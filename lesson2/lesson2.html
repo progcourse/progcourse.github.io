@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Lesson 2</title>
+		
+		<style>
+			a {
+				text-decoration: none;
+			}
+			button {
+				padding: 5px;
+				margin: 5px; 
+			}
+			table {
+				border-collapse: collapse;
+				width: 100%;
+			}
+			th, td {
+				border: 1px solid #ddd;
+				text-align: left;
+				padding: 8px;
+			}
+
+			tr:nth-child(even) {
+				background-color: #f2f2f2;
+			}
+
+			tr:hover {
+				background-color: #ddd;
+			}
+		</style>
+	</head>
+	<body>
+		<button>
+			<a href="../index.html">Home</a>
+		</button>
+		<form action="../index.html" method="POST">
+			<fieldset>
+				<legend>Information</legend>
+				<label for="name">Name:</label><br/>
+				<input type="text" id="name" name="name" required /><br/>
+				<label for="email">Email:</label><br/>
+				<input type="email" id="email" name="email" required /><br/>
+				<label for="password">Password:</label><br/>
+				<input type="password" id="password" name="email" required /><br/>
+				
+				<label for="country">Country:</label><br/>
+				<select id="country" name="country" required>
+					<option value="armenia">Armenia</option>
+					<option value="usa">United States</option>
+					<option value="france" selected>France</option>
+					<option value="russia">Russia</option>
+					<option value="england">England</option>
+				</select>
+			</fieldset>
+
+			<fieldset>
+				<legend>Languages</legend>
+				<input type="checkbox" id="armenian" name="languages[]" value="armenian"/>
+				<label for="armenian">Armenian</label><br/>
+				<input type="checkbox" id="english" name="languages[]" value="english"/>
+				<label for="english">English</label><br/>
+				<input type="checkbox" id="russian" name="languages[]" value="russian"/>
+				<label for="russian">Russian</label><br/>
+				<input type="checkbox" id="french" name="languages[]" value="french"/>
+				<label for="french">French</label><br/>
+			</fieldset>
+
+			<fieldset>
+				<legend>Age</legend>
+				<input type="radio" id="0_18" name="age" value="0-18"/>
+				<label for="0_18">0-18</label>
+				<input type="radio" id="19_40" name="age" value="19-40"/>
+				<label for="19_40">19-40</label>
+				<input type="radio" id="41_60" name="age" value="41-60"/>
+				<label for="41_60">41-60</label>
+				<input type="radio" id="61_100" name="age" value="61-100"/>
+				<label for="61_100">61-100</label>
+			</fieldset>
+			
+			<fieldset>
+				<legend>Message</legend>
+				<textarea id="message" name="message" rows="4" required></textarea>
+			</fieldset>
+			
+			<input type="submit" value="Send"/>
+		</form>
+	
+		<table border="1">
+			<caption>Monthly Sales Report</caption>
+			<thead>
+				<tr>
+					<th>Month</th>
+					<th>Product A</th>
+					<th>Product B</th>
+					<th>Total Sales</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>January</td>
+					<td>$1000</td>
+					<td>$1500</td>
+					<td>$2500</td>
+				</tr>
+				<tr>
+					<td>February</td>
+					<td>$1200</td>
+					<td>$1600</td>
+					<td>$2800</td>
+				</tr>
+				<tr>
+					<td>March</td>
+					<td>$1300</td>
+					<td>$1700</td>
+					<td>$3000</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>Total</td>
+					<td>$3500</td>
+					<td>$4800</td>
+					<td>$8300</td>
+				</tr>
+			</tfoot>
+		</table>
+	</body>
+</html>
