@@ -6,19 +6,83 @@
 		<style>
 			a {
 				text-decoration: none;
+				font-size: 16px;
+				font-weight: bold;
 			}
-			button {
-				padding: 5px;
-				margin: 5px; 
+			.button-container {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+			}
+			.button {
+				padding: 10px;
+				margin: 10px; 
 			}
 		</style>
 	</head>
 	<body>
-		<button>
-			<a href="lesson1/lesson1.html">Lesson 1</a>
+	<h1>Ծրագրավորման դասընթաց</h1>
+	<fieldset class="button-container">
+		<legend><strong>Մասնակիցներ</strong></legend>
+		<button class="button">
+			<a href="https://vahramyan.github.io">Անուշ Վահրամյան</a>
 		</button>
-		<button>
-			<a href="lesson2/lesson2.html">Lesson 2</a>
+		<button class="button">
+			<a href="https://eriksjc.github.io">Էրիկ Գրիգորյան</a>
 		</button>
+		<button class="button">
+			<a href="https://lilipoghosyan.github.io">Լիլիթ Պողոսյան</a>
+		</button>
+		<button class="button">
+			<a href="https://hakobyanvahe.github.io">Վահե Հակոբյան</a>
+		</button>
+		<button class="button">
+			<a href="https://aramshambaryan.github.io">Արամ Շամբարյան</a>
+		</button>
+		<button class="button">
+			<a href="https://nanestepanyan8.github.io">Նանե Ստեփանյան</a>
+		</button>
+		<button class="button">
+			<a href="home.html">Սամվել Հովհաննիսյան</a>
+		</button>
+		<button class="button">
+			<a href="home.html">Սիլվա Իսկանդարյան</a>
+		</button>
+		<button class="button">
+			<a href="home.html">Անահիտ Ավագյան</a>
+		</button>
+		<button class="button">
+			<a href="home.html">Գոռ Մուրադյան</a>
+		</button>
+		<button class="button">
+			<a href="home.html">Մերի Հակոբյան</a>
+		</button>
+		<button class="button">
+			<a href="home.html">Սեյրան Խաչատրյան</a>
+		</button>
+		<button class="button">
+			<a href="home.html">Սոնա Աղաջանյան</a>
+		</button>
+	</fieldset>
+	
 	</body>
+	<script>
+	  document.addEventListener('DOMContentLoaded', function() {
+		const buttonsContainer = document.querySelector('.button-container');
+		const buttons = Array.from(document.querySelectorAll('.button'));
+
+		shuffleArray(buttons);
+
+		buttons.forEach(button => {
+		  buttonsContainer.appendChild(button);
+		});
+	  });
+
+	  function shuffleArray(array) {
+		for (let i = array.length - 1; i > 0; i--) {
+		  const j = Math.floor(Math.random() * (i + 1));
+		  [array[i], array[j]] = [array[j], array[i]];
+		}
+	  }
+	</script>
 </html>
