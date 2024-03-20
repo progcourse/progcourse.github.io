@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+section {
+    background-color: #6666ff;
+    color: #ff9;
+    text-align: center;
+}
+
+section article p {
+    background-color: #333;
+}
+
+section > p {
+    background-color: #aaf;
+    color: #00a;
+}
+
+article {
+    background-color: #00f;
+    font-size: 16px;
+}
+
+.short-text {
+    display: inline;
+}
+
+.lorem-ipsum {
+    text-align: justify;
+}
+
+.paragraph {
+    background-color: black;
+}

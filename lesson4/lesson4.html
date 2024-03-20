@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=2.0">
+	<title>Lesson 4</title>
+	<style>
+		header {
+			background-color: #333;
+			color: #fff;
+			padding: 20px;
+		}
+		nav {
+			background-color: #444;
+			color: #fff;
+			padding: 10px;
+		}
+		nav ul {
+			padding: 0;
+			margin: 0;
+		}
+		nav ul li {
+			display: inline-block;
+			margin: 10px;
+		}
+		footer {
+			background-color: #333;
+			color: #fff;
+			padding: 20px;
+		}
+		a {
+			text-decoration: none;
+			font-size: 16px;
+			font-weight: bold;
+		}
+	</style>
+
+    <link rel="stylesheet" href="styles.css"/>
+	</head>
+	<body>
+		
+		<header>
+		  <h1>Welcome to Our Website</h1>
+		</header>
+
+		<nav>
+		  <ul>
+			<li>
+				<button>
+					<a href="../index.html">Home</a>
+				</button>
+			</li>
+			<li>
+				<button>
+					<a href="#news">News</a>
+				</button>
+			</li>
+			<li>
+				<button>
+					<a href="#info">Information</a>
+				</button>
+			</li>
+			<li>
+				<button>
+					<a href="#contact">Contact</a>
+				</button>
+			</li>
+		  </ul>
+		</nav>
+
+		<section>
+		  <article id="news">
+			<h2>Latest News</h2>
+			<p class="paragraph">
+				Scientists Discover New Species of Orchid in the Amazon Rainforest
+				In a groundbreaking discovery, researchers have uncovered a new species of orchid flourishing in the heart of the Amazon rainforest. Named "Amazonia Radiant," this orchid species captivates with its vibrant hues and intricate petal patterns, marking a significant addition to the rich biodiversity of the region.
+				Dr. Elena Santos, lead botanist of the expedition, describes the finding as a testament to the Amazon's unparalleled ecological diversity. "The Amazon rainforest continues to reveal its secrets, underscoring the urgent need for its preservation," she states. The discovery underscores the importance of conservation efforts to safeguard these delicate ecosystems amidst mounting environmental challenges.
+				The "Amazonia Radiant" orchid's discovery serves as a reminder of the countless undiscovered species awaiting exploration in Earth's remaining wilderness areas. Scientists emphasize the critical role of conservation initiatives and sustainable practices in protecting these invaluable natural treasures for future generations.
+			</p>
+		  </article>
+		</section>
+
+		<section>
+		  <article id="info">
+			<h2>What is Lorem Ipsum?</h2>
+			<p class="lorem-ipsum paragraph">
+				Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+                It has survived not only five centuries, but also the leap into electronic typesetting, 
+                remaining essentially unchanged.
+
+                It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+                and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+			</p>
+
+			<h2>Where does it come from?</h2>
+			<p class="lorem-ipsum paragraph">
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+			</p>
+		  </article>
+		</section>
+
+		<section id="contact">
+            <h2>Contact Us</h2>
+            <p>Feel free to reach out to us with any questions, comments, or inquiries. We'd love to hear from you!</p>
+            <p class="short-text">Short Text</p>
+            <p class="short-text">Short Text</p>
+            <p class="short-text">Short Text</p>
+            <form action="/submit_contact_form" method="post">
+              <label for="name">Name:</label><br>
+              <input type="text" id="name" name="name" required><br>
+              
+              <label for="email">Email:</label><br>
+              <input type="email" id="email" name="email" required><br>
+              
+              <label for="message">Message:</label><br>
+              <textarea id="message" name="message" rows="4" required></textarea><br>
+              
+              <input type="submit" value="Submit">
+            </form>
+        </section>
+          
+		<footer id="contact">
+		  <p>&copy; 2024 Our Website. All rights reserved.</p>
+		</footer>
+
+	</body>
+</html>
