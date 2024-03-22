@@ -1,6 +1,8 @@
 html {
-    background-color: white;
+    background-color: #aa0;
     padding: 10px;
+    margin: 10px;
+    border: 1px solid black;
 }
 
 body {
@@ -45,4 +47,24 @@ img, audio, video, iframe {
 
 .file {
     background-color: #ff0;
+}
+
+.flex-container {
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #00f;
+  }
+  
+.flex-container > div {
+    background-color: #f1f1f1;
+    width: 100px;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+}
+
+.flex-container {
+    display: none;
 }
