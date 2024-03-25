@@ -68,7 +68,7 @@ h2, p, img, audio, video, iframe {
     border: 1px solid black;
 }
 
-img, audio, video, iframe {
+audio, video, iframe {
     width: 400px;
 }
 
@@ -113,7 +113,7 @@ img, audio, video, iframe {
 }
 
 .element {
-    animation-name: goAndBack;
+    animation-name: fadeIn;
     animation-duration: 10s;
     animation-timing-function: ease-in;
     animation-delay: 1s;
@@ -140,7 +140,7 @@ p {
     color: #ff9;
     font-size: 10px;
     transition-property: color, font-size;
-    transition-duration: 10s;
+    transition-duration: 5s;
     transition-timing-function: ease-in-out;
 }
 
@@ -150,6 +150,7 @@ p:hover {
 }
 
 img {
+    width: 400px;
     transition-property: width;
     transition-duration: 2s;
     transition-timing-function: ease-in-out;
@@ -177,6 +178,43 @@ h2::after {
     display: inline-block;
     width: 50px;
     margin-right: 5px;
+}
+
+h2 {
+    transform: rotate(0);
+    transition-property: transform;
+    transition-duration: 4s;
+    transition-timing-function: ease-in-out;
+}
+
+h2:hover {
+    transform:rotate(45deg);
+}
+
+h2:active {
+    transform:rotate(-45deg);
+}
+
+#multimedia {
+    transform: rotate(-5deg);
+}
+
+audio {
+    transform: rotate(15deg);
+    transform-origin: 20% 40%;
+    position: relative;
+    z-index: 2;
+}
+
+video {
+    transform: rotate3d(1, 1, -1, 15deg);
+    translate: 10% 25%;
+    position: relative;
+    z-index: 1;
+}
+
+iframe {
+    transform: rotate3d(1, 1, 1, 15deg);
 }
 
 footer {
