@@ -1,0 +1,173 @@
+html {
+    background-color: #aa0;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid black;
+}
+
+body {
+    background-color: #ff0;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid black;
+}
+
+header {
+    background-color: #330;
+    color: #fff;
+    padding: 20px;
+}
+
+nav {
+    background-color: #660;
+    color: #fff;
+    padding: 10px;
+}
+
+nav ul {
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 5px;
+}
+
+nav ul li button{
+    border-radius: 10px;
+    background-color: aqua;
+}
+
+nav ul li button:hover{
+    background-color: blueviolet;
+}
+
+a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+section {
+    background-color: #ff3;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid black;
+    display: flex;
+    text-align: center;
+}
+
+article, aside {
+    background-color: #ff6;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+h2, p, img, audio, video, iframe {
+    background-color: #ff9;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid black;
+}
+
+img, audio, video, iframe {
+    width: 500px;
+}
+
+#contact {
+    display: block;
+    text-align: center;
+}
+
+.file {
+    background-color: #ff0;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+/* Media Queries */
+
+/* Extra Small screens */
+@media only screen and (max-width: 600px) {
+    * {
+        padding: 5px !important;
+        margin: 5px !important;
+    }
+
+    nav ul li {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    nav ul li button {
+        width: 100%;
+    }
+
+    section {
+        display: block;
+    }
+
+    img, audio, video, iframe {
+        width: 300px;
+    }
+}
+
+/* Small screens */
+@media only screen and (min-width: 601px) and (max-width: 800px) {
+    * {
+        padding: 10px !important;
+        margin: 10px !important;
+    }
+
+    nav ul {
+        text-align: center;
+    }
+
+    nav ul li {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    nav ul li button {
+        width: 50%;
+    }
+
+    section {
+        display: block;
+    }
+
+    img, audio, video, iframe {
+        width: 400px;
+    }
+}
+
+/* Medium screens */
+@media only screen and (min-width: 801px) and (max-width: 1000px) {
+    nav ul li {
+        display: inline;
+        margin-right: 5px;
+    }
+
+    section {
+        display: block;
+    }
+}
+
+/* Large screens */
+@media only screen and (min-width: 1001px) and (max-width: 1200px) {
+    nav ul li {
+        display: inline-block;
+        margin-right: 20px;
+    }
+
+    section {
+        display: block;
+    }
+}
