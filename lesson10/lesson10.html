@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Code Block with Syntax Highlight and Copy Feature</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+    </head>
+    <body class="p-5">
+        <h3 id="conditional-statements-if-else-if-else-">Conditional Statements (if, else if, else)</h3>
+        <h4 id="introduction-to-conditionals">Introduction to Conditionals</h4>
+        <p>Conditional statements are fundamental to programming, allowing the program to make decisions and alter its course of action based on specific conditions. These conditions are evaluated to be either true or false, and depending on the result, different blocks of code are executed. This ability to make decisions is crucial for creating dynamic and interactive programs.</p>
+        <h4 id="using-if-else-statements">Using If-else Statements</h4>
+        <p>In JavaScript, the <code>if</code>, <code>else if</code>, and <code>else</code> statements are used to perform different actions based on different conditions.</p>
+        <ul>
+            <li><p><strong><code>if</code> statement:</strong> It&#39;s the simplest form of conditional statement that executes a block of code if a specified condition is true.</p>
+                <div class="card bg-dark text-white">
+                    <div class="card-header">
+                        <button class="btn btn-primary" onclick="copyCode(1)">Copy</button>
+                        <span id="copied-1" class="float-end"></span>
+                    </div>
+                    <div>
+                        <pre>
+                            <code class="language-javascript" id="code-block-1">
+if (condition) {
+    // Code to execute if condition is true
+}                                
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </li>
+
+            <li><p><strong><code>else</code> statement:</strong> It is used to execute a block of code if the condition in the <code>if</code> statement is false.</p>
+                <div class="card bg-dark text-white">
+                    <div class="card-header">
+                        <button class="btn btn-primary" onclick="copyCode(2)">Copy</button>
+                        <span id="copied-2" class="float-end"></span>
+                    </div>
+                    <div>
+                        <pre>
+                            <code class="language-javascript" id="code-block-2">
+if (condition) {
+    // Code to execute if condition is true
+} else {
+    // Code to execute if condition is false
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </li>
+
+            <li><p><strong><code>else if</code> statement:</strong> It&#39;s used to specify a new condition to test if the first condition is false.</p>
+                <div class="card bg-dark text-white">
+                    <div class="card-header">
+                        <button class="btn btn-primary" onclick="copyCode(3)">Copy</button>
+                        <span id="copied-3" class="float-end"></span>
+                    </div>
+                    <div>
+                        <pre>
+                            <code class="language-javascript" id="code-block-3">
+if (condition1) {
+    // Code to execute if condition1 is true
+} else if (condition2) {
+    // Code to execute if condition2 is true
+} else {
+    // Code to execute if both condition1 and condition2 are false
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <p>These statements can be nested and combined to handle complex decision-making processes.</p>
+        <h4 id="practical-examples">Practical Examples</h4>
+        <p>Conditional statements can be used in numerous scenarios, such as:</p>
+        <ul>
+            <li>Displaying different messages to the user based on their input.</li>
+            <li>Deciding the execution path in a program based on the values of variables.</li>
+        </ul>
+        <p>For example, displaying a greeting message based on the time of the day:</p>
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(4)">Copy</button>
+                <span id="copied-4" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-4">
+let hour = new Date().getHours();
+
+if (hour < 12) {
+    console.log("Good morning!");
+} else if (hour < 18) {
+    console.log("Good afternoon!");
+} else {
+    console.log("Good evening!");
+}
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+        <h4 id="interactive-exercise">Interactive Exercise</h4>
+        <p>Now, let&#39;s put this knowledge into practice with an interactive exercise:</p>
+        <ul>
+            <li><p><strong>Scenario:</strong> Write a script to grade a test score, where scores are graded as <code>A</code> through <code>F</code>.</p>
+                <div class="card bg-dark text-white">
+                    <div class="card-header">
+                        <button class="btn btn-primary" onclick="copyCode(5)">Copy</button>
+                        <span id="copied-5" class="float-end"></span>
+                    </div>
+                    <div>
+                        <pre>
+                            <code class="language-javascript" id="code-block-5">
+let score = prompt("Enter the test score:");
+
+if (score >= 90) {
+    console.log("Grade: A");
+} else if (score >= 80) {
+    console.log("Grade: B");
+} else if (score >= 70) {
+    console.log("Grade: C");
+} else if (score >= 60) {
+    console.log("Grade: D");
+} else {
+    console.log("Grade: F");
+}                                                   
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <p>In this exercise, students will practice using conditional statements to check against different ranges of numbers and output corresponding results. This hands-on approach helps solidify understanding of how conditionals control the flow of a program, making it react differently under varying conditions.</p>
+
+
+
+
+
+        <h3 id="loops-in-javascript">Loops in JavaScript</h3>
+        <h4 id="looping-in-javascript">Looping in JavaScript</h4>
+        <p>Loops are fundamental programming constructs that allow repetitive execution of a block of code as long as a specified condition is true. They are essential for automating repetitive tasks, processing collections of data (like arrays or objects), and building dynamic behavior in programs.</p>
+        <h4 id="for-loop">For Loop</h4>
+        <p>The <code>for</code> loop is one of the most commonly used looping mechanisms, particularly when the number of iterations is known beforehand. Its syntax includes three main parts: initialization, condition, and increment/decrement expressions.</p>
+        <ul>
+            <li><strong>Initialization:</strong> Sets the starting point of the loop, often used to declare and initialize a counter variable.</li>
+            <li><strong>Condition:</strong> The loop continues to execute as long as this condition is true. Once false, the loop terminates.</li>
+            <li><strong>Increment/Decrement:</strong> Updates the loop counter at the end of each iteration, moving the loop towards its termination condition.</li>
+        </ul>
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(6)">Copy</button>
+                <span id="copied-6" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-6">
+for (let i = 0; i < 10; i++) {
+    console.log(i); // Outputs numbers from 0 to 9
+}                        
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+        <p>In this example, <code>i</code> is initialized to <code>0</code>, and the loop runs as long as <code>i</code> is less than <code>10</code>. After each iteration, <code>i</code> is incremented by <code>1</code>.</p>
+        <h4 id="while-loop">While Loop</h4>
+        <p>The <code>while</code> loop is ideal when the number of iterations isn&#39;t known and depends on a condition being true. The loop will continue executing as long as the specified condition evaluates to true.</p>
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(7)">Copy</button>
+                <span id="copied-7" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-7">
+let i = 0;
+
+while (i < 10) {
+    console.log(i); // Outputs numbers from 0 to 9
+    i++;
+}                        
+                    </code>
+                </pre>
+            </div>
+        </div>
+        <p>Here, the loop checks the condition <code>i &lt; 10</code> before each iteration, and as long as it&#39;s true, the loop continues, incrementing <code>i</code> by <code>1</code> with each pass.</p>
+        <h4 id="do-while-loop">Do-While Loop</h4>
+        <p>The <code>do-while</code> loop is similar to the <code>while</code> loop but guarantees that the code block is executed at least once before the condition is tested.</p>
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(8)">Copy</button>
+                <span id="copied-8" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-8">
+let i = 0;
+
+do {
+    console.log(i); // Outputs numbers from 0 to 9
+    i++;
+} while (i < 10);                      
+                    </code>
+                </pre>
+            </div>
+        </div>
+        <p>Even if <code>i</code> starts as a value greater than <code>9</code>, the code block inside the <code>do-while</code> loop will run once before the condition <code>i &lt; 10</code> is evaluated.</p>
+        <h4 id="hands-on-practice">Hands-on Practice</h4>
+        <p>Engage in exercises to apply these loop constructs:</p>
+        <ol>
+        <li><p><strong>Iterate Over Arrays Using <code>for</code> Loops:</strong></p>
+        <p>Create an array of numbers or strings and use a <code>for</code> loop to iterate over each element, printing its value.</p>
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(9)">Copy</button>
+                <span id="copied-9" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-9">
+let fruits = ['Apple', 'Banana', 'Cherry'];
+
+for (let i = 0; i < fruits.length; i++) {
+    console.log(fruits[i]);
+}                   
+                    </code>
+                </pre>
+            </div>
+        </div>
+        </li>
+        <li><p><strong>Using <code>while</code> and <code>do-while</code> Loops for Repeat-until Conditions:</strong></p>
+        <p>Implement a <code>while</code> loop that executes as long as a condition is met, such as checking for user input, and use a <code>do-while</code> loop to execute a block of code at least once, such as prompting a user for input until a valid response is received.</p>
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(10)">Copy</button>
+                <span id="copied-10" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-10">
+// While loop
+let count = 0;
+
+while (count < 5) {
+    console.log(count);
+    count++;
+}
+
+// Do-While loop
+let number;
+
+do {
+    number = prompt("Enter a number greater than 10");
+} while (number <= 10);                
+                    </code>
+                </pre>
+            </div>
+        </div>
+        </li>
+        </ol>
+        <p>In these exercises, students will practice using loops to process data and control the flow of their programs efficiently. Understanding how to leverage different types of loops depending on the context is a crucial skill in programming, enabling more effective and dynamic code solutions.</p>
+
+        <h3 id="multi-way-branching-with-switch">Multi-way Branching with Switch</h3>
+        <h4 id="introduction-to-the-switch-statement">Introduction to the Switch Statement</h4>
+        <p>The <code>switch</code> statement provides an efficient way to perform multi-way branching in JavaScript. It&#39;s used to execute different parts of code based on the value of an expression, typically a variable. This makes the <code>switch</code> statement a cleaner and more readable alternative to multiple <code>if-else</code> statements, especially when dealing with a large number of potential conditions that depend on the same value.</p>
+        <h4 id="syntax-and-use-cases">Syntax and Use Cases</h4>
+        <p>The syntax of a <code>switch</code> statement includes an expression to evaluate and multiple <code>case</code> clauses representing the different values that the expression can match. Each <code>case</code> ends with a <code>break</code> statement to exit the switch block once a matching case is executed. If no case matches, an optional <code>default</code> clause can execute a block of code.</p>
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(11)">Copy</button>
+                <span id="copied-11" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-11">
+switch (expression) {
+    case value1:
+        // Code to execute when the expression matches value1
+        break;
+    case value2:
+        // Code to execute when the expression matches value2
+        break;
+    // Additional cases...
+    default:
+        // Code to execute if none of the above cases are matched
+}               
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+        <p><strong>Comparing with If-Else Statements:</strong></p>
+        <ul>
+        <li><strong>Readability:</strong> <code>switch</code> statements can be more readable than a long series of <code>if-else</code> statements, especially when all branches depend on the value of a single variable.</li>
+        <li><strong>Functionality:</strong> While <code>if-else</code> can handle complex logical conditions, <code>switch</code> is best suited for scenarios where you&#39;re checking a single variable against multiple constant values.</li>
+        </ul>
+        <h4 id="interactive-exercise">Interactive Exercise</h4>
+        <p>In this practical exercise, students will use a <code>switch</code> statement to handle different scenarios based on user input. This can simulate responding to keyboard commands, menu selections, or other discrete inputs.</p>
+        <p><strong>Example Scenario: User Menu Selection</strong></p>
+        <p>Let’s write a script where the user selects an option from a menu, and the program responds accordingly:</p>
+        <ol>
+        <li>Prompt the user for a choice and store it in a variable.</li>
+        <li>Use a <code>switch</code> statement to execute different code based on the user&#39;s selection.</li>
+        </ol>
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(12)">Copy</button>
+                <span id="copied-12" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-12">
+let userChoice = prompt("Select an option: 1. Hi 2. Bye 3. Hello");
+
+switch (userChoice) {
+    case '1':
+        console.log("User said Hi");
+        break;
+    case '2':
+        console.log("User said Bye");
+        break;
+    case '3':
+        console.log("User said Hello");
+        break;
+    default:
+        console.log("Invalid choice");
+}           
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+        <p>In this exercise, the <code>switch</code> statement efficiently handles multiple potential user inputs, executing different blocks of code depending on the user’s selection. This introduces students to structured decision-making in programming, encouraging them to consider how and when to use <code>switch</code> statements in their own projects for effective code management.</p>
+
+
+
+
+
+
+        <h3 id="practical-application-and-exercises">Practical Application and Exercises</h3>
+        <h4 id="combining-control-structures">Combining Control Structures</h4>
+        <p>In real-world programming, control structures such as conditional statements, loops, and switch cases are often combined to create more complex and efficient solutions to problems. Understanding how to integrate these structures allows for more dynamic and functional programming.</p>
+        <ul>
+            <li><strong>Conditional Statements and Loops:</strong> For example, you might use a loop to iterate over data, with an <code>if-else</code> statement inside to perform different actions based on certain conditions.</li>
+            <li><strong>Switch Cases in Loops:</strong> A <code>switch</code> statement can be used within a loop to perform different actions for various cases on each iteration.</li>
+        </ul>
+        <h4 id="building-a-simple-calculator">Building a Simple Calculator</h4>
+        <p>Creating a basic calculator is an excellent way to apply these concepts. This calculator will take user input to perform arithmetic operations like addition, subtraction, multiplication, and division.</p>
+        <ol>
+        <li><p><strong>Prompt User for Input:</strong> Ask the user for two numbers and the operation they wish to perform.</p>
+        
+            <div class="card bg-dark text-white">
+                <div class="card-header">
+                    <button class="btn btn-primary" onclick="copyCode(13)">Copy</button>
+                    <span id="copied-13" class="float-end"></span>
+                </div>
+                <div>
+                    <pre>
+                        <code class="language-javascript" id="code-block-13">
+let number1 = parseFloat(prompt("Enter first number:"));
+let number2 = parseFloat(prompt("Enter second number:"));
+let operation = prompt("Choose an operation (+, -, *, /):");
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </li>
+        <li><p><strong>Perform Operation:</strong> Use an <code>if-else</code> or <code>switch</code> statement to execute the correct operation based on user input.</p>
+            <div class="card bg-dark text-white">
+                <div class="card-header">
+                    <button class="btn btn-primary" onclick="copyCode(14)">Copy</button>
+                    <span id="copied-14" class="float-end"></span>
+                </div>
+                <div>
+                    <pre>
+                        <code class="language-javascript" id="code-block-14">
+// Using switch statement
+let result;
+
+switch (operation) {
+    case '+':
+        result = number1 + number2;
+        break;
+    case '-':
+        result = number1 - number2;
+        break;
+    case '*':
+        result = number1 * number2;
+        break;
+    case '/':
+        if (number2 !== 0) {
+            result = number1 / number2;
+        } else {
+            console.log("Division by zero is not allowed.");
+        }
+        break;
+    default:
+        console.log("Invalid operation.");
+        break;
+}
+
+console.log(`Result: ${result}`);
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </li>
+        </ol>
+        <h4 id="looping-through-data">Looping Through Data</h4>
+        <p>Loops are essential for processing collections of data, such as arrays. They can iterate over each element to perform calculations or manipulations.</p>
+        <ul>
+        <li><p><strong>Summing Numbers:</strong> Calculate the total sum of an array of numbers.</p>
+            <div class="card bg-dark text-white">
+                <div class="card-header">
+                    <button class="btn btn-primary" onclick="copyCode(15)">Copy</button>
+                    <span id="copied-15" class="float-end"></span>
+                </div>
+                <div>
+                    <pre>
+                        <code class="language-javascript" id="code-block-15">
+let numbers = [10, 20, 30, 40, 50];
+let sum = 0;
+
+for (let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+}
+
+console.log(`Total sum: ${sum}`);                    
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </li>
+        <li><p><strong>Finding the Average:</strong> Compute the average value of an array of numbers.</p>
+            <div class="card bg-dark text-white">
+                <div class="card-header">
+                    <button class="btn btn-primary" onclick="copyCode(16)">Copy</button>
+                    <span id="copied-16" class="float-end"></span>
+                </div>
+                <div>
+                    <pre>
+                        <code class="language-javascript" id="code-block-16">
+let average = sum / numbers.length;
+
+console.log(`Average: ${average}`);
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </li>
+        <li><p><strong>Searching for Elements:</strong> Use a loop to find a specific element in an array.</p>
+            <div class="card bg-dark text-white">
+                <div class="card-header">
+                    <button class="btn btn-primary" onclick="copyCode(17)">Copy</button>
+                    <span id="copied-17" class="float-end"></span>
+                </div>
+                <div>
+                    <pre>
+                        <code class="language-javascript" id="code-block-17">
+let target = 30;
+let found = false;
+
+for (let i = 0; i < numbers.length; i++) {
+    if (numbers[i] === target) {
+        found = true;
+        break;
+    }
+}
+
+console.log(`Target ${target} found: ${found}`);
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </li>
+        </ul>
+        <p>These exercises not only reinforce the understanding of JavaScript control structures but also demonstrate how they can be used in unison to solve typical programming tasks, reflecting the real-world application of these foundational concepts.</p>
+
+
+
+
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+        <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/core.min.js"></script> -->
+        <!-- Load the language you need -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/languages/javascript.min.js"></script> -->
+        <script>
+            function copyCode(index) {
+                const code = document.getElementById('code-block-' + index).innerText;
+                const copied = document.getElementById('copied-' + index);
+
+                navigator.clipboard.writeText(code).then(() => {
+                    copied.innerText = 'Copied to clipboard!';
+                });
+
+                setTimeout(() => {
+                    copied.innerText = '';
+                }, 3000);
+            }
+
+            // Initialize Highlight.js after the document is fully loaded
+            document.addEventListener('DOMContentLoaded', (event) => {
+                hljs.highlightAll();
+            });
+        </script>
+    </body>
+</html>
