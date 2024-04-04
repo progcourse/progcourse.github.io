@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lesson 11: Functions and Scope</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+        <style>
+            code {
+                background-color: yellow;
+                color: blue;
+                padding: 0 5px;
+            }
+        </style>
+    </head>
+    <body class="p-5">
+        <a href="դաս11.html" class="btn btn-info">Հայերեն</a>
+        <a href="урок11.html" class="btn btn-info">Русский</a>
+        <hr>
+        <h3 id="introduction-to-functions-in-javascript">Introduction to Functions in JavaScript</h3>
+        <h4 id="what-are-functions-">What are Functions?</h4>
+        <p>Functions in programming, particularly in JavaScript, are fundamental building blocks that allow you to encapsulate reusable code designed to perform a specific task. By defining a set of instructions within a function, you can execute those instructions whenever and wherever the function is called, without needing to rewrite the code each time.</p>
+        <p>Functions enhance the modularity, readability, and maintainability of the code. They allow you to break down complex problems into smaller, more manageable tasks, each encapsulated in its function. This not only simplifies the development process but also facilitates debugging and testing, as each function can be independently tested and verified.</p>
+        <h4 id="declaring-functions">Declaring Functions</h4>
+        <p>In JavaScript, you declare a function using the <code>function</code> keyword, followed by a name that identifies the function. The function name is followed by parentheses, which may include parameters representing the inputs the function operates on. Finally, the function body is enclosed in curly braces, containing the executable code block.</p>
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(1)">Copy</button>
+                <span id="copied-1" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-1">
+function sayHello() {
+    console.log("Hello, world!");
+}                               
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+        <p>In this example, <code>sayHello</code> is a function that takes no parameters and, when called, will execute the code within its body, printing &quot;Hello, world!&quot; to the console.</p>
+        <p>If you want the function to accept inputs, you can declare parameters within the parentheses:</p>
+        
+
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(2)">Copy</button>
+                <span id="copied-2" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-2">
+function greet(name) {
+    console.log("Hello, " + name + "!");
+}                              
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+        <p>Here, <code>greet</code> is a function that takes one parameter, <code>name</code>, and uses it within the function to display a personalized greeting.</p>
+        <h4 id="calling-invoking-functions">Calling (Invoking) Functions</h4>
+        <p>To execute a function, you call or invoke it by using its name followed by parentheses. If the function requires parameters, you provide the arguments within these parentheses; otherwise, you simply use empty parentheses.</p>
+
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(3)">Copy</button>
+                <span id="copied-3" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-3">
+sayHello(); // Calls the sayHello function, outputting "Hello, world!"
+
+greet("Alice"); // Calls the greet function with "Alice" as an argument, outputting "Hello, Alice!"                              
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+        <p>When you call a function, the JavaScript engine jumps to the function declaration, executes the code block within it, and then returns to the point in the code where the function was called, continuing execution from there.</p>
+        <p>In the above examples, <code>sayHello()</code> is called without any arguments since it does not require any, while <code>greet(&quot;Alice&quot;)</code> is called with a single argument to pass the name &quot;Alice&quot; to the function, demonstrating how functions can be used with and without parameters to modularize and control the flow of a program.</p>
+
+
+
+
+
+
+        <h3 id="parameters-and-return-values-in-functions">Parameters and Return Values in Functions</h3>
+        <h4 id="function-parameters">Function Parameters</h4>
+        <p>Parameters in functions are like placeholders for values that you can pass to the function when you call it. These values are then used within the function to perform operations or calculations. Parameters allow functions to be more dynamic and reusable, as they can operate on different data each time they are invoked.</p>
+        <p>When declaring a function, you specify parameters inside the parentheses, following the function name. Each parameter acts as a local variable within the function.</p>
+        <p><strong>Example of a Function with Multiple Parameters:</strong></p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(4)">Copy</button>
+                <span id="copied-4" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-4">
+function addNumbers(number1, number2) {
+    return number1 + number2;
+}                     
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+
+        <p>In this example, <code>addNumbers</code> is a function with two parameters, <code>number1</code> and <code>number2</code>. When the function is called, it adds these two numbers and returns the result.</p>
+        <h4 id="return-values">Return Values</h4>
+        <p>The <code>return</code> statement in a function outputs a value back to the place where the function was called. This allows the function to pass data back to the rest of the program. When <code>return</code> is executed, the function&#39;s execution ends, and the specified value is returned to the caller.</p>
+        <p><strong>Example of Returning a Value:</strong></p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(5)">Copy</button>
+                <span id="copied-5" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-5">
+function multiplyNumbers(num1, num2) {
+    return num1 * num2;
+}
+
+let result = multiplyNumbers(5, 3); // result is now 15                          
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+
+        <p>In this example, <code>multiplyNumbers</code> calculates the product of <code>num1</code> and <code>num2</code> and returns the result. The returned value is then stored in the variable <code>result</code>.</p>
+        <h4 id="practical-exercises">Practical Exercises</h4>
+        <p>To reinforce the concepts of parameters and return values, let&#39;s work through some practical exercises:</p>
+        <ol>
+        <li><p><strong>Calculate the Area of a Shape:</strong>
+        Write a function to calculate the area of a rectangle, which requires width and height as parameters.</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(6)">Copy</button>
+                <span id="copied-6" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-6">
+function calculateArea(width, height) {
+    return width * height;
+}
+
+let area = calculateArea(5, 10); // Calls the function and stores the result
+
+console.log("Area of the rectangle:", area);                          
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+
+        </li>
+        <li><p><strong>Concatenate Strings:</strong>
+        Create a function that takes two strings as parameters and returns their concatenation.</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(7)">Copy</button>
+                <span id="copied-7" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-7">
+function concatenateStrings(str1, str2) {
+    return str1 + str2;
+}
+
+let fullName = concatenateStrings("Alice", " Smith");
+
+console.log("Full Name:", fullName);                           
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+
+        </li>
+        <li><p><strong>Convert Temperature Units:</strong>
+        Develop a function to convert Celsius to Fahrenheit. The formula for conversion is <code>(Celsius * 9/5) + 32</code>.</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(8)">Copy</button>
+                <span id="copied-8" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-8">
+function celsiusToFahrenheit(celsius) {
+    return (celsius * 9 / 5) + 32;
+}
+
+let fahrenheit = celsiusToFahrenheit(30); // Converts 30°C to °F
+
+console.log("30°C in Fahrenheit is:", fahrenheit);                          
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+       
+        </li>
+        </ol>
+        <p>These exercises offer hands-on experience with defining functions, using parameters to pass data into them, and utilizing the <code>return</code> statement to pass data out. Through these activities, students will learn how to create functional, reusable code blocks that can perform a variety of tasks in a JavaScript program.</p>
+
+
+
+
+
+
+        <h3 id="understanding-scope-in-javascript">Understanding Scope in JavaScript</h3>
+        <h4 id="global-vs-local-scope">Global vs. Local Scope</h4>
+        <p>Scope in JavaScript refers to the accessibility of variables and functions in different parts of the program. It&#39;s a fundamental concept that determines where a variable can be accessed within the code.</p>
+        <ul>
+        <li><p><strong>Global Scope:</strong> A variable has a global scope when it is declared outside any function. This means it can be accessed and modified from any part of the program, including within functions.</p>
+        
+        
+            <div class="card bg-dark text-white">
+                <div class="card-header">
+                    <button class="btn btn-primary" onclick="copyCode(9)">Copy</button>
+                    <span id="copied-9" class="float-end"></span>
+                </div>
+                <div>
+                    <pre>
+                        <code class="language-javascript" id="code-block-9">
+let globalVar = "I am global";
+
+function accessGlobalVar() {
+    console.log(globalVar);  // Accessible here
+}
+
+console.log(globalVar);  // Also accessible here                       
+                        </code>
+                    </pre>
+                </div>
+            </div>
+
+
+
+        <p>In this example, <code>globalVar</code> is defined outside any function, making it globally accessible.</p>
+        </li>
+        <li><p><strong>Local Scope (or Function Scope):</strong> A variable has a local scope when it is declared within a function. It can only be accessed and modified within that function and not from outside it.</p>
+        
+        
+            <div class="card bg-dark text-white">
+                <div class="card-header">
+                    <button class="btn btn-primary" onclick="copyCode(10)">Copy</button>
+                    <span id="copied-10" class="float-end"></span>
+                </div>
+                <div>
+                    <pre>
+                        <code class="language-javascript" id="code-block-10">
+function myFunction() {
+    let localVar = "I am local";
+    console.log(localVar);  // Accessible here
+}
+
+// console.log(localVar);  // Unaccessible here, would result in an error                      
+                        </code>
+                    </pre>
+                </div>
+            </div>
+
+
+        <p>Here, <code>localVar</code> is defined inside <code>myFunction</code> and can only be accessed within its defining function.</p>
+        </li>
+        </ul>
+        <h4 id="scope-chain">Scope Chain</h4>
+        <p>The scope chain in JavaScript refers to how nested functions can access variables. In a nested function structure, inner functions can access variables from their parent function&#39;s scope, forming a &quot;chain&quot; of accessible scopes from inner to outer.</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(11)">Copy</button>
+                <span id="copied-11" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-11">
+function outerFunction() {
+    let outerVar = "Outer variable";
+
+    function innerFunction() {
+        let innerVar = "Inner variable";
+        console.log(outerVar);  // Accessible due to scope chain
+        console.log(innerVar);  // Accessible in its local scope
+    }
+
+    innerFunction();
+    // console.log(innerVar);  // Unaccessible here, would result in an error
+}
+
+outerFunction();                      
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+
+        <p>In this structure, <code>innerFunction</code> can access <code>outerVar</code> from <code>outerFunction</code> due to the scope chain, while <code>outerVar</code> remains inaccessible outside its defining function.</p>
+        <h4 id="hands-on-exercise">Hands-on Exercise</h4>
+        <p>To illustrate the concept of scope and how it affects variable accessibility and lifetime, students can engage in an exercise involving nested functions:</p>
+        <ol>
+        <li><p><strong>Create Nested Functions:</strong></p>
+        <p>Define a function within another function, each with its local variables, and try to access those variables from different parts of the program.</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(12)">Copy</button>
+                <span id="copied-12" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-12">
+function parentFunction() {
+    let parentVar = "Parent variable";
+
+    function childFunction() {
+        let childVar = "Child variable";
+        console.log(parentVar);  // Accessible here
+        console.log(childVar);  // Accessible here
+    }
+
+    childFunction();
+    // console.log(childVar);  // Error: childVar is not defined in this scope
+}
+
+parentFunction();
+// console.log(parentVar);  // Error: parentVar is not defined in this scope                   
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+
+
+        </li>
+        <li><p><strong>Experiment with Scope Accessibility:</strong></p>
+        <p>After defining the nested functions, attempt to access the inner function’s variables from the outer function, and vice versa, to see where errors occur due to scope limitations.</p>
+        </li>
+        </ol>
+        <p>This exercise helps students understand how the scope chain works in JavaScript, demonstrating the rules governing variable accessibility within nested functions and highlighting the concept of local and global scope. Through these activities, learners gain practical insights into structuring their code to manage variable accessibility and ensure proper encapsulation.</p>
+        
+
+
+
+
+
+        <h3 id="closures-and-arrow-functions-in-javascript">Closures and Arrow Functions in JavaScript</h3>
+        <h4 id="closures">Closures</h4>
+        <p>A closure in JavaScript is a powerful and fundamental concept where an inner function has access to the variables and parameters of its outer function, even after the outer function has finished executing. This capability makes closures a crucial tool for managing and maintaining state in a controlled environment.</p>
+        <p><strong>Key Characteristics of Closures:</strong></p>
+        <ul>
+            <li><strong>Access to Outer Function Scope:</strong> Inner functions can access variables and parameters defined in the outer function.</li>
+            <li><strong>Memory Retention:</strong> Even after the outer function has executed, the inner function retains access to the outer function&#39;s scope, preserving the state.</li>
+            <li><strong>Privacy:</strong> Closures can create private variables and methods that are only accessible within the function scope, preventing external access and modification.</li>
+        </ul>
+        <p><strong>Example of a Closure:</strong></p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(13)">Copy</button>
+                <span id="copied-13" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-13">
+function outerFunction() {
+    let secretNumber = 42; // Private variable
+
+    return function innerFunction() {
+        console.log(`The secret number is ${secretNumber}.`);
+    };
+}
+
+let getSecretNumber = outerFunction(); // Creates a closure
+getSecretNumber(); // Accesses secretNumber via closure
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+
+        <p>In this example, <code>secretNumber</code> is a private variable within <code>outerFunction</code>. <code>innerFunction</code> forms a closure, maintaining access to <code>secretNumber</code> even after <code>outerFunction</code> has been executed.</p>
+        <h4 id="arrow-functions">Arrow Functions</h4>
+        <p>Arrow functions, introduced in ECMAScript 6 (ES6), provide a more concise syntax for writing functions. They are particularly useful for short expressions and are commonly used in functional programming patterns and methods that require this context, such as event handlers and callbacks.</p>
+        <p><strong>Syntax and Characteristics of Arrow Functions:</strong></p>
+        <ul>
+            <li><strong>Concise Syntax:</strong> Arrow functions eliminate the need for the <code>function</code> keyword and use <code>=&gt;</code> to separate parameters from the function body.</li>
+            <li><strong>Lexical <code>this</code> Binding:</strong> Unlike traditional functions, arrow functions don’t have their own <code>this</code> context. Instead, they inherit <code>this</code> from the surrounding code, known as lexical scoping.</li>
+            <li><strong>No <code>arguments</code> Object:</strong> Arrow functions don’t have an <code>arguments</code> object. Parameters are passed explicitly, or the <code>...rest</code> parameter can be used to capture arguments.</li>
+        </ul>
+        <p><strong>Example of an Arrow Function:</strong></p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(14)">Copy</button>
+                <span id="copied-14" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-14">
+let addNumbers = (a, b) => a + b;
+console.log(addNumbers(5, 3)); // Outputs 8
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+
+        <p>In this arrow function, <code>addNumbers</code> adds two numbers together in a more concise manner than a traditional function expression.</p>
+        <h4 id="interactive-exercise">Interactive Exercise</h4>
+        <p><strong>Rewriting Traditional Functions as Arrow Functions:</strong></p>
+        <p>Convert existing function expressions to arrow functions to understand the syntax and behavior differences.</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(15)">Copy</button>
+                <span id="copied-15" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-15">
+// Traditional function expression
+function sayHello(name) {
+    return `Hello, ${name}!`;
+}
+
+// Converted to arrow function
+let sayHello = name => `Hello, ${name}!`;
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+        
+        <p><strong>Creating a Simple Closure:</strong></p>
+        <p>Guide students to create a closure that manages a private variable, demonstrating how closures can encapsulate state.</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(16)">Copy</button>
+                <span id="copied-16" class="float-end"></span>
+            </div>
+            <div>
+                <pre>
+                    <code class="language-javascript" id="code-block-16">
+function createCounter() {
+    let count = 0; // Private variable
+
+    return () => {
+        count++;
+        console.log(`Current count is ${count}`);
+    };
+}
+
+let counter = createCounter(); // Closure encapsulating the count variable
+counter(); // Increments and logs count
+counter(); // Increments and logs count
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+        
+        <p>In this exercise, students will learn how to refactor traditional functions into arrow functions and how to use closures to manage and encapsulate state within a function scope effectively.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+        <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/core.min.js"></script> -->
+        <!-- Load the language you need -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/languages/javascript.min.js"></script> -->
+        <script>
+            function copyCode(index) {
+                const code = document.getElementById('code-block-' + index).innerText;
+                const copied = document.getElementById('copied-' + index);
+
+                navigator.clipboard.writeText(code).then(() => {
+                    copied.innerText = 'Copied to clipboard!';
+                });
+
+                setTimeout(() => {
+                    copied.innerText = '';
+                }, 3000);
+            }
+
+            // Initialize Highlight.js after the document is fully loaded
+            document.addEventListener('DOMContentLoaded', (event) => {
+                hljs.highlightAll();
+            });
+        </script>
+    </body>
+</html>

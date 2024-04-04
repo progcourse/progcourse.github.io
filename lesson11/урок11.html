@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ru" class="translated-ltr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Урок 11: Функции и область действия</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+        <style>
+            code {
+                background-color: yellow;
+                color: blue;
+                padding: 0 5px;
+            }
+        </style>
+        <link type="text/css" rel="stylesheet" charset="UTF-8" href="https://www.gstatic.com/_/translate_http/_/ss/k=translate_http.tr.qhDXWpKopYk.L.W.O/am=wA/d=0/rs=AN8SPfq5gedF4FIOWZgYyMCNZA5tU966ig/m=el_main_css">
+    </head>
+    <body class="p-5">
+        <a href="դաս11.html" class="btn btn-info">Հայերեն</a>
+        <a href="lesson11.html" class="btn btn-info">English</a>
+        <hr>
+        <h3 id="introduction-to-functions-in-javascript">Введение в функции в JavaScript</h3>
+        <h4 id="what-are-functions-">Что такое функции?</h4>
+        <p>Функции в программировании, особенно в JavaScript, являются фундаментальными строительными блоками, которые позволяют инкапсулировать повторно используемый код, предназначенный для выполнения конкретной задачи. Определив набор инструкций внутри функции, вы можете выполнять эти инструкции в любое время и в любом месте, где вызывается функция, без необходимости каждый раз переписывать код.</p>
+        <p>Функции повышают модульность, читаемость и удобство сопровождения кода. Они позволяют разбивать сложные проблемы на более мелкие и более управляемые задачи, каждая из которых заключена в своей функции. Это не только упрощает процесс разработки, но также облегчает отладку и тестирование, поскольку каждую функцию можно тестировать и проверять независимо.</p>
+        <h4 id="declaring-functions">Объявление функций</h4>
+        <p>В JavaScript вы объявляете функцию, используя <code>function</code>ключевое слово, за которым следует имя, идентифицирующее функцию. За именем функции следуют круглые скобки, которые могут включать параметры, представляющие входные данные, с которыми работает функция. Наконец, тело функции заключено в фигурные скобки и содержит блок исполняемого кода.</p>
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(1)">Копировать</button>
+                <span id="copied-1" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-1" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">sayHello</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Hello, world!"</span>);<font>
+}                               <font>
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+        <p>В этом примере <code>sayHello</code>— это функция, которая не принимает параметров и при вызове выполняет код внутри своего тела, печатая «Hello, world!» на консоль.</p>
+        <p>Если вы хотите, чтобы функция принимала входные данные, вы можете объявить параметры в круглых скобках:</p>
+        
+
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(2)">Копировать</button>
+                <span id="copied-2" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-2" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">greet</span>(<span class="hljs-params">name</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Hello, "</span> + name + <span class="hljs-string">"!"</span>);<font>
+}                              <font>
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+        <p>Вот <code>greet</code>функция, которая принимает один параметр <code>name</code>и использует его внутри функции для отображения персонализированного приветствия.</p>
+        <h4 id="calling-invoking-functions">Вызов (вызов) функций</h4>
+        <p>Чтобы выполнить функцию, вы вызываете ее, используя ее имя, за которым следуют круглые скобки. Если функция требует параметров, вы указываете аргументы в этих круглых скобках; в противном случае вы просто используете пустые круглые скобки.</p>
+
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(3)">Копировать</button>
+                <span id="copied-3" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-3" data-highlighted="yes">
+<span class="hljs-title function_">sayHello</span>(); <span class="hljs-comment">// Calls the sayHello function, outputting "Hello, world!"</span><font>
+<font>
+<span class="hljs-title function_">greet</span>(<span class="hljs-string">"Alice"</span>); <span class="hljs-comment">// Calls the greet function with "Alice" as an argument, outputting "Hello, Alice!"                              </span>
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+        <p>Когда вы вызываете функцию, движок JavaScript переходит к объявлению функции, выполняет блок кода внутри него, а затем возвращается к тому месту кода, где была вызвана функция, продолжая выполнение оттуда.</p>
+        <p>В приведенных выше примерах <code>sayHello()</code>вызывается без каких-либо аргументов, поскольку они не требуются, а <code>greet("Alice")</code>вызывается с одним аргументом для передачи имени «Алиса» функции, демонстрируя, как можно использовать функции с параметрами и без них для модульной организации и управления ход программы.</p>
+
+
+
+
+
+
+        <h3 id="parameters-and-return-values-in-functions">Параметры и возвращаемые значения в функциях</h3>
+        <h4 id="function-parameters">Параметры функции</h4>
+        <p>Параметры в функциях подобны заполнителям для значений, которые вы можете передать функции при ее вызове. Эти значения затем используются внутри функции для выполнения операций или вычислений. Параметры позволяют функциям быть более динамичными и пригодными для повторного использования, поскольку они могут работать с разными данными при каждом вызове.</p>
+        <p>При объявлении функции вы указываете параметры в круглых скобках после имени функции. Каждый параметр действует как локальная переменная внутри функции.</p>
+        <p><strong>Пример функции с несколькими параметрами:</strong></p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(4)">Копировать</button>
+                <span id="copied-4" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-4" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">addNumbers</span>(<span class="hljs-params">number1, number2</span>) {
+    <span class="hljs-keyword">return</span> number1 + number2;<font>
+}                     <font>
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+
+        <p>В этом примере <code>addNumbers</code>— функция с двумя параметрами <code>number1</code>и <code>number2</code>. Когда функция вызывается, она складывает эти два числа и возвращает результат.</p>
+        <h4 id="return-values">Возвращаемые значения</h4>
+        <p>Оператор <code>return</code>в функции выводит значение обратно в то место, где была вызвана функция. Это позволяет функции передавать данные обратно в остальную часть программы. При <code>return</code>выполнении выполнение функции завершается, и указанное значение возвращается вызывающей стороне.</p>
+        <p><strong>Пример возврата значения:</strong></p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(5)">Копировать</button>
+                <span id="copied-5" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-5" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">multiplyNumbers</span>(<span class="hljs-params">num1, num2</span>) {
+    <span class="hljs-keyword">return</span> num1 * num2;<font>
+}<font>
+<font>
+<span class="hljs-keyword">let</span> result = <span class="hljs-title function_">multiplyNumbers</span>(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>); <span class="hljs-comment">// result is now 15                          </span>
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+
+        <p>В этом примере <code>multiplyNumbers</code>вычисляет произведение <code>num1</code>и <code>num2</code>и возвращает результат. Возвращенное значение затем сохраняется в переменной <code>result</code>.</p>
+        <h4 id="practical-exercises">Практические упражнения</h4>
+        <p>Чтобы закрепить понятия параметров и возвращаемых значений, давайте выполним несколько практических упражнений:</p>
+        <ol>
+        <li><p><strong>Вычислить площадь фигуры.</strong> 
+        Напишите функцию для расчета площади прямоугольника, для которой в качестве параметров требуются ширина и высота.</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(6)">Копировать</button>
+                <span id="copied-6" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-6" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">calculateArea</span>(<span class="hljs-params">width, height</span>) {
+    <span class="hljs-keyword">return</span> width * height;<font>
+}<font>
+<font>
+<span class="hljs-keyword">let</span> area = <span class="hljs-title function_">calculateArea</span>(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>); <span class="hljs-comment">// Calls the function and stores the result</span><font>
+<font>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Area of the rectangle:"</span>, area);                          
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+
+        </li>
+        <li><p><strong>Объединение строк.</strong> 
+        Создайте функцию, которая принимает две строки в качестве параметров и возвращает их объединение.</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(7)">Копировать</button>
+                <span id="copied-7" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-7" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">concatenateStrings</span>(<span class="hljs-params">str1, str2</span>) {
+    <span class="hljs-keyword">return</span> str1 + str2;<font>
+}<font>
+<font>
+<span class="hljs-keyword">let</span> fullName = <span class="hljs-title function_">concatenateStrings</span>(<span class="hljs-string">"Alice"</span>, <span class="hljs-string">" Smith"</span>);<font>
+<font>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Full Name:"</span>, fullName);                           
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+
+        </li>
+        <li><p><strong>Преобразование единиц температуры:</strong> 
+        разработайте функцию для преобразования градусов Цельсия в градусы Фаренгейта. Формула конвертации такова <code>(Celsius * 9/5) + 32</code>.</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(8)">Копировать</button>
+                <span id="copied-8" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-8" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">celsiusToFahrenheit</span>(<span class="hljs-params">celsius</span>) {
+    <span class="hljs-keyword">return</span> (celsius * <span class="hljs-number">9</span> / <span class="hljs-number">5</span>) + <span class="hljs-number">32</span>;<font>
+}<font>
+<font>
+<span class="hljs-keyword">let</span> fahrenheit = <span class="hljs-title function_">celsiusToFahrenheit</span>(<span class="hljs-number">30</span>); <span class="hljs-comment">// Converts 30°C to °F</span><font>
+<font>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"30°C in Fahrenheit is:"</span>, fahrenheit);                          
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+       
+        </li>
+        </ol>
+        <p>Эти упражнения дают практический опыт определения функций, использования параметров для передачи в них данных и использования операторов <code>return</code>для передачи данных. Благодаря этим занятиям учащиеся узнают, как создавать функциональные, многократно используемые блоки кода, которые могут выполнять различные задачи в программе JavaScript.</p>
+
+
+
+
+
+
+        <h3 id="understanding-scope-in-javascript">Понимание области действия в JavaScript</h3>
+        <h4 id="global-vs-local-scope">Глобальная и локальная область действия</h4>
+        <p>Область видимости в JavaScript означает доступность переменных и функций в разных частях программы. Это фундаментальная концепция, определяющая, где в коде можно получить доступ к переменной.</p>
+        <ul>
+        <li><p><strong>Глобальная область действия.</strong> Переменная имеет глобальную область видимости, если она объявлена &ZeroWidthSpace;&ZeroWidthSpace;вне какой-либо функции. Это означает, что к нему можно получить доступ и изменить его из любой части программы, в том числе внутри функций.</p>
+        
+        
+            <div class="card bg-dark text-white">
+                <div class="card-header">
+                    <button class="btn btn-primary" onclick="copyCode(9)">Копировать</button>
+                    <span id="copied-9" class="float-end"></span>
+                </div>
+                <div>
+                    <pre>                        <code class="language-javascript hljs" id="code-block-9" data-highlighted="yes">
+<span class="hljs-keyword">let</span> globalVar = <span class="hljs-string">"I am global"</span>;<font>
+<font>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">accessGlobalVar</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(globalVar);  <span class="hljs-comment">// Accessible here</span><font>
+}<font>
+<font>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(globalVar);  <span class="hljs-comment">// Also accessible here                       </span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+
+
+
+        <p>В этом примере <code>globalVar</code>определяется вне любой функции, что делает его доступным глобально.</p>
+        </li>
+        <li><p><strong>Локальная область (или область функции):</strong> переменная имеет локальную область, когда она объявлена &ZeroWidthSpace;&ZeroWidthSpace;внутри функции. Доступ к нему и его изменение можно получить только внутри этой функции, а не снаружи.</p>
+        
+        
+            <div class="card bg-dark text-white">
+                <div class="card-header">
+                    <button class="btn btn-primary" onclick="copyCode(10)">Копировать</button>
+                    <span id="copied-10" class="float-end"></span>
+                </div>
+                <div>
+                    <pre>                        <code class="language-javascript hljs" id="code-block-10" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">myFunction</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> localVar = <span class="hljs-string">"I am local"</span>;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(localVar);  <span class="hljs-comment">// Accessible here</span><font>
+}<font>
+<font>
+<span class="hljs-comment">// console.log(localVar);  // Unaccessible here, would result in an error                      </span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+
+
+        <p>Здесь <code>localVar</code>определено внутри <code>myFunction</code>, и доступ к нему возможен только внутри его определяющей функции.</p>
+        </li>
+        </ul>
+        <h4 id="scope-chain">Цепь прицела</h4>
+        <p>Цепочка областей видимости в JavaScript относится к тому, как вложенные функции могут получать доступ к переменным. Во вложенной структуре функций внутренние функции могут получать доступ к переменным из области действия родительской функции, образуя «цепочку» доступных областей от внутренней к внешней.</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(11)">Копировать</button>
+                <span id="copied-11" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-11" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">outerFunction</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> outerVar = <span class="hljs-string">"Outer variable"</span>;<font>
+<font>
+    <span class="hljs-keyword">function</span> <span class="hljs-title function_">innerFunction</span>(<span class="hljs-params"></span>) {
+        <span class="hljs-keyword">let</span> innerVar = <span class="hljs-string">"Inner variable"</span>;
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(outerVar);  <span class="hljs-comment">// Accessible due to scope chain</span>
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(innerVar);  <span class="hljs-comment">// Accessible in its local scope</span><font>
+    }<font>
+<font>
+    <span class="hljs-title function_">innerFunction</span>();
+    <span class="hljs-comment">// console.log(innerVar);  // Unaccessible here, would result in an error</span><font>
+}<font>
+<font>
+<span class="hljs-title function_">outerFunction</span>();                      
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+
+        <p>В этой структуре <code>innerFunction</code>доступ возможен <code>outerVar</code>из <code>outerFunction</code>-за цепочки областей, но <code>outerVar</code>остается недоступным за пределами ее определяющей функции.</p>
+        <h4 id="hands-on-exercise">Практическое упражнение</h4>
+        <p>Чтобы проиллюстрировать концепцию области действия и то, как она влияет на доступность и время жизни переменных, учащиеся могут выполнить упражнение с вложенными функциями:</p>
+        <ol>
+        <li><p><strong>Создайте вложенные функции:</strong></p>
+        <p>Определите функцию внутри другой функции, каждая со своими локальными переменными, и попытайтесь получить доступ к этим переменным из разных частей программы.</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(12)">Копировать</button>
+                <span id="copied-12" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-12" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">parentFunction</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> parentVar = <span class="hljs-string">"Parent variable"</span>;<font>
+<font>
+    <span class="hljs-keyword">function</span> <span class="hljs-title function_">childFunction</span>(<span class="hljs-params"></span>) {
+        <span class="hljs-keyword">let</span> childVar = <span class="hljs-string">"Child variable"</span>;
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(parentVar);  <span class="hljs-comment">// Accessible here</span>
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(childVar);  <span class="hljs-comment">// Accessible here</span><font>
+    }<font>
+<font>
+    <span class="hljs-title function_">childFunction</span>();
+    <span class="hljs-comment">// console.log(childVar);  // Error: childVar is not defined in this scope</span><font>
+}<font>
+<font>
+<span class="hljs-title function_">parentFunction</span>();
+<span class="hljs-comment">// console.log(parentVar);  // Error: parentVar is not defined in this scope                   </span>
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+
+
+        </li>
+        <li><p><strong>Поэкспериментируйте с доступностью области:</strong></p>
+        <p>После определения вложенных функций попытайтесь получить доступ к переменным внутренней функции из внешней функции и наоборот, чтобы увидеть, где возникают ошибки из-за ограничений области действия.</p>
+        </li>
+        </ol>
+        <p>Это упражнение помогает учащимся понять, как работает цепочка областей видимости в JavaScript, демонстрируя правила, управляющие доступностью переменных внутри вложенных функций, и подчеркивая концепцию локальной и глобальной области видимости. Благодаря этим занятиям учащиеся получают практические знания о структурировании своего кода для управления доступностью переменных и обеспечения правильной инкапсуляции.</p>
+        
+
+
+
+
+
+        <h3 id="closures-and-arrow-functions-in-javascript">Замыкания и стрелочные функции в JavaScript</h3>
+        <h4 id="closures">Замыкания</h4>
+        <p>Замыкание в JavaScript — это мощная и фундаментальная концепция, при которой внутренняя функция имеет доступ к переменным и параметрам своей внешней функции даже после завершения выполнения внешней функции. Эта возможность делает замыкания важнейшим инструментом управления и поддержания состояния в контролируемой среде.</p>
+        <p><strong>Ключевые характеристики затворов:</strong></p>
+        <ul>
+            <li><strong>Доступ к области внешней функции.</strong> Внутренние функции могут получать доступ к переменным и параметрам, определенным во внешней функции.</li>
+            <li><strong>Сохранение памяти:</strong> даже после выполнения внешней функции внутренняя функция сохраняет доступ к области видимости внешней функции, сохраняя состояние.</li>
+            <li><strong>Конфиденциальность:</strong> замыкания могут создавать частные переменные и методы, доступные только внутри области функции, предотвращая внешний доступ и изменение.</li>
+        </ul>
+        <p><strong>Пример закрытия:</strong></p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(13)">Копировать</button>
+                <span id="copied-13" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-13" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">outerFunction</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> secretNumber = <span class="hljs-number">42</span>; <span class="hljs-comment">// Private variable</span><font>
+<font>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">innerFunction</span>(<span class="hljs-params"></span>) {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`The secret number is <span class="hljs-subst">${secretNumber}</span>.`</span>);<font>
+    };<font>
+}<font>
+<font>
+<span class="hljs-keyword">let</span> getSecretNumber = <span class="hljs-title function_">outerFunction</span>(); <span class="hljs-comment">// Creates a closure</span>
+<span class="hljs-title function_">getSecretNumber</span>(); <span class="hljs-comment">// Accesses secretNumber via closure</span>
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+
+        <p>В этом примере <code>secretNumber</code>— частная переменная внутри <code>outerFunction</code>. <code>innerFunction</code>образует замыкание, сохраняя доступ <code>secretNumber</code>даже после <code>outerFunction</code>выполнения.</p>
+        <h4 id="arrow-functions">Стрелочные функции</h4>
+        <p>Стрелочные функции, представленные в ECMAScript 6 (ES6), предоставляют более краткий синтаксис для написания функций. Они особенно полезны для коротких выражений и обычно используются в шаблонах и методах функционального программирования, требующих этого контекста, таких как обработчики событий и обратные вызовы.</p>
+        <p><strong>Синтаксис и характеристики стрелочных функций:</strong></p>
+        <ul>
+            <li><strong>Краткий синтаксис:</strong> стрелочные функции устраняют необходимость использования <code>function</code>ключевого слова и использования <code>=&gt;</code>для отделения параметров от тела функции.</li>
+            <li><strong>Лексическая <code>this</code>привязка.</strong> В отличие от традиционных функций, стрелочные функции не имеют собственного <code>this</code>контекста. Вместо этого они наследуют <code>this</code>окружающий код, известный как лексическая область видимости.</li>
+            <li><strong>Нет <code>arguments</code>объекта:</strong> стрелочные функции не имеют <code>arguments</code>объекта. Параметры передаются явно, или <code>...rest</code>параметр можно использовать для захвата аргументов.</li>
+        </ul>
+        <p><strong>Пример функции стрелки:</strong></p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(14)">Копировать</button>
+                <span id="copied-14" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-14" data-highlighted="yes">
+<span class="hljs-keyword">let</span> <span class="hljs-title function_">addNumbers</span> = (<span class="hljs-params">a, b</span>) =&gt; a + b;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">addNumbers</span>(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>)); <span class="hljs-comment">// Outputs 8</span>
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+
+        <p>В этой стрелочной функции <code>addNumbers</code>два числа складываются более лаконично, чем в традиционном функциональном выражении.</p>
+        <h4 id="interactive-exercise">Интерактивное упражнение</h4>
+        <p><strong>Переписывание традиционных функций в виде стрелочных функций:</strong></p>
+        <p>Преобразуйте существующие функциональные выражения в стрелочные функции, чтобы понять различия в синтаксисе и поведении.</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(15)">Копировать</button>
+                <span id="copied-15" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-15" data-highlighted="yes">
+<span class="hljs-comment">// Traditional function expression</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">sayHello</span>(<span class="hljs-params">name</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`Hello, <span class="hljs-subst">${name}</span>!`</span>;<font>
+}<font>
+<font>
+<span class="hljs-comment">// Converted to arrow function</span>
+<span class="hljs-keyword">let</span> <span class="hljs-title function_">sayHello</span> = name =&gt; <span class="hljs-string">`Hello, <span class="hljs-subst">${name}</span>!`</span>;
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+        
+        <p><strong>Создание простого замыкания:</strong></p>
+        <p>Помогите учащимся создать замыкание, которое управляет частной переменной, демонстрируя, как замыкания могут инкапсулировать состояние.</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(16)">Копировать</button>
+                <span id="copied-16" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-16" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">createCounter</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> count = <span class="hljs-number">0</span>; <span class="hljs-comment">// Private variable</span><font>
+<font>
+    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> {<font>
+        count++;<font>
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Current count is <span class="hljs-subst">${count}</span>`</span>);<font>
+    };<font>
+}<font>
+<font>
+<span class="hljs-keyword">let</span> counter = <span class="hljs-title function_">createCounter</span>(); <span class="hljs-comment">// Closure encapsulating the count variable</span>
+<span class="hljs-title function_">counter</span>(); <span class="hljs-comment">// Increments and logs count</span>
+<span class="hljs-title function_">counter</span>(); <span class="hljs-comment">// Increments and logs count</span>
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+        
+        <p>В этом упражнении учащиеся узнают, как реорганизовать традиционные функции в стрелочные функции и как использовать замыкания для эффективного управления и инкапсуляции состояния в области функции.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+        <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/core.min.js"></script> -->
+        <!-- Load the language you need -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/languages/javascript.min.js"></script> -->
+        <script>
+            function copyCode(index) {
+                const code = document.getElementById('code-block-' + index).innerText;
+                const copied = document.getElementById('copied-' + index);
+
+                navigator.clipboard.writeText(code).then(() => {
+                    copied.innerText = 'Скопировано в буфер обмена!';
+                });
+
+                setTimeout(() => {
+                    copied.innerText = '';
+                }, 3000);
+            }
+
+            // Initialize Highlight.js after the document is fully loaded
+            document.addEventListener('DOMContentLoaded', (event) => {
+                hljs.highlightAll();
+            });
+        </script>
+    </body>
+</html>

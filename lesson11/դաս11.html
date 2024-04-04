@@ -1,0 +1,513 @@
+<html lang="hy" class="translated-ltr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Դաս 11. Գործառույթներ և շրջանակ</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+        <style>
+            code {
+                background-color: yellow;
+                color: blue;
+                padding: 0 5px;
+            }
+        </style>
+        <link type="text/css" rel="stylesheet" charset="UTF-8" href="https://www.gstatic.com/_/translate_http/_/ss/k=translate_http.tr.qhDXWpKopYk.L.W.O/am=wA/d=0/rs=AN8SPfq5gedF4FIOWZgYyMCNZA5tU966ig/m=el_main_css">
+    </head>
+    <body class="p-5">
+        <a href="lesson11.html" class="btn btn-info">English</a>
+        <a href="урок11.html" class="btn btn-info">Русский</a>
+        <hr>
+        <h3 id="introduction-to-functions-in-javascript">Ներածություն գործառույթներին JavaScript-ում</h3>
+        <h4 id="what-are-functions-">Որոնք են գործառույթները:</h4>
+        <p>Ծրագրավորման գործառույթները, մասնավորապես JavaScript-ում, հիմնարար շինարարական բլոկներ են, որոնք թույլ են տալիս ընդգրկել բազմակի օգտագործման կոդ, որը նախատեսված է որոշակի առաջադրանք կատարելու համար: Ֆունկցիայի ներսում հրահանգների մի շարք սահմանելով՝ դուք կարող եք կատարել այդ հրահանգները, երբ և որտեղ կանչվի ֆունկցիան՝ առանց ամեն անգամ կոդը վերաշարադրելու անհրաժեշտության:</p>
+        <p>Գործառույթները մեծացնում են կոդի մոդուլյարությունը, ընթեռնելիությունը և պահպանելիությունը: Դրանք թույլ են տալիս բարդ խնդիրները բաժանել ավելի փոքր, ավելի կառավարելի առաջադրանքների, որոնցից յուրաքանչյուրը ներառված է իր գործառույթի մեջ: Սա ոչ միայն հեշտացնում է զարգացման գործընթացը, այլև հեշտացնում է վրիպազերծումը և փորձարկումը, քանի որ յուրաքանչյուր գործառույթ կարող է ինքնուրույն փորձարկվել և ստուգվել:</p>
+        <h4 id="declaring-functions">Գործառույթների հայտարարում</h4>
+        <p>JavaScript-ում դուք հայտարարում եք ֆունկցիա՝ օգտագործելով <code>function</code>հիմնաբառը, որին հաջորդում է ֆունկցիան նույնականացնող անունը: Ֆունկցիայի անվանմանը հաջորդում են փակագծերը, որոնք կարող են ներառել այնպիսի պարամետրեր, որոնք ներկայացնում են այն մուտքերը, որոնց վրա գործում է ֆունկցիան: Վերջապես, ֆունկցիայի մարմինը փակված է գանգուր փակագծերի մեջ, որը պարունակում է գործարկվող կոդի բլոկ:</p>
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(1)">Պատճենել</button>
+                <span id="copied-1" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-1" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">sayHello</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Hello, world!"</span>);<font>
+}                               <font>
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+        <p>Այս օրինակում <code>sayHello</code>ֆունկցիան է, որը ոչ մի պարամետր չի ընդունում և, երբ կանչվում է, կգործարկի կոդը իր մարմնի ներսում՝ տպելով «Բարև, աշխարհ»: կոնսոլին։</p>
+        <p>Եթե &ZeroWidthSpace;&ZeroWidthSpace;ցանկանում եք, որ ֆունկցիան ընդունի մուտքերը, կարող եք նշել պարամետրերը փակագծերում.</p>
+        
+
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(2)">Պատճենել</button>
+                <span id="copied-2" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-2" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">greet</span>(<span class="hljs-params">name</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Hello, "</span> + name + <span class="hljs-string">"!"</span>);<font>
+}                              <font>
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+        <p>Ահա <code>greet</code>մի ֆունկցիա, որը վերցնում է մեկ պարամետր, <code>name</code>և այն օգտագործում է ֆունկցիայի ներսում՝ անհատականացված ողջույնը ցուցադրելու համար:</p>
+        <h4 id="calling-invoking-functions">Զանգահարելու (կանչելու) գործառույթներ</h4>
+        <p>Գործառույթն իրականացնելու համար դուք կանչում կամ կանչում եք այն՝ օգտագործելով նրա անունը, որին հաջորդում են փակագծերը: Եթե &ZeroWidthSpace;&ZeroWidthSpace;ֆունկցիան պահանջում է պարամետրեր, դուք արգումենտները տրամադրում եք այս փակագծերում. հակառակ դեպքում, դուք պարզապես օգտագործում եք դատարկ փակագծեր:</p>
+
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(3)">Պատճենել</button>
+                <span id="copied-3" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-3" data-highlighted="yes">
+<span class="hljs-title function_">sayHello</span>(); <span class="hljs-comment">// Calls the sayHello function, outputting "Hello, world!"</span><font>
+<font>
+<span class="hljs-title function_">greet</span>(<span class="hljs-string">"Alice"</span>); <span class="hljs-comment">// Calls the greet function with "Alice" as an argument, outputting "Hello, Alice!"                              </span>
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+        <p>Երբ դուք կանչում եք ֆունկցիա, JavaScript շարժիչը ցատկում է դեպի ֆունկցիայի հռչակագիրը, կատարում է կոդի բլոկը դրա ներսում, և այնուհետև վերադառնում է կոդի այն կետը, որտեղ կանչվել է ֆունկցիան՝ այնտեղից շարունակելով կատարումը:</p>
+        <p>Վերոնշյալ օրինակներում <code>sayHello()</code>կանչվում է առանց որևէ արգումենտի, քանի որ այն չի պահանջում, մինչդեռ <code>greet("Alice")</code>կոչվում է մեկ արգումենտով՝ «Alice» անունը ֆունկցիային փոխանցելու համար՝ ցույց տալով, թե ինչպես կարող են ֆունկցիաները օգտագործել և առանց պարամետրերի մոդուլյարացնելու և կառավարելու համար։ ծրագրի ընթացքը.</p>
+
+
+
+
+
+
+        <h3 id="parameters-and-return-values-in-functions">Պարամետրեր և վերադարձի արժեքներ ֆունկցիաներում</h3>
+        <h4 id="function-parameters">Ֆունկցիայի պարամետրեր</h4>
+        <p>Գործառույթների պարամետրերը նման են արժեքների տեղապահների, որոնք կարող եք փոխանցել ֆունկցիային, երբ այն կանչեք: Այս արժեքներն այնուհետև օգտագործվում են ֆունկցիայի շրջանակներում՝ գործողություններ կամ հաշվարկներ կատարելու համար: Պարամետրերը թույլ են տալիս գործառույթներին ավելի դինամիկ և վերօգտագործելի լինել, քանի որ դրանք կարող են աշխատել տարբեր տվյալների վրա ամեն անգամ, երբ դրանք կանչվում են:</p>
+        <p>Ֆունկցիան հայտարարելիս դուք նշում եք պարամետրերը փակագծերի ներսում՝ հետևելով ֆունկցիայի անվանմանը: Յուրաքանչյուր պարամետր գործառույթի ներսում գործում է որպես տեղական փոփոխական:</p>
+        <p><strong>Բազմաթիվ պարամետրերով ֆունկցիայի օրինակ.</strong></p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(4)">Պատճենել</button>
+                <span id="copied-4" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-4" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">addNumbers</span>(<span class="hljs-params">number1, number2</span>) {
+    <span class="hljs-keyword">return</span> number1 + number2;<font>
+}                     <font>
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+
+        <p>Այս օրինակում <code>addNumbers</code>երկու պարամետրով ֆունկցիա է <code>number1</code>և <code>number2</code>. Երբ ֆունկցիան կանչվում է, այն գումարում է այս երկու թվերը և վերադարձնում արդյունքը։</p>
+        <h4 id="return-values">Վերադարձի արժեքներ</h4>
+        <p><code>return</code>Ֆունկցիայի հայտարարությունը վերադարձնում է արժեք այն տեղը, որտեղ կանչվել է ֆունկցիան : Սա թույլ է տալիս ֆունկցիան հետ փոխանցել տվյալները ծրագրի մնացած մասերին: Երբ <code>return</code>կատարվում է, ֆունկցիայի կատարումն ավարտվում է, և նշված արժեքը վերադարձվում է զանգահարողին:</p>
+        <p><strong>Արժեքը վերադարձնելու օրինակ.</strong></p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(5)">Պատճենել</button>
+                <span id="copied-5" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-5" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">multiplyNumbers</span>(<span class="hljs-params">num1, num2</span>) {
+    <span class="hljs-keyword">return</span> num1 * num2;<font>
+}<font>
+<font>
+<span class="hljs-keyword">let</span> result = <span class="hljs-title function_">multiplyNumbers</span>(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>); <span class="hljs-comment">// result is now 15                          </span>
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+
+        <p>Այս օրինակում <code>multiplyNumbers</code>հաշվարկում է արդյունքը <code>num1</code>և <code>num2</code>վերադարձնում արդյունքը: Այնուհետև վերադարձված արժեքը պահվում է փոփոխականում <code>result</code>:</p>
+        <h4 id="practical-exercises">Գործնական վարժություններ</h4>
+        <p>Պարամետրերի և վերադարձի արժեքների հասկացություններն ամրապնդելու համար եկեք աշխատենք մի քանի գործնական վարժությունների միջոցով.</p>
+        <ol>
+        <li><p><strong>Հաշվեք ձևի մակերեսը.</strong> 
+        գրեք ուղղանկյան մակերեսը հաշվարկելու գործառույթ, որը որպես պարամետրեր պահանջում է լայնություն և բարձրություն:</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(6)">Պատճենել</button>
+                <span id="copied-6" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-6" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">calculateArea</span>(<span class="hljs-params">width, height</span>) {
+    <span class="hljs-keyword">return</span> width * height;<font>
+}<font>
+<font>
+<span class="hljs-keyword">let</span> area = <span class="hljs-title function_">calculateArea</span>(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>); <span class="hljs-comment">// Calls the function and stores the result</span><font>
+<font>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Area of the rectangle:"</span>, area);                          
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+
+        </li>
+        <li><p><strong>Միավորել տողերը.</strong> 
+        Ստեղծեք ֆունկցիա, որն ընդունում է երկու տող որպես պարամետր և վերադարձնում դրանց միացումը:</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(7)">Պատճենել</button>
+                <span id="copied-7" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-7" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">concatenateStrings</span>(<span class="hljs-params">str1, str2</span>) {
+    <span class="hljs-keyword">return</span> str1 + str2;<font>
+}<font>
+<font>
+<span class="hljs-keyword">let</span> fullName = <span class="hljs-title function_">concatenateStrings</span>(<span class="hljs-string">"Alice"</span>, <span class="hljs-string">" Smith"</span>);<font>
+<font>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Full Name:"</span>, fullName);                           
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+
+        </li>
+        <li><p><strong>Փոխակերպել ջերմաստիճանի միավորները.</strong> 
+        մշակել ֆունկցիա՝ Ցելսիուսը Ֆարենհայթի փոխարկելու համար: Փոխակերպման բանաձևն է <code>(Celsius * 9/5) + 32</code>.</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(8)">Պատճենել</button>
+                <span id="copied-8" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-8" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">celsiusToFahrenheit</span>(<span class="hljs-params">celsius</span>) {
+    <span class="hljs-keyword">return</span> (celsius * <span class="hljs-number">9</span> / <span class="hljs-number">5</span>) + <span class="hljs-number">32</span>;<font>
+}<font>
+<font>
+<span class="hljs-keyword">let</span> fahrenheit = <span class="hljs-title function_">celsiusToFahrenheit</span>(<span class="hljs-number">30</span>); <span class="hljs-comment">// Converts 30°C to °F</span><font>
+<font>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"30°C in Fahrenheit is:"</span>, fahrenheit);                          
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+       
+        </li>
+        </ol>
+        <p>Այս վարժություններն առաջարկում են գործնական փորձ՝ գործառույթների սահմանման, դրանց մեջ տվյալների փոխանցման պարամետրերի կիրառման և <code>return</code>տվյալների փոխանցման համար հայտարարություն օգտագործելու համար: Այս գործողությունների միջոցով ուսանողները կսովորեն, թե ինչպես ստեղծել ֆունկցիոնալ, բազմակի օգտագործման կոդային բլոկներ, որոնք կարող են կատարել մի շարք առաջադրանքներ JavaScript ծրագրում:</p>
+
+
+
+
+
+
+        <h3 id="understanding-scope-in-javascript">Հասկանալով շրջանակը JavaScript-ում</h3>
+        <h4 id="global-vs-local-scope">Համաշխարհային ընդդեմ տեղական շրջանակի</h4>
+        <p>Scope-ը JavaScript-ում վերաբերում է փոփոխականների և գործառույթների հասանելիությանը ծրագրի տարբեր մասերում: Դա հիմնարար հասկացություն է, որը որոշում է, թե որտեղ կարող է փոփոխականին մուտք գործել կոդի մեջ:</p>
+        <ul>
+        <li><p><strong>Համաշխարհային շրջանակ.</strong> փոփոխականն ունի գլոբալ շրջանակ, երբ այն հայտարարվում է որևէ ֆունկցիայից դուրս: Սա նշանակում է, որ այն կարող է մուտք գործել և փոփոխվել ծրագրի ցանկացած մասից, ներառյալ գործառույթների ներսում:</p>
+        
+        
+            <div class="card bg-dark text-white">
+                <div class="card-header">
+                    <button class="btn btn-primary" onclick="copyCode(9)">Պատճենել</button>
+                    <span id="copied-9" class="float-end"></span>
+                </div>
+                <div>
+                    <pre>                        <code class="language-javascript hljs" id="code-block-9" data-highlighted="yes">
+<span class="hljs-keyword">let</span> globalVar = <span class="hljs-string">"I am global"</span>;<font>
+<font>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">accessGlobalVar</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(globalVar);  <span class="hljs-comment">// Accessible here</span><font>
+}<font>
+<font>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(globalVar);  <span class="hljs-comment">// Also accessible here                       </span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+
+
+
+        <p>Այս օրինակում <code>globalVar</code>սահմանվում է ցանկացած ֆունկցիայից դուրս՝ այն դարձնելով գլոբալ հասանելի:</p>
+        </li>
+        <li><p><strong>Տեղական շրջանակ (կամ ֆունկցիայի շրջանակ).</strong> փոփոխականն ունի լոկալ տիրույթ, երբ այն հայտարարվում է ֆունկցիայի շրջանակներում: Այն կարող է մուտք գործել և փոփոխվել միայն այդ ֆունկցիայի շրջանակներում, այլ ոչ թե դրանից դուրս:</p>
+        
+        
+            <div class="card bg-dark text-white">
+                <div class="card-header">
+                    <button class="btn btn-primary" onclick="copyCode(10)">Պատճենել</button>
+                    <span id="copied-10" class="float-end"></span>
+                </div>
+                <div>
+                    <pre>                        <code class="language-javascript hljs" id="code-block-10" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">myFunction</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> localVar = <span class="hljs-string">"I am local"</span>;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(localVar);  <span class="hljs-comment">// Accessible here</span><font>
+}<font>
+<font>
+<span class="hljs-comment">// console.log(localVar);  // Unaccessible here, would result in an error                      </span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+
+
+        <p>Այստեղ <code>localVar</code>սահմանվում է ներսում <code>myFunction</code>և հասանելի է միայն իր որոշիչ ֆունկցիայի շրջանակներում:</p>
+        </li>
+        </ul>
+        <h4 id="scope-chain">Շրջանակի շղթա</h4>
+        <p>JavaScript-ի շրջանակի շղթան վերաբերում է նրան, թե ինչպես են ներկառուցված գործառույթները կարող մուտք գործել փոփոխականներ: Ներքին ֆունկցիաների կառուցվածքում ներքին ֆունկցիաները կարող են մուտք գործել փոփոխականներ իրենց մայր ֆունկցիայի շրջանակից՝ ձևավորելով հասանելի շրջանակների «շղթա»՝ ներքինից արտաքին:</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(11)">Պատճենել</button>
+                <span id="copied-11" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-11" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">outerFunction</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> outerVar = <span class="hljs-string">"Outer variable"</span>;<font>
+<font>
+    <span class="hljs-keyword">function</span> <span class="hljs-title function_">innerFunction</span>(<span class="hljs-params"></span>) {
+        <span class="hljs-keyword">let</span> innerVar = <span class="hljs-string">"Inner variable"</span>;
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(outerVar);  <span class="hljs-comment">// Accessible due to scope chain</span>
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(innerVar);  <span class="hljs-comment">// Accessible in its local scope</span><font>
+    }<font>
+<font>
+    <span class="hljs-title function_">innerFunction</span>();
+    <span class="hljs-comment">// console.log(innerVar);  // Unaccessible here, would result in an error</span><font>
+}<font>
+<font>
+<span class="hljs-title function_">outerFunction</span>();                      
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+
+        <p>Այս կառույցում <code>innerFunction</code>կարող է մուտք գործել <code>outerVar</code>ըստ <code>outerFunction</code>շրջանակի շղթայի, մինչդեռ <code>outerVar</code>մնում է անհասանելի իր որոշիչ գործառույթից դուրս:</p>
+        <h4 id="hands-on-exercise">Ձեռքի վարժություն</h4>
+        <p>Շրջանակի հայեցակարգը և ինչպես է այն ազդում փոփոխական հասանելիության և կյանքի տևողության վրա պատկերացնելու համար, ուսանողները կարող են մասնակցել մի վարժություն, որը ներառում է ներդիր գործառույթներ.</p>
+        <ol>
+        <li><p><strong>Ստեղծեք Nested գործառույթներ.</strong></p>
+        <p>Սահմանեք ֆունկցիա մեկ այլ ֆունկցիայի մեջ՝ յուրաքանչյուրն իր տեղական փոփոխականներով, և փորձեք մուտք գործել այդ փոփոխականները ծրագրի տարբեր մասերից։</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(12)">Պատճենել</button>
+                <span id="copied-12" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-12" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">parentFunction</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> parentVar = <span class="hljs-string">"Parent variable"</span>;<font>
+<font>
+    <span class="hljs-keyword">function</span> <span class="hljs-title function_">childFunction</span>(<span class="hljs-params"></span>) {
+        <span class="hljs-keyword">let</span> childVar = <span class="hljs-string">"Child variable"</span>;
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(parentVar);  <span class="hljs-comment">// Accessible here</span>
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(childVar);  <span class="hljs-comment">// Accessible here</span><font>
+    }<font>
+<font>
+    <span class="hljs-title function_">childFunction</span>();
+    <span class="hljs-comment">// console.log(childVar);  // Error: childVar is not defined in this scope</span><font>
+}<font>
+<font>
+<span class="hljs-title function_">parentFunction</span>();
+<span class="hljs-comment">// console.log(parentVar);  // Error: parentVar is not defined in this scope                   </span>
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+
+
+        </li>
+        <li><p><strong>Փորձարկել Scope Accessibility.</strong></p>
+        <p>Ներդրված գործառույթները սահմանելուց հետո փորձեք մուտք գործել ներքին ֆունկցիայի փոփոխականներ արտաքին ֆունկցիայից և հակառակը՝ տեսնելու, թե որտեղ են սխալները տեղի ունենում շրջանակի սահմանափակումների պատճառով:</p>
+        </li>
+        </ol>
+        <p>Այս վարժությունն օգնում է ուսանողներին հասկանալ, թե ինչպես է աշխատում շրջանակի շղթան JavaScript-ում՝ ցույց տալով փոփոխական հասանելիությունը կարգավորող կանոնները ներդիր գործառույթների շրջանակներում և ընդգծելով տեղական և գլոբալ շրջանակի հայեցակարգը: Այս գործողությունների միջոցով սովորողները գործնական պատկերացումներ են ձեռք բերում իրենց ծածկագրի կառուցվածքի վերաբերյալ՝ փոփոխական հասանելիությունը կառավարելու և պատշաճ ամփոփում ապահովելու համար:</p>
+        
+
+
+
+
+
+        <h3 id="closures-and-arrow-functions-in-javascript">Փակումներ և սլաքների գործառույթներ JavaScript-ում</h3>
+        <h4 id="closures">Փակումներ</h4>
+        <p>JavaScript-ում փակումը հզոր և հիմնարար հասկացություն է, որտեղ ներքին ֆունկցիան հասանելի է իր արտաքին ֆունկցիայի փոփոխականներին և պարամետրերին, նույնիսկ այն բանից հետո, երբ արտաքին ֆունկցիան ավարտի իր կատարումը: Այս հնարավորությունը փակումները դարձնում է կարևոր գործիք վերահսկվող միջավայրում վիճակը կառավարելու և պահպանելու համար:</p>
+        <p><strong>Փակման հիմնական բնութագրերը.</strong></p>
+        <ul>
+            <li><strong>Մուտք դեպի արտաքին ֆունկցիայի շրջանակ.</strong> Ներքին գործառույթները կարող են մուտք գործել արտաքին ֆունկցիայի մեջ սահմանված փոփոխականներ և պարամետրեր:</li>
+            <li><strong>Հիշողության պահպանում.</strong> նույնիսկ արտաքին ֆունկցիան կատարելուց հետո, ներքին ֆունկցիան պահպանում է մուտքը դեպի արտաքին ֆունկցիայի շրջանակը՝ պահպանելով վիճակը:</li>
+            <li><strong>Գաղտնիություն.</strong> Փակումները կարող են ստեղծել մասնավոր փոփոխականներ և մեթոդներ, որոնք հասանելի են միայն գործառույթի շրջանակում՝ կանխելով արտաքին մուտքն ու փոփոխությունը:</li>
+        </ul>
+        <p><strong>Փակման օրինակ.</strong></p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(13)">Պատճենել</button>
+                <span id="copied-13" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-13" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">outerFunction</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> secretNumber = <span class="hljs-number">42</span>; <span class="hljs-comment">// Private variable</span><font>
+<font>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">innerFunction</span>(<span class="hljs-params"></span>) {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`The secret number is <span class="hljs-subst">${secretNumber}</span>.`</span>);<font>
+    };<font>
+}<font>
+<font>
+<span class="hljs-keyword">let</span> getSecretNumber = <span class="hljs-title function_">outerFunction</span>(); <span class="hljs-comment">// Creates a closure</span>
+<span class="hljs-title function_">getSecretNumber</span>(); <span class="hljs-comment">// Accesses secretNumber via closure</span>
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+
+        <p>Այս օրինակում <code>secretNumber</code>մասնավոր փոփոխական է <code>outerFunction</code>. <code>innerFunction</code>ձևավորում է փակում՝ պահպանելով մուտքը <code>secretNumber</code>նույնիսկ <code>outerFunction</code>այն գործարկվելուց հետո:</p>
+        <h4 id="arrow-functions">Սլաքների գործառույթները</h4>
+        <p>Սլաքների գործառույթները, որոնք ներկայացված են ECMAScript 6-ում (ES6), ապահովում են ավելի հակիրճ շարահյուսություն ֆունկցիաները գրելու համար: Դրանք հատկապես օգտակար են կարճ արտահայտությունների համար և սովորաբար օգտագործվում են ֆունկցիոնալ ծրագրավորման օրինաչափություններում և մեթոդներում, որոնք պահանջում են այս համատեքստը, ինչպիսիք են իրադարձությունների մշակողները և հետադարձ զանգերը:</p>
+        <p><strong>Սլաքների ֆունկցիաների շարահյուսություն և բնութագրեր.</strong></p>
+        <ul>
+            <li><strong>Համառոտ շարահյուսություն.</strong> սլաքների գործառույթները վերացնում են հիմնաբառի անհրաժեշտությունը <code>function</code>և օգտագործում են <code>=&gt;</code>ֆունկցիայի մարմնից պարամետրերը առանձնացնելու համար:</li>
+            <li><strong>Լեքսիկական <code>this</code>կապում.</strong> Ի տարբերություն ավանդական ֆունկցիաների, սլաքների ֆունկցիաները չունեն իրենց սեփական <code>this</code>ենթատեքստը: Փոխարենը, նրանք ժառանգում են <code>this</code>շրջակա ծածկագրից, որը հայտնի է որպես բառապաշարի շրջանակ:</li>
+            <li><strong>Առանց <code>arguments</code>օբյեկտի.</strong> սլաքների ֆունկցիաները օբյեկտ չունեն <code>arguments</code>: Պարամետրերը փոխանցվում են հստակորեն, կամ <code>...rest</code>պարամետրը կարող է օգտագործվել փաստարկներ հավաքելու համար:</li>
+        </ul>
+        <p><strong>Սլաքի ֆունկցիայի օրինակ.</strong></p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(14)">Պատճենել</button>
+                <span id="copied-14" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-14" data-highlighted="yes">
+<span class="hljs-keyword">let</span> <span class="hljs-title function_">addNumbers</span> = (<span class="hljs-params">a, b</span>) =&gt; a + b;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">addNumbers</span>(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>)); <span class="hljs-comment">// Outputs 8</span>
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+
+        <p>Այս սլաքի ֆունկցիայում <code>addNumbers</code>երկու թվեր ավելացնում է ավելի հակիրճ ձևով, քան ավանդական ֆունկցիայի արտահայտությունը:</p>
+        <h4 id="interactive-exercise">Ինտերակտիվ վարժություն</h4>
+        <p><strong>Ավանդական գործառույթների վերագրանցում որպես սլաքների գործառույթներ.</strong></p>
+        <p>Փոխակերպեք առկա ֆունկցիաների արտահայտությունները սլաքների ֆունկցիաների՝ հասկանալու շարահյուսության և վարքագծի տարբերությունները:</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(15)">Պատճենել</button>
+                <span id="copied-15" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-15" data-highlighted="yes">
+<span class="hljs-comment">// Traditional function expression</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">sayHello</span>(<span class="hljs-params">name</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`Hello, <span class="hljs-subst">${name}</span>!`</span>;<font>
+}<font>
+<font>
+<span class="hljs-comment">// Converted to arrow function</span>
+<span class="hljs-keyword">let</span> <span class="hljs-title function_">sayHello</span> = name =&gt; <span class="hljs-string">`Hello, <span class="hljs-subst">${name}</span>!`</span>;
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+        
+        <p><strong>Պարզ փակման ստեղծում.</strong></p>
+        <p>Ուղղորդեք ուսանողներին ստեղծել փակում, որը կառավարում է մասնավոր փոփոխականը, ցույց տալով, թե ինչպես կարող են փակումները ներառել վիճակը:</p>
+        
+        
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="copyCode(16)">Պատճենել</button>
+                <span id="copied-16" class="float-end"></span>
+            </div>
+            <div>
+                <pre>                    <code class="language-javascript hljs" id="code-block-16" data-highlighted="yes">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">createCounter</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> count = <span class="hljs-number">0</span>; <span class="hljs-comment">// Private variable</span><font>
+<font>
+    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> {<font>
+        count++;<font>
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Current count is <span class="hljs-subst">${count}</span>`</span>);<font>
+    };<font>
+}<font>
+<font>
+<span class="hljs-keyword">let</span> counter = <span class="hljs-title function_">createCounter</span>(); <span class="hljs-comment">// Closure encapsulating the count variable</span>
+<span class="hljs-title function_">counter</span>(); <span class="hljs-comment">// Increments and logs count</span>
+<span class="hljs-title function_">counter</span>(); <span class="hljs-comment">// Increments and logs count</span>
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+        
+        <p>Այս վարժությունում ուսանողները կսովորեն, թե ինչպես ավանդական ֆունկցիաները վերածել սլաքների ֆունկցիաների և ինչպես օգտագործել փակումները՝ գործառույթի շրջանակում վիճակը արդյունավետ կառավարելու և ամփոփելու համար:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+        <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/core.min.js"></script> -->
+        <!-- Load the language you need -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/languages/javascript.min.js"></script> -->
+        <script>
+            function copyCode(index) {
+                const code = document.getElementById('code-block-' + index).innerText;
+                const copied = document.getElementById('copied-' + index);
+
+                navigator.clipboard.writeText(code).then(() => {
+                    copied.innerText = 'Պատճենվել է սեղմատախտակում:';
+                });
+
+                setTimeout(() => {
+                    copied.innerText = '';
+                }, 3000);
+            }
+
+            // Initialize Highlight.js after the document is fully loaded
+            document.addEventListener('DOMContentLoaded', (event) => {
+                hljs.highlightAll();
+            });
+        </script>
+    </body>
+</html>
