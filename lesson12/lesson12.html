@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lesson 12: Advanced JavaScript: Objects, Arrays, and DOM Manipulation</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+        <style>
+            code {
+                background-color: yellow;
+                color: blue;
+                padding: 0 5px;
+            }
+        </style>
+    </head>
+    <body class="p-5">
+        <a href="դաս12.html" class="btn btn-info">Հայերեն</a>
+        <a href="#" class="btn btn-info">Русский</a>
+        <hr>
+        
+
+
+        <h3 id="deep-dive-into-objects-in-javascript">Deep Dive into Objects in JavaScript</h3>
+<h4 id="understanding-objects">Understanding Objects</h4>
+<p>In JavaScript, objects are fundamental constructs that represent collections of key-value pairs. These pairs, also known as properties and methods, encapsulate data and functionality related to the object. Objects provide a structured way to manage related data and behavior, making them crucial for building scalable and maintainable applications.</p>
+<p><strong>Key Characteristics of Objects:</strong></p>
+<ul>
+<li><strong>Key-Value Pairs:</strong> Each property of an object is a key-value pair, where the key (or property name) is a string, and the value can be of any data type, including another object, function, or array.</li>
+<li><strong>Flexible and Dynamic:</strong> Objects in JavaScript are dynamic, meaning you can add, modify, and delete properties and methods at runtime.</li>
+</ul>
+<h4 id="creating-objects">Creating Objects</h4>
+<p>Objects can be created in several ways, with object literals being the most common method. An object literal is a comma-separated list of key-value pairs enclosed in curly braces <code>{}</code>.</p>
+<p><strong>Example of Creating an Object:</strong></p>
+<pre><code class="lang-javascript">let book = {
+<span class="hljs-symbol">    title:</span> <span class="hljs-string">"The Great Gatsby"</span>,
+<span class="hljs-symbol">    author:</span> <span class="hljs-string">"F. Scott Fitzgerald"</span>,
+<span class="hljs-symbol">    year:</span> <span class="hljs-number">1925</span>,
+<span class="hljs-symbol">    isAvailable:</span> true
+};
+</code></pre>
+<p>In this example, <code>book</code> is an object with properties like <code>title</code>, <code>author</code>, <code>year</code>, and <code>isAvailable</code>.</p>
+<h4 id="accessing-and-modifying-object-properties">Accessing and Modifying Object Properties</h4>
+<p>Properties within an object can be accessed and modified using dot notation or bracket notation.</p>
+<ul>
+<li><strong>Dot Notation:</strong> <code>objectName.propertyName</code></li>
+<li><strong>Bracket Notation:</strong> <code>objectName[&quot;propertyName&quot;]</code> (useful when property names are dynamic or not valid identifiers)</li>
+</ul>
+<pre><code class="lang-javascript">console.<span class="hljs-built_in">log</span>(book.<span class="hljs-built_in">title</span>);  <span class="hljs-comment">// Outputs "The Great Gatsby"</span>
+book.isAvailable = <span class="hljs-literal">false</span>;  <span class="hljs-comment">// Modifies the isAvailable property</span>
+</code></pre>
+<h4 id="object-methods-and-this-">Object Methods and &#39;this&#39;</h4>
+<p>Methods are functions that are properties of an object. The <code>this</code> keyword in a method refers to the object from which the method is called, providing access to the object’s properties and methods.</p>
+<p><strong>Example with Method and <code>this</code>:</strong></p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> person = {
+    <span class="hljs-attr">firstName</span>: <span class="hljs-string">"Alice"</span>,
+    <span class="hljs-attr">lastName</span>: <span class="hljs-string">"Johnson"</span>,
+    <span class="hljs-attr">greet</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Hello, "</span> + <span class="hljs-keyword">this</span>.firstName + <span class="hljs-string">" "</span> + <span class="hljs-keyword">this</span>.lastName);
+    }
+};
+
+person.greet();  <span class="hljs-comment">// Outputs "Hello, Alice Johnson"</span>
+</code></pre>
+<p>In <code>person.greet</code>, <code>this</code> refers to the <code>person</code> object, allowing access to its <code>firstName</code> and <code>lastName</code> properties.</p>
+<h4 id="practical-examples">Practical Examples</h4>
+<p>Let&#39;s apply these concepts by creating and using objects in practical scenarios:</p>
+<ol>
+<li><p><strong>Representing a Book:</strong></p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> book = {
+    <span class="hljs-attr">title</span>: <span class="hljs-string">"1984"</span>,
+    <span class="hljs-attr">author</span>: <span class="hljs-string">"George Orwell"</span>,
+    <span class="hljs-attr">publishYear</span>: <span class="hljs-number">1949</span>,
+    <span class="hljs-attr">getDescription</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.title}</span> by <span class="hljs-subst">${<span class="hljs-keyword">this</span>.author}</span>, published in <span class="hljs-subst">${<span class="hljs-keyword">this</span>.publishYear}</span>`</span>;
+    }
+};
+
+<span class="hljs-built_in">console</span>.log(book.getDescription());
+</code></pre>
+</li>
+<li><p><strong>Modeling a Person:</strong></p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> person = {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">"John Doe"</span>,
+    <span class="hljs-attr">age</span>: <span class="hljs-number">30</span>,
+    <span class="hljs-attr">occupation</span>: <span class="hljs-string">"Software Developer"</span>,
+    <span class="hljs-attr">introduce</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Hi, I'm <span class="hljs-subst">${<span class="hljs-keyword">this</span>.name}</span>, a <span class="hljs-subst">${<span class="hljs-keyword">this</span>.age}</span>-year-old <span class="hljs-subst">${<span class="hljs-keyword">this</span>.occupation}</span>.`</span>);
+    }
+};
+
+person.introduce();
+</code></pre>
+</li>
+<li><p><strong>Describing a Product:</strong></p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> product = {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">"Laptop"</span>,
+    <span class="hljs-attr">price</span>: <span class="hljs-number">999.99</span>,
+    <span class="hljs-attr">discount</span>: <span class="hljs-number">0.10</span>,
+    <span class="hljs-attr">calculateDiscountPrice</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.price * (<span class="hljs-number">1</span> - <span class="hljs-keyword">this</span>.discount);
+    }
+};
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Discounted price:"</span>, product.calculateDiscountPrice());
+</code></pre>
+</li>
+</ol>
+<p>These examples showcase how objects in JavaScript can encapsulate related data and behavior, providing a structured and intuitive way to represent complex entities in code. By using objects, developers can create more organized, readable, and maintainable programs.</p>
+
+
+
+
+
+<h3 id="arrays-and-array-methods-in-javascript">Arrays and Array Methods in JavaScript</h3>
+<h4 id="introduction-to-arrays">Introduction to Arrays</h4>
+<p>Arrays in JavaScript are used to store ordered collections of items, which can be of any data type, including numbers, strings, objects, or even other arrays. Arrays are indexed collections, starting from index 0 for the first element, index 1 for the second, and so on.</p>
+<p><strong>Creating and Accessing Array Elements:</strong></p>
+<p>To create an array, you use square brackets <code>[]</code>, with elements separated by commas. You access elements in an array by specifying the index in square brackets.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> fruits = [<span class="hljs-string">"Apple"</span>, <span class="hljs-string">"Banana"</span>, <span class="hljs-string">"Cherry"</span>];
+console.<span class="hljs-built_in">log</span>(fruits[<span class="hljs-number">0</span>]); <span class="hljs-comment">// Outputs "Apple"</span>
+console.<span class="hljs-built_in">log</span>(fruits[<span class="hljs-number">2</span>]); <span class="hljs-comment">// Outputs "Cherry"</span>
+</code></pre>
+<h4 id="common-array-methods">Common Array Methods</h4>
+<p>Arrays come with built-in methods that facilitate manipulation and querying of the array contents.</p>
+<ul>
+<li><p><strong><code>map</code></strong>: Transforms the elements in an array and returns a new array with the transformed elements.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> <span class="hljs-attr">numbers</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+<span class="hljs-keyword">let</span> <span class="hljs-attr">squares</span> = numbers.<span class="hljs-built_in">map</span>(<span class="hljs-attr">x</span> =&gt; x * x); // [<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">9</span>]
+</code></pre>
+</li>
+<li><p><strong><code>filter</code></strong>: Creates a new array with all elements that pass the test implemented by the provided function.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> evenNumbers = numbers.filter(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x % <span class="hljs-number">2</span> === <span class="hljs-number">0</span>); <span class="hljs-comment">// [2]</span>
+</code></pre>
+</li>
+<li><p><strong><code>reduce</code></strong>: Applies a function against an accumulator and each element in the array to reduce it to a single value.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> sum = numbers.reduce(<span class="hljs-function">(<span class="hljs-params">accumulator, currentValue</span>) =&gt;</span> accumulator + currentValue, <span class="hljs-number">0</span>); <span class="hljs-comment">// 6</span>
+</code></pre>
+</li>
+<li><p><strong><code>forEach</code></strong>: Executes a provided function once for each array element.</p>
+<pre><code class="lang-javascript">fruits.forEach(<span class="hljs-function"><span class="hljs-params">fruit</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(fruit));
+</code></pre>
+</li>
+<li><p><strong><code>push</code></strong>: Adds one or more elements to the end of an array and returns the new length of the array.</p>
+<pre><code class="lang-javascript">fruits.push(<span class="hljs-string">"Durian"</span>); <span class="hljs-regexp">//</span> [<span class="hljs-string">"Apple"</span>, <span class="hljs-string">"Banana"</span>, <span class="hljs-string">"Cherry"</span>, <span class="hljs-string">"Durian"</span>]
+</code></pre>
+</li>
+<li><p><strong><code>pop</code></strong>: Removes the last element from an array and returns that element.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> lastFruit = fruits.<span class="hljs-keyword">pop</span>(); <span class="hljs-comment">// Removes "Durian"</span>
+</code></pre>
+</li>
+<li><p><strong><code>shift</code></strong>: Removes the first element from an array and returns that removed element.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> <span class="hljs-attr">firstFruit</span> = fruits.shift(); // Removes <span class="hljs-string">"Apple"</span>
+</code></pre>
+</li>
+<li><p><strong><code>unshift</code></strong>: Adds one or more elements to the beginning of an array and returns the new length.</p>
+<pre><code class="lang-javascript">fruits.unshift(<span class="hljs-string">"Strawberry"</span>); <span class="hljs-regexp">//</span> [<span class="hljs-string">"Strawberry"</span>, <span class="hljs-string">"Banana"</span>, <span class="hljs-string">"Cherry"</span>]
+</code></pre>
+</li>
+<li><p><strong><code>splice</code></strong>: Changes the contents of an array by removing or replacing existing elements and/or adding new elements.</p>
+<pre><code class="lang-javascript">fruits.splice(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-string">"Mango"</span>); // Replaces <span class="hljs-string">"Banana"</span> <span class="hljs-keyword">with</span> <span class="hljs-string">"Mango"</span>
+</code></pre>
+</li>
+</ul>
+<h4 id="using-array-methods">Using Array Methods</h4>
+<p>These array methods can be used to process and manipulate data within arrays, serving various purposes from transformation to aggregation.</p>
+<ul>
+<li><strong><code>map</code></strong> for transforming data: Create a new array by performing an operation on each element of the original array.</li>
+<li><strong><code>filter</code></strong> for filtering data: Extract a subset of an array based on a condition.</li>
+<li><strong><code>reduce</code></strong> for accumulating values: Reduce an array to a single value by cumulatively combining its elements.</li>
+</ul>
+<h4 id="hands-on-exercise">Hands-on Exercise</h4>
+<p>Students should apply these array methods to perform common tasks:</p>
+<ol>
+<li><p><strong>Data Transformation with <code>map</code>:</strong>
+Convert an array of numbers to an array of their square roots.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> <span class="hljs-attr">numbers</span> = [<span class="hljs-number">4</span>, <span class="hljs-number">9</span>, <span class="hljs-number">16</span>];
+<span class="hljs-keyword">let</span> <span class="hljs-attr">roots</span> = numbers.<span class="hljs-built_in">map</span>(Math.sqrt); // [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]
+</code></pre>
+</li>
+<li><p><strong>Data Filtering with <code>filter</code>:</strong>
+Extract numbers greater than a certain value from an array.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> filteredNumbers = numbers.filter(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x &gt; <span class="hljs-number">5</span>); <span class="hljs-comment">// [9, 16]</span>
+</code></pre>
+</li>
+<li><p><strong>Accumulating Values with <code>reduce</code>:</strong>
+Calculate the total of all numbers in an array.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> total = numbers.reduce((<span class="hljs-built_in">sum</span>, current) =&gt; <span class="hljs-built_in">sum</span> + current, <span class="hljs-number">0</span>); // <span class="hljs-number">29</span>
+</code></pre>
+</li>
+<li><p><strong>Searching and Sorting:</strong>
+Find elements in an array or sort them based on certain criteria using <code>find</code>, <code>some</code>, <code>every</code>, or <code>sort</code>.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> found = numbers.find(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x &gt; <span class="hljs-number">10</span>); <span class="hljs-comment">// 16</span>
+numbers.sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b); <span class="hljs-comment">// Sorts numbers in ascending order</span>
+</code></pre>
+</li>
+</ol>
+<p>Through these exercises, students will gain hands-on experience with JavaScript array methods, learning how to effectively manipulate and process array data. This practice reinforces their understanding of arrays and their</p>
+
+
+
+
+
+
+<h3 id="introduction-to-dom-manipulation">Introduction to DOM Manipulation</h3>
+<h4 id="what-is-the-dom-">What is the DOM?</h4>
+<p>The Document Object Model (DOM) is a programming interface for HTML and XML documents. It represents the page structure as a tree of objects, allowing scripts to access and manipulate the document’s content, structure, and styles. Through the DOM, JavaScript can add, remove, and modify elements and attributes, change styles, respond to user events, and more, enabling dynamic and interactive web experiences.</p>
+<h4 id="selecting-elements">Selecting Elements</h4>
+<p>To manipulate the DOM, you first need to select the elements you want to work with. JavaScript provides several methods to select elements from the DOM:</p>
+<ul>
+<li><p><strong><code>getElementById</code></strong>: Selects an element by its ID.</p>
+<pre><code class="lang-javascript"><span class="hljs-attribute">let element</span> = document.getElementById(<span class="hljs-string">'myElement'</span>);
+</code></pre>
+</li>
+<li><p><strong><code>getElementsByClassName</code></strong>: Returns a live HTMLCollection of all elements with the specified class name.</p>
+<pre><code class="lang-javascript"><span class="hljs-attribute">let elements</span> = document.getElementsByClassName(<span class="hljs-string">'myClass'</span>);
+</code></pre>
+</li>
+<li><p><strong><code>getElementsByTagName</code></strong>: Returns a live HTMLCollection of elements with the given tag name.</p>
+<pre><code class="lang-javascript"><span class="hljs-attribute">let elements</span> = document.getElementsByTagName(<span class="hljs-string">'div'</span>);
+</code></pre>
+</li>
+<li><p><strong><code>querySelector</code></strong>: Returns the first element that matches a specified CSS selector.</p>
+<pre><code class="lang-javascript">let element = <span class="hljs-built_in">document</span>.<span class="hljs-built_in">querySelector</span>(<span class="hljs-string">'.myClass'</span>);
+</code></pre>
+</li>
+<li><p><strong><code>querySelectorAll</code></strong>: Returns a static NodeList of all elements that match a specified CSS selector.</p>
+<pre><code class="lang-javascript">let elements = <span class="hljs-built_in">document</span>.<span class="hljs-built_in">querySelectorAll</span>(<span class="hljs-string">'.myClass'</span>);
+</code></pre>
+</li>
+</ul>
+<h4 id="manipulating-the-dom">Manipulating the DOM</h4>
+<p>After selecting elements, you can manipulate the DOM in various ways:</p>
+<ul>
+<li><p><strong>Modifying Element Properties and Attributes</strong>: Change properties like <code>innerText</code>, <code>innerHTML</code>, or attributes like <code>src</code>, <code>href</code>.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> heading = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'heading'</span>);
+heading.innerText = <span class="hljs-string">'New Heading Text'</span>;
+</code></pre>
+</li>
+<li><p><strong>Changing Styles</strong>: Modify an element’s style directly using the <code>style</code> property.</p>
+<pre><code class="lang-javascript">heading.<span class="hljs-built_in">style</span>.<span class="hljs-built_in">color</span> = 'red';
+</code></pre>
+</li>
+<li><p><strong>Creating and Inserting Elements</strong>: Create new DOM elements with <code>document.createElement</code> and insert them using methods like <code>appendChild</code> or <code>insertBefore</code>.</p>
+<pre><code class="lang-javascript">let <span class="hljs-keyword">new</span><span class="hljs-type">Element</span> = document.createElement(<span class="hljs-string">'p'</span>);
+<span class="hljs-keyword">new</span><span class="hljs-type">Element</span>.innerText = <span class="hljs-string">'This is a new paragraph.'</span>;
+document.body.appendChild(<span class="hljs-keyword">new</span><span class="hljs-type">Element</span>);
+</code></pre>
+</li>
+<li><p><strong>Removing Elements</strong>: Remove elements from the DOM using <code>removeChild</code> or <code>remove</code>.</p>
+<pre><code class="lang-javascript">let parentElement = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'parent'</span>);
+parentElement.removeChild(heading); <span class="hljs-regexp">//</span> Assuming <span class="hljs-string">'heading'</span> <span class="hljs-keyword">is</span> a child <span class="hljs-keyword">of</span> <span class="hljs-string">'parent'</span>
+</code></pre>
+</li>
+</ul>
+<h4 id="interactive-dom-exercise">Interactive DOM Exercise</h4>
+<p>Let&#39;s engage in hands-on exercises to practice DOM manipulation:</p>
+<ol>
+<li><p><strong>Select and Modify Elements:</strong>
+Select elements on a webpage and modify their content, style, or other properties. For example, change the text and color of a heading element.</p>
+</li>
+<li><p><strong>Create a Dynamic List:</strong>
+Build a simple interactive list where users can add and remove items. Use <code>prompt</code> to get user input for new items and add them to the list displayed on the webpage.</p>
+<pre><code class="lang-javascript"> <span class="hljs-keyword">let</span> ulElement = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'ul'</span>);
+ <span class="hljs-built_in">document</span>.body.appendChild(ulElement);
+
+ <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addItem</span>(<span class="hljs-params"></span>) </span>{
+     <span class="hljs-keyword">let</span> itemText = prompt(<span class="hljs-string">'Enter item text'</span>);
+     <span class="hljs-keyword">if</span> (itemText) {
+         <span class="hljs-keyword">let</span> liElement = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'li'</span>);
+         liElement.innerText = itemText;
+         ulElement.appendChild(liElement);
+     }
+ }
+
+ <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">removeItem</span>(<span class="hljs-params"></span>) </span>{
+     <span class="hljs-keyword">if</span> (ulElement.hasChildNodes()) {
+         ulElement.removeChild(ulElement.lastChild);
+     }
+ }
+</code></pre>
+</li>
+<li><p><strong>Respond to User Events:</strong>
+Add buttons to the webpage that call <code>addItem</code> and <code>removeItem</code> functions when clicked, allowing the user to interact with the list dynamically.</p>
+</li>
+</ol>
+<p>In these exercises, students will learn how to select and manipulate DOM elements, create interactive content, and respond to user events, gaining practical skills in dynamic web page manipulation and enhancing their understanding of how JavaScript interacts with the DOM.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+        <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/core.min.js"></script> -->
+        <!-- Load the language you need -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/languages/javascript.min.js"></script> -->
+        <script>
+            function copyCode(index) {
+                const code = document.getElementById('code-block-' + index).innerText;
+                const copied = document.getElementById('copied-' + index);
+
+                navigator.clipboard.writeText(code).then(() => {
+                    copied.innerText = 'Copied to clipboard!';
+                });
+
+                setTimeout(() => {
+                    copied.innerText = '';
+                }, 3000);
+            }
+
+            // Initialize Highlight.js after the document is fully loaded
+            document.addEventListener('DOMContentLoaded', (event) => {
+                hljs.highlightAll();
+            });
+        </script>
+    </body>
+</html>

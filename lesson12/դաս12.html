@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="hy" class="translated-ltr"><head>
+    <meta charset="UTF-8">
+    <title>Դաս 12. Ընդլայնված JavaScript. օբյեկտներ, զանգվածներ և DOM մանիպուլյացիա</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+    <style>
+        code {
+            background-color: yellow;
+            color: blue;
+            padding: 0 5px;
+        }
+    </style>
+<link type="text/css" rel="stylesheet" charset="UTF-8" href="https://www.gstatic.com/_/translate_http/_/ss/k=translate_http.tr.26tY-h6gH9w.L.W.O/am=wA/d=0/rs=AN8SPfpPTNr3cQN8QhzqvQYsNrDu3oHhow/m=el_main_css"></head>
+<body class="p-5">
+    <a href="lesson12.html" class="btn btn-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">English</font></font></a>
+    <a href="#" class="btn btn-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Русский</font></font></a>
+    <hr>
+    
+
+
+    <h3 id="deep-dive-into-objects-in-javascript"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Deep Dive into Objects JavaScript-ում</font></font></h3>
+<h4 id="understanding-objects"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հասկանալով օբյեկտները</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JavaScript-ում օբյեկտները հիմնարար կառուցվածքներ են, որոնք ներկայացնում են բանալի-արժեք զույգերի հավաքածուներ: Այս զույգերը, որոնք նաև հայտնի են որպես հատկություններ և մեթոդներ, ամփոփում են տվյալներն ու ֆունկցիոնալությունը՝ կապված օբյեկտի հետ: Օբյեկտները տրամադրում են համապատասխան տվյալների և վարքագծի կառավարման կառուցվածքային միջոց՝ դրանք դարձնելով կարևոր՝ մասշտաբային և պահպանվող հավելվածներ ստեղծելու համար:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օբյեկտների հիմնական բնութագրերը.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բանալի-արժեք զույգեր.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> օբյեկտի յուրաքանչյուր հատկություն բանալի-արժեք զույգ է, որտեղ բանալին (կամ հատկության անվանումը) տող է, և արժեքը կարող է լինել ցանկացած տվյալների տիպի, ներառյալ մեկ այլ օբյեկտ, ֆունկցիա կամ զանգված:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ճկուն և դինամիկ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> JavaScript-ի օբյեկտները դինամիկ են, ինչը նշանակում է, որ դուք կարող եք ավելացնել, փոփոխել և ջնջել հատկություններ և մեթոդներ գործարկման ժամանակ:</font></font></li>
+</ul>
+<h4 id="creating-objects"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օբյեկտների ստեղծում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օբյեկտները կարող են ստեղծվել մի քանի եղանակով, ընդ որում օբյեկտների բառացիությունը ամենատարածված մեթոդն է: Օբյեկտի բառացիությունը ստորակետերով բաժանված բանալի-արժեք զույգերի ցանկ է, որը փակցված է գանգուր փակագծերում </font></font><code>{}</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օբյեկտ ստեղծելու օրինակ.</font></font></strong></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> book = {
+<span class="hljs-attr">title</span>: <span class="hljs-string">"The Great Gatsby"</span>,
+<span class="hljs-attr">author</span>: <span class="hljs-string">"F. Scott Fitzgerald"</span>,
+<span class="hljs-attr">year</span>: <span class="hljs-number">1925</span>,
+<span class="hljs-attr">isAvailable</span>: <span class="hljs-literal">true</span><font></font>
+};<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս օրինակում </font></font><code>book</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">օբյեկտ է այնպիսի հատկություններով, ինչպիսիք են </font></font><code>title</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>author</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>year</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>isAvailable</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+<h4 id="accessing-and-modifying-object-properties"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օբյեկտների հատկությունների մուտք և փոփոխում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օբյեկտի մեջ գտնվող հատկությունները կարելի է մուտք գործել և փոփոխել՝ օգտագործելով կետային նշում կամ փակագծային նշում:</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կետերի նշում.</font></font></strong> <code>objectName.propertyName</code></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Փակագծի նշում.</font></font></strong> <code>objectName["propertyName"]</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> (օգտակար է, երբ գույքի անունները դինամիկ են կամ վավեր նույնացուցիչներ չեն)</font></font></li>
+</ul>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(book.<span class="hljs-property">title</span>);  <span class="hljs-comment">// Outputs "The Great Gatsby"</span>
+book.<span class="hljs-property">isAvailable</span> = <span class="hljs-literal">false</span>;  <span class="hljs-comment">// Modifies the isAvailable property</span>
+</code></pre>
+<h4 id="object-methods-and-this-"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օբյեկտի մեթոդներ և «սա»</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մեթոդները գործառույթներ են, որոնք օբյեկտի հատկություններ են: Մեթոդի </font><font style="vertical-align: inherit;">հիմնաբառը </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">վերաբերում է այն օբյեկտին, որտեղից կոչվում է մեթոդը՝ ապահովելով օբյեկտի հատկությունների և մեթոդների հասանելիություն:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օրինակ մեթոդով և </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></strong></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> person = {
+<span class="hljs-attr">firstName</span>: <span class="hljs-string">"Alice"</span>,
+<span class="hljs-attr">lastName</span>: <span class="hljs-string">"Johnson"</span>,
+<span class="hljs-attr">greet</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Hello, "</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">firstName</span> + <span class="hljs-string">" "</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">lastName</span>);<font></font>
+}<font></font>
+};<font></font>
+<font></font>
+person.<span class="hljs-title function_">greet</span>();  <span class="hljs-comment">// Outputs "Hello, Alice Johnson"</span>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In </font></font><code>person.greet</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">վերաբերում է </font></font><code>person</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">օբյեկտին, որը թույլ է տալիս մուտք գործել նրա </font></font><code>firstName</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>lastName</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հատկությունների:</font></font></p>
+<h4 id="practical-examples"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական օրինակներ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Եկեք կիրառենք այս հասկացությունները՝ ստեղծելով և օգտագործելով առարկաներ գործնական սցենարներում.</font></font></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գրքի ներկայացում.</font></font></strong></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> book = {
+<span class="hljs-attr">title</span>: <span class="hljs-string">"1984"</span>,
+<span class="hljs-attr">author</span>: <span class="hljs-string">"George Orwell"</span>,
+<span class="hljs-attr">publishYear</span>: <span class="hljs-number">1949</span>,
+<span class="hljs-attr">getDescription</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.title}</span> by <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.author}</span>, published in <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.publishYear}</span>`</span>;<font></font>
+}<font></font>
+};<font></font>
+<font></font>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(book.<span class="hljs-title function_">getDescription</span>());
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Անձի մոդելավորում.</font></font></strong></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> person = {
+<span class="hljs-attr">name</span>: <span class="hljs-string">"John Doe"</span>,
+<span class="hljs-attr">age</span>: <span class="hljs-number">30</span>,
+<span class="hljs-attr">occupation</span>: <span class="hljs-string">"Software Developer"</span>,
+<span class="hljs-attr">introduce</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Hi, I'm <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.name}</span>, a <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.age}</span>-year-old <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.occupation}</span>.`</span>);<font></font>
+}<font></font>
+};<font></font>
+<font></font>
+person.<span class="hljs-title function_">introduce</span>();
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ապրանքի նկարագրությունը.</font></font></strong></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> product = {
+<span class="hljs-attr">name</span>: <span class="hljs-string">"Laptop"</span>,
+<span class="hljs-attr">price</span>: <span class="hljs-number">999.99</span>,
+<span class="hljs-attr">discount</span>: <span class="hljs-number">0.10</span>,
+<span class="hljs-attr">calculateDiscountPrice</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">price</span> * (<span class="hljs-number">1</span> - <span class="hljs-variable language_">this</span>.<span class="hljs-property">discount</span>);<font></font>
+}<font></font>
+};<font></font>
+<font></font>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Discounted price:"</span>, product.<span class="hljs-title function_">calculateDiscountPrice</span>());
+</code></pre>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս օրինակները ցույց են տալիս, թե ինչպես են JavaScript-ի օբյեկտները կարող են ամփոփել առնչվող տվյալներն ու վարքագիծը՝ ապահովելով կառուցվածքային և ինտուիտիվ եղանակ՝ բարդ սուբյեկտները կոդում ներկայացնելու համար: Օբյեկտներ օգտագործելով՝ մշակողները կարող են ստեղծել ավելի կազմակերպված, ընթեռնելի և պահպանվող ծրագրեր:</font></font></p>
+
+
+
+
+
+<h3 id="arrays-and-array-methods-in-javascript"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զանգվածներ և զանգվածի մեթոդներ JavaScript-ում</font></font></h3>
+<h4 id="introduction-to-arrays"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներածություն Arrays</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զանգվածները JavaScript-ում օգտագործվում են տարրերի պատվիրված հավաքածուներ պահելու համար, որոնք կարող են լինել ցանկացած տեսակի տվյալների, ներառյալ թվեր, տողեր, առարկաներ կամ նույնիսկ այլ զանգվածներ: Զանգվածները ինդեքսավորված հավաքածուներ են՝ սկսած 0-ից առաջին տարրի համար, ինդեքս 1-ից երկրորդի համար և այլն:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զանգվածի տարրերի ստեղծում և մուտք.</font></font></strong></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զանգված ստեղծելու համար դուք օգտագործում եք քառակուսի փակագծեր </font></font><code>[]</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">՝ ստորակետերով բաժանված տարրերով: Դուք մուտք եք գործում զանգվածի տարրեր՝ նշելով ինդեքսը քառակուսի փակագծերում:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> fruits = [<span class="hljs-string">"Apple"</span>, <span class="hljs-string">"Banana"</span>, <span class="hljs-string">"Cherry"</span>];
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(fruits[<span class="hljs-number">0</span>]); <span class="hljs-comment">// Outputs "Apple"</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(fruits[<span class="hljs-number">2</span>]); <span class="hljs-comment">// Outputs "Cherry"</span>
+</code></pre>
+<h4 id="common-array-methods"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զանգվածի ընդհանուր մեթոդներ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զանգվածները գալիս են ներկառուցված մեթոդներով, որոնք հեշտացնում են զանգվածի բովանդակության շահարկումն ու հարցումը:</font></font></p>
+<ul>
+<li><p><strong><code>map</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Փոխակերպում է զանգվածի տարրերը և փոխակերպված տարրերով վերադարձնում նոր զանգված:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> numbers = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+<span class="hljs-keyword">let</span> squares = numbers.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x * x); <span class="hljs-comment">// [1, 4, 9]</span>
+</code></pre>
+</li>
+<li><p><strong><code>filter</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ստեղծում է նոր զանգված բոլոր տարրերով, որոնք անցնում են տրամադրված ֆունկցիայի կողմից իրականացվող թեստը:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> evenNumbers = numbers.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x % <span class="hljs-number">2</span> === <span class="hljs-number">0</span>); <span class="hljs-comment">// [2]</span>
+</code></pre>
+</li>
+<li><p><strong><code>reduce</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կիրառում է ֆունկցիա կուտակիչի և զանգվածի յուրաքանչյուր տարրի նկատմամբ՝ այն իջեցնելու մեկ արժեքի:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> sum = numbers.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">accumulator, currentValue</span>) =&gt;</span> accumulator + currentValue, <span class="hljs-number">0</span>); <span class="hljs-comment">// 6</span>
+</code></pre>
+</li>
+<li><p><strong><code>forEach</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. Յուրաքանչյուր զանգվածի տարրի համար մեկ անգամ կատարում է տրված գործառույթը:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes">fruits.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">fruit</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(fruit));
+</code></pre>
+</li>
+<li><p><strong><code>push</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ավելացնում է մեկ կամ մի քանի տարրեր զանգվածի վերջում և վերադարձնում զանգվածի նոր երկարությունը:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes">fruits.<span class="hljs-title function_">push</span>(<span class="hljs-string">"Durian"</span>); <span class="hljs-comment">// ["Apple", "Banana", "Cherry", "Durian"]</span>
+</code></pre>
+</li>
+<li><p><strong><code>pop</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: Հեռացնում է վերջին տարրը զանգվածից և վերադարձնում այդ տարրը:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> lastFruit = fruits.<span class="hljs-title function_">pop</span>(); <span class="hljs-comment">// Removes "Durian"</span>
+</code></pre>
+</li>
+<li><p><strong><code>shift</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հեռացնում է առաջին տարրը զանգվածից և վերադարձնում է հեռացված տարրը:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> firstFruit = fruits.<span class="hljs-title function_">shift</span>(); <span class="hljs-comment">// Removes "Apple"</span>
+</code></pre>
+</li>
+<li><p><strong><code>unshift</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ավելացնում է մեկ կամ մի քանի տարր զանգվածի սկզբում և վերադարձնում նոր երկարությունը:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes">fruits.<span class="hljs-title function_">unshift</span>(<span class="hljs-string">"Strawberry"</span>); <span class="hljs-comment">// ["Strawberry", "Banana", "Cherry"]</span>
+</code></pre>
+</li>
+<li><p><strong><code>splice</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Փոփոխում է զանգվածի բովանդակությունը՝ հեռացնելով կամ փոխարինելով գոյություն ունեցող տարրերը և/կամ ավելացնելով նոր տարրեր:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes">fruits.<span class="hljs-title function_">splice</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-string">"Mango"</span>); <span class="hljs-comment">// Replaces "Banana" with "Mango"</span>
+</code></pre>
+</li>
+</ul>
+<h4 id="using-array-methods"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զանգվածի մեթոդների կիրառում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զանգվածի այս մեթոդները կարող են օգտագործվել զանգվածների մեջ տվյալների մշակման և մանիպուլյացիայի համար՝ ծառայելով տարբեր նպատակների՝ փոխակերպումից մինչև համախմբում:</font></font></p>
+<ul>
+<li><strong><code>map</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">տվյալների փոխակերպման համար. Ստեղծեք նոր զանգված՝ կատարելով գործողություն բնօրինակ զանգվածի յուրաքանչյուր տարրի վրա:</font></font></li>
+<li><strong><code>filter</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">տվյալների զտման համար. հանել զանգվածի ենթաբազմությունը՝ հիմնվելով պայմանի վրա:</font></font></li>
+<li><strong><code>reduce</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">արժեքներ կուտակելու համար. զանգվածը վերածել մեկ արժեքի՝ կուտակային կերպով միավորելով դրա տարրերը:</font></font></li>
+</ul>
+<h4 id="hands-on-exercise"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ձեռքի վարժություն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սովորողները պետք է կիրառեն զանգվածի այս մեթոդները՝ ընդհանուր առաջադրանքները կատարելու համար.</font></font></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տվյալների փոխակերպում -ով </font></font><code>map</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+Թվերի զանգվածը վերածել իրենց քառակուսի արմատների զանգվածի:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> numbers = [<span class="hljs-number">4</span>, <span class="hljs-number">9</span>, <span class="hljs-number">16</span>];
+<span class="hljs-keyword">let</span> roots = numbers.<span class="hljs-title function_">map</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-property">sqrt</span>); <span class="hljs-comment">// [2, 3, 4]</span>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տվյալների զտում հետևյալով </font></font><code>filter</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+զանգվածից հանել որոշակի արժեքից մեծ թվեր:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> filteredNumbers = numbers.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x &gt; <span class="hljs-number">5</span>); <span class="hljs-comment">// [9, 16]</span>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Արժեքների կուտակում .-ով </font></font><code>reduce</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+հաշվարկեք զանգվածի բոլոր թվերի ընդհանուր գումարը:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> total = numbers.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">sum, current</span>) =&gt;</span> sum + current, <span class="hljs-number">0</span>); <span class="hljs-comment">// 29</span>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Որոնում և տեսակավորում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+Գտեք տարրեր զանգվածում կամ տեսակավորեք դրանք որոշակի չափանիշների հիման վրա՝ օգտագործելով </font></font><code>find</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>some</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>every</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կամ </font></font><code>sort</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> found = numbers.<span class="hljs-title function_">find</span>(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x &gt; <span class="hljs-number">10</span>); <span class="hljs-comment">// 16</span>
+numbers.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b); <span class="hljs-comment">// Sorts numbers in ascending order</span>
+</code></pre>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժությունների միջոցով ուսանողները ձեռք կբերեն գործնական փորձ JavaScript զանգվածի մեթոդների հետ՝ սովորելով, թե ինչպես արդյունավետ կերպով շահարկել և մշակել զանգվածի տվյալները: Այս պրակտիկան ուժեղացնում է զանգվածների և դրանց մասին նրանց պատկերացումները</font></font></p>
+
+
+
+
+
+
+<h3 id="introduction-to-dom-manipulation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներածություն DOM մանիպուլյացիայի մեջ</font></font></h3>
+<h4 id="what-is-the-dom-"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ի՞նչ է DOM-ը:</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Փաստաթղթի օբյեկտի մոդելը (DOM) ծրագրավորման միջերես է HTML և XML փաստաթղթերի համար: Այն ներկայացնում է էջի կառուցվածքը որպես օբյեկտների ծառ՝ թույլ տալով սկրիպտներին մուտք գործել և շահարկել փաստաթղթի բովանդակությունը, կառուցվածքը և ոճերը: DOM-ի միջոցով JavaScript-ը կարող է ավելացնել, հեռացնել և փոփոխել տարրեր և ատրիբուտներ, փոխել ոճերը, արձագանքել օգտատերերի իրադարձություններին և այլն՝ հնարավորություն տալով դինամիկ և ինտերակտիվ վեբ փորձառություններ:</font></font></p>
+<h4 id="selecting-elements"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ընտրելով տարրեր</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">DOM-ը շահարկելու համար նախ պետք է ընտրել այն տարրերը, որոնց հետ ցանկանում եք աշխատել: JavaScript-ը տրամադրում է մի քանի մեթոդներ DOM-ից տարրեր ընտրելու համար.</font></font></p>
+<ul>
+<li><p><strong><code>getElementById</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ընտրում է տարրն իր ID-ով:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> element = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">'myElement'</span>);
+</code></pre>
+</li>
+<li><p><strong><code>getElementsByClassName</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերադարձնում է բոլոր տարրերի կենդանի HTML հավաքածուն՝ նշված դասի անունով:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> elements = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementsByClassName</span>(<span class="hljs-string">'myClass'</span>);
+</code></pre>
+</li>
+<li><p><strong><code>getElementsByTagName</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերադարձնում է տվյալ պիտակի անունով տարրերի կենդանի HTML հավաքածու:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> elements = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementsByTagName</span>(<span class="hljs-string">'div'</span>);
+</code></pre>
+</li>
+<li><p><strong><code>querySelector</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերադարձնում է առաջին տարրը, որը համապատասխանում է նշված CSS ընտրիչին:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> element = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'.myClass'</span>);
+</code></pre>
+</li>
+<li><p><strong><code>querySelectorAll</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերադարձնում է բոլոր տարրերի ստատիկ NodeList, որոնք համապատասխանում են նշված CSS ընտրիչին:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> elements = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelectorAll</span>(<span class="hljs-string">'.myClass'</span>);
+</code></pre>
+</li>
+</ul>
+<h4 id="manipulating-the-dom"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">DOM-ի մանիպուլյացիա</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Էլեմենտներ ընտրելուց հետո դուք կարող եք շահարկել DOM-ը տարբեր ձևերով.</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տարրերի հատկությունների և ատրիբուտների փոփոխում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Փոխել այնպիսի հատկություններ, ինչպիսիք են </font></font><code>innerText</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>innerHTML</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, կամ ատրիբուտները, ինչպիսիք են </font></font><code>src</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>href</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> heading = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">'heading'</span>);<font></font>
+heading.<span class="hljs-property">innerText</span> = <span class="hljs-string">'New Heading Text'</span>;
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ոճերի փոփոխություն</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . փոփոխեք տարրի ոճը ուղղակիորեն օգտագործելով </font></font><code>style</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հատկությունը:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes">heading.<span class="hljs-property">style</span>.<span class="hljs-property">color</span> = <span class="hljs-string">'red'</span>;
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Էլեմենտների ստեղծում և տեղադրում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Ստեղծեք նոր DOM տարրեր </font></font><code>document.createElement</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և տեղադրեք դրանք՝ օգտագործելով մեթոդները, ինչպիսիք են </font></font><code>appendChild</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կամ </font></font><code>insertBefore</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> newElement = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">'p'</span>);<font></font>
+newElement.<span class="hljs-property">innerText</span> = <span class="hljs-string">'This is a new paragraph.'</span>;
+<span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">appendChild</span>(newElement);
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Էլեմենտների հեռացում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Հեռացրեք տարրերը DOM-ից՝ օգտագործելով </font></font><code>removeChild</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կամ </font></font><code>remove</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> parentElement = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">'parent'</span>);<font></font>
+parentElement.<span class="hljs-title function_">removeChild</span>(heading); <span class="hljs-comment">// Assuming 'heading' is a child of 'parent'</span>
+</code></pre>
+</li>
+</ul>
+<h4 id="interactive-dom-exercise"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ինտերակտիվ DOM վարժություն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Եկեք զբաղվենք գործնական վարժություններով՝ DOM մանիպուլյացիա իրականացնելու համար.</font></font></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ընտրել և փոփոխել տարրերը.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+Ընտրել տարրեր վեբ էջի վրա և փոփոխել դրանց բովանդակությունը, ոճը կամ այլ հատկություններ: Օրինակ, փոխեք վերնագրի տարրի տեքստը և գույնը:</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ստեղծեք դինամիկ ցուցակ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+Կառուցեք պարզ ինտերակտիվ ցուցակ, որտեղ օգտվողները կարող են ավելացնել և հեռացնել տարրեր: Օգտագործեք </font></font><code>prompt</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">՝ նոր տարրերի համար օգտատերերի մուտքագրում ստանալու և դրանք վեբ էջում ցուցադրվող ցանկում ավելացնելու համար:</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"> <span class="hljs-keyword">let</span> ulElement = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">'ul'</span>);
+<span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">appendChild</span>(ulElement);<font></font>
+<font></font>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">addItem</span>(<span class="hljs-params"></span>) {
+ <span class="hljs-keyword">let</span> itemText = <span class="hljs-title function_">prompt</span>(<span class="hljs-string">'Enter item text'</span>);
+ <span class="hljs-keyword">if</span> (itemText) {
+     <span class="hljs-keyword">let</span> liElement = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">'li'</span>);<font></font>
+     liElement.<span class="hljs-property">innerText</span> = itemText;<font></font>
+     ulElement.<span class="hljs-title function_">appendChild</span>(liElement);<font></font>
+ }<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">removeItem</span>(<span class="hljs-params"></span>) {
+ <span class="hljs-keyword">if</span> (ulElement.<span class="hljs-title function_">hasChildNodes</span>()) {<font></font>
+     ulElement.<span class="hljs-title function_">removeChild</span>(ulElement.<span class="hljs-property">lastChild</span>);<font></font>
+ }<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պատասխանել օգտատիրոջ իրադարձություններին.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+վեբէջին ավելացրեք կոճակներ, որոնք զանգում են </font></font><code>addItem</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>removeItem</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">գործում են սեղմելիս՝ թույլ տալով օգտվողին դինամիկ կերպով փոխազդել ցանկի հետ:</font></font></p>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժություններում ուսանողները կսովորեն, թե ինչպես ընտրել և շահարկել DOM տարրերը, ստեղծել ինտերակտիվ բովանդակություն և արձագանքել օգտատերերի իրադարձություններին՝ ձեռք բերելով վեբ էջի դինամիկ մանիպուլյացիայի գործնական հմտություններ և բարելավելով իրենց հասկացողությունը, թե ինչպես է JavaScript-ը փոխազդում DOM-ի հետ:</font></font></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/core.min.js"></script> -->
+    <!-- Load the language you need -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/languages/javascript.min.js"></script> -->
+    <script>
+        function copyCode(index) {
+            const code = document.getElementById('code-block-' + index).innerText;
+            const copied = document.getElementById('copied-' + index);
+
+            navigator.clipboard.writeText(code).then(() => {
+                copied.innerText = 'Copied to clipboard!';
+            });
+
+            setTimeout(() => {
+                copied.innerText = '';
+            }, 3000);
+        }
+
+        // Initialize Highlight.js after the document is fully loaded
+        document.addEventListener('DOMContentLoaded', (event) => {
+            hljs.highlightAll();
+        });
+    </script><div id="goog-gt-tt" class="VIpgJd-yAWNEb-L7lbkb skiptranslate" style="border-radius: 12px; margin: 0 0 0 -23px; padding: 0; font-family: 'Google Sans', Arial, sans-serif;" data-id=""><div id="goog-gt-vt" class="VIpgJd-yAWNEb-hvhgNd"><div class=" VIpgJd-yAWNEb-hvhgNd-l4eHX-i3jM8c"><img src="https://fonts.gstatic.com/s/i/productlogos/translate/v14/24px.svg" width="24" height="24" alt=""></div><div class=" VIpgJd-yAWNEb-hvhgNd-k77Iif-i3jM8c"><div class="VIpgJd-yAWNEb-hvhgNd-IuizWc" dir="ltr">Original text</div><div id="goog-gt-original-text" class="VIpgJd-yAWNEb-nVMfcd-fmcmS VIpgJd-yAWNEb-hvhgNd-axAV1"></div></div><div class="VIpgJd-yAWNEb-hvhgNd-N7Eqid ltr"><div class="VIpgJd-yAWNEb-hvhgNd-N7Eqid-B7I4Od ltr" dir="ltr"><div class="VIpgJd-yAWNEb-hvhgNd-UTujCb">Rate this translation</div><div class="VIpgJd-yAWNEb-hvhgNd-eO9mKe">Your feedback will be used to help improve Google Translate</div></div><div class="VIpgJd-yAWNEb-hvhgNd-xgov5 ltr"><button id="goog-gt-thumbUpButton" type="button" class="VIpgJd-yAWNEb-hvhgNd-bgm6sf" title="Good translation" aria-label="Good translation" aria-pressed="false"><span id="goog-gt-thumbUpIcon"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M21 7h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 0S7.08 6.85 7 7H2v13h16c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9c0-1.1-.9-2-2-2zM7 18H4V9h3v9zm14-7l-3 7H9V8l4.34-4.34L12 9h9v2z"></path></svg></span><span id="goog-gt-thumbUpIconFilled"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M21 7h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 0S7.08 6.85 7 7v13h11c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9c0-1.1-.9-2-2-2zM5 7H1v13h4V7z"></path></svg></span></button><button id="goog-gt-thumbDownButton" type="button" class="VIpgJd-yAWNEb-hvhgNd-bgm6sf" title="Poor translation" aria-label="Poor translation" aria-pressed="false"><span id="goog-gt-thumbDownIcon"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M3 17h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 24s7.09-6.85 7.17-7h5V4H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2zM17 6h3v9h-3V6zM3 13l3-7h9v10l-4.34 4.34L12 15H3v-2z"></path></svg></span><span id="goog-gt-thumbDownIconFilled"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M3 17h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 24s7.09-6.85 7.17-7V4H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2zm16 0h4V4h-4v13z"></path></svg></span></button></div></div><div id="goog-gt-votingHiddenPane" class="VIpgJd-yAWNEb-hvhgNd-aXYTce"><form id="goog-gt-votingForm" action="//translate.googleapis.com/translate_voting?client=te_lib" method="post" target="votingFrame" class="VIpgJd-yAWNEb-hvhgNd-aXYTce"><input type="text" name="sl" id="goog-gt-votingInputSrcLang"><input type="text" name="tl" id="goog-gt-votingInputTrgLang"><input type="text" name="query" id="goog-gt-votingInputSrcText"><input type="text" name="gtrans" id="goog-gt-votingInputTrgText"><input type="text" name="vote" id="goog-gt-votingInputVote"></form><iframe name="votingFrame" frameborder="0"></iframe></div></div></div>
+
+
+</body></html>
