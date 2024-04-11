@@ -1,0 +1,17 @@
+body {
+    padding: 20px;
+}
+
+th, tr, td {
+    border: 1px solid black;
+}
+
+section {
+    display: flex;
+}
+
+div {
+    width: 50%;
+    height: 200px;
+    border: 1px solid black;
+}

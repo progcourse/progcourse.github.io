@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <label for="number">Number: </label>
+    <select name="number" id="number" onchange="getNumber()">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+    
+    <label for="background">Background: </label>
+    <input type="color" name="background" id="background" onchange="getBgColor()">
+
+    <label for="color">Text Color: </label>
+    <input type="color" name="color" id="color" onchange="getTextColor()">
+
+    <label for="text">Text: </label>
+    <textarea name="text" id="text" cols="30" rows="10" onchange="getText()"></textarea>
+
+    <hr>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Background</th>
+                <th>Text Color</th>
+                <th>Text</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button onclick="change()">Change</button>
+
+    <hr>
+    
+    <section>
+        <div id="div1"></div>
+        <div id="div2"></div>
+        <div id="div3"></div>
+        <div id="div4"></div>
+    </section>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
