@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ru" class="translated-ltr">
+    <head>
+    <meta charset="UTF-8">
+    <title>Урок 13: Обработка событий и веб-хранилище</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+    <style>
+        code {
+            background-color: yellow;
+            color: blue;
+            padding: 0 5px;
+        }
+    </style>
+<link type="text/css" rel="stylesheet" charset="UTF-8" href="https://www.gstatic.com/_/translate_http/_/ss/k=translate_http.tr.26tY-h6gH9w.L.W.O/am=wA/d=0/rs=AN8SPfpPTNr3cQN8QhzqvQYsNrDu3oHhow/m=el_main_css">
+</head>
+<body class="p-5">
+    <a href="դաս13.html" class="btn btn-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հայերեն</font></font></a>
+    <a href="lesson13.html" class="btn btn-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">English</font></font></a>
+    <hr>
+    
+
+
+    
+
+    <h3 id="introduction-to-event-handling-in-javascript"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Введение в обработку событий в JavaScript</font></font></h3>
+<h4 id="what-are-events-"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Что такое события?</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В контексте веб-разработки события — это действия или события, происходящие в окне браузера или на веб-странице, которые система может обнаружить и предоставить вам возможность отреагировать. Они могут включать в себя взаимодействия с пользователем, такие как щелчки мышью, нажатия клавиш или более сложные события, такие как загрузка или выгрузка веб-страницы.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">События играют центральную роль в создании интерактивных приложений на JavaScript. Реагируя на эти события, разработчики могут создавать динамические реакции, улучшающие взаимодействие с пользователем.</font></font></p>
+<h4 id="event-listeners"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Слушатели событий</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Чтобы реагировать на эти события, JavaScript предоставляет механизм, называемый прослушивателями событий. Прослушиватель событий «слушает» определенное событие, например нажатие кнопки или клавиши, а затем в ответ запускает функцию, известную как обработчик событий.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Синтаксис </font></font><code>addEventListener</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></strong></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes">element.<span class="hljs-title function_">addEventListener</span>(event, <span class="hljs-keyword">function</span>, useCapture);
+</code></pre>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">событие</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : это строка, определяющая имя события, которое нужно прослушивать.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">function</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : это функция-обработчик, которая выполняется при возникновении события.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">useCapture</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : это необязательное логическое значение, указывающее, должно ли событие выполняться на этапе захвата или на этапе всплытия. По умолчанию установлено значение false (всплывающее).</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример добавления прослушивателя событий:</font></font></strong></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">"myButton"</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">"click"</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-title function_">alert</span>(<span class="hljs-string">"Button clicked!"</span>);<font></font>
+});<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Этот фрагмент кода добавляет прослушиватель событий к элементу с идентификатором </font></font><code>myButton</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. При нажатии на кнопку срабатывает оповещение.</font></font></p>
+<h4 id="types-of-events"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Типы событий</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">События в JavaScript можно разделить на несколько типов в зависимости от типа взаимодействия, которое они представляют:</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">События мыши</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><code>click</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: срабатывает при щелчке мыши по элементу.</font></font></li>
+<li><code>mouseenter</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: срабатывает, когда указатель мыши входит в элемент.</font></font></li>
+<li><code>mouseleave</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: срабатывает, когда указатель мыши покидает элемент.</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">События клавиатуры</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><code>keypress</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: срабатывает при нажатии клавиши.</font></font></li>
+<li><code>keydown</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: срабатывает при нажатии клавиши.</font></font></li>
+<li><code>keyup</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: срабатывает при отпускании клавиши.</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">События формы</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><code>submit</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: срабатывает при отправке формы.</font></font></li>
+<li><code>change</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: срабатывает, когда значение элемента input, select или textarea было изменено.</font></font></li>
+</ul>
+</li>
+</ul>
+<h4 id="practical-examples"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практические примеры</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Добавление прослушивателей событий к кнопкам и формам:</font></font></strong></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Событие нажатия кнопки</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> button = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">"clickButton"</span>);<font></font>
+button.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">"click"</span>, <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Button was clicked!"</span>);<font></font>
+});<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Событие отправки формы</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> form = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">"myForm"</span>);<font></font>
+form.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">"submit"</span>, <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {<font></font>
+    event.<span class="hljs-title function_">preventDefault</span>(); <span class="hljs-comment">// Prevent the form from submitting</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Form submitted!"</span>);<font></font>
+});<font></font>
+</code></pre>
+</li>
+</ul>
+<h4 id="hands-on-exercise"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практическое упражнение</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Для практического упражнения учащиеся создадут интерактивную форму, которая реагирует на действия пользователя в режиме реального времени.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Схема упражнения</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Создайте простую форму в HTML</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<pre><code class="lang-html hljs language-xml" data-highlighted="yes"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"liveForm"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"nameInput"</span>&gt;</span>Enter your name:<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"nameInput"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"livePreview"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span>&gt;</span>Submit<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Добавьте прослушиватели событий для предварительного просмотра в реальном времени</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">"nameInput"</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">"input"</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> preview = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">"livePreview"</span>);<font></font>
+    preview.<span class="hljs-property">innerText</span> = <span class="hljs-string">"Preview: "</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">value</span>;<font></font>
+});<font></font>
+</code></pre>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этом упражнении форма включает поле ввода, где пользователи могут ввести свое имя. Когда пользователь вводит текст, событие ввода запускает обновление элемента абзаца ( </font></font><code>livePreview</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) с предварительным просмотром ввода, демонстрируя, как можно использовать обработку событий для создания адаптивного интерфейса.</font></font></p>
+
+
+
+
+
+<h3 id="advanced-event-handling-techniques"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Расширенные методы обработки событий</font></font></h3>
+<h4 id="event-propagation-bubbling-and-capturing"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Распространение событий: всплытие и захват</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Распространение событий — это механизм, который определяет, как события распространяются или проходят через дерево DOM, чтобы достичь своего целевого элемента и потенциально всплывать или захватываться после достижения цели.</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Всплытие событий (по умолчанию)</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . На этом этапе событие начинается с самого глубокого, самого внутреннего элемента (цели события), а затем последовательно запускает обработчики на его родительских элементах по направлению к самому внешнему элементу (объекту документа). Это поведение событий по умолчанию.</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Захват событий</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . В отличие от всплытия, захват происходит, когда событие фиксируется от самого внешнего элемента до целевого элемента. Вы можете включить захват, установив для третьего аргумента </font></font><code>addEventListener</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">значение </font></font><code>true</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+</li>
+</ul>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-comment">// Example of setting up capturing</span>
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">"parent"</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">"click"</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Parent clicked - capturing phase"</span>);<font></font>
+}, <span class="hljs-literal">true</span>); <span class="hljs-comment">// Capturing is enabled</span>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Понимание этих механизмов имеет решающее значение при разработке сложных интерактивных веб-приложений для управления обработкой событий и их распространением через дерево DOM.</font></font></p>
+<h4 id="preventing-default-actions"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Предотвращение действий по умолчанию</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Многие элементы DOM имеют поведение по умолчанию, которое может выполняться при определенных событиях. Например, нажатие кнопки отправки в элементе формы обычно обновляет страницу. Вы можете запретить эти действия по умолчанию, используя </font></font><code>event.preventDefault()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">обработчик событий.</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Вариант использования при обработке форм</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font><pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">"myForm"</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">"submit"</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) {<font></font>
+    event.<span class="hljs-title function_">preventDefault</span>(); <span class="hljs-comment">// Prevents the form from submitting</span>
+    <span class="hljs-comment">// Additional code to handle form submission via JavaScript</span><font></font>
+});<font></font>
+</code></pre>
+</li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это особенно полезно при обработке форм, когда вы хотите иметь полный контроль над процессом отправки, возможно, для выполнения проверки, выполнения запроса AJAX или манипулирования данными перед их отправкой на сервер.</font></font></p>
+<h4 id="using-this-in-events"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Использование </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">в событиях</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В контексте обработчика событий </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ключевое слово относится к элементу, над которым в данный момент выполняется обработчик событий. Это чрезвычайно полезно, когда вы хотите манипулировать элементом, получившим событие, или получить доступ к его свойствам.</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">"myButton"</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">"click"</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">textContent</span>); <span class="hljs-comment">// `this` refers to the button</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">textContent</span> = <span class="hljs-string">"Clicked"</span>; <span class="hljs-comment">// Changes the button text to 'Clicked'</span><font></font>
+});<font></font>
+</code></pre>
+<h4 id="exercise-handling-form-submission-with-event-propagation-control"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Упражнение: обработка отправки формы с помощью управления распространением событий</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цель</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : реализовать упражнение, в котором учащимся необходимо остановить распространение события и предотвратить поведение по умолчанию при отправке формы, чтобы обработать ее с помощью JavaScript.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Настраивать</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML-структура</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<pre><code class="lang-html hljs language-xml" data-highlighted="yes"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"signupForm"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"username"</span>&gt;</span>Username:<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"username"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"username"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span>&gt;</span>Sign Up<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JavaScript</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">"signupForm"</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">"submit"</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) {<font></font>
+    event.<span class="hljs-title function_">preventDefault</span>(); <span class="hljs-comment">// Prevent default form submission</span>
+    event.<span class="hljs-title function_">stopPropagation</span>(); <span class="hljs-comment">// Stop the event from bubbling up</span>
+    <span class="hljs-keyword">let</span> username = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">"username"</span>).<span class="hljs-property">value</span>;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Signing up user:"</span>, username);
+    <span class="hljs-comment">// Additional code to process the username</span><font></font>
+});<font></font>
+</code></pre>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этом упражнении учащиеся присоединят к форме прослушиватель событий, который предотвращает отправку формы традиционным способом и предотвращает всплеск события в DOM. Этот подход позволяет полностью обрабатывать форму в JavaScript, обеспечивая больший контроль над обработкой данных и потоком взаимодействия. Эта практика укрепляет понимание обработки, распространения событий и предотвращения действий по умолчанию в реальных сценариях.</font></font></p>
+
+
+
+
+
+<h3 id="introduction-to-web-storage"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Введение в веб-хранилище</font></font></h3>
+<h4 id="overview-of-web-storage"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обзор веб-хранилища</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">API веб-хранилища предоставляет механизмы, с помощью которых браузеры могут хранить пары ключ/значение гораздо более интуитивно понятным способом, чем использование файлов cookie. Два механизма в веб-хранилище — это </font></font><code>localStorage</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>sessionStorage</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, каждый из которых удовлетворяет различные потребности и обеспечивает способы сохранения данных в браузере клиента.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Возможности веб-хранилища</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Емкость</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : предлагает больше места для хранения, чем файлы cookie.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Доступность</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : сохраненные данные доступны только на стороне клиента, а не на стороне сервера.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Безопасность</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . В отличие от файлов cookie, данные веб-хранилища не отправляются с каждым запросом к серверу, но они по-прежнему доступны через JavaScript, что делает их уязвимыми для атак XSS, если они не обрабатываются должным образом.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Простота</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : предоставляет простой API с методами установки, получения и удаления элементов.</font></font></li>
+</ul>
+<h4 id="localstorage-vs-sessionstorage"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">localStorage против sessionStorage</font></font></h4>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">локальное хранилище</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Постоянство</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : данные, хранящиеся в localStorage, не имеют срока годности. Он сохраняется в браузере пользователя до тех пор, пока не будет явно очищен либо с помощью сценария, либо пользователем вручную, очистившим кеш браузера.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Вариант использования</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : идеально подходит для сохранения пользовательских настроек или других данных, которые должны сохраняться даже при закрытии и повторном открытии браузера (например, пользовательская тема, токены входа).</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">хранилище сеанса</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Постоянство</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : данные, хранящиеся в sessionStorage, удаляются при завершении сеанса страницы, то есть при закрытии вкладки браузера. На него не влияют перезагрузки и восстановления страниц.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Вариант использования</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : полезно для данных, которые не должны сохраняться между сеансами, например данных, введенных в форму, которую не следует хранить в течение длительного времени.</font></font></li>
+</ul>
+</li>
+</ol>
+<h4 id="setting-getting-and-removing-items"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Установка, получение и удаление элементов</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">И localStorage, и sessionStorage предоставляют одни и те же методы, предоставляя простой API для управления сохраненными данными.</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Настройка элементов</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : </font></font><code>setItem(key, value)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">метод используется для хранения данных, где </font></font><code>key</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">является строкой, а </font></font><code>value</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">также сохраняется в виде строки.</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">"username"</span>, <span class="hljs-string">"JohnDoe"</span>);
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Получение элементов</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : </font></font><code>getItem(key)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">метод используется для получения данных. Если ключ не существует, он возвращает </font></font><code>null</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">let</span> username = <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-string">"username"</span>);  <span class="hljs-comment">// "JohnDoe"</span>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Удаление элементов</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : </font></font><code>removeItem(key)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">метод используется для удаления элемента из хранилища.</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">removeItem</span>(<span class="hljs-string">"username"</span>);
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Очистка всех данных</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : </font></font><code>clear()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">метод можно использовать для очистки всего хранилища.</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">clear</span>();
+</code></pre>
+</li>
+</ul>
+<h4 id="practical-exercise-building-a-theme-preference-application"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практическое упражнение: Создание приложения настройки тем</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цель</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : создать простое приложение, позволяющее пользователям выбирать цвет темы для веб-сайта, который будет сохраняться во время сеансов с использованием </font></font><code>localStorage</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Шаги</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Настройка HTML</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<pre><code class="lang-html hljs language-xml" data-highlighted="yes"><span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>Select your theme color:<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"themeSelector"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"light"</span>&gt;</span>Light<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"dark"</span>&gt;</span>Dark<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"saveTheme()"</span>&gt;</span>Save Theme<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Реализация JavaScript</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">function</span> <span class="hljs-title function_">saveTheme</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> theme = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">"themeSelector"</span>).<span class="hljs-property">value</span>;
+    <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">"theme"</span>, theme);<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">loadTheme</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> theme = <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-string">"theme"</span>);
+    <span class="hljs-keyword">if</span> (theme) {
+        <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">className</span> = theme;  <span class="hljs-comment">// Assuming CSS classes for themes exist</span>
+        <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">"themeSelector"</span>).<span class="hljs-property">value</span> = theme;<font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-variable language_">window</span>.<span class="hljs-property">onload</span> = loadTheme;  <span class="hljs-comment">// Load the theme when the document loads</span>
+</code></pre>
+</li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Результаты обучения</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Студенты научатся взаимодействовать с </font></font><code>localStorage</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">системой для установки, получения и управления данными.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Они поймут, как применять постоянное хранилище данных для улучшения пользовательского опыта, запоминая пользовательские предпочтения во время сеансов браузера.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это упражнение не только укрепляет понимание API веб-хранилища, но и иллюстрирует его практическое использование в реальных веб-приложениях, например, для настройки и запоминания пользовательских настроек.</font></font></p>
+
+
+
+
+
+<h3 id="combining-event-handling-with-web-storage"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Объединение обработки событий с веб-хранилищем</font></font></h3>
+<h4 id="interactive-application-example-to-do-list"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример интерактивного приложения: список дел</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Одним из наиболее наглядных примеров сочетания обработки событий с веб-хранилищем является создание приложения списка дел. Это приложение позволит пользователям добавлять задачи, отмечать их как выполненные и сохранять состояние списка во время сеансов браузера с помощью </font></font><code>localStorage</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Особенности приложения</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Добавить задачи</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : пользователи могут вводить задачи в поле ввода и добавлять их в список, нажав кнопку или нажав Enter.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пометить задачи как выполненные</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : пользователи могут нажимать на задачи, чтобы переключать статус их завершения.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Постоянство</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : состояние списка дел сохраняется в папке </font></font><code>localStorage</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, поэтому оно остается неизменным даже после закрытия и повторного открытия браузера или вкладки.</font></font></li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML-структура</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<pre><code class="lang-html hljs language-xml" data-highlighted="yes"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"todoApp"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"newTask"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Add a new task"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"addTask()"</span>&gt;</span>Add Task<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"taskList"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CSS для выполненных задач</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> (для визуальной обратной связи):</font></font></p>
+<pre><code class="lang-css hljs language-css" data-highlighted="yes"><span class="hljs-selector-class">.completed</span> {
+    <span class="hljs-attribute">text-decoration</span>: line-through;<font></font>
+}<font></font>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JavaScript для обработки событий и локального хранилища</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">function</span> <span class="hljs-title function_">loadTasks</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> tasks = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-string">'tasks'</span>)) || [];
+    <span class="hljs-keyword">let</span> taskList = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">'taskList'</span>);<font></font>
+    taskList.<span class="hljs-property">innerHTML</span> = <span class="hljs-string">''</span>; <span class="hljs-comment">// Clear existing tasks in the DOM</span>
+    tasks.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">task, index</span>) =&gt;</span> {
+        <span class="hljs-keyword">let</span> li = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">'li'</span>);<font></font>
+        li.<span class="hljs-property">textContent</span> = task.<span class="hljs-property">description</span>;<font></font>
+        li.<span class="hljs-property">className</span> = task.<span class="hljs-property">completed</span> ? <span class="hljs-string">'completed'</span> : <span class="hljs-string">''</span>;<font></font>
+        li.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">toggleTask</span>(index));<font></font>
+        taskList.<span class="hljs-title function_">appendChild</span>(li);<font></font>
+    });<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">addTask</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> newTaskInput = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">'newTask'</span>);
+    <span class="hljs-keyword">let</span> tasks = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-string">'tasks'</span>)) || [];
+    <span class="hljs-keyword">if</span> (newTaskInput.<span class="hljs-property">value</span>) {<font></font>
+        tasks.<span class="hljs-title function_">push</span>({ <span class="hljs-attr">description</span>: newTaskInput.<span class="hljs-property">value</span>, <span class="hljs-attr">completed</span>: <span class="hljs-literal">false</span> });
+        <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">'tasks'</span>, <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(tasks));<font></font>
+        newTaskInput.<span class="hljs-property">value</span> = <span class="hljs-string">''</span>; <span class="hljs-comment">// Clear input field</span>
+        <span class="hljs-title function_">loadTasks</span>(); <span class="hljs-comment">// Refresh the list</span><font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">toggleTask</span>(<span class="hljs-params">index</span>) {
+    <span class="hljs-keyword">let</span> tasks = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-string">'tasks'</span>));<font></font>
+    tasks[index].<span class="hljs-property">completed</span> = !tasks[index].<span class="hljs-property">completed</span>;
+    <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">'tasks'</span>, <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(tasks));
+    <span class="hljs-title function_">loadTasks</span>();<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-variable language_">window</span>.<span class="hljs-property">onload</span> = loadTasks; <span class="hljs-comment">// Load tasks when the document is ready</span>
+</code></pre>
+<h4 id="exercise-enhance-the-interactive-form"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Упражнение: улучшение интерактивной формы</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Учащиеся улучшат интерактивную форму, созданную ими ранее, путем включения функций, позволяющих сохранять вводимые пользователем данные в файлы </font></font><code>localStorage</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. Это позволит получить данные при перезагрузке формы.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Возможности для реализации</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сохранение входных данных</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : каждый раз, когда пользователь изменяет поле в форме, сохраняйте данные в формате </font></font><code>localStorage</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Получить данные при загрузке</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : при загрузке формы (например, при обновлении страницы) заполните поля формы данными, хранящимися в файлах </font></font><code>localStorage</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример сценария</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Предположим, что форма собирает настройки пользователя, такие как любимый цвет и адрес электронной почты.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<pre><code class="lang-html hljs language-xml" data-highlighted="yes"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"preferenceForm"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"email"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"email"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Enter your email"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"color"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"favoriteColor"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Choose your favorite color"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span>&gt;</span>Save Preferences<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JavaScript</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<pre><code class="lang-javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">'preferenceForm'</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'change'</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) {
+    <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(event.<span class="hljs-property">target</span>.<span class="hljs-property">id</span>, event.<span class="hljs-property">target</span>.<span class="hljs-property">value</span>);<font></font>
+});<font></font>
+<font></font>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">loadPreferences</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">'email'</span>).<span class="hljs-property">value</span> = <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-string">'email'</span>) || <span class="hljs-string">''</span>;
+    <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">'favoriteColor'</span>).<span class="hljs-property">value</span> = <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-string">'favoriteColor'</span>) || <span class="hljs-string">'#ffffff'</span>; <span class="hljs-comment">// Default to white</span><font></font>
+}<font></font>
+<font></font>
+<span class="hljs-variable language_">window</span>.<span class="hljs-property">onload</span> = loadPreferences;
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это упражнение поможет учащимся понять, как эффективно сочетать обработку событий с </font></font><code>localStorage</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">созданием динамичных, удобных для пользователя веб-приложений, которые запоминают вводимые пользователем данные во время сеансов, что значительно повышает удобство работы с пользователем.</font></font></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/core.min.js"></script> -->
+    <!-- Load the language you need -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/languages/javascript.min.js"></script> -->
+    <script>
+        function copyCode(index) {
+            const code = document.getElementById('code-block-' + index).innerText;
+            const copied = document.getElementById('copied-' + index);
+
+            navigator.clipboard.writeText(code).then(() => {
+                copied.innerText = 'Copied to clipboard!';
+            });
+
+            setTimeout(() => {
+                copied.innerText = '';
+            }, 3000);
+        }
+
+        // Initialize Highlight.js after the document is fully loaded
+        document.addEventListener('DOMContentLoaded', (event) => {
+            hljs.highlightAll();
+        });
+    </script><div id="goog-gt-tt" class="VIpgJd-yAWNEb-L7lbkb skiptranslate" style="border-radius: 12px; margin: 0 0 0 -23px; padding: 0; font-family: 'Google Sans', Arial, sans-serif;" data-id=""><div id="goog-gt-vt" class="VIpgJd-yAWNEb-hvhgNd"><div class=" VIpgJd-yAWNEb-hvhgNd-l4eHX-i3jM8c"><img src="https://fonts.gstatic.com/s/i/productlogos/translate/v14/24px.svg" width="24" height="24" alt=""></div><div class=" VIpgJd-yAWNEb-hvhgNd-k77Iif-i3jM8c"><div class="VIpgJd-yAWNEb-hvhgNd-IuizWc" dir="ltr">Original text</div><div id="goog-gt-original-text" class="VIpgJd-yAWNEb-nVMfcd-fmcmS VIpgJd-yAWNEb-hvhgNd-axAV1"></div></div><div class="VIpgJd-yAWNEb-hvhgNd-N7Eqid ltr"><div class="VIpgJd-yAWNEb-hvhgNd-N7Eqid-B7I4Od ltr" dir="ltr"><div class="VIpgJd-yAWNEb-hvhgNd-UTujCb">Rate this translation</div><div class="VIpgJd-yAWNEb-hvhgNd-eO9mKe">Your feedback will be used to help improve Google Translate</div></div><div class="VIpgJd-yAWNEb-hvhgNd-xgov5 ltr"><button id="goog-gt-thumbUpButton" type="button" class="VIpgJd-yAWNEb-hvhgNd-bgm6sf" title="Good translation" aria-label="Good translation" aria-pressed="false"><span id="goog-gt-thumbUpIcon"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M21 7h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 0S7.08 6.85 7 7H2v13h16c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9c0-1.1-.9-2-2-2zM7 18H4V9h3v9zm14-7l-3 7H9V8l4.34-4.34L12 9h9v2z"></path></svg></span><span id="goog-gt-thumbUpIconFilled"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M21 7h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 0S7.08 6.85 7 7v13h11c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9c0-1.1-.9-2-2-2zM5 7H1v13h4V7z"></path></svg></span></button><button id="goog-gt-thumbDownButton" type="button" class="VIpgJd-yAWNEb-hvhgNd-bgm6sf" title="Poor translation" aria-label="Poor translation" aria-pressed="false"><span id="goog-gt-thumbDownIcon"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M3 17h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 24s7.09-6.85 7.17-7h5V4H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2zM17 6h3v9h-3V6zM3 13l3-7h9v10l-4.34 4.34L12 15H3v-2z"></path></svg></span><span id="goog-gt-thumbDownIconFilled"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M3 17h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 24s7.09-6.85 7.17-7V4H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2zm16 0h4V4h-4v13z"></path></svg></span></button></div></div><div id="goog-gt-votingHiddenPane" class="VIpgJd-yAWNEb-hvhgNd-aXYTce"><form id="goog-gt-votingForm" action="//translate.googleapis.com/translate_voting?client=te_lib" method="post" target="votingFrame" class="VIpgJd-yAWNEb-hvhgNd-aXYTce"><input type="text" name="sl" id="goog-gt-votingInputSrcLang"><input type="text" name="tl" id="goog-gt-votingInputTrgLang"><input type="text" name="query" id="goog-gt-votingInputSrcText"><input type="text" name="gtrans" id="goog-gt-votingInputTrgText"><input type="text" name="vote" id="goog-gt-votingInputVote"></form><iframe name="votingFrame" frameborder="0"></iframe></div></div></div>
+
+
+</body></html>
