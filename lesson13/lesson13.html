@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lesson 13: Event Handling and Web Storage</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+        <style>
+            code {
+                background-color: yellow;
+                color: blue;
+                padding: 0 5px;
+            }
+        </style>
+    </head>
+    <body class="p-5">
+        <!-- <a href="դաս12.html" class="btn btn-info">Հայերեն</a>
+        <a href="#" class="btn btn-info">Русский</a> -->
+        <hr>
+        
+
+
+        
+
+        <h3 id="introduction-to-event-handling-in-javascript">Introduction to Event Handling in JavaScript</h3>
+<h4 id="what-are-events-">What are Events?</h4>
+<p>In the context of web development, events are actions or occurrences that happen within the browser window or on a web page, which the system can detect and provide you with the opportunity to respond. These can include user interactions like clicks, key presses, or more complex occurrences like the loading or unloading of a web page.</p>
+<p>Events are central to creating interactive applications in JavaScript. By responding to these events, developers can craft dynamic responses that enhance the user experience.</p>
+<h4 id="event-listeners">Event Listeners</h4>
+<p>To react to these events, JavaScript provides a mechanism called event listeners. An event listener &quot;listens&quot; for a specific event happening, such as a button being clicked or a key being pressed, and then triggers a function, known as an event handler, in response.</p>
+<p><strong>Syntax of <code>addEventListener</code>:</strong></p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">element</span>.addEventListener(event, <span class="hljs-function"><span class="hljs-keyword">function</span>, <span class="hljs-title">useCapture</span>);</span>
+</code></pre>
+<ul>
+<li><strong>event</strong>: This is a string that specifies the name of the event to listen for.</li>
+<li><strong>function</strong>: This is the handler function that executes when the event occurs.</li>
+<li><strong>useCapture</strong>: This is an optional boolean value that specifies whether the event should be executed in the capturing or in the bubbling phase. The default is false (bubbling).</li>
+</ul>
+<p><strong>Example of Adding an Event Listener:</strong></p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"myButton"</span>).addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    alert(<span class="hljs-string">"Button clicked!"</span>);
+});
+</code></pre>
+<p>This code snippet adds an event listener to an element with the ID <code>myButton</code>. When the button is clicked, it triggers an alert.</p>
+<h4 id="types-of-events">Types of Events</h4>
+<p>Events in JavaScript can be broadly categorized into several types based on the kind of interaction they represent:</p>
+<ul>
+<li><p><strong>Mouse Events</strong>:</p>
+<ul>
+<li><code>click</code>: Fires when a mouse click on an element.</li>
+<li><code>mouseenter</code>: Fires when the mouse pointer enters the element.</li>
+<li><code>mouseleave</code>: Fires when the mouse pointer leaves the element.</li>
+</ul>
+</li>
+<li><p><strong>Keyboard Events</strong>:</p>
+<ul>
+<li><code>keypress</code>: Fires when a key is pressed.</li>
+<li><code>keydown</code>: Fires when a key is pressed down.</li>
+<li><code>keyup</code>: Fires when a key is released.</li>
+</ul>
+</li>
+<li><p><strong>Form Events</strong>:</p>
+<ul>
+<li><code>submit</code>: Fires when a form is submitted.</li>
+<li><code>change</code>: Fires when the value of an input, select, or textarea element has been changed.</li>
+</ul>
+</li>
+</ul>
+<h4 id="practical-examples">Practical Examples</h4>
+<p><strong>Adding Event Listeners to Buttons and Forms:</strong></p>
+<ul>
+<li><p><strong>Button Click Event</strong>:</p>
+<pre><code class="lang-javascript">let button = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"clickButton"</span>);
+button.addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Button was clicked!"</span>);
+});
+</code></pre>
+</li>
+<li><p><strong>Form Submission Event</strong>:</p>
+<pre><code class="lang-javascript">let form = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"myForm"</span>);
+form.addEventListener(<span class="hljs-string">"submit"</span>, <span class="hljs-function"><span class="hljs-params">(event)</span> =&gt;</span> {
+    event.preventDefault(); <span class="hljs-regexp">//</span> Prevent the form from submitting
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Form submitted!"</span>);
+});
+</code></pre>
+</li>
+</ul>
+<h4 id="hands-on-exercise">Hands-On Exercise</h4>
+<p>For the practical exercise, students will create an interactive form that reacts to user inputs in real-time.</p>
+<p><strong>Exercise Setup</strong>:</p>
+<ol>
+<li><p><strong>Create a Simple Form in HTML</strong>:</p>
+<pre><code class="lang-html">&lt;<span class="hljs-selector-tag">form</span> id=<span class="hljs-string">"liveForm"</span>&gt;
+    &lt;<span class="hljs-selector-tag">label</span> <span class="hljs-keyword">for</span>=<span class="hljs-string">"nameInput"</span>&gt;Enter your name:&lt;/label&gt;
+    &lt;<span class="hljs-selector-tag">input</span> type=<span class="hljs-string">"text"</span> id=<span class="hljs-string">"nameInput"</span> /&gt;
+    &lt;<span class="hljs-selector-tag">p</span> id=<span class="hljs-string">"livePreview"</span>&gt;&lt;/p&gt;
+    &lt;<span class="hljs-selector-tag">button</span> type=<span class="hljs-string">"submit"</span>&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+</li>
+<li><p><strong>Add Event Listeners for Live Preview</strong>:</p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"nameInput"</span>).addEventListener(<span class="hljs-string">"input"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> preview = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"livePreview"</span>);
+    preview.innerText = <span class="hljs-string">"Preview: "</span> + <span class="hljs-keyword">this</span>.value;
+});
+</code></pre>
+</li>
+</ol>
+<p>In this exercise, the form includes an input where users can type their name. As the user types, the input event triggers updating a paragraph element (<code>livePreview</code>) with a preview of the input, demonstrating how event handling can be used to create a responsive interface.</p>
+
+
+
+
+
+<h3 id="advanced-event-handling-techniques">Advanced Event Handling Techniques</h3>
+<h4 id="event-propagation-bubbling-and-capturing">Event Propagation: Bubbling and Capturing</h4>
+<p>Event propagation is a mechanism that defines how events propagate or travel through the DOM tree to arrive at their target element and potentially bubble up or capture down after reaching the target.</p>
+<ul>
+<li><p><strong>Event Bubbling (default)</strong>: In this phase, the event starts from the deepest, innermost element (the event target), and then triggers handlers on its parent elements in succession towards the outermost element (document object). This is the default behavior of events.</p>
+</li>
+<li><p><strong>Event Capturing</strong>: Unlike bubbling, capturing occurs when the event is captured from the outermost element down to the target element. You can enable capturing by setting the third argument of <code>addEventListener</code> to <code>true</code>.</p>
+</li>
+</ul>
+<pre><code class="lang-javascript"><span class="hljs-comment">// Example of setting up capturing</span>
+<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"parent"</span>).addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Parent clicked - capturing phase"</span>);
+}, <span class="hljs-literal">true</span>); <span class="hljs-comment">// Capturing is enabled</span>
+</code></pre>
+<p>Understanding these mechanisms is crucial when designing complex interactive web applications to manage how events are handled and propagated through the DOM tree.</p>
+<h4 id="preventing-default-actions">Preventing Default Actions</h4>
+<p>Many DOM elements have default behaviors that can be executed on specific events. For example, clicking a submit button in a form element typically refreshes the page. You can prevent these default actions using <code>event.preventDefault()</code> within an event handler.</p>
+<ul>
+<li><strong>Use Case in Form Handling</strong>:<pre><code class="lang-javascript"><span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"myForm"</span>).addEventListener(<span class="hljs-string">"submit"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>{
+    event.preventDefault(); <span class="hljs-comment">// Prevents the form from submitting</span>
+    <span class="hljs-comment">// Additional code to handle form submission via JavaScript</span>
+});
+</code></pre>
+</li>
+</ul>
+<p>This is particularly useful in form handling where you want to have complete control over the submission process, possibly to perform validation, make an AJAX request, or manipulate data before sending it to a server.</p>
+<h4 id="using-this-in-events">Using <code>this</code> in Events</h4>
+<p>In the context of an event handler, the <code>this</code> keyword refers to the element on which the event handler is currently executing. This is extremely helpful when you want to manipulate the element that received the event or access its properties.</p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"myButton"</span>).addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.textContent); <span class="hljs-comment">// `this` refers to the button</span>
+    <span class="hljs-keyword">this</span>.textContent = <span class="hljs-string">"Clicked"</span>; <span class="hljs-comment">// Changes the button text to 'Clicked'</span>
+});
+</code></pre>
+<h4 id="exercise-handling-form-submission-with-event-propagation-control">Exercise: Handling Form Submission with Event Propagation Control</h4>
+<p><strong>Objective</strong>: Implement an exercise where students need to stop the propagation of an event and prevent the default behavior of a form submission to handle it using JavaScript.</p>
+<p><strong>Setup</strong>:</p>
+<ol>
+<li><p><strong>HTML Structure</strong>:</p>
+<pre><code class="lang-html">&lt;<span class="hljs-selector-tag">form</span> id=<span class="hljs-string">"signupForm"</span>&gt;
+    &lt;<span class="hljs-selector-tag">label</span> <span class="hljs-keyword">for</span>=<span class="hljs-string">"username"</span>&gt;Username:&lt;/label&gt;
+    &lt;<span class="hljs-selector-tag">input</span> type=<span class="hljs-string">"text"</span> id=<span class="hljs-string">"username"</span> name=<span class="hljs-string">"username"</span>&gt;
+    &lt;<span class="hljs-selector-tag">button</span> type=<span class="hljs-string">"submit"</span>&gt;Sign Up&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+</li>
+<li><p><strong>JavaScript</strong>:</p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"signupForm"</span>).addEventListener(<span class="hljs-string">"submit"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>{
+    event.preventDefault(); <span class="hljs-comment">// Prevent default form submission</span>
+    event.stopPropagation(); <span class="hljs-comment">// Stop the event from bubbling up</span>
+    <span class="hljs-keyword">let</span> username = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"username"</span>).value;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Signing up user:"</span>, username);
+    <span class="hljs-comment">// Additional code to process the username</span>
+});
+</code></pre>
+</li>
+</ol>
+<p>In this exercise, students will attach an event listener to a form that stops the form from submitting in the traditional way and prevents the event from bubbling up the DOM. This approach allows the form to be processed entirely within JavaScript, offering more control over data handling and interaction flow. This practice solidifies understanding of event handling, propagation, and default action prevention in real-world scenarios.</p>
+
+
+
+
+
+<h3 id="introduction-to-web-storage">Introduction to Web Storage</h3>
+<h4 id="overview-of-web-storage">Overview of Web Storage</h4>
+<p>The Web Storage API provides mechanisms by which browsers can store key/value pairs, in a much more intuitive fashion than using cookies. The two mechanisms within Web Storage are <code>localStorage</code> and <code>sessionStorage</code>, each serving different needs and providing ways to persist data on the client&#39;s browser.</p>
+<p><strong>Features of Web Storage</strong>:</p>
+<ul>
+<li><strong>Capacity</strong>: Offers more storage space than cookies.</li>
+<li><strong>Accessibility</strong>: Data stored is only accessible on the client-side, not server-side.</li>
+<li><strong>Security</strong>: Unlike cookies, Web Storage data is not sent with every server request, but it is still accessible via JavaScript, which makes it vulnerable to XSS attacks if not handled properly.</li>
+<li><strong>Simplicity</strong>: Provides a straightforward API with methods to set, get, and remove items.</li>
+</ul>
+<h4 id="localstorage-vs-sessionstorage">localStorage vs sessionStorage</h4>
+<ol>
+<li><p><strong>localStorage</strong>:</p>
+<ul>
+<li><strong>Persistence</strong>: Data stored in localStorage has no expiration time. It remains stored on the user&#39;s browser until it is explicitly cleared either via script or by the user manually clearing the browser&#39;s cache.</li>
+<li><strong>Use Case</strong>: Ideal for saving user preferences or other data that should persist even when the browser is closed and reopened (e.g., user theme, login tokens).</li>
+</ul>
+</li>
+<li><p><strong>sessionStorage</strong>:</p>
+<ul>
+<li><strong>Persistence</strong>: Data stored in sessionStorage is cleared when the page session ends — that is, when the browser tab is closed. It is not affected by page reloads and restores.</li>
+<li><strong>Use Case</strong>: Useful for data that should not persist between sessions, such as data entered into a form that should not be stored long term.</li>
+</ul>
+</li>
+</ol>
+<h4 id="setting-getting-and-removing-items">Setting, Getting, and Removing Items</h4>
+<p>Both localStorage and sessionStorage expose the same methods, providing a simple API for managing stored data.</p>
+<ul>
+<li><p><strong>Setting Items</strong>: <code>setItem(key, value)</code> method is used to store data, where <code>key</code> is a string, and <code>value</code> is also stored as a string.</p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">local</span>Storage.setItem(<span class="hljs-string">"username"</span>, <span class="hljs-string">"JohnDoe"</span>);
+</code></pre>
+</li>
+<li><p><strong>Getting Items</strong>: <code>getItem(key)</code> method is used to retrieve data. If the key does not exist, it returns <code>null</code>.</p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">let</span> username = <span class="hljs-built_in">local</span>Storage.getItem(<span class="hljs-string">"username"</span>);  // <span class="hljs-string">"JohnDoe"</span>
+</code></pre>
+</li>
+<li><p><strong>Removing Items</strong>: <code>removeItem(key)</code> method is used to delete an item from storage.</p>
+<pre><code class="lang-javascript">localStorage.removeItem(<span class="hljs-string">"username"</span>)<span class="hljs-comment">;</span>
+</code></pre>
+</li>
+<li><p><strong>Clearing All Data</strong>: <code>clear()</code> method can be used to empty all storage.</p>
+<pre><code class="lang-javascript">localStorage.clear()<span class="hljs-comment">;</span>
+</code></pre>
+</li>
+</ul>
+<h4 id="practical-exercise-building-a-theme-preference-application">Practical Exercise: Building a Theme Preference Application</h4>
+<p><strong>Objective</strong>: Create a simple application that allows users to choose a theme color for the website, which will persist across sessions using <code>localStorage</code>.</p>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li><p><strong>HTML Setup</strong>:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>Select your theme color:<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"themeSelector"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"light"</span>&gt;</span>Light<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"dark"</span>&gt;</span>Dark<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"saveTheme()"</span>&gt;</span>Save Theme<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre>
+</li>
+<li><p><strong>JavaScript Implementation</strong>:</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">saveTheme</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> theme = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"themeSelector"</span>).value;
+    localStorage.setItem(<span class="hljs-string">"theme"</span>, theme);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadTheme</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> theme = localStorage.getItem(<span class="hljs-string">"theme"</span>);
+    <span class="hljs-keyword">if</span> (theme) {
+        <span class="hljs-built_in">document</span>.body.className = theme;  <span class="hljs-comment">// Assuming CSS classes for themes exist</span>
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"themeSelector"</span>).value = theme;
+    }
+}
+
+<span class="hljs-built_in">window</span>.onload = loadTheme;  <span class="hljs-comment">// Load the theme when the document loads</span>
+</code></pre>
+</li>
+</ol>
+<p><strong>Learning Outcomes</strong>:</p>
+<ul>
+<li>Students will learn how to interact with <code>localStorage</code> to set, get, and manage data.</li>
+<li>They will understand how to apply persistent data storage to enhance user experience by remembering user preferences across browser sessions.</li>
+</ul>
+<p>This exercise not only reinforces understanding of the Web Storage API but also illustrates its practical use in real-world web applications, such as customizing and remembering user settings.</p>
+
+
+
+
+
+<h3 id="combining-event-handling-with-web-storage">Combining Event Handling with Web Storage</h3>
+<h4 id="interactive-application-example-to-do-list">Interactive Application Example: To-Do List</h4>
+<p>One of the most illustrative examples of combining event handling with Web Storage is creating a to-do list application. This application will allow users to add tasks, mark them as completed, and persist the state of the list across browser sessions using <code>localStorage</code>.</p>
+<p><strong>Application Features</strong>:</p>
+<ol>
+<li><strong>Add Tasks</strong>: Users can enter tasks into an input field and add them to the list by pressing a button or hitting enter.</li>
+<li><strong>Mark Tasks as Completed</strong>: Users can click on tasks to toggle their completion status.</li>
+<li><strong>Persistence</strong>: The state of the to-do list is saved to <code>localStorage</code>, so it remains intact even after the browser or tab is closed and reopened.</li>
+</ol>
+<p><strong>HTML Structure</strong>:</p>
+<pre><code class="lang-html">&lt;<span class="hljs-selector-tag">div</span> id=<span class="hljs-string">"todoApp"</span>&gt;
+    &lt;<span class="hljs-selector-tag">input</span> type=<span class="hljs-string">"text"</span> id=<span class="hljs-string">"newTask"</span> placeholder=<span class="hljs-string">"Add a new task"</span> /&gt;
+    &lt;<span class="hljs-selector-tag">button</span> onclick=<span class="hljs-string">"addTask()"</span>&gt;Add Task&lt;/button&gt;
+    &lt;<span class="hljs-selector-tag">ul</span> id=<span class="hljs-string">"taskList"</span>&gt;&lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+<p><strong>CSS for Completed Tasks</strong> (for visual feedback):</p>
+<pre><code class="lang-css"><span class="hljs-selector-class">.completed</span> {
+    <span class="hljs-attribute">text-decoration</span>: line-through;
+}
+</code></pre>
+<p><strong>JavaScript for Event Handling and Local Storage</strong>:</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadTasks</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> tasks = <span class="hljs-built_in">JSON</span>.parse(localStorage.getItem(<span class="hljs-string">'tasks'</span>)) || [];
+    <span class="hljs-keyword">let</span> taskList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'taskList'</span>);
+    taskList.innerHTML = <span class="hljs-string">''</span>; <span class="hljs-comment">// Clear existing tasks in the DOM</span>
+    tasks.forEach(<span class="hljs-function">(<span class="hljs-params">task, index</span>) =&gt;</span> {
+        <span class="hljs-keyword">let</span> li = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'li'</span>);
+        li.textContent = task.description;
+        li.className = task.completed ? <span class="hljs-string">'completed'</span> : <span class="hljs-string">''</span>;
+        li.addEventListener(<span class="hljs-string">'click'</span>, () =&gt; toggleTask(index));
+        taskList.appendChild(li);
+    });
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addTask</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> newTaskInput = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'newTask'</span>);
+    <span class="hljs-keyword">let</span> tasks = <span class="hljs-built_in">JSON</span>.parse(localStorage.getItem(<span class="hljs-string">'tasks'</span>)) || [];
+    <span class="hljs-keyword">if</span> (newTaskInput.value) {
+        tasks.push({ <span class="hljs-attr">description</span>: newTaskInput.value, <span class="hljs-attr">completed</span>: <span class="hljs-literal">false</span> });
+        localStorage.setItem(<span class="hljs-string">'tasks'</span>, <span class="hljs-built_in">JSON</span>.stringify(tasks));
+        newTaskInput.value = <span class="hljs-string">''</span>; <span class="hljs-comment">// Clear input field</span>
+        loadTasks(); <span class="hljs-comment">// Refresh the list</span>
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">toggleTask</span>(<span class="hljs-params">index</span>) </span>{
+    <span class="hljs-keyword">let</span> tasks = <span class="hljs-built_in">JSON</span>.parse(localStorage.getItem(<span class="hljs-string">'tasks'</span>));
+    tasks[index].completed = !tasks[index].completed;
+    localStorage.setItem(<span class="hljs-string">'tasks'</span>, <span class="hljs-built_in">JSON</span>.stringify(tasks));
+    loadTasks();
+}
+
+<span class="hljs-built_in">window</span>.onload = loadTasks; <span class="hljs-comment">// Load tasks when the document is ready</span>
+</code></pre>
+<h4 id="exercise-enhance-the-interactive-form">Exercise: Enhance the Interactive Form</h4>
+<p>Students will enhance an interactive form they created earlier by incorporating functionality that saves user inputs into <code>localStorage</code>. This will allow the data to be retrieved when the form is reloaded.</p>
+<p><strong>Features to Implement</strong>:</p>
+<ol>
+<li><strong>Save Input Data</strong>: Every time a user modifies a field in the form, save the data to <code>localStorage</code>.</li>
+<li><strong>Retrieve Data on Load</strong>: When the form is loaded (e.g., when the page is refreshed), populate the form fields with the data stored in <code>localStorage</code>.</li>
+</ol>
+<p><strong>Example Scenario</strong>: Suppose the form collects user preferences, such as favorite color and email address.</p>
+<p><strong>HTML</strong>:</p>
+<pre><code class="lang-html">&lt;<span class="hljs-keyword">form</span> id=<span class="hljs-string">"preferenceForm"</span>&gt;
+    &lt;<span class="hljs-keyword">input</span> <span class="hljs-keyword">type</span>=<span class="hljs-string">"email"</span> id=<span class="hljs-string">"email"</span> placeholder=<span class="hljs-string">"Enter your email"</span>&gt;
+    &lt;<span class="hljs-keyword">input</span> <span class="hljs-keyword">type</span>=<span class="hljs-string">"color"</span> id=<span class="hljs-string">"favoriteColor"</span> title=<span class="hljs-string">"Choose your favorite color"</span>&gt;
+    &lt;button <span class="hljs-keyword">type</span>=<span class="hljs-string">"submit"</span>&gt;<span class="hljs-keyword">Save</span> Preferences&lt;/button&gt;
+&lt;/<span class="hljs-keyword">form</span>&gt;
+</code></pre>
+<p><strong>JavaScript</strong>:</p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'preferenceForm'</span>).addEventListener(<span class="hljs-string">'change'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>{
+    localStorage.setItem(event.target.id, event.target.value);
+});
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadPreferences</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'email'</span>).value = localStorage.getItem(<span class="hljs-string">'email'</span>) || <span class="hljs-string">''</span>;
+    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'favoriteColor'</span>).value = localStorage.getItem(<span class="hljs-string">'favoriteColor'</span>) || <span class="hljs-string">'#ffffff'</span>; <span class="hljs-comment">// Default to white</span>
+}
+
+<span class="hljs-built_in">window</span>.onload = loadPreferences;
+</code></pre>
+<p>This exercise will help students understand how to effectively combine event handling with <code>localStorage</code> to create dynamic, user-friendly web applications that remember user inputs across sessions, enhancing the user experience significantly.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+        <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/core.min.js"></script> -->
+        <!-- Load the language you need -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/languages/javascript.min.js"></script> -->
+        <script>
+            function copyCode(index) {
+                const code = document.getElementById('code-block-' + index).innerText;
+                const copied = document.getElementById('copied-' + index);
+
+                navigator.clipboard.writeText(code).then(() => {
+                    copied.innerText = 'Copied to clipboard!';
+                });
+
+                setTimeout(() => {
+                    copied.innerText = '';
+                }, 3000);
+            }
+
+            // Initialize Highlight.js after the document is fully loaded
+            document.addEventListener('DOMContentLoaded', (event) => {
+                hljs.highlightAll();
+            });
+        </script>
+    </body>
+</html>
