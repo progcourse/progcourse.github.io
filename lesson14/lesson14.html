@@ -1,0 +1,1169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lesson 14: JavaScript Best Practices and Debugging</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+        <style>
+            code {
+                background-color: yellow;
+                color: blue;
+                padding: 0 5px;
+            }
+			#md{
+				display: none;
+			}
+        </style>
+    </head>
+    <body class="p-5">
+    <a href="#" id="hy" class="btn btn-info">Հայերեն</a>
+    <a href="#" id="en" class="btn btn-info" style="display:none">English</a>
+    <a href="#" id="ru" class="btn btn-info">Русский</a>
+	
+	<hr>
+	
+	<div id="md">
+### JavaScript Best Practices
+
+#### Code Organization
+
+Organizing code logically is fundamental to building maintainable and scalable applications. Well-organized code helps not only during initial development but significantly eases future modifications and debugging efforts. Here are some key aspects to consider:
+
+- **Grouping Related Functions:** Functions that perform related tasks should be grouped together, either in the same section of a file or within the same module. This approach makes it easier to understand how different parts of your application relate to each other.
+  
+- **Modularizing Code:** Utilize modules or separate files to encapsulate different parts of your application's logic. This practice not only helps in organizing code but also aids in reusability across different parts of your application without redundancy.
+  
+- **Consistent Patterns:** Follow established JavaScript patterns and standards. Use frameworks and libraries where appropriate, which can help enforce a structured way of coding and reduce the amount of code you need to write.
+
+#### Commenting and Documentation
+
+Comments and documentation play a crucial role in making your code understandable to others and your future self. Key practices include:
+
+- **Meaningful Comments:** Comments should explain why certain decisions were made or clarify complex portions of code. Avoid redundant comments that simply describe what the code does, as good code should be self-explanatory in that regard.
+  
+- **Use of JSDoc:** For larger projects, consider using JSDoc—a popular documentation syntax for JavaScript. JSDoc comments can help in automatically generating HTML documentation pages for your code, and many IDEs use these comments to provide contextual hints and auto-completion features.
+  
+  ```javascript
+  /**
+   * Calculates the area of a rectangle.
+   * @param {number} width - The width of the rectangle.
+   * @param {number} height - The height of the rectangle.
+   * @returns {number} The area of the rectangle.
+   */
+  function calculateArea(width, height) {
+      return width * height;
+  }
+  ```
+
+#### Naming Conventions
+
+Effective naming conventions enhance your code's readability and maintainability:
+
+- **Variables and Functions (camelCase):** Start with a lowercase letter and use uppercase letters to denote new words without spaces. Example: `recordUserActivity`
+  
+- **Classes (PascalCase):** Start each new word with an uppercase letter. Example: `UserProfile`
+  
+- **Constants (UPPER_SNAKE_CASE):** Use uppercase letters with underscores separating words. Example: `MAX_USERS`
+  
+- **Descriptive Names:** Choose names that reflect the purpose of the variable or function. Avoid using vague names like `data` or `info` and instead opt for names that describe what the data or function pertains to.
+
+#### Writing Clean Code
+
+Clean code is fundamental for maintaining a healthy codebase, especially in dynamic languages like JavaScript:
+
+- **Single Responsibility:** Each function should do one thing well. This makes the function more robust, easier to test, and easier to read.
+  
+- **Avoid Global Variables:** Minimize the use of global variables. This reduces dependencies and potential conflicts in the global scope. Use closures, modules, or ES6 classes to encapsulate variables.
+  
+- **Minimize Nesting:** Deeply nested code (many levels of indentation) can make code harder to read and maintain. Try to flatten structures by breaking complex functions into simpler ones.
+  
+- **Error Handling:** Use try-catch blocks judiciously and throw meaningful errors. Consider using Promises or async/await for handling asynchronous errors.
+
+```javascript
+async function fetchData(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    } catch (error) {
+        console.error('Could not fetch data:', error);
+    }
+}
+```
+
+#### Conclusion
+
+Adhering to these best practices in JavaScript will make your code more efficient, understandable, and maintainable. It's crucial to stay updated with the latest standards and techniques in JavaScript development, as the language and its ecosystem are constantly evolving.
+
+### Debugging Techniques in JavaScript
+
+Debugging is a critical skill in software development, enabling developers to identify and resolve issues in their code. Effective debugging techniques can save considerable time and effort in maintaining code health and functionality.
+
+#### Using Console Methods
+
+The `console` object provides several methods that can help with logging information to the browser's console, which is invaluable for debugging and general information output.
+
+- **`console.log()`**: This is the most frequently used method for logging general information about the code execution state. It's useful for outputting variable values or messages that indicate the code flow.
+  
+  ```javascript
+  console.log('Hello, world!');
+  console.log('User data:', userData);
+  ```
+
+- **`console.error()`**: Used for reporting errors or issues in the code, this method outputs messages in red in the console, making them stand out.
+  
+  ```javascript
+  console.error('Error fetching data from server.');
+  ```
+
+- **`console.warn()`**: Outputs warning messages to the console. These are typically highlighted in yellow, which is useful for drawing attention to non-critical issues that developers should be aware of.
+  
+  ```javascript
+  console.warn('Deprecated function called. Consider upgrading to the new API.');
+  ```
+
+- **`console.info()`**: Provides informational messages that are visually differentiated from regular `log` messages. Useful for less important messages that still need to be separated from general debug outputs.
+  
+  ```javascript
+  console.info('Processing completed with 0 errors.');
+  ```
+
+#### Breakpoints and the Debugger Statement
+
+Breakpoints are an essential tool for debugging. They allow developers to pause code execution at specific points and examine the values of variables at those moments.
+
+- **Using Breakpoints in Developer Tools**: Modern browsers like Chrome, Firefox, and Edge include development tools with extensive debugging capabilities. You can set breakpoints directly in the source code panel of the developer tools. Simply click on the line number where you want the execution to pause.
+  
+- **`debugger;` Statement**: Adding the `debugger;` statement in your JavaScript code is equivalent to setting a breakpoint. When the browser executes this statement, it will automatically pause if the developer tools are open.
+  
+  ```javascript
+  function complexCalculation(input) {
+      debugger;  // Execution will pause here when DevTools is open
+      let result = input * 10;  // Example calculation
+      return result;
+  }
+  ```
+
+#### Step-by-Step Execution
+
+Stepping through code is another powerful feature of browser development tools. It allows you to move through your JavaScript code one statement at a time, observing how changes in the code affect the program state.
+
+- **Step Over**: Executes the next line of code but doesn't dive into any function calls on that line.
+- **Step Into**: Executes the next line of code and dives into any function that is being called.
+- **Step Out**: Continues executing code and steps out of the current function when it returns.
+- **Call Stack**: Allows you to see the stack trace that led up to the current point of execution.
+- **Watch Variables**: You can specify variables that you want to watch. The values of these variables are displayed in the developer tools as they change.
+
+#### Practical Example
+
+Let's demonstrate using these debugging tools through a practical exercise:
+
+1. **Add Console Outputs**: Integrate various `console` methods throughout a function that processes user data.
+2. **Insert Breakpoints**: Set breakpoints at critical stages in the function's execution, such as after data is retrieved or before a complex calculation.
+3. **Use Debugger and Step Through**: Insert a `debugger;` statement and use step-by-step execution to trace the function's behavior.
+
+```javascript
+function processData(data) {
+    console.log('Received data:', data);
+    debugger;
+    try {
+        let result = data.map(item => item.value * 10);
+        console.info('Processing complete.');
+        return result;
+    } catch (error) {
+        console.error('Processing failed:', error);
+    }
+}
+```
+
+Using these techniques, developers can gain insights into the workings of their code, identify logic errors, and ensure their applications perform as intended.
+	
+### Error Handling with Try-Catch Blocks in JavaScript
+
+#### Introduction to Error Handling
+
+Error handling is an essential aspect of software development that involves anticipating, catching, and resolving errors or exceptions that may occur during the execution of a program. Proper error handling ensures that even if an error occurs, the program can continue to operate or fail gracefully, providing a better user experience and preventing data loss or corruption. In JavaScript, structured error handling can significantly enhance the robustness and reliability of web applications.
+
+#### Using Try-Catch-Finally
+
+The `try-catch-finally` statement provides a powerful mechanism for catching exceptions, handling them appropriately, and executing clean-up code, regardless of the success or failure of the try block.
+
+- **`try` Block**: Code that might throw an exception is placed inside the `try` block. If an exception occurs, the rest of the code in this block will be skipped, and control will move to the `catch` block.
+  
+- **`catch` Block**: This block is executed if an error occurs in the `try` block. The exception thrown is caught here, and this block contains code to handle or log the error.
+  
+- **`finally` Block**: Code inside the `finally` block will execute after the `try` and `catch` blocks, but before the statements following the `try-catch-finally` statement. This is used to perform clean-up actions, such as closing files or clearing resources, regardless of whether an error occurred.
+
+**Example of Try-Catch-Finally:**
+
+```javascript
+try {
+    // Code that may throw an exception
+    const result = riskyOperation();
+    console.log('Result:', result);
+} catch (error) {
+    // Error handling logic
+    console.error('Error occurred:', error);
+} finally {
+    // Cleanup code
+    console.log('Cleanup actions completed.');
+}
+```
+
+#### Best Practices for Error Handling
+
+Effective error handling goes beyond merely using `try-catch` blocks. It involves a comprehensive strategy to prevent errors, handle them appropriately when they do occur, and ensure the application remains stable.
+
+- **Validate Inputs**: Many errors can be prevented by validating inputs before using them. Ensure that the inputs meet the expected format, type, and range.
+
+- **Use `finally` for Cleanup**: Always use the `finally` block to free up resources, such as closing files or network connections, which need to be done regardless of whether an operation succeeds or fails.
+
+- **Throw Custom Errors**: JavaScript allows you to throw your own errors using the `throw` statement. This can be useful when you want to enforce specific business rules or need more descriptive error messages.
+
+  ```javascript
+  function processUser(user) {
+      if (!user.id) {
+          throw new Error('User must have an id.');
+      }
+      // Process the user
+  }
+  ```
+
+- **Error Propagation**: In functions that handle critical operations, it's often better to let exceptions propagate to higher levels where they can be logged or handled in a unified way, rather than swallowing them silently at lower levels.
+
+- **Logging Errors**: Use logging strategies to record errors and exceptions. This can help in diagnosing issues after they occur, especially in production environments.
+
+#### Conclusion
+
+Understanding and implementing robust error handling in JavaScript is crucial for building reliable and user-friendly web applications. By using `try-catch-finally` blocks effectively and adhering to best practices in error prevention and management, developers can ensure that their applications can handle unexpected situations gracefully, maintain operational stability, and provide a smooth user experience.
+	
+### Practical Exercises and Debugging Session
+
+#### Hands-On Debugging Exercise
+
+Debugging is a critical skill for any developer, and practicing with real code that contains various errors is an excellent way to hone this skill. In this exercise, students will be given a snippet of JavaScript code that includes a mix of logic errors, syntax errors, and performance issues. The goal is to identify and correct each issue, using the debugging techniques previously discussed.
+
+**Sample Code with Bugs:**
+
+```javascript
+function calculateTotal(items) {
+    let total = 0; 
+    for (let i = 0; i <= items.length; i++) {
+        total += items[i].price * item[i].quantity;
+    }
+    return total;
+}
+
+const cart = [
+    { price: 15.99, quantity: 2 },
+    { price: 29.99, quantity: 1 },
+    { price: 4.99, quantity: 4 }
+];
+
+console.log('Total cart value:', calculateTotal(cart));
+```
+
+**Bugs to Identify and Fix:**
+1. **Syntax Error**: `item[i]` should be `items[i]` in the loop.
+2. **Logic Error**: The loop uses `i <= items.length`, which causes an undefined item to be accessed. It should be `i < items.length`.
+3. **Performance Issue**: Currently, there is no significant performance issue in this snippet, but students could be encouraged to think about potential issues if the cart array were very large or if the function were called frequently.
+
+**Debugging Steps**:
+1. Use the browser's developer tools to inspect the console for any immediate syntax errors.
+2. Set breakpoints in the `calculateTotal` function to inspect the value of `total` and `items[i]` during each iteration.
+3. Observe and correct how the loop iterates and accesses array elements.
+
+#### Error Handling Implementation
+
+Handling errors, especially when dealing with network requests (like API calls), is crucial for building reliable applications. Students will enhance a given piece of JavaScript that interacts with a web API by adding comprehensive error handling.
+
+**Provided Code Snippet** (without error handling):
+
+```javascript
+function fetchData() {
+    fetch('https://api.example.com/data')
+        .then(response => response.json())
+        .then(data => console.log('Fetched data:', data))
+        .catch(error => console.error('Error fetching data:', error));
+}
+
+fetchData();
+```
+
+**Task**:
+1. Add error handling to manage bad responses from the server (e.g., non-200 status codes).
+2. Use `try-catch` blocks effectively, especially handling JSON parsing errors which might not be caught by `fetch`'s `catch`.
+
+**Enhanced Code with Error Handling**:
+
+```javascript
+async function fetchData() {
+    try {
+        const response = await fetch('https://api.example.com/data');
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log('Fetched data:', data);
+    } catch (error) {
+        console.error('Error during fetching or processing data:', error);
+    }
+}
+
+fetchData();
+```
+
+#### Conclusion
+
+These exercises serve multiple learning objectives:
+- **Debugging**: Students apply their debugging skills to identify and fix both obvious and subtle bugs in a given code snippet.
+- **Error Handling**: By implementing robust error handling in an API interaction scenario, students learn to anticipate and manage potential runtime errors, enhancing the reliability and user-friendliness of their applications. 
+
+Such practical sessions are invaluable in transitioning from theoretical knowledge to real-world application, preparing students for typical development tasks they might face in their careers.	
+	</div>
+	
+	
+<div id="html_en" class="html"><h3 id="javascriptbestpractices">JavaScript Best Practices</h3>
+<h4 id="codeorganization">Code Organization</h4>
+<p>Organizing code logically is fundamental to building maintainable and scalable applications. Well-organized code helps not only during initial development but significantly eases future modifications and debugging efforts. Here are some key aspects to consider:</p>
+<ul>
+<li><p><strong>Grouping Related Functions:</strong> Functions that perform related tasks should be grouped together, either in the same section of a file or within the same module. This approach makes it easier to understand how different parts of your application relate to each other.</p></li>
+<li><p><strong>Modularizing Code:</strong> Utilize modules or separate files to encapsulate different parts of your application's logic. This practice not only helps in organizing code but also aids in reusability across different parts of your application without redundancy.</p></li>
+<li><p><strong>Consistent Patterns:</strong> Follow established JavaScript patterns and standards. Use frameworks and libraries where appropriate, which can help enforce a structured way of coding and reduce the amount of code you need to write.</p></li>
+</ul>
+<h4 id="commentinganddocumentation">Commenting and Documentation</h4>
+<p>Comments and documentation play a crucial role in making your code understandable to others and your future self. Key practices include:</p>
+<ul>
+<li><p><strong>Meaningful Comments:</strong> Comments should explain why certain decisions were made or clarify complex portions of code. Avoid redundant comments that simply describe what the code does, as good code should be self-explanatory in that regard.</p></li>
+<li><p><strong>Use of JSDoc:</strong> For larger projects, consider using JSDoc?a popular documentation syntax for JavaScript. JSDoc comments can help in automatically generating HTML documentation pages for your code, and many IDEs use these comments to provide contextual hints and auto-completion features.</p></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-comment">/**
+   * Calculates the area of a rectangle.
+   * <span class="hljs-doctag">@param</span> {<span class="hljs-type">number</span>} <span class="hljs-variable">width</span> - The width of the rectangle.
+   * <span class="hljs-doctag">@param</span> {<span class="hljs-type">number</span>} <span class="hljs-variable">height</span> - The height of the rectangle.
+   * <span class="hljs-doctag">@returns</span> {<span class="hljs-type">number</span>} The area of the rectangle.
+   */</span>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">calculateArea</span>(<span class="hljs-params">width, height</span>) {
+      <span class="hljs-keyword">return</span> width * height;
+  }
+</code></pre>
+<h4 id="namingconventions">Naming Conventions</h4>
+<p>Effective naming conventions enhance your code's readability and maintainability:</p>
+<ul>
+<li><p><strong>Variables and Functions (camelCase):</strong> Start with a lowercase letter and use uppercase letters to denote new words without spaces. Example: <code>recordUserActivity</code></p></li>
+<li><p><strong>Classes (PascalCase):</strong> Start each new word with an uppercase letter. Example: <code>UserProfile</code></p></li>
+<li><p><strong>Constants (UPPER<em>SNAKE</em>CASE):</strong> Use uppercase letters with underscores separating words. Example: <code>MAX_USERS</code></p></li>
+<li><p><strong>Descriptive Names:</strong> Choose names that reflect the purpose of the variable or function. Avoid using vague names like <code>data</code> or <code>info</code> and instead opt for names that describe what the data or function pertains to.</p></li>
+</ul>
+<h4 id="writingcleancode">Writing Clean Code</h4>
+<p>Clean code is fundamental for maintaining a healthy codebase, especially in dynamic languages like JavaScript:</p>
+<ul>
+<li><p><strong>Single Responsibility:</strong> Each function should do one thing well. This makes the function more robust, easier to test, and easier to read.</p></li>
+<li><p><strong>Avoid Global Variables:</strong> Minimize the use of global variables. This reduces dependencies and potential conflicts in the global scope. Use closures, modules, or ES6 classes to encapsulate variables.</p></li>
+<li><p><strong>Minimize Nesting:</strong> Deeply nested code (many levels of indentation) can make code harder to read and maintain. Try to flatten structures by breaking complex functions into simpler ones.</p></li>
+<li><p><strong>Error Handling:</strong> Use try-catch blocks judiciously and throw meaningful errors. Consider using Promises or async/await for handling asynchronous errors.</p></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchData</span>(<span class="hljs-params">url</span>) {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(url);
+        <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">'Network response was not ok'</span>);
+        }
+        <span class="hljs-keyword">return</span> response.<span class="hljs-title function_">json</span>();
+    } <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Could not fetch data:'</span>, error);
+    }
+}
+</code></pre>
+<h4 id="conclusion">Conclusion</h4>
+<p>Adhering to these best practices in JavaScript will make your code more efficient, understandable, and maintainable. It's crucial to stay updated with the latest standards and techniques in JavaScript development, as the language and its ecosystem are constantly evolving.</p>
+<h3 id="debuggingtechniquesinjavascript">Debugging Techniques in JavaScript</h3>
+<p>Debugging is a critical skill in software development, enabling developers to identify and resolve issues in their code. Effective debugging techniques can save considerable time and effort in maintaining code health and functionality.</p>
+<h4 id="usingconsolemethods">Using Console Methods</h4>
+<p>The <code>console</code> object provides several methods that can help with logging information to the browser's console, which is invaluable for debugging and general information output.</p>
+<ul>
+<li><strong><code>console.log()</code></strong>: This is the most frequently used method for logging general information about the code execution state. It's useful for outputting variable values or messages that indicate the code flow.</li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Hello, world!'</span>);
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'User data:'</span>, userData);
+</code></pre>
+<ul>
+<li><strong><code>console.error()</code></strong>: Used for reporting errors or issues in the code, this method outputs messages in red in the console, making them stand out.</li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Error fetching data from server.'</span>);
+</code></pre>
+<ul>
+<li><strong><code>console.warn()</code></strong>: Outputs warning messages to the console. These are typically highlighted in yellow, which is useful for drawing attention to non-critical issues that developers should be aware of.</li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(<span class="hljs-string">'Deprecated function called. Consider upgrading to the new API.'</span>);
+</code></pre>
+<ul>
+<li><strong><code>console.info()</code></strong>: Provides informational messages that are visually differentiated from regular <code>log</code> messages. Useful for less important messages that still need to be separated from general debug outputs.</li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">info</span>(<span class="hljs-string">'Processing completed with 0 errors.'</span>);
+</code></pre>
+<h4 id="breakpointsandthedebuggerstatement">Breakpoints and the Debugger Statement</h4>
+<p>Breakpoints are an essential tool for debugging. They allow developers to pause code execution at specific points and examine the values of variables at those moments.</p>
+<ul>
+<li><p><strong>Using Breakpoints in Developer Tools</strong>: Modern browsers like Chrome, Firefox, and Edge include development tools with extensive debugging capabilities. You can set breakpoints directly in the source code panel of the developer tools. Simply click on the line number where you want the execution to pause.</p></li>
+<li><p><strong><code>debugger;</code> Statement</strong>: Adding the <code>debugger;</code> statement in your JavaScript code is equivalent to setting a breakpoint. When the browser executes this statement, it will automatically pause if the developer tools are open.</p></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-keyword">function</span> <span class="hljs-title function_">complexCalculation</span>(<span class="hljs-params">input</span>) {
+      <span class="hljs-keyword">debugger</span>;  <span class="hljs-comment">// Execution will pause here when DevTools is open</span>
+      <span class="hljs-keyword">let</span> result = input * <span class="hljs-number">10</span>;  <span class="hljs-comment">// Example calculation</span>
+      <span class="hljs-keyword">return</span> result;
+  }
+</code></pre>
+<h4 id="stepbystepexecution">Step-by-Step Execution</h4>
+<p>Stepping through code is another powerful feature of browser development tools. It allows you to move through your JavaScript code one statement at a time, observing how changes in the code affect the program state.</p>
+<ul>
+<li><strong>Step Over</strong>: Executes the next line of code but doesn't dive into any function calls on that line.</li>
+<li><strong>Step Into</strong>: Executes the next line of code and dives into any function that is being called.</li>
+<li><strong>Step Out</strong>: Continues executing code and steps out of the current function when it returns.</li>
+<li><strong>Call Stack</strong>: Allows you to see the stack trace that led up to the current point of execution.</li>
+<li><strong>Watch Variables</strong>: You can specify variables that you want to watch. The values of these variables are displayed in the developer tools as they change.</li>
+</ul>
+<h4 id="practicalexample">Practical Example</h4>
+<p>Let's demonstrate using these debugging tools through a practical exercise:</p>
+<ol>
+<li><strong>Add Console Outputs</strong>: Integrate various <code>console</code> methods throughout a function that processes user data.</li>
+<li><strong>Insert Breakpoints</strong>: Set breakpoints at critical stages in the function's execution, such as after data is retrieved or before a complex calculation.</li>
+<li><strong>Use Debugger and Step Through</strong>: Insert a <code>debugger;</code> statement and use step-by-step execution to trace the function's behavior.</li>
+</ol>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">function</span> <span class="hljs-title function_">processData</span>(<span class="hljs-params">data</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Received data:'</span>, data);
+    <span class="hljs-keyword">debugger</span>;
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">let</span> result = data.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item.<span class="hljs-property">value</span> * <span class="hljs-number">10</span>);
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">info</span>(<span class="hljs-string">'Processing complete.'</span>);
+        <span class="hljs-keyword">return</span> result;
+    } <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Processing failed:'</span>, error);
+    }
+}
+</code></pre>
+<p>Using these techniques, developers can gain insights into the workings of their code, identify logic errors, and ensure their applications perform as intended.</p>
+<h3 id="errorhandlingwithtrycatchblocksinjavascript">Error Handling with Try-Catch Blocks in JavaScript</h3>
+<h4 id="introductiontoerrorhandling">Introduction to Error Handling</h4>
+<p>Error handling is an essential aspect of software development that involves anticipating, catching, and resolving errors or exceptions that may occur during the execution of a program. Proper error handling ensures that even if an error occurs, the program can continue to operate or fail gracefully, providing a better user experience and preventing data loss or corruption. In JavaScript, structured error handling can significantly enhance the robustness and reliability of web applications.</p>
+<h4 id="usingtrycatchfinally">Using Try-Catch-Finally</h4>
+<p>The <code>try-catch-finally</code> statement provides a powerful mechanism for catching exceptions, handling them appropriately, and executing clean-up code, regardless of the success or failure of the try block.</p>
+<ul>
+<li><p><strong><code>try</code> Block</strong>: Code that might throw an exception is placed inside the <code>try</code> block. If an exception occurs, the rest of the code in this block will be skipped, and control will move to the <code>catch</code> block.</p></li>
+<li><p><strong><code>catch</code> Block</strong>: This block is executed if an error occurs in the <code>try</code> block. The exception thrown is caught here, and this block contains code to handle or log the error.</p></li>
+<li><p><strong><code>finally</code> Block</strong>: Code inside the <code>finally</code> block will execute after the <code>try</code> and <code>catch</code> blocks, but before the statements following the <code>try-catch-finally</code> statement. This is used to perform clean-up actions, such as closing files or clearing resources, regardless of whether an error occurred.</p></li>
+</ul>
+<p><strong>Example of Try-Catch-Finally:</strong></p>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// Code that may throw an exception</span>
+    <span class="hljs-keyword">const</span> result = <span class="hljs-title function_">riskyOperation</span>();
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Result:'</span>, result);
+} <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-comment">// Error handling logic</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Error occurred:'</span>, error);
+} <span class="hljs-keyword">finally</span> {
+    <span class="hljs-comment">// Cleanup code</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Cleanup actions completed.'</span>);
+}
+</code></pre>
+<h4 id="bestpracticesforerrorhandling">Best Practices for Error Handling</h4>
+<p>Effective error handling goes beyond merely using <code>try-catch</code> blocks. It involves a comprehensive strategy to prevent errors, handle them appropriately when they do occur, and ensure the application remains stable.</p>
+<ul>
+<li><p><strong>Validate Inputs</strong>: Many errors can be prevented by validating inputs before using them. Ensure that the inputs meet the expected format, type, and range.</p></li>
+<li><p><strong>Use <code>finally</code> for Cleanup</strong>: Always use the <code>finally</code> block to free up resources, such as closing files or network connections, which need to be done regardless of whether an operation succeeds or fails.</p></li>
+<li><p><strong>Throw Custom Errors</strong>: JavaScript allows you to throw your own errors using the <code>throw</code> statement. This can be useful when you want to enforce specific business rules or need more descriptive error messages.</p></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-keyword">function</span> <span class="hljs-title function_">processUser</span>(<span class="hljs-params">user</span>) {
+      <span class="hljs-keyword">if</span> (!user.<span class="hljs-property">id</span>) {
+          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">'User must have an id.'</span>);
+      }
+      <span class="hljs-comment">// Process the user</span>
+  }
+</code></pre>
+<ul>
+<li><p><strong>Error Propagation</strong>: In functions that handle critical operations, it's often better to let exceptions propagate to higher levels where they can be logged or handled in a unified way, rather than swallowing them silently at lower levels.</p></li>
+<li><p><strong>Logging Errors</strong>: Use logging strategies to record errors and exceptions. This can help in diagnosing issues after they occur, especially in production environments.</p></li>
+</ul>
+<h4 id="conclusion-1">Conclusion</h4>
+<p>Understanding and implementing robust error handling in JavaScript is crucial for building reliable and user-friendly web applications. By using <code>try-catch-finally</code> blocks effectively and adhering to best practices in error prevention and management, developers can ensure that their applications can handle unexpected situations gracefully, maintain operational stability, and provide a smooth user experience.</p>
+<h3 id="practicalexercisesanddebuggingsession">Practical Exercises and Debugging Session</h3>
+<h4 id="handsondebuggingexercise">Hands-On Debugging Exercise</h4>
+<p>Debugging is a critical skill for any developer, and practicing with real code that contains various errors is an excellent way to hone this skill. In this exercise, students will be given a snippet of JavaScript code that includes a mix of logic errors, syntax errors, and performance issues. The goal is to identify and correct each issue, using the debugging techniques previously discussed.</p>
+<p><strong>Sample Code with Bugs:</strong></p>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">function</span> <span class="hljs-title function_">calculateTotal</span>(<span class="hljs-params">items</span>) {
+    <span class="hljs-keyword">let</span> total = <span class="hljs-number">0</span>; 
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt;= items.<span class="hljs-property">length</span>; i++) {
+        total += items[i].<span class="hljs-property">price</span> * item[i].<span class="hljs-property">quantity</span>;
+    }
+    <span class="hljs-keyword">return</span> total;
+}
+
+<span class="hljs-keyword">const</span> cart = [
+    { <span class="hljs-attr">price</span>: <span class="hljs-number">15.99</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">2</span> },
+    { <span class="hljs-attr">price</span>: <span class="hljs-number">29.99</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">1</span> },
+    { <span class="hljs-attr">price</span>: <span class="hljs-number">4.99</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">4</span> }
+];
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Total cart value:'</span>, <span class="hljs-title function_">calculateTotal</span>(cart));
+</code></pre>
+<p><strong>Bugs to Identify and Fix:</strong></p>
+<ol>
+<li><strong>Syntax Error</strong>: <code>item[i]</code> should be <code>items[i]</code> in the loop.</li>
+<li><strong>Logic Error</strong>: The loop uses <code>i &lt;= items.length</code>, which causes an undefined item to be accessed. It should be <code>i &lt; items.length</code>.</li>
+<li><strong>Performance Issue</strong>: Currently, there is no significant performance issue in this snippet, but students could be encouraged to think about potential issues if the cart array were very large or if the function were called frequently.</li>
+</ol>
+<p><strong>Debugging Steps</strong>:</p>
+<ol>
+<li>Use the browser's developer tools to inspect the console for any immediate syntax errors.</li>
+<li>Set breakpoints in the <code>calculateTotal</code> function to inspect the value of <code>total</code> and <code>items[i]</code> during each iteration.</li>
+<li>Observe and correct how the loop iterates and accesses array elements.</li>
+</ol>
+<h4 id="errorhandlingimplementation">Error Handling Implementation</h4>
+<p>Handling errors, especially when dealing with network requests (like API calls), is crucial for building reliable applications. Students will enhance a given piece of JavaScript that interacts with a web API by adding comprehensive error handling.</p>
+<p><strong>Provided Code Snippet</strong> (without error handling):</p>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchData</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-title function_">fetch</span>(<span class="hljs-string">'https://api.example.com/data'</span>)
+        .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.<span class="hljs-title function_">json</span>())
+        .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Fetched data:'</span>, data))
+        .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Error fetching data:'</span>, error));
+}
+
+<span class="hljs-title function_">fetchData</span>();
+</code></pre>
+<p><strong>Task</strong>:</p>
+<ol>
+<li>Add error handling to manage bad responses from the server (e.g., non-200 status codes).</li>
+<li>Use <code>try-catch</code> blocks effectively, especially handling JSON parsing errors which might not be caught by <code>fetch</code>'s <code>catch</code>.</li>
+</ol>
+<p><strong>Enhanced Code with Error Handling</strong>:</p>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchData</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">'https://api.example.com/data'</span>);
+        <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`HTTP error! Status: <span class="hljs-subst">${response.status}</span>`</span>);
+        }
+        <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Fetched data:'</span>, data);
+    } <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Error during fetching or processing data:'</span>, error);
+    }
+}
+
+<span class="hljs-title function_">fetchData</span>();
+</code></pre>
+<h4 id="conclusion-2">Conclusion</h4>
+<p>These exercises serve multiple learning objectives:</p>
+<ul>
+<li><strong>Debugging</strong>: Students apply their debugging skills to identify and fix both obvious and subtle bugs in a given code snippet.</li>
+<li><strong>Error Handling</strong>: By implementing robust error handling in an API interaction scenario, students learn to anticipate and manage potential runtime errors, enhancing the reliability and user-friendliness of their applications. </li>
+</ul>
+<p>Such practical sessions are invaluable in transitioning from theoretical knowledge to real-world application, preparing students for typical development tasks they might face in their careers.    </p>
+	</div>
+	
+
+	
+	
+	
+	
+	
+<div id="html_hy" class="html" style="display:none"><h3 id="javascriptbestpractices"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JavaScript-ի լավագույն փորձը</font></font></h3>
+<h4 id="codeorganization"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կոդի կազմակերպում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կոդը տրամաբանորեն կազմակերպելը հիմնարար է պահպանման և մասշտաբային հավելվածներ ստեղծելու համար: Լավ կազմակերպված կոդը օգնում է ոչ միայն սկզբնական մշակման ժամանակ, այլ զգալիորեն թեթևացնում է ապագա փոփոխությունները և վրիպազերծման ջանքերը: Ահա մի քանի հիմնական ասպեկտներ, որոնք պետք է հաշվի առնել.</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Համակցված գործառույթների խմբավորում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> հարակից առաջադրանքներ կատարող գործառույթները պետք է խմբավորվեն միասին՝ կա՛մ ֆայլի նույն բաժնում, կա՛մ նույն մոդուլում: Այս մոտեցումը հեշտացնում է հասկանալը, թե ինչպես են ձեր հավելվածի տարբեր մասերը կապված միմյանց հետ:</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Modularizing Code.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Օգտագործեք մոդուլներ կամ առանձին ֆայլեր՝ ձեր հավելվածի տրամաբանության տարբեր մասերը ամփոփելու համար: Այս պրակտիկան ոչ միայն օգնում է կոդի կազմակերպմանը, այլ նաև օգնում է ձեր հավելվածի տարբեր մասերում բազմակի օգտագործմանը՝ առանց ավելորդության:</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հետևողական օրինաչափություններ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> հետևեք JavaScript-ի հաստատված օրինաչափություններին և ստանդարտներին: Անհրաժեշտության դեպքում օգտագործեք շրջանակներ և գրադարաններ, որոնք կարող են օգնել կիրառել կոդավորման կառուցվածքային եղանակ և նվազեցնել գրելու համար անհրաժեշտ կոդերի քանակը:</font></font></p></li>
+</ul>
+<h4 id="commentinganddocumentation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մեկնաբանություն և փաստաթղթավորում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մեկնաբանությունները և փաստաթղթերը կարևոր դեր են խաղում ձեր ծածկագիրը հասկանալի դարձնելու այլոց և ձեր ապագա անձի համար: Հիմնական պրակտիկաները ներառում են.</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իմաստալից մեկնաբանություններ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Մեկնաբանությունները պետք է բացատրեն, թե ինչու են որոշ որոշումներ կայացվել կամ պարզաբանեն կոդի բարդ մասերը: Խուսափեք ավելորդ մեկնաբանություններից, որոնք պարզապես նկարագրում են, թե ինչ է անում կոդը, քանի որ լավ կոդը պետք է ինքնաբացատրելի լինի այդ առումով:</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JSDoc-ի օգտագործումը.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ավելի մեծ նախագծերի համար օգտագործեք JSDoc՝ JavaScript-ի համար հանրաճանաչ փաստաթղթային շարահյուսություն: JSDoc մեկնաբանությունները կարող են օգնել ավտոմատ կերպով ստեղծել ձեր կոդի համար HTML փաստաթղթերի էջեր, և շատ IDE-ներ օգտագործում են այս մեկնաբանությունները՝ տրամադրելու համատեքստային ակնարկներ և ավտոմատ լրացման հնարավորություններ:</font></font></p></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-comment">/**
+   * Calculates the area of a rectangle.
+   * <span class="hljs-doctag">@param</span> {<span class="hljs-type">number</span>} <span class="hljs-variable">width</span> - The width of the rectangle.
+   * <span class="hljs-doctag">@param</span> {<span class="hljs-type">number</span>} <span class="hljs-variable">height</span> - The height of the rectangle.
+   * <span class="hljs-doctag">@returns</span> {<span class="hljs-type">number</span>} The area of the rectangle.
+   */</span>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">calculateArea</span>(<span class="hljs-params">width, height</span>) {
+      <span class="hljs-keyword">return</span> width * height;<font></font>
+  }<font></font>
+</code></pre>
+<h4 id="namingconventions"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Անվանման կոնվենցիաներ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Անվանման արդյունավետ կոնվենցիաները մեծացնում են ձեր կոդի ընթեռնելիությունը և պահպանելիությունը.</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Փոփոխականներ և գործառույթներ (camelCase).</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Սկսեք փոքրատառով և օգտագործեք մեծատառեր՝ առանց բացատների նոր բառեր նշելու համար: Օրինակ:</font></font><code>recordUserActivity</code></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դասեր (PascalCase).</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Յուրաքանչյուր նոր բառ սկսեք մեծատառով: Օրինակ:</font></font><code>UserProfile</code></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մշտականներ (ՎԵՐԻՆ </font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օձի</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> պատյան).</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Օգտագործեք մեծատառ տառեր՝ բառերը բաժանող ընդգծումներով: Օրինակ:</font></font><code>MAX_USERS</code></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նկարագրական անուններ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ընտրեք անուններ, որոնք արտացոլում են փոփոխականի կամ ֆունկցիայի նպատակը: Խուսափեք օգտագործել անորոշ անուններ, ինչպիսիք են </font></font><code>data</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կամ </font></font><code>info</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, փոխարենը ընտրեք անուններ, որոնք նկարագրում են, թե ինչին են վերաբերում տվյալները կամ գործառույթը:</font></font></p></li>
+</ul>
+<h4 id="writingcleancode"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մաքուր կոդ գրելը</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մաքուր կոդը հիմնարար է առողջ կոդերի բազան պահպանելու համար, հատկապես այն դինամիկ լեզուներում, ինչպիսին է JavaScript-ը.</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Միայնակ պատասխանատվություն.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> յուրաքանչյուր գործառույթ պետք է լավ կատարի մեկ բան: Սա գործառույթն ավելի ամուր է դարձնում, ավելի հեշտ է փորձարկել և ավելի հեշտ կարդալ:</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Խուսափեք գլոբալ փոփոխականներից.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> նվազագույնի հասցրեք գլոբալ փոփոխականների օգտագործումը: Սա նվազեցնում է կախվածությունները և պոտենցիալ հակամարտությունները համաշխարհային մասշտաբով: Փոփոխականները ամփոփելու համար օգտագործեք փակիչներ, մոդուլներ կամ ES6 դասեր:</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նվազագույնի հասցնել Nesting.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Խորը տեղադրված ծածկագիրը (նեղման շատ մակարդակներ) կարող է դժվարացնել կոդը կարդալը և պահպանելը: Փորձեք հարթեցնել կառուցվածքները՝ բարդ ֆունկցիաները բաժանելով ավելի պարզերի:</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սխալների կառավարում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> խելամտորեն օգտագործեք «փորձելու բռնել» բլոկները և նշանակալից սխալներ գցեք: Մտածեք օգտագործել Promises կամ async/wait՝ ասինխրոն սխալները կարգավորելու համար:</font></font></p></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchData</span>(<span class="hljs-params">url</span>) {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(url);
+        <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">'Network response was not ok'</span>);<font></font>
+        }<font></font>
+        <span class="hljs-keyword">return</span> response.<span class="hljs-title function_">json</span>();<font></font>
+    } <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Could not fetch data:'</span>, error);<font></font>
+    }<font></font>
+}<font></font>
+</code></pre>
+<h4 id="conclusion"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Եզրակացություն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JavaScript-ում այս լավագույն փորձին հավատարիմ մնալը ձեր կոդը կդարձնի ավելի արդյունավետ, հասկանալի և պահպանելի: Շատ կարևոր է թարմացված մնալ JavaScript-ի մշակման վերջին ստանդարտներին և տեխնիկաներին, քանի որ լեզուն և նրա էկոհամակարգը մշտապես զարգանում են:</font></font></p>
+<h3 id="debuggingtechniquesinjavascript"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վրիպազերծման տեխնիկա JavaScript-ում</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վրիպազերծումը ծրագրային ապահովման մշակման կարևոր հմտություն է, որը ծրագրավորողներին հնարավորություն է տալիս բացահայտել և լուծել իրենց կոդում առկա խնդիրները: Վրիպազերծման արդյունավետ մեթոդները կարող են զգալի ժամանակ և ջանք խնայել կոդի առողջությունն ու ֆունկցիոնալությունը պահպանելու համար:</font></font></p>
+<h4 id="usingconsolemethods"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վահանակի մեթոդների օգտագործումը</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օբյեկտը </font></font><code>console</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">տրամադրում է մի քանի մեթոդներ, որոնք կարող են օգնել զննարկիչի կոնսոլում տեղեկատվություն մուտքագրելու հարցում, որն անգնահատելի է վրիպազերծման և ընդհանուր տեղեկատվության ելքի համար:</font></font></p>
+<ul>
+<li><strong><code>console.log()</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սա կոդի կատարման վիճակի մասին ընդհանուր տեղեկատվության գրանցման ամենահաճախ օգտագործվող մեթոդն է: Այն օգտակար է փոփոխական արժեքներ կամ հաղորդագրություններ դուրս բերելու համար, որոնք ցույց են տալիս ծածկագրի հոսքը:</font></font></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Hello, world!'</span>);
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'User data:'</span>, userData);
+</code></pre>
+<ul>
+<li><strong><code>console.error()</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործվում է կոդի սխալների կամ խնդիրների մասին հաղորդելու համար, այս մեթոդը վահանակում կարմիր գույնով հաղորդագրություններ է թողարկում՝ դրանք առանձնացնելով:</font></font></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Error fetching data from server.'</span>);
+</code></pre>
+<ul>
+<li><strong><code>console.warn()</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Արտադրում է նախազգուշական հաղորդագրություններ վահանակ: Դրանք սովորաբար ընդգծված են դեղինով, ինչը օգտակար է ուշադրություն հրավիրելու ոչ կարևոր խնդիրների վրա, որոնց մասին պետք է տեղյակ լինեն մշակողները:</font></font></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(<span class="hljs-string">'Deprecated function called. Consider upgrading to the new API.'</span>);
+</code></pre>
+<ul>
+<li><strong><code>console.info()</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տրամադրում է տեղեկատվական հաղորդագրություններ, որոնք տեսողականորեն տարբերվում են սովորական </font></font><code>log</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հաղորդագրություններից: Օգտակար է ոչ այնքան կարևոր հաղորդագրությունների համար, որոնք դեռ պետք է առանձնացվեն ընդհանուր վրիպազերծման արդյունքներից:</font></font></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">info</span>(<span class="hljs-string">'Processing completed with 0 errors.'</span>);
+</code></pre>
+<h4 id="breakpointsandthedebuggerstatement"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ընդմիջման կետերը և վրիպազերծիչի հայտարարությունը</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ընդմիջման կետերը վրիպազերծման կարևոր գործիք են: Նրանք թույլ են տալիս ծրագրավորողներին դադարեցնել կոդի կատարումը կոնկրետ կետերում և ուսումնասիրել փոփոխականների արժեքները այդ պահերին:</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործելով Breakpoints մշակողների գործիքներում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . ժամանակակից բրաուզերները, ինչպիսիք են Chrome-ը, Firefox-ը և Edge-ը, ներառում են զարգացման գործիքներ՝ վրիպազերծման լայն հնարավորություններով: Դուք կարող եք սահմանել ընդմիջման կետերը անմիջապես մշակողի գործիքների սկզբնական կոդի վահանակում: Պարզապես սեղմեք այն տողի համարի վրա, որտեղ ցանկանում եք, որ կատարումը դադարեցվի:</font></font></p></li>
+<li><p><strong><code>debugger;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հայտարարություն</font></font></strong><font style="vertical-align: inherit;"></font><code>debugger;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Ձեր JavaScript կոդում հայտարարություն </font><font style="vertical-align: inherit;">ավելացնելը համարժեք է ընդմիջման կետի սահմանմանը: </font><font style="vertical-align: inherit;">Երբ զննարկիչը կատարում է այս հայտարարությունը, այն ավտոմատ կերպով կդադարեցվի, եթե մշակողի գործիքները բաց լինեն:</font></font></p></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-keyword">function</span> <span class="hljs-title function_">complexCalculation</span>(<span class="hljs-params">input</span>) {
+      <span class="hljs-keyword">debugger</span>;  <span class="hljs-comment">// Execution will pause here when DevTools is open</span>
+      <span class="hljs-keyword">let</span> result = input * <span class="hljs-number">10</span>;  <span class="hljs-comment">// Example calculation</span>
+      <span class="hljs-keyword">return</span> result;<font></font>
+  }<font></font>
+</code></pre>
+<h4 id="stepbystepexecution"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Քայլ առ քայլ կատարում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կոդի միջով անցնելը բրաուզերի մշակման գործիքների մեկ այլ հզոր հատկանիշ է: Այն թույլ է տալիս շարժվել ձեր JavaScript կոդի միջով մեկ-մեկ հայտարարությամբ՝ դիտարկելով, թե ինչպես են կոդի փոփոխություններն ազդում ծրագրի վիճակի վրա:</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Քայլ ավարտ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Կատարում է կոդի հաջորդ տողը, բայց չի մտնում այդ գծի որևէ ֆունկցիայի կանչի մեջ:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Քայլ մուտք</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . գործարկում է կոդի հաջորդ տողը և սուզվում է կանչվող ցանկացած ֆունկցիայի մեջ:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Քայլ դուրս</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Շարունակում է գործարկել կոդը և դուրս է գալիս ընթացիկ ֆունկցիայից, երբ այն վերադառնում է:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Call Stack</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Թույլ է տալիս տեսնել կույտի հետքը, որը տանում է մինչև կատարման ընթացիկ կետը:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Watch Variables</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Դուք կարող եք նշել այն փոփոխականները, որոնք ցանկանում եք դիտել: Այս փոփոխականների արժեքները ցուցադրվում են մշակողի գործիքներում, երբ դրանք փոխվում են:</font></font></li>
+</ul>
+<h4 id="practicalexample"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական օրինակ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Եկեք ցույց տանք այս կարգաբերման գործիքների օգտագործումը գործնական վարժության միջոցով.</font></font></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ավելացնել կոնսոլի արդյունքներ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . ինտեգրել տարբեր </font></font><code>console</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">մեթոդներ մի ֆունկցիայի մեջ, որը մշակում է օգտվողի տվյալները:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տեղադրեք ընդմիջման կետեր</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . սահմանեք ընդմիջման կետեր գործառույթի կատարման կրիտիկական փուլերում, օրինակ՝ տվյալների առբերումից հետո կամ բարդ հաշվարկից առաջ:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործեք վրիպազերծիչ և քայլ առ քայլ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Տեղադրեք </font></font><code>debugger;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հայտարարություն և օգտագործեք քայլ առ քայլ կատարումը ֆունկցիայի վարքագիծը հետևելու համար:</font></font></li>
+</ol>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">function</span> <span class="hljs-title function_">processData</span>(<span class="hljs-params">data</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Received data:'</span>, data);
+    <span class="hljs-keyword">debugger</span>;
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">let</span> result = data.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item.<span class="hljs-property">value</span> * <span class="hljs-number">10</span>);
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">info</span>(<span class="hljs-string">'Processing complete.'</span>);
+        <span class="hljs-keyword">return</span> result;<font></font>
+    } <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Processing failed:'</span>, error);<font></font>
+    }<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործելով այս տեխնիկան՝ ծրագրավորողները կարող են պատկերացում կազմել իրենց կոդի աշխատանքի մասին, բացահայտել տրամաբանական սխալները և ապահովել, որ իրենց հավելվածներն աշխատեն այնպես, ինչպես նախատեսված է:</font></font></p>
+<h3 id="errorhandlingwithtrycatchblocksinjavascript"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JavaScript-ում Try-Catch բլոկների հետ աշխատելիս սխալները</font></font></h3>
+<h4 id="introductiontoerrorhandling"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սխալների հետ կապված ներածություն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սխալների հետ աշխատելը ծրագրային ապահովման մշակման էական կողմն է, որը ներառում է սխալների կամ բացառությունների կանխատեսում, բռնում և լուծում, որոնք կարող են առաջանալ ծրագրի կատարման ընթացքում: Սխալների ճիշտ կառավարումն ապահովում է, որ նույնիսկ եթե սխալ առաջանա, ծրագիրը կարող է շարունակել գործել կամ խափանվել նրբագեղորեն՝ ապահովելով օգտվողի ավելի լավ փորձ և կանխելով տվյալների կորուստը կամ կոռուպցիան: JavaScript-ում կառուցվածքային սխալների կառավարումը կարող է զգալիորեն բարձրացնել վեբ հավելվածների կայունությունն ու հուսալիությունը:</font></font></p>
+<h4 id="usingtrycatchfinally"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործելով Try-Catch-Finally</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հայտարարությունը </font></font><code>try-catch-finally</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հզոր մեխանիզմ է տրամադրում բացառությունները բռնելու, դրանք պատշաճ կերպով մշակելու և մաքրման կոդը գործարկելու համար՝ անկախ փորձի բլոկի հաջողությունից կամ ձախողումից:</font></font></p>
+<ul>
+<li><p><strong><code>try</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բլոկ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Բլոկի ներսում տեղադրվում է կոդը, որը կարող է բացառություն գցել </font></font><code>try</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: Եթե &ZeroWidthSpace;&ZeroWidthSpace;բացառություն լինի, այս բլոկի մնացած կոդը կբացակայվի, և կառավարումը կտեղափոխվի բլոկ </font></font><code>catch</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></p></li>
+<li><p><strong><code>catch</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բլոկ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : Այս բլոկը կատարվում է, եթե բլոկում սխալ է տեղի ունենում </font></font><code>try</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: Նետված բացառությունը բռնվում է այստեղ, և այս բլոկը պարունակում է կոդ՝ սխալը կարգավորելու կամ գրանցելու համար:</font></font></p></li>
+<li><p><strong><code>finally</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Արգելափակում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Բլոկի ներսում ծածկագիրը </font></font><code>finally</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կկատարվի </font></font><code>try</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>catch</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բլոկներից հետո, բայց հայտարարությանը հաջորդող հայտարարություններից առաջ </font></font><code>try-catch-finally</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: Սա օգտագործվում է մաքրման գործողություններ կատարելու համար, ինչպիսիք են ֆայլերը փակելը կամ ռեսուրսները մաքրելը, անկախ նրանից, թե արդյոք սխալ է տեղի ունեցել:</font></font></p></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Try-Catch-Finally-ի օրինակ.</font></font></strong></p>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// Code that may throw an exception</span>
+    <span class="hljs-keyword">const</span> result = <span class="hljs-title function_">riskyOperation</span>();
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Result:'</span>, result);<font></font>
+} <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-comment">// Error handling logic</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Error occurred:'</span>, error);<font></font>
+} <span class="hljs-keyword">finally</span> {
+    <span class="hljs-comment">// Cleanup code</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Cleanup actions completed.'</span>);<font></font>
+}<font></font>
+</code></pre>
+<h4 id="bestpracticesforerrorhandling"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սխալների հետ աշխատելու լավագույն փորձը</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սխալների արդյունավետ կառավարումը դուրս է գալիս միայն </font></font><code>try-catch</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բլոկների օգտագործումից: Այն ենթադրում է համապարփակ ռազմավարություն՝ սխալները կանխելու, դրանք պատշաճ կերպով կարգավորելու, երբ դրանք տեղի են ունենում և ապահովելու, որ հավելվածը մնում է կայուն:</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վավերացնել մուտքերը</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . շատ սխալներ կարելի է կանխել՝ վավերացնելով մուտքերը նախքան դրանք օգտագործելը: Համոզվեք, որ մուտքերը համապատասխանում են ակնկալվող ձևաչափին, տեսակին և տիրույթին:</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործեք </font></font><code>finally</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">մաքրման համար</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Միշտ օգտագործեք </font></font><code>finally</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բլոկը՝ ռեսուրսներ ազատելու համար, ինչպիսիք են ֆայլերը կամ ցանցային կապերը փակելը, որոնք պետք է կատարվեն՝ անկախ նրանից՝ գործողությունը հաջողվում է, թե ձախողվում:</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Throw Custom Errors</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . JavaScript-ը թույլ է տալիս գցել ձեր սեփական սխալները՝ օգտագործելով հայտարարությունը </font></font><code>throw</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: Սա կարող է օգտակար լինել, երբ ցանկանում եք կիրառել բիզնեսի հատուկ կանոններ կամ կարիք ունեք ավելի շատ նկարագրական սխալի հաղորդագրությունների:</font></font></p></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-keyword">function</span> <span class="hljs-title function_">processUser</span>(<span class="hljs-params">user</span>) {
+      <span class="hljs-keyword">if</span> (!user.<span class="hljs-property">id</span>) {
+          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">'User must have an id.'</span>);<font></font>
+      }<font></font>
+      <span class="hljs-comment">// Process the user</span><font></font>
+  }<font></font>
+</code></pre>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սխալների տարածում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . այն ֆունկցիաներում, որոնք կատարում են կարևորագույն գործողություններ, հաճախ ավելի լավ է թույլ տալ, որ բացառությունները տարածվեն ավելի բարձր մակարդակներում, որտեղ դրանք կարող են գրանցվել կամ մշակվել միասնական ձևով, այլ ոչ թե դրանք լուռ կուլ տալ ցածր մակարդակներում:</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գրանցման սխալներ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . օգտագործեք գրանցման ռազմավարություններ՝ սխալներն ու բացառությունները գրանցելու համար: Սա կարող է օգնել ախտորոշել խնդիրները դրանց առաջանալուց հետո, հատկապես արտադրական միջավայրում:</font></font></p></li>
+</ul>
+<h4 id="conclusion-1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Եզրակացություն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JavaScript-ում սխալների արդյունավետ մշակման ըմբռնումը և ներդրումը կարևոր է հուսալի և օգտագործողի համար հարմար վեբ հավելվածներ ստեղծելու համար: Արդյունավետ </font><font style="vertical-align: inherit;">օգտագործելով </font></font><code>try-catch-finally</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բլոկները և հետևելով սխալների կանխարգելման և կառավարման լավագույն փորձին, ծրագրավորողները կարող են ապահովել, որ իրենց հավելվածները կարող են նրբագեղորեն կարգավորել անսպասելի իրավիճակները, պահպանել գործառնական կայունությունը և ապահովել օգտատիրոջ սահուն փորձ:</font></font></p>
+<h3 id="practicalexercisesanddebuggingsession"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական վարժություններ և վրիպազերծման նիստ</font></font></h3>
+<h4 id="handsondebuggingexercise"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ձեռքի վրիպազերծման վարժություն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վրիպազերծումը կարևոր հմտություն է ցանկացած մշակողի համար, և իրական կոդով զբաղվելը, որը պարունակում է տարբեր սխալներ, հիանալի միջոց է այս հմտությունը կատարելագործելու համար: Այս վարժությունում ուսանողներին կտրվի JavaScript կոդի մի հատված, որը ներառում է տրամաբանական սխալների, շարահյուսական սխալների և կատարողականի հետ կապված խնդիրներ: Նպատակն է բացահայտել և ուղղել յուրաքանչյուր խնդիր՝ օգտագործելով նախկինում քննարկված վրիպազերծման տեխնիկան:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սխալներով կոդի նմուշ.</font></font></strong></p>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">function</span> <span class="hljs-title function_">calculateTotal</span>(<span class="hljs-params">items</span>) {
+    <span class="hljs-keyword">let</span> total = <span class="hljs-number">0</span>; 
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt;= items.<span class="hljs-property">length</span>; i++) {<font></font>
+        total += items[i].<span class="hljs-property">price</span> * item[i].<span class="hljs-property">quantity</span>;<font></font>
+    }<font></font>
+    <span class="hljs-keyword">return</span> total;<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">const</span> cart = [<font></font>
+    { <span class="hljs-attr">price</span>: <span class="hljs-number">15.99</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">2</span> },<font></font>
+    { <span class="hljs-attr">price</span>: <span class="hljs-number">29.99</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">1</span> },<font></font>
+    { <span class="hljs-attr">price</span>: <span class="hljs-number">4.99</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">4</span> }<font></font>
+];<font></font>
+<font></font>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Total cart value:'</span>, <span class="hljs-title function_">calculateTotal</span>(cart));
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բացահայտելու և շտկելու սխալները.</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Շարահյուսական սխալ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font></font><code>item[i]</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">պետք է լինի </font></font><code>items[i]</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ցիկլում:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տրամաբանական սխալ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . հանգույցն օգտագործում է </font></font><code>i &lt;= items.length</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, ինչը հանգեցնում է չսահմանված տարրի մուտքի: Դա պետք է լինի </font></font><code>i &lt; items.length</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կատարման խնդիր</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Ներկայումս այս հատվածում կատարողականության էական խնդիր չկա, սակայն ուսանողներին կարող են խրախուսել մտածել հնարավոր խնդիրների մասին, եթե զամբյուղի զանգվածը շատ մեծ է կամ եթե ֆունկցիան հաճախակի է կանչվում:</font></font></li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վրիպազերծման քայլեր</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<ol>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործեք զննարկիչի մշակողի գործիքները՝ վահանակը ստուգելու համար շարահյուսական անմիջական սխալների համար:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործառույթում սահմանեք ընդմիջման կետեր ՝ </font><font style="vertical-align: inherit;">յուրաքանչյուր կրկնության </font></font><code>calculateTotal</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">արժեքը </font></font><code>total</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և դրա ընթացքում ստուգելու համար:</font></font><code>items[i]</code><font style="vertical-align: inherit;"></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դիտեք և ուղղեք, թե ինչպես է օղակը կրկնում և մուտք գործում զանգվածի տարրերին:</font></font></li>
+</ol>
+<h4 id="errorhandlingimplementation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սխալների մշակման իրականացում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սխալների հետ վարվելը, հատկապես ցանցային հարցումների հետ գործ ունենալիս (ինչպես API զանգերը), կարևոր է հուսալի հավելվածներ ստեղծելու համար: Ուսանողները կբարելավեն JavaScript-ի տվյալ հատվածը, որը փոխազդում է վեբ API-ի հետ՝ ավելացնելով սխալների համապարփակ մշակում:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տրամադրված կոդի հատված</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> (առանց սխալների մշակման).</font></font></p>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchData</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-title function_">fetch</span>(<span class="hljs-string">'https://api.example.com/data'</span>)<font></font>
+        .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.<span class="hljs-title function_">json</span>())<font></font>
+        .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Fetched data:'</span>, data))<font></font>
+        .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Error fetching data:'</span>, error));<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-title function_">fetchData</span>();
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Առաջադրանք</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<ol>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ավելացրեք սխալների մշակում՝ սերվերից ստացվող վատ պատասխանները կառավարելու համար (օրինակ՝ ոչ 200 կարգավիճակի կոդեր):</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Արդյունավետ օգտագործեք </font></font><code>try-catch</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բլոկները, հատկապես լուծեք JSON-ի վերլուծման սխալները, որոնք կարող են չնկատվել </font></font><code>fetch</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">«-ի կողմից» </font></font><code>catch</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ընդլայնված կոդ՝ սխալների մշակմամբ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchData</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">'https://api.example.com/data'</span>);
+        <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`HTTP error! Status: <span class="hljs-subst">${response.status}</span>`</span>);<font></font>
+        }<font></font>
+        <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Fetched data:'</span>, data);<font></font>
+    } <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Error during fetching or processing data:'</span>, error);<font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-title function_">fetchData</span>();
+</code></pre>
+<h4 id="conclusion-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Եզրակացություն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժությունները ծառայում են բազմաթիվ ուսումնական նպատակների.</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վրիպազերծում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Ուսանողները կիրառում են վրիպազերծման իրենց հմտությունները՝ բացահայտելու և շտկելու ինչպես ակնհայտ, այնպես էլ նուրբ սխալները տվյալ կոդի հատվածում:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սխալների կառավարում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . API-ի փոխազդեցության սցենարում սխալների արդյունավետ կառավարում իրականացնելով, ուսանողները սովորում են կանխատեսել և կառավարել պոտենցիալ գործարկման ժամանակի սխալները՝ բարձրացնելով իրենց հավելվածների հուսալիությունը և օգտատիրոջ հարմարավետությունը:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նման գործնական պարապմունքներն անգնահատելի են տեսական գիտելիքներից իրական աշխարհի կիրառման անցնելու համար՝ նախապատրաստելով ուսանողներին զարգացման բնորոշ առաջադրանքներին, որոնց կարող են հանդիպել իրենց կարիերայում:    </font></font></p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div id="html_ru" class="html" style="display:none"><h3 id="javascriptbestpractices"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Лучшие практики JavaScript</font></font></h3>
+<h4 id="codeorganization"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Организация кода</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Логическая организация кода имеет основополагающее значение для создания удобных в обслуживании и масштабируемых приложений. Хорошо организованный код помогает не только на начальном этапе разработки, но и значительно облегчает будущие модификации и усилия по отладке. Вот некоторые ключевые аспекты, которые следует учитывать:</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Группировка связанных функций.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Функции, выполняющие связанные задачи, должны быть сгруппированы либо в одном разделе файла, либо в одном модуле. Такой подход облегчает понимание того, как различные части вашего приложения связаны друг с другом.</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Модуляция кода:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> используйте модули или отдельные файлы для инкапсуляции различных частей логики вашего приложения. Эта практика не только помогает в организации кода, но и способствует повторному использованию в различных частях вашего приложения без избыточности.</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Согласованные шаблоны:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> следуйте установленным шаблонам и стандартам JavaScript. При необходимости используйте платформы и библиотеки, которые помогут обеспечить структурированный способ кодирования и сократить объем кода, который вам нужно написать.</font></font></p></li>
+</ul>
+<h4 id="commentinganddocumentation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Комментирование и документация</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Комментарии и документация играют решающую роль в том, чтобы сделать ваш код понятным для других и для вас самих в будущем. Ключевые практики включают в себя:</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Значимые комментарии.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Комментарии должны объяснять, почему были приняты определенные решения, или разъяснять сложные части кода. Избегайте лишних комментариев, которые просто описывают, что делает код, поскольку хороший код в этом отношении не требует пояснений.</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Использование JSDoc.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Для более крупных проектов рассмотрите возможность использования JSDoc — популярного синтаксиса документации для JavaScript. Комментарии JSDoc могут помочь в автоматическом создании страниц HTML-документации для вашего кода, и многие IDE используют эти комментарии для предоставления контекстных подсказок и функций автозаполнения.</font></font></p></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-comment">/**
+   * Calculates the area of a rectangle.
+   * <span class="hljs-doctag">@param</span> {<span class="hljs-type">number</span>} <span class="hljs-variable">width</span> - The width of the rectangle.
+   * <span class="hljs-doctag">@param</span> {<span class="hljs-type">number</span>} <span class="hljs-variable">height</span> - The height of the rectangle.
+   * <span class="hljs-doctag">@returns</span> {<span class="hljs-type">number</span>} The area of the rectangle.
+   */</span>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">calculateArea</span>(<span class="hljs-params">width, height</span>) {
+      <span class="hljs-keyword">return</span> width * height;<font></font>
+  }<font></font>
+</code></pre>
+<h4 id="namingconventions"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Соглашения об именах</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эффективные соглашения об именах повышают читабельность и удобство сопровождения вашего кода:</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Переменные и функции (camelCase).</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Начинайте со строчной буквы и используйте прописные буквы для обозначения новых слов без пробелов. Пример:</font></font><code>recordUserActivity</code></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Классы (PascalCase):</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> каждое новое слово начинается с заглавной буквы. Пример:</font></font><code>UserProfile</code></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Константы (ВЕРХНИЙ </font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">РЕГИСТР</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ЗМЕИ):</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> используйте прописные буквы с подчеркиванием, разделяющим слова. Пример:</font></font><code>MAX_USERS</code></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Описательные имена:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> выбирайте имена, отражающие назначение переменной или функции. Избегайте использования расплывчатых имен, таких как </font></font><code>data</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">или, </font></font><code>info</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и вместо этого выбирайте имена, описывающие, к чему относятся данные или функция.</font></font></p></li>
+</ul>
+<h4 id="writingcleancode"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Написание чистого кода</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Чистый код имеет основополагающее значение для поддержания работоспособности кодовой базы, особенно в динамических языках, таких как JavaScript:</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Единая ответственность:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> каждая функция должна хорошо выполнять одну задачу. Это делает функцию более надежной, ее легче тестировать и читать.</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Избегайте глобальных переменных:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> сведите к минимуму использование глобальных переменных. Это уменьшает зависимости и потенциальные конфликты в глобальном масштабе. Используйте замыкания, модули или классы ES6 для инкапсуляции переменных.</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Минимизируйте вложенность.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Глубоко вложенный код (много уровней отступов) может затруднить чтение и поддержку кода. Попробуйте сделать структуру более плоской, разбивая сложные функции на более простые.</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обработка ошибок:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> разумно используйте блоки try-catch и выдавайте значимые ошибки. Рассмотрите возможность использования Promises или async/await для обработки асинхронных ошибок.</font></font></p></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchData</span>(<span class="hljs-params">url</span>) {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(url);
+        <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">'Network response was not ok'</span>);<font></font>
+        }<font></font>
+        <span class="hljs-keyword">return</span> response.<span class="hljs-title function_">json</span>();<font></font>
+    } <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Could not fetch data:'</span>, error);<font></font>
+    }<font></font>
+}<font></font>
+</code></pre>
+<h4 id="conclusion"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Заключение</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Следование этим рекомендациям в JavaScript сделает ваш код более эффективным, понятным и удобным в сопровождении. Крайне важно быть в курсе новейших стандартов и методов разработки JavaScript, поскольку язык и его экосистема постоянно развиваются.</font></font></p>
+<h3 id="debuggingtechniquesinjavascript"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Методы отладки в JavaScript</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Отладка — важнейший навык в разработке программного обеспечения, позволяющий разработчикам выявлять и устранять проблемы в своем коде. Эффективные методы отладки могут сэкономить значительное время и усилия на поддержании работоспособности и функциональности кода.</font></font></p>
+<h4 id="usingconsolemethods"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Использование методов консоли</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Объект </font></font><code>console</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">предоставляет несколько методов, которые могут помочь с записью информации в консоль браузера, что неоценимо для отладки и вывода общей информации.</font></font></p>
+<ul>
+<li><strong><code>console.log()</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: это наиболее часто используемый метод регистрации общей информации о состоянии выполнения кода. Это полезно для вывода значений переменных или сообщений, указывающих ход выполнения кода.</font></font></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Hello, world!'</span>);
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'User data:'</span>, userData);
+</code></pre>
+<ul>
+<li><strong><code>console.error()</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: используется для сообщения об ошибках или проблемах в коде. Этот метод выводит сообщения в консоли красным цветом, что выделяет их.</font></font></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Error fetching data from server.'</span>);
+</code></pre>
+<ul>
+<li><strong><code>console.warn()</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: выводит предупреждающие сообщения на консоль. Обычно они выделяются желтым цветом, что полезно для привлечения внимания к некритическим проблемам, о которых следует знать разработчикам.</font></font></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(<span class="hljs-string">'Deprecated function called. Consider upgrading to the new API.'</span>);
+</code></pre>
+<ul>
+<li><strong><code>console.info()</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: предоставляет информационные сообщения, которые визуально отличаются от обычных </font></font><code>log</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">сообщений. Полезно для менее важных сообщений, которые все же необходимо отделить от общих результатов отладки.</font></font></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">info</span>(<span class="hljs-string">'Processing completed with 0 errors.'</span>);
+</code></pre>
+<h4 id="breakpointsandthedebuggerstatement"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Точки останова и оператор отладчика</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Точки останова — важный инструмент отладки. Они позволяют разработчикам приостанавливать выполнение кода в определенных точках и проверять значения переменных в эти моменты.</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Использование точек останова в инструментах разработчика</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Современные браузеры, такие как Chrome, Firefox и Edge, включают в себя инструменты разработки с обширными возможностями отладки. Вы можете установить точки останова непосредственно на панели исходного кода инструментов разработчика. Просто нажмите на номер строки, где вы хотите приостановить выполнение.</font></font></p></li>
+<li><p><strong><code>debugger;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Утверждение</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Добавление </font></font><code>debugger;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">оператора в ваш код JavaScript эквивалентно установке точки останова. Когда браузер выполняет этот оператор, он автоматически приостанавливается, если инструменты разработчика открыты.</font></font></p></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-keyword">function</span> <span class="hljs-title function_">complexCalculation</span>(<span class="hljs-params">input</span>) {
+      <span class="hljs-keyword">debugger</span>;  <span class="hljs-comment">// Execution will pause here when DevTools is open</span>
+      <span class="hljs-keyword">let</span> result = input * <span class="hljs-number">10</span>;  <span class="hljs-comment">// Example calculation</span>
+      <span class="hljs-keyword">return</span> result;<font></font>
+  }<font></font>
+</code></pre>
+<h4 id="stepbystepexecution"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пошаговое выполнение</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пошаговое выполнение кода — еще одна мощная функция инструментов разработки браузеров. Он позволяет вам перемещаться по коду JavaScript по одному оператору за раз, наблюдая, как изменения в коде влияют на состояние программы.</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Step Over</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : выполняет следующую строку кода, но не погружается в вызовы функций в этой строке.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Step Into</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : выполняет следующую строку кода и погружается в любую вызываемую функцию.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Step Out</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : продолжает выполнение кода и выходит из текущей функции при ее возврате.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Стек вызовов</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : позволяет увидеть трассировку стека, которая привела к текущей точке выполнения.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Наблюдать за переменными</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : вы можете указать переменные, которые хотите отслеживать. Значения этих переменных отображаются в инструментах разработчика по мере их изменения.</font></font></li>
+</ul>
+<h4 id="practicalexample"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практический пример</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Давайте продемонстрируем использование этих инструментов отладки на практическом примере:</font></font></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Добавить выходные данные консоли</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Интегрируйте различные </font></font><code>console</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">методы в функцию, обрабатывающую пользовательские данные.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Вставить точки останова</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : установите точки останова на критических этапах выполнения функции, например, после получения данных или перед сложным вычислением.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Используйте отладчик и пошаговое выполнение</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : вставьте </font></font><code>debugger;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">оператор и используйте пошаговое выполнение, чтобы отслеживать поведение функции.</font></font></li>
+</ol>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">function</span> <span class="hljs-title function_">processData</span>(<span class="hljs-params">data</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Received data:'</span>, data);
+    <span class="hljs-keyword">debugger</span>;
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">let</span> result = data.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item.<span class="hljs-property">value</span> * <span class="hljs-number">10</span>);
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">info</span>(<span class="hljs-string">'Processing complete.'</span>);
+        <span class="hljs-keyword">return</span> result;<font></font>
+    } <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Processing failed:'</span>, error);<font></font>
+    }<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Используя эти методы, разработчики могут получить представление о работе своего кода, выявить логические ошибки и обеспечить правильную работу своих приложений.</font></font></p>
+<h3 id="errorhandlingwithtrycatchblocksinjavascript"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обработка ошибок с помощью блоков Try-Catch в JavaScript</font></font></h3>
+<h4 id="introductiontoerrorhandling"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Введение в обработку ошибок</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обработка ошибок — это важный аспект разработки программного обеспечения, который включает в себя прогнозирование, обнаружение и разрешение ошибок или исключений, которые могут возникнуть во время выполнения программы. Правильная обработка ошибок гарантирует, что даже в случае возникновения ошибки программа сможет продолжать работать или корректно выйти из строя, обеспечивая лучшее взаимодействие с пользователем и предотвращая потерю или повреждение данных. В JavaScript структурированная обработка ошибок может значительно повысить устойчивость и надежность веб-приложений.</font></font></p>
+<h4 id="usingtrycatchfinally"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Использование Try-Catch-Finally</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Этот </font></font><code>try-catch-finally</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">оператор предоставляет мощный механизм для перехвата исключений, их соответствующей обработки и выполнения кода очистки независимо от успеха или неудачи блока try.</font></font></p>
+<ul>
+<li><p><strong><code>try</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Блок</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : код, который может вызвать исключение, размещается внутри </font></font><code>try</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">блока. Если возникнет исключение, остальная часть кода в этом блоке будет пропущена и управление перейдет в этот </font></font><code>catch</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">блок.</font></font></p></li>
+<li><p><strong><code>catch</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Блок</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : Этот блок выполняется, если в </font></font><code>try</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">блоке возникает ошибка. Здесь перехватывается выброшенное исключение, и этот блок содержит код для обработки или регистрации ошибки.</font></font></p></li>
+<li><p><strong><code>finally</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Блок</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : код внутри </font></font><code>finally</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">блока будет выполняться после блоков </font></font><code>try</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>catch</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, но до операторов, следующих за </font></font><code>try-catch-finally</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">оператором. Это используется для выполнения действий по очистке, таких как закрытие файлов или очистка ресурсов, независимо от того, произошла ли ошибка.</font></font></p></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример Try-Catch-Finally:</font></font></strong></p>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// Code that may throw an exception</span>
+    <span class="hljs-keyword">const</span> result = <span class="hljs-title function_">riskyOperation</span>();
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Result:'</span>, result);<font></font>
+} <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-comment">// Error handling logic</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Error occurred:'</span>, error);<font></font>
+} <span class="hljs-keyword">finally</span> {
+    <span class="hljs-comment">// Cleanup code</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Cleanup actions completed.'</span>);<font></font>
+}<font></font>
+</code></pre>
+<h4 id="bestpracticesforerrorhandling"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Лучшие практики обработки ошибок</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эффективная обработка ошибок выходит за рамки простого использования </font></font><code>try-catch</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">блоков. Он включает в себя комплексную стратегию предотвращения ошибок, их надлежащего реагирования в случае их возникновения и обеспечения стабильности приложения.</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Проверка входных данных</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Многие ошибки можно предотвратить, проверяя входные данные перед их использованием. Убедитесь, что входные данные соответствуют ожидаемому формату, типу и диапазону.</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Использование </font></font><code>finally</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">для очистки</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : всегда используйте </font></font><code>finally</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">блокировку для освобождения ресурсов, например, для закрытия файлов или сетевых подключений, что необходимо выполнять независимо от того, была ли операция успешной или неудачной.</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Выдавать пользовательские ошибки</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : JavaScript позволяет вам генерировать собственные ошибки с помощью </font></font><code>throw</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">оператора. Это может быть полезно, если вы хотите обеспечить соблюдение определенных бизнес-правил или вам нужны более описательные сообщения об ошибках.</font></font></p></li>
+</ul>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes">  <span class="hljs-keyword">function</span> <span class="hljs-title function_">processUser</span>(<span class="hljs-params">user</span>) {
+      <span class="hljs-keyword">if</span> (!user.<span class="hljs-property">id</span>) {
+          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">'User must have an id.'</span>);<font></font>
+      }<font></font>
+      <span class="hljs-comment">// Process the user</span><font></font>
+  }<font></font>
+</code></pre>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Распространение ошибок</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . В функциях, которые обрабатывают критические операции, часто лучше позволить исключениям распространяться на более высокие уровни, где их можно протоколировать или обрабатывать унифицированным способом, а не молча поглощать их на более низких уровнях.</font></font></p></li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Регистрация ошибок</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : используйте стратегии регистрации для записи ошибок и исключений. Это может помочь в диагностике проблем после их возникновения, особенно в производственных средах.</font></font></p></li>
+</ul>
+<h4 id="conclusion-1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Заключение</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Понимание и реализация надежной обработки ошибок в JavaScript имеет решающее значение для создания надежных и удобных веб-приложений. Эффективно </font><font style="vertical-align: inherit;">используя </font></font><code>try-catch-finally</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">блоки и придерживаясь лучших практик в предотвращении и управлении ошибками, разработчики могут гарантировать, что их приложения смогут корректно обрабатывать непредвиденные ситуации, поддерживать стабильность работы и обеспечивать удобство работы с пользователем.</font></font></p>
+<h3 id="practicalexercisesanddebuggingsession"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практические упражнения и сеанс отладки</font></font></h3>
+<h4 id="handsondebuggingexercise"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практическое упражнение по отладке</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Отладка — важнейший навык для любого разработчика, и практика с реальным кодом, содержащим различные ошибки, — отличный способ отточить этот навык. В этом упражнении учащимся будет предоставлен фрагмент кода JavaScript, который содержит смесь логических и синтаксических ошибок, а также проблем с производительностью. Цель состоит в том, чтобы выявить и исправить каждую проблему, используя ранее обсуждавшиеся методы отладки.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример кода с ошибками:</font></font></strong></p>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">function</span> <span class="hljs-title function_">calculateTotal</span>(<span class="hljs-params">items</span>) {
+    <span class="hljs-keyword">let</span> total = <span class="hljs-number">0</span>; 
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt;= items.<span class="hljs-property">length</span>; i++) {<font></font>
+        total += items[i].<span class="hljs-property">price</span> * item[i].<span class="hljs-property">quantity</span>;<font></font>
+    }<font></font>
+    <span class="hljs-keyword">return</span> total;<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">const</span> cart = [<font></font>
+    { <span class="hljs-attr">price</span>: <span class="hljs-number">15.99</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">2</span> },<font></font>
+    { <span class="hljs-attr">price</span>: <span class="hljs-number">29.99</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">1</span> },<font></font>
+    { <span class="hljs-attr">price</span>: <span class="hljs-number">4.99</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">4</span> }<font></font>
+];<font></font>
+<font></font>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Total cart value:'</span>, <span class="hljs-title function_">calculateTotal</span>(cart));
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ошибки, которые необходимо выявить и исправить:</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Синтаксическая ошибка</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : </font></font><code>item[i]</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">должно быть </font></font><code>items[i]</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">в цикле.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Логическая ошибка</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : цикл использует </font></font><code>i &lt;= items.length</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, что приводит к доступу к неопределенному элементу. Должен быть </font></font><code>i &lt; items.length</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Проблема с производительностью</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . В настоящее время в этом фрагменте нет серьезных проблем с производительностью, но учащимся следует подумать о потенциальных проблемах, если массив корзины будет очень большим или если функция будет вызываться часто.</font></font></li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Шаги отладки</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ol>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Используйте инструменты разработчика браузера, чтобы проверить консоль на наличие синтаксических ошибок.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Установите точки останова в </font></font><code>calculateTotal</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">функции для проверки значения </font></font><code>total</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>items[i]</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">во время каждой итерации.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Наблюдайте и исправляйте, как цикл выполняет итерации и обращается к элементам массива.</font></font></li>
+</ol>
+<h4 id="errorhandlingimplementation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Реализация обработки ошибок</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обработка ошибок, особенно при работе с сетевыми запросами (например, вызовами API), имеет решающее значение для создания надежных приложений. Студенты улучшат конкретный фрагмент JavaScript, который взаимодействует с веб-API, добавив комплексную обработку ошибок.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Предоставленный фрагмент кода</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> (без обработки ошибок):</font></font></p>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchData</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-title function_">fetch</span>(<span class="hljs-string">'https://api.example.com/data'</span>)<font></font>
+        .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.<span class="hljs-title function_">json</span>())<font></font>
+        .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Fetched data:'</span>, data))<font></font>
+        .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Error fetching data:'</span>, error));<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-title function_">fetchData</span>();
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Задача</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ol>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Добавьте обработку ошибок для управления неверными ответами сервера (например, кодами состояния, отличными от 200).</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эффективно используйте </font></font><code>try-catch</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">блоки, особенно обрабатывая ошибки синтаксического анализа JSON, которые могут не быть </font></font><code>fetch</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">обнаружены </font></font><code>catch</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Расширенный код с обработкой ошибок</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<pre><code class="javascript language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchData</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">'https://api.example.com/data'</span>);
+        <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`HTTP error! Status: <span class="hljs-subst">${response.status}</span>`</span>);<font></font>
+        }<font></font>
+        <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Fetched data:'</span>, data);<font></font>
+    } <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Error during fetching or processing data:'</span>, error);<font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-title function_">fetchData</span>();
+</code></pre>
+<h4 id="conclusion-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Заключение</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эти упражнения служат нескольким целям обучения:</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Отладка</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : учащиеся применяют свои навыки отладки для выявления и исправления как очевидных, так и незаметных ошибок в заданном фрагменте кода.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обработка ошибок</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : реализуя надежную обработку ошибок в сценарии взаимодействия API, студенты учатся предвидеть потенциальные ошибки во время выполнения и управлять ими, повышая надежность и удобство использования своих приложений.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Такие практические занятия имеют неоценимое значение при переходе от теоретических знаний к практическому применению, готовя студентов к типичным задачам развития, с которыми они могут столкнуться в своей карьере.    </font></font></p>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js" integrity="sha512-LhccdVNGe2QMEfI3x4DVV3ckMRe36TfydKss6mJpdHjNFiV07dFpS2xzeZedptKZrwxfICJpez09iNioiSZ3hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+        <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/core.min.js"></script> -->
+        <!-- Load the language you need -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/languages/javascript.min.js"></script> -->
+        <script>
+			
+			var converter = new showdown.Converter();
+			text = document.getElementById('md').innerText;
+			html = converter.makeHtml(text);
+			//document.getElementById('html').innerHTML = html;
+			
+            function copyCode(index) {
+                const code = document.getElementById('code-block-' + index).innerText;
+                const copied = document.getElementById('copied-' + index);
+			
+                navigator.clipboard.writeText(code).then(() => {
+                    copied.innerText = 'Copied to clipboard!';
+                });
+
+                setTimeout(() => {
+                    copied.innerText = '';
+                }, 3000);
+            }
+
+            // Initialize Highlight.js after the document is fully loaded
+            document.addEventListener('DOMContentLoaded', (event) => {
+                hljs.highlightAll();
+            });
+			
+			let en = document.getElementById('en');
+			let hy = document.getElementById('hy');
+			let ru = document.getElementById('ru');
+			let html_en = document.getElementById('html_en');
+			let html_hy = document.getElementById('html_hy');
+			let html_ru = document.getElementById('html_ru');
+			
+			en.addEventListener('click', function(){
+				html_en.style.display = 'block';
+				html_hy.style.display = 'none';
+				html_ru.style.display = 'none';
+				
+				en.style.display = 'none';
+				hy.style.display = 'inline';
+				ru.style.display = 'inline';
+			});
+			
+			hy.addEventListener('click', function(){
+				html_en.style.display = 'none';
+				html_hy.style.display = 'block';
+				html_ru.style.display = 'none';
+				
+				en.style.display = 'inline';
+				hy.style.display = 'none';
+				ru.style.display = 'inline';
+			});
+			
+			ru.addEventListener('click', function(){
+				html_en.style.display = 'none';
+				html_hy.style.display = 'none';
+				html_ru.style.display = 'block';
+				
+				en.style.display = 'inline';
+				hy.style.display = 'inline';
+				ru.style.display = 'none';
+			});
+
+            // let pre_code = document.querySelectorAll('pre code');
+			
+			// pre_code = pre_code.map(function(code, key){
+			// 	let html = code.innerHTML
+				
+			// let card = document.createElement('div');
+			// card.className = 'card bg-dark text-white';
+			
+			//document.body.appendChild(card);
+			
+// 			let card_html = `<div class="card bg-dark text-white">
+//             <div class="card-header">
+//                 <button class="btn btn-primary" onclick="copyCode(1)">Copy</button>
+//                 <span id="copied-1" class="float-end"></span>
+//             </div>
+//             <div>
+//                 <pre>                    <code class="language-javascript hljs" id="code-block-1" data-highlighted="yes">
+// <span class="hljs-keyword">function</span> <span class="hljs-title function_">sayHello</span>(<span class="hljs-params"></span>) {
+//     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Hello, world!"</span>);
+// }                               
+//                     </code>
+//                 </pre>
+//             </div>
+//         </div>
+// 		`
+// 		card.innerHTML = card_html;
+// 		return card;
+//			});
+        </script>
+    </body>
+</html>
