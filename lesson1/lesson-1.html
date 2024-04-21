@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lesson 1: Introduction to HTML: Basic Structure, Elements, and Tags</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+        <style>
+            code {
+                background-color: lightgray;
+                color: black;
+                padding: 2px 5px;
+                margin: 0 5px;
+				border: 1px solid gray;
+				border-radius: 5px;
+            }
+			#md{
+				display: none;
+			}
+        </style>
+    </head>
+    <body class="p-5">
+    <a href="#" id="hy" class="btn btn-info">Հայերեն</a>
+    <a href="#" id="en" class="btn btn-info" style="display:none">English</a>
+    <a href="#" id="ru" class="btn btn-info">Русский</a>
+	
+	<hr>
+
+
+
+
+
+
+	<div id="html_en" class="html">
+<h2>Lesson 1: Introduction to HTML: Basic Structure, Elements, and Tags</h2>
+<hr>
+<h3>Understanding HTML and Its Structure</h3>
+<h4>Introduction to HTML</h4>
+<p>HTML, or HyperText Markup Language, is the cornerstone of the World Wide Web. It was conceived by Tim Berners-Lee in the late 1980s at CERN as a means to facilitate document sharing and communication among researchers across the globe. The first official version, HTML 2.0, was released in 1995, and since then, HTML has undergone continuous evolution to meet the growing demands of web development, with its latest version being HTML5.</p>
+<p>HTML serves as the standard markup language for creating web pages and applications. It enables the structuring and presentation of content on the internet, allowing for the integration of text, images, videos, and other multimedia elements. HTML documents, which are files ending in .html or .htm, are the building blocks of the web. When accessed via a web browser, these documents are parsed and rendered into the visual and interactive pages that users interact with daily. This process is made possible by the simple yet powerful structure of HTML, which organizes content through a system of elements and tags.</p>
+<h4>Basic Anatomy of an HTML Document</h4>
+<p>An HTML document is structured into several key components, each serving a unique purpose in the document's overall function and presentation. Understanding these components is essential for anyone learning web development. Here's a brief overview:</p>
+<ul>
+<li><p><strong><code>&lt;!DOCTYPE html&gt;</code></strong>: This declaration is placed at the very beginning of an HTML document. It's not an HTML tag but a declaration to the web browser about the version of HTML the page is written in. For modern web pages, <code>&lt;!DOCTYPE html&gt;</code> specifies that the document uses HTML5, the latest standard.</p>
+</li>
+<li><p><strong><code>&lt;html&gt;</code></strong>: This tag encloses the entire HTML document, serving as the root element. It tells the browser that everything contained within it is HTML content.</p>
+</li>
+<li><p><strong><code>&lt;head&gt;</code></strong>: The head element contains meta-information about the document, such as its title, character set, links to stylesheets, and scripts. This section does not contain content that is directly displayed on the web page.</p>
+</li>
+<li><p><strong><code>&lt;title&gt;</code></strong>: Nested within the <code>&lt;head&gt;</code>, the title tag specifies the title of the web page, which appears in the browser's title bar or tab.</p>
+</li>
+<li><p><strong><code>&lt;body&gt;</code></strong>: The body tag encloses the content of the web page that is visible to the user. This includes text, images, links, and other media.</p>
+</li>
+</ul>
+<p>Here's a simple example to illustrate how these elements fit together in an HTML document:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My First Web Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+    &lt;p&gt;This is my first web page.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h4>Interactive Exercise</h4>
+<p>Now, let's put this knowledge into practice. Follow these steps to create a basic HTML document:</p>
+<ol>
+<li><p><strong>Open a Code Editor</strong>: Any text editor will do (e.g., Notepad, VS Code, Sublime Text).</p>
+</li>
+<li><p><strong>Create a New File</strong>: Save it with an .html extension, for example, <code>my-first-page.html</code>.</p>
+</li>
+<li><p><strong>Type the Basic Structure</strong>: Enter the HTML structure as shown in the example above. Feel free to customize the content inside the <code>&lt;title&gt;</code> and <code>&lt;body&gt;</code> tags.</p>
+</li>
+<li><p><strong>Save Your Work</strong>: After typing your HTML code, save the file.</p>
+</li>
+<li><p><strong>View in a Browser</strong>: Open the file in a web browser to see your web page in action.</p>
+</li>
+</ol>
+<p>This exercise will help you understand how the essential components of an HTML document work together to form the foundation of a web page. As you progress in your learning, you'll explore more complex elements and attributes that add functionality and style to your pages.</p>
+<h3>Common HTML Tags and Their Usage</h3>
+<p>This section delves into the essential HTML tags that form the core of web content creation, focusing on their purpose, usage, and how they influence the structure and appearance of web content. By mastering these tags, you'll be equipped to create more organized and visually appealing web pages.</p>
+<h4>Paragraphs, Headings, and Text Formatting</h4>
+<ul>
+<li><p><strong>Paragraphs (<code>&lt;p&gt;</code>):</strong> The paragraph tag is used to define blocks of text. It creates a visible space between the paragraph and adjacent content, helping to make the text more readable.</p>
+<pre><code class="language-html">&lt;p&gt;This is a paragraph of text. Here, you can include several sentences that form a complete thought.&lt;/p&gt;
+</code></pre>
+</li>
+<li><p><strong>Headings (<code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code>):</strong> Headings are used to define the titles and subtitles of different sections of content, with <code>&lt;h1&gt;</code> being the highest (or most important) level and <code>&lt;h6&gt;</code> the lowest. They are crucial for organizing content hierarchically and for SEO purposes.</p>
+<pre><code class="language-html">&lt;h1&gt;Main Title&lt;/h1&gt;
+&lt;h2&gt;Subsection Title&lt;/h2&gt;
+</code></pre>
+</li>
+<li><p><strong>Text Formatting:</strong> Tags like <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> are used for emphasizing text. <code>&lt;strong&gt;</code> makes text bold, indicating it's of greater importance, while <code>&lt;em&gt;</code> italicizes text, showing emphasis or differentiation.</p>
+<pre><code class="language-html">&lt;p&gt;This is a &lt;strong&gt;very important&lt;/strong&gt; point. It should be noted by everyone.&lt;/p&gt;
+&lt;p&gt;You should always &lt;em&gt;verify&lt;/em&gt; the information provided.&lt;/p&gt;
+</code></pre>
+</li>
+</ul>
+<h4>Creating Links and Images</h4>
+<ul>
+<li><p><strong>Hyperlinks (<code>&lt;a&gt;</code>):</strong> The anchor tag is used to create links to other pages or resources. The <code>href</code> attribute specifies the URL of the page the link goes to. Hyperlinks are fundamental for navigating between web pages.</p>
+<pre><code class="language-html">&lt;a href="https://www.example.com"&gt;Visit Example&lt;/a&gt;
+</code></pre>
+</li>
+<li><p><strong>Images (<code>&lt;img&gt;</code>):</strong> The image tag embeds an image into the page. The <code>src</code> attribute specifies the path to the image file, while the <code>alt</code> attribute provides alternative text describing the image if it can't be displayed.</p>
+<pre><code class="language-html">&lt;img src="image.jpg" alt="Descriptive text of the image"&gt;
+</code></pre>
+</li>
+</ul>
+<h4>Lists and Division Elements</h4>
+<ul>
+<li><p><strong>Lists:</strong> Ordered (<code>&lt;ol&gt;</code>) and unordered (<code>&lt;ul&gt;</code>) lists are used for creating lists of items. The <code>&lt;li&gt;</code> tag is used to define each list item. Ordered lists display items in a numbered format, while unordered lists use bullet points.</p>
+<pre><code class="language-html">&lt;ul&gt;
+    &lt;li&gt;First item&lt;/li&gt;
+    &lt;li&gt;Second item&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+</li>
+<li><p><strong>Division Elements (<code>&lt;div&gt;</code>):</strong> The div tag is used to group blocks of content, making it easier to style and position sections of the webpage with CSS.</p>
+<pre><code class="language-html">&lt;div&gt;
+    &lt;p&gt;This is a section of content grouped together.&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+</li>
+</ul>
+<h4>Hands-on Practice</h4>
+<p>Now, let's apply what you've learned by creating a simple webpage. Your task is to create an HTML document that includes:</p>
+<ol>
+<li><strong>A paragraph (<code>&lt;p&gt;</code>) introducing yourself.</strong></li>
+<li><strong>Three headings (<code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, and <code>&lt;h3&gt;</code>) labeling different sections of your webpage, such as "About Me", "My Projects", and "Contact Information".</strong></li>
+<li><strong>Bold (<code>&lt;strong&gt;</code>) and italicized (<code>&lt;em&gt;</code>) text within your paragraphs to emphasize key points.</strong></li>
+<li><strong>A link (<code>&lt;a&gt;</code>) to a website you find interesting, with a brief description of why you recommend it.</strong></li>
+<li><strong>An image (<code>&lt;img&gt;</code>) related to one of your hobbies or interests, with appropriate <code>alt</code> text.</strong></li>
+<li><strong>A list (<code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code>) of your favorite books, movies, or hobbies.</strong></li>
+</ol>
+<p>This exercise will not only help you practice using basic HTML tags but also assist you in structuring web content effectively. Save your file with an .html extension and view it in a web browser to see your work come to life.</p>
+<h3>Semantic Markup and Attributes</h3>
+<p>Understanding the importance of semantic markup and the role of attributes in HTML is crucial for developing accessible and SEO-friendly web pages. This section delves into these concepts, providing a foundation for enhancing the structure and meaning of web content.</p>
+<h4>Importance of Semantic Markup</h4>
+<p>Semantic HTML refers to the use of HTML elements that convey meaning about the type of content they hold, beyond just their presentation aspects. This approach is essential for several reasons:</p>
+<ul>
+<li><strong>Accessibility:</strong> Semantic markup helps assistive technologies (like screen readers) interpret and navigate through web content more effectively, improving the user experience for people with disabilities.</li>
+<li><strong>Search Engine Optimization (SEO):</strong> Search engines use semantic elements to understand the structure and importance of content on a web page, which can influence the page's ranking in search results.</li>
+<li><strong>Maintainability:</strong> A well-structured document using semantic elements is easier to read, update, and maintain, both for the original author and others who might work on the document in the future.</li>
+</ul>
+<p>Examples of semantic elements include:</p>
+<ul>
+<li><code>&lt;article&gt;</code>: Defines content that forms an independent part of a document or site, such as a blog post or news article.</li>
+<li><code>&lt;section&gt;</code>: Represents a standalone section within a document, which doesn't have a more specific semantic element to represent it.</li>
+<li><code>&lt;header&gt;</code>: Contains introductory content or a set of navigational links for a section of the document or the whole page.</li>
+<li><code>&lt;footer&gt;</code>: Specifies the footer for a document or section, containing information about the author, copyright data, or related documents.</li>
+<li><code>&lt;nav&gt;</code>: Defines a section of a page that links to other pages or to parts within the page; a section intended for navigation.</li>
+</ul>
+<p>These elements stand in contrast to non-semantic elements like <code>&lt;div&gt;</code>, which does not convey any meaning about its content and is used primarily for styling or as a container for other elements.</p>
+<h4>Understanding Attributes</h4>
+<p>Attributes in HTML provide additional information about elements, modifying their behavior or appearance. They are included within the opening tag of an element and consist of a name and a value pair. Here are some common attributes:</p>
+<ul>
+<li><strong>id:</strong> Assigns a unique identifier to an element, which can be used for styling and accessing the element with JavaScript.<pre><code class="language-html">&lt;div id="header"&gt;&lt;/div&gt;
+</code></pre>
+</li>
+<li><strong>class:</strong> Specifies one or more class names for an element, which can be used by CSS and JavaScript to apply styles or perform tasks.<pre><code class="language-html">&lt;div class="container"&gt;&lt;/div&gt;
+</code></pre>
+</li>
+<li><strong>src:</strong> Used with <code>&lt;img&gt;</code>, <code>&lt;audio&gt;</code>, and <code>&lt;video&gt;</code> tags, it specifies the URL of the media file.<pre><code class="language-html">&lt;img src="image.jpg" alt="Descriptive text"&gt;
+</code></pre>
+</li>
+<li><strong>href:</strong> Used with <code>&lt;a&gt;</code> tags, it indicates the link's destination URL.<pre><code class="language-html">&lt;a href="https://www.example.com"&gt;Visit Example&lt;/a&gt;
+</code></pre>
+</li>
+<li><strong>alt:</strong> Provides alternative text for an image if the image cannot be displayed.<pre><code class="language-html">&lt;img src="logo.png" alt="Company Logo"&gt;
+</code></pre>
+</li>
+</ul>
+<h4>Interactive Exercise</h4>
+<p>For this activity, revisit the simple webpage you created earlier. Enhance it by incorporating semantic elements and utilizing attributes to add more detail and structure. Follow these guidelines:</p>
+<ol>
+<li><p><strong>Structure your content with semantic elements:</strong> Replace non-semantic <code>&lt;div&gt;</code> elements with <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;article&gt;</code>, and <code>&lt;section&gt;</code> where appropriate. For example, wrap the introductory paragraph in a <code>&lt;header&gt;</code> tag and group related content in <code>&lt;article&gt;</code> or <code>&lt;section&gt;</code> tags.</p>
+</li>
+<li><p><strong>Use attributes to refine your elements:</strong> </p>
+<ul>
+<li>Assign <code>id</code> or <code>class</code> attributes to elements you might want to style differently or access via JavaScript.</li>
+<li>Ensure all images have an <code>alt</code> attribute with a descriptive text.</li>
+<li>If you have links in your webpage, check that they use the <code>href</code> attribute correctly.</li>
+</ul>
+</li>
+<li><p><strong>Check accessibility and SEO:</strong> Ensure that your use of semantic elements and attributes contributes to making your webpage more accessible and potentially more visible in search engine results.</p>
+</li>
+</ol>
+<p>This exercise is a step towards creating more meaningful, accessible, and effectively structured web content. By conscientiously applying semantic markup and attributes, you're not just coding for the present; you're building a foundation for future accessibility and SEO success.</p>
+	</div>
+
+
+
+
+
+
+	<div id="html_hy" class="html" style="display:none">
+<h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դաս 1. HTML-ի ներածություն. Հիմնական կառուցվածք, տարրեր և պիտակներ</font></font></h2>
+<hr>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հասկանալով HTML-ը և դրա կառուցվածքը</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML-ի ներածություն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML-ը կամ HyperText Markup Language-ը Համաշխարհային ցանցի հիմնաքարն է: Այն մտահղացվել է Թիմ Բերներս-Լիի կողմից 1980-ականների վերջին CERN-ում որպես միջոց՝ հեշտացնելու փաստաթղթերի փոխանակումը և հաղորդակցությունը հետազոտողների միջև ամբողջ աշխարհում: Առաջին պաշտոնական տարբերակը՝ HTML 2.0-ը, թողարկվել է 1995 թվականին, և այդ ժամանակից ի վեր HTML-ը շարունակական էվոլյուցիայի է ենթարկվել՝ բավարարելու վեբ զարգացման աճող պահանջները, որի վերջին տարբերակն է HTML5:</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML-ը ծառայում է որպես վեբ էջեր և հավելվածներ ստեղծելու ստանդարտ նշագրման լեզու: Այն հնարավորություն է տալիս բովանդակության կառուցվածքը և ներկայացումը ինտերնետում, ինչը թույլ է տալիս ինտեգրել տեքստը, պատկերները, տեսանյութերը և այլ մուլտիմեդիա տարրերը: HTML փաստաթղթերը, որոնք ֆայլեր են, որոնք վերջանում են .html կամ .htm, ցանցի կառուցման բլոկներն են: Վեբ բրաուզերի միջոցով մուտք գործելու դեպքում այս փաստաթղթերը վերլուծվում և ներկայացվում են տեսողական և ինտերակտիվ էջերում, որոնց հետ օգտատերերն ամեն օր շփվում են: Այս գործընթացը հնարավոր է դարձել HTML-ի պարզ, բայց հզոր կառուցվածքի շնորհիվ, որը կազմակերպում է բովանդակությունը տարրերի և պիտակների համակարգի միջոցով:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML փաստաթղթի հիմնական անատոմիա</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML փաստաթուղթը կառուցված է մի քանի հիմնական բաղադրիչների, որոնցից յուրաքանչյուրը ծառայում է եզակի նպատակի փաստաթղթի ընդհանուր գործառույթի և ներկայացման մեջ: Այս բաղադրիչները հասկանալը կարևոր է վեբ մշակում սովորող յուրաքանչյուրի համար: Ահա հակիրճ ակնարկ.</font></font></p>
+<ul>
+<li><p><strong><code>&lt;!DOCTYPE html&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս հայտարարությունը տեղադրված է HTML փաստաթղթի հենց սկզբում: Դա HTML թեգ չէ, այլ հայտարարություն վեբ դիտարկիչին HTML-ի տարբերակի մասին, որում գրված է էջը: Ժամանակակից վեբ էջերի համար </font></font><code>&lt;!DOCTYPE html&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">նշում է, որ փաստաթուղթն օգտագործում է HTML5՝ վերջին ստանդարտը:</font></font></p>
+</li>
+<li><p><strong><code>&lt;html&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս թեգը ներառում է ամբողջ HTML փաստաթուղթը՝ ծառայելով որպես արմատային տարր: Այն զննարկիչին ասում է, որ դրա մեջ պարունակվող ամեն ինչ HTML բովանդակություն է:</font></font></p>
+</li>
+<li><p><strong><code>&lt;head&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գլխի տարրը պարունակում է մետա-տեղեկություններ փաստաթղթի մասին, ինչպիսիք են դրա վերնագիրը, նիշերի հավաքածուն, ոճաթերթերի հղումները և սկրիպտները: Այս բաժինը չի պարունակում բովանդակություն, որն ուղղակիորեն ցուցադրվում է վեբ էջում:</font></font></p>
+</li>
+<li><p><strong><code>&lt;title&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներդրված լինելով </font></font><code>&lt;head&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, վերնագրի պիտակը նշում է վեբ էջի անվանումը, որը հայտնվում է դիտարկիչի վերնագրի տողում կամ ներդիրում:</font></font></p>
+</li>
+<li><p><strong><code>&lt;body&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մարմնի պիտակը ներառում է վեբ էջի բովանդակությունը, որը տեսանելի է օգտագործողին: Սա ներառում է տեքստ, պատկերներ, հղումներ և այլ լրատվամիջոցներ:</font></font></p>
+</li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ահա մի պարզ օրինակ՝ ցույց տալու համար, թե ինչպես են այս տարրերը տեղավորվում HTML փաստաթղթում.</font></font></p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;<font></font>
+&lt;html&gt;<font></font>
+&lt;head&gt;<font></font>
+    &lt;title&gt;My First Web Page&lt;/title&gt;<font></font>
+&lt;/head&gt;<font></font>
+&lt;body&gt;<font></font>
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;<font></font>
+    &lt;p&gt;This is my first web page.&lt;/p&gt;<font></font>
+&lt;/body&gt;<font></font>
+&lt;/html&gt;<font></font>
+</code></pre>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ինտերակտիվ վարժություն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիմա եկեք այս գիտելիքը գործնականում կիրառենք: Հիմնական HTML փաստաթուղթ ստեղծելու համար հետևեք հետևյալ քայլերին.</font></font></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բացեք կոդերի խմբագիր</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . ցանկացած տեքստային խմբագրիչ կարող է դա անել (օրինակ՝ Notepad, VS Code, Sublime Text):</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ստեղծեք նոր ֆայլ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : Պահպանեք այն .html ընդլայնմամբ, օրինակ՝ </font></font><code>my-first-page.html</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մուտքագրեք Հիմնական կառուցվածքը</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Մուտքագրեք HTML կառուցվածքը, ինչպես ցույց է տրված վերևի օրինակում: Ազատորեն հարմարեցրեք բովանդակությունը </font></font><code>&lt;title&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>&lt;body&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">պիտակների ներսում:</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պահպանեք ձեր աշխատանքը</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . ձեր HTML կոդը մուտքագրելուց հետո պահեք ֆայլը:</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դիտել զննարկիչում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . բացեք ֆայլը վեբ բրաուզերում՝ ձեր վեբ էջը գործողության մեջ տեսնելու համար:</font></font></p>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժությունը կօգնի ձեզ հասկանալ, թե ինչպես են HTML փաստաթղթի հիմնական բաղադրիչները աշխատում միասին՝ ձևավորելով վեբ էջի հիմքը: Երբ դուք առաջադիմեք ձեր ուսուցման մեջ, դուք կուսումնասիրեք ավելի բարդ տարրեր և ատրիբուտներ, որոնք ֆունկցիոնալություն և ոճ են հաղորդում ձեր էջերին:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ընդհանուր HTML պիտակներ և դրանց օգտագործումը</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս բաժինը խորանում է հիմնական HTML թեգերի մեջ, որոնք կազմում են վեբ բովանդակության ստեղծման առանցքը՝ կենտրոնանալով դրանց նպատակի, օգտագործման և վեբ բովանդակության կառուցվածքի և արտաքին տեսքի վրա: Տիրապետելով այս պիտակներին՝ դուք կկարողանաք ստեղծել ավելի կազմակերպված և տեսողականորեն գրավիչ վեբ էջեր:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պարբերություններ, վերնագրեր և տեքստի ձևաչափում</font></font></h4>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պարբերություններ ( </font></font><code>&lt;p&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">):</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Պարբերության թեգը օգտագործվում է տեքստի բլոկներ սահմանելու համար: Այն տեսանելի տարածություն է ստեղծում պարբերության և հարակից բովանդակության միջև՝ օգնելով տեքստն ավելի ընթեռնելի դարձնել:</font></font></p>
+<pre><code class="language-html">&lt;p&gt;This is a paragraph of text. Here, you can include several sentences that form a complete thought.&lt;/p&gt;
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերնագրերը</font></font><code>&lt;h1&gt;</code><font style="vertical-align: inherit;"></font><code>&lt;h6&gt;</code><font style="vertical-align: inherit;"></font></strong><font style="vertical-align: inherit;"></font><code>&lt;h1&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ( </font><strong><font style="vertical-align: inherit;">մինչև </font></strong><strong><font style="vertical-align: inherit;">)</font></strong></font><code>&lt;h6&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font><font style="vertical-align: inherit;">&ZeroWidthSpace; </font><font style="vertical-align: inherit;">Դրանք շատ կարևոր են բովանդակությունը հիերարխիկորեն կազմակերպելու և SEO-ի նպատակների համար:</font></font></p>
+<pre><code class="language-html">&lt;h1&gt;Main Title&lt;/h1&gt;<font></font>
+&lt;h2&gt;Subsection Title&lt;/h2&gt;<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տեքստի ձևաչափում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Թեգերը հավանում են </font></font><code>&lt;strong&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>&lt;em&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">օգտագործվում են տեքստն ընդգծելու համար: </font></font><code>&lt;strong&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">տեքստը դարձնում է թավ՝ նշելով, որ այն ավելի կարևոր է, մինչդեռ </font></font><code>&lt;em&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">շեղում է տեքստը՝ ցույց տալով շեշտադրում կամ տարբերակում:</font></font></p>
+<pre><code class="language-html">&lt;p&gt;This is a &lt;strong&gt;very important&lt;/strong&gt; point. It should be noted by everyone.&lt;/p&gt;<font></font>
+&lt;p&gt;You should always &lt;em&gt;verify&lt;/em&gt; the information provided.&lt;/p&gt;<font></font>
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հղումների և պատկերների ստեղծում</font></font></h4>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիպերհղումներ ( </font></font><code>&lt;a&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">):</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Խարիսխ պիտակը օգտագործվում է այլ էջերի կամ ռեսուրսների հղումներ ստեղծելու համար: Հատկանիշը </font></font><code>href</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">նշում է այն էջի URL-ը, ուր գնում է հղումը: Հիպերհղումները հիմնարար են վեբ էջերի միջև նավարկելու համար:</font></font></p>
+<pre><code class="language-html">&lt;a href="https://www.example.com"&gt;Visit Example&lt;/a&gt;
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պատկերներ ( </font></font><code>&lt;img&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">):</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Պատկերի պիտակը պատկեր է տեղադրում էջի մեջ: Հատկանիշը </font></font><code>src</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">նշում է պատկերի ֆայլի ուղին, մինչդեռ </font></font><code>alt</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հատկանիշը տրամադրում է այլընտրանքային տեքստ, որը նկարագրում է պատկերը, եթե այն չի կարող ցուցադրվել:</font></font></p>
+<pre><code class="language-html">&lt;img src="image.jpg" alt="Descriptive text of the image"&gt;
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ցանկեր և բաժանման տարրեր</font></font></h4>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ցուցակներ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Պատվիրված ( </font></font><code>&lt;ol&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) և չպատվիրված ( </font></font><code>&lt;ul&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) ցուցակներն օգտագործվում են տարրերի ցուցակներ ստեղծելու համար: Պիտակն </font></font><code>&lt;li&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">օգտագործվում է ցանկի յուրաքանչյուր տարր սահմանելու համար: Պատվիրված ցուցակները ցուցադրում են տարրերը համարակալված ձևաչափով, մինչդեռ չդասավորված ցուցակներն օգտագործում են կետային կետեր:</font></font></p>
+<pre><code class="language-html">&lt;ul&gt;<font></font>
+    &lt;li&gt;First item&lt;/li&gt;<font></font>
+    &lt;li&gt;Second item&lt;/li&gt;<font></font>
+&lt;/ul&gt;<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Division Elements ( </font></font><code>&lt;div&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">):</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Div պիտակն օգտագործվում է բովանդակության բլոկները խմբավորելու համար, ինչը հեշտացնում է վեբ էջի բաժինների ոճավորումը և տեղադրումը CSS-ով:</font></font></p>
+<pre><code class="language-html">&lt;div&gt;<font></font>
+    &lt;p&gt;This is a section of content grouped together.&lt;/p&gt;<font></font>
+&lt;/div&gt;<font></font>
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական պրակտիկա</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այժմ, եկեք կիրառենք այն, ինչ սովորել եք՝ ստեղծելով պարզ վեբ էջ: Ձեր խնդիրն է ստեղծել HTML փաստաթուղթ, որը ներառում է.</font></font></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մի պարբերություն ( </font></font><code>&lt;p&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">), որը ներկայացնում է ինքներդ:</font></font></strong></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Երեք վերնագրեր ( </font></font><code>&lt;h1&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;h2&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, և </font></font><code>&lt;h3&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">), որոնք նշում են ձեր վեբ էջի տարբեր բաժինները, ինչպիսիք են «Իմ մասին», «Իմ նախագծերը» և «Կոնտակտային տվյալներ»։</font></font></strong></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ձեր պարբերությունների մեջ թավ ( </font></font><code>&lt;strong&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) և շեղ ( </font></font><code>&lt;em&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) տեքստ՝ առանցքային կետերն ընդգծելու համար:</font></font></strong></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հղում ( </font></font><code>&lt;a&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) դեպի այն կայք, որը ձեզ հետաքրքիր է, հակիրճ նկարագրությամբ, թե ինչու եք այն խորհուրդ տալիս:</font></font></strong></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պատկեր ( </font></font><code>&lt;img&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">)՝ կապված ձեր հոբբիներից կամ հետաքրքրություններից մեկին, համապատասխան տեքստով </font></font><code>alt</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">։</font></font></strong></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ձեր սիրելի գրքերի, ֆիլմերի կամ հոբբիների </font><font style="vertical-align: inherit;">ցանկը ( </font></font><code>&lt;ul&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կամ ):</font></font><code>&lt;ol&gt;</code><font style="vertical-align: inherit;"></font></strong></li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժությունը ոչ միայն կօգնի ձեզ գործնականում կիրառել հիմնական HTML թեգերը, այլև կօգնի ձեզ արդյունավետորեն վեբ բովանդակության կառուցվածքում: Պահեք ձեր ֆայլը .html ընդլայնմամբ և դիտեք այն վեբ բրաուզերում՝ տեսնելու ձեր աշխատանքը կյանքի կոչելու համար:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իմաստային նշում և հատկանիշներ</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իմաստային նշագրման կարևորությունը և HTML-ում ատրիբուտների դերը հասկանալը կարևոր է մատչելի և SEO-ին հարմար վեբ էջեր ստեղծելու համար: Այս բաժինը խորանում է այս հասկացությունների մեջ՝ հիմք ստեղծելով վեբ բովանդակության կառուցվածքն ու նշանակությունը բարելավելու համար:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իմաստային նշագրման կարևորությունը</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իմաստային HTML-ը վերաբերում է HTML-ի տարրերի օգտագործմանը, որոնք իմաստ են հաղորդում իրենց պահած բովանդակության տեսակի մասին՝ միայն դրանց ներկայացման ասպեկտներից դուրս: Այս մոտեցումը կարևոր է մի քանի պատճառներով.</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մատչելիություն.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Իմաստային նշագրումն օգնում է օժանդակ տեխնոլոգիաներին (օրինակ՝ էկրանի ընթերցողներին) ավելի արդյունավետ կերպով մեկնաբանել և նավարկել վեբ բովանդակությունը՝ բարելավելով հաշմանդամություն ունեցող մարդկանց օգտատիրոջ փորձը:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Որոնման համակարգերի օպտիմիզացում (SEO).</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Որոնիչները օգտագործում են իմաստային տարրեր՝ հասկանալու վեբ էջի բովանդակության կառուցվածքն ու նշանակությունը, ինչը կարող է ազդել որոնման արդյունքներում էջի վարկանիշի վրա:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պահպանելիություն.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> իմաստային տարրեր օգտագործող լավ կառուցվածքային փաստաթուղթն ավելի հեշտ է կարդալ, թարմացնել և պահպանել ինչպես սկզբնական հեղինակի, այնպես էլ մյուսների համար, ովքեր կարող են աշխատել փաստաթղթի վրա ապագայում:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իմաստային տարրերի օրինակները ներառում են.</font></font></p>
+<ul>
+<li><code>&lt;article&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սահմանում է բովանդակություն, որը կազմում է փաստաթղթի կամ կայքի անկախ մաս, օրինակ՝ բլոգի գրառումը կամ նորությունների հոդվածը:</font></font></li>
+<li><code>&lt;section&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: Ներկայացնում է փաստաթղթի առանձին բաժին, որը չունի ավելի կոնկրետ իմաստային տարր այն ներկայացնելու համար:</font></font></li>
+<li><code>&lt;header&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պարունակում է ներածական բովանդակություն կամ նավիգացիոն հղումների մի շարք փաստաթղթի մի հատվածի կամ ամբողջ էջի համար:</font></font></li>
+<li><code>&lt;footer&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նշում է փաստաթղթի կամ բաժնի ստորագիր, որը պարունակում է տեղեկություններ հեղինակի մասին, հեղինակային իրավունքի տվյալներ կամ հարակից փաստաթղթեր:</font></font></li>
+<li><code>&lt;nav&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սահմանում է էջի մի հատված, որը կապում է այլ էջերին կամ էջի մասերին. նավարկության համար նախատեսված հատված։</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս տարրերը հակադրվում են ոչ իմաստային տարրերին, ինչպիսիք են </font></font><code>&lt;div&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, որը որևէ իմաստ չի հաղորդում իր բովանդակությանը և օգտագործվում է հիմնականում ոճավորելու կամ որպես այլ տարրերի համար նախատեսված տարա:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հասկանալով հատկանիշները</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML-ի ատրիբուտները լրացուցիչ տեղեկություններ են տալիս տարրերի մասին՝ փոփոխելով դրանց վարքը կամ տեսքը: Դրանք ներառված են տարրի բացման պիտակի մեջ և բաղկացած են անունից և արժեքային զույգից: Ահա որոշ ընդհանուր հատկանիշներ.</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">id.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> հատկացնում է տարրի եզակի նույնացուցիչ, որը կարող է օգտագործվել տարրը ոճավորելու և JavaScript-ով մուտք գործելու համար:</font></font><pre><code class="language-html">&lt;div id="header"&gt;&lt;/div&gt;
+</code></pre>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">class.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Նշում է մեկ կամ մի քանի դասի անուններ տարրի համար, որոնք կարող են օգտագործվել CSS-ի և JavaScript-ի կողմից՝ ոճեր կիրառելու կամ առաջադրանքներ կատարելու համար:</font></font><pre><code class="language-html">&lt;div class="container"&gt;&lt;/div&gt;
+</code></pre>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">src:</font></font></strong><font style="vertical-align: inherit;"></font><code>&lt;img&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Օգտագործվում է , </font></font><code>&lt;audio&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, և պիտակների </font><font style="vertical-align: inherit;">հետ </font></font><code>&lt;video&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, այն նշում է մեդիա ֆայլի URL-ը:</font></font><pre><code class="language-html">&lt;img src="image.jpg" alt="Descriptive text"&gt;
+</code></pre>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">href:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Օգտագործվում է պիտակների հետ </font></font><code>&lt;a&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, այն ցույց է տալիս հղման նպատակակետ URL-ը:</font></font><pre><code class="language-html">&lt;a href="https://www.example.com"&gt;Visit Example&lt;/a&gt;
+</code></pre>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">alt.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ապահովում է այլընտրանքային տեքստ պատկերի համար, եթե պատկերը չի կարող ցուցադրվել:</font></font><pre><code class="language-html">&lt;img src="logo.png" alt="Company Logo"&gt;
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ինտերակտիվ վարժություն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս գործունեության համար կրկին այցելեք ձեր ավելի վաղ ստեղծած պարզ վեբ էջը: Բարելավեք այն՝ ներառելով իմաստային տարրեր և օգտագործելով ատրիբուտներ՝ ավելի շատ մանրամասներ և կառուցվածք ավելացնելու համար: Հետևեք այս ուղեցույցներին.</font></font></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կառուցեք ձեր բովանդակությունը իմաստային տարրերով.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> փոխարինեք ոչ իմաստային </font></font><code>&lt;div&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">տարրերը </font></font><code>&lt;header&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;footer&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;article&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, և </font></font><code>&lt;section&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">որտեղ անհրաժեշտ է: Օրինակ, ներածական պարբերությունը փաթեթավորեք </font></font><code>&lt;header&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">պիտակի մեջ և խմբավորեք առնչվող բովանդակությունը պիտակների </font></font><code>&lt;article&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կամ </font></font><code>&lt;section&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">պիտակների մեջ:</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործեք ատրիբուտներ՝ ձեր տարրերը ճշգրտելու համար.</font></font></strong> </p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերագրեք </font></font><code>id</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կամ </font></font><code>class</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">վերագրեք այն տարրերին, որոնց կարող եք այլ կերպ ոճավորել կամ մուտք գործել JavaScript-ի միջոցով:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Համոզվեք, որ բոլոր պատկերները </font></font><code>alt</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">նկարագրական տեքստով հատկանիշ ունեն:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Եթե &ZeroWidthSpace;&ZeroWidthSpace;ձեր կայքէջում հղումներ ունեք, ստուգեք, որ դրանք </font></font><code>href</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ճիշտ են օգտագործում հատկանիշը:</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ստուգեք մատչելիությունը և SEO-ն.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Համոզվեք, որ իմաստային տարրերի և ատրիբուտների օգտագործումը նպաստում է ձեր վեբ էջն ավելի մատչելի և պոտենցիալ ավելի տեսանելի դարձնելուն որոնման համակարգի արդյունքներում:</font></font></p>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժությունը քայլ է դեպի ավելի իմաստալից, մատչելի և արդյունավետ կառուցվածքով վեբ բովանդակություն ստեղծելու համար: Խղճորեն կիրառելով իմաստային նշումներ և ատրիբուտներ՝ դուք ոչ միայն կոդավորում եք ներկայի համար. դուք հիմք եք ստեղծում ապագա հասանելիության և SEO-ի հաջողության համար:</font></font></p>
+	</div>
+
+
+
+
+
+
+	<div id="html_ru" class="html" style="display:none">
+<h2>Урок 1. Введение в HTML: базовая структура, элементы и теги</h2>
+<hr>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Понимание HTML и его структуры</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Введение в HTML</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML, или язык гипертекстовой разметки, является краеугольным камнем Всемирной паутины. Он был задуман Тимом Бернерсом-Ли в конце 1980-х годов в ЦЕРНе как средство облегчения обмена документами и общения между исследователями по всему миру. Первая официальная версия HTML 2.0 была выпущена в 1995 году, и с тех пор HTML постоянно развивался, чтобы удовлетворить растущие потребности веб-разработки, и его последней версией стал HTML5.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML служит стандартным языком разметки для создания веб-страниц и приложений. Он позволяет структурировать и представлять контент в Интернете, позволяя интегрировать текст, изображения, видео и другие мультимедийные элементы. HTML-документы, представляющие собой файлы, заканчивающиеся на .html или .htm, являются строительными блоками Интернета. При доступе через веб-браузер эти документы анализируются и преобразуются в визуальные и интерактивные страницы, с которыми пользователи взаимодействуют ежедневно. Этот процесс стал возможным благодаря простой, но мощной структуре HTML, которая организует контент с помощью системы элементов и тегов.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Базовая анатомия HTML-документа</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML-документ состоит из нескольких ключевых компонентов, каждый из которых служит уникальной цели в общей функции и представлении документа. Понимание этих компонентов необходимо для любого, кто изучает веб-разработку. Вот краткий обзор:</font></font></p>
+<ul>
+<li><p><strong><code>&lt;!DOCTYPE html&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: это объявление размещается в самом начале HTML-документа. Это не тег HTML, а объявление веб-браузеру версии HTML, в которой написана страница. Для современных веб-страниц </font></font><code>&lt;!DOCTYPE html&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">указывает, что документ использует HTML5, новейший стандарт.</font></font></p>
+</li>
+<li><p><strong><code>&lt;html&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: этот тег охватывает весь HTML-документ, выступая в качестве корневого элемента. Он сообщает браузеру, что все, что в нем содержится, является содержимым HTML.</font></font></p>
+</li>
+<li><p><strong><code>&lt;head&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: элемент head содержит метаинформацию о документе, такую &ZeroWidthSpace;&ZeroWidthSpace;как его заголовок, набор символов, ссылки на таблицы стилей и сценарии. Этот раздел не содержит контента, который отображается непосредственно на веб-странице.</font></font></p>
+</li>
+<li><p><strong><code>&lt;title&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: </font></font><code>&lt;head&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Тег title, вложенный в тег title, определяет заголовок веб-страницы, который отображается в строке заголовка или на вкладке браузера.</font></font></p>
+</li>
+<li><p><strong><code>&lt;body&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: Тег body содержит содержимое веб-страницы, видимое пользователю. Сюда входят текст, изображения, ссылки и другие медиафайлы.</font></font></p>
+</li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Вот простой пример, иллюстрирующий, как эти элементы сочетаются друг с другом в HTML-документе:</font></font></p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;<font></font>
+&lt;html&gt;<font></font>
+&lt;head&gt;<font></font>
+    &lt;title&gt;My First Web Page&lt;/title&gt;<font></font>
+&lt;/head&gt;<font></font>
+&lt;body&gt;<font></font>
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;<font></font>
+    &lt;p&gt;This is my first web page.&lt;/p&gt;<font></font>
+&lt;/body&gt;<font></font>
+&lt;/html&gt;<font></font>
+</code></pre>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Интерактивное упражнение</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Теперь давайте применим эти знания на практике. Выполните следующие шаги, чтобы создать базовый HTML-документ:</font></font></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Откройте редактор кода</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : подойдет любой текстовый редактор (например, Блокнот, VS Code, Sublime Text).</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Создайте новый файл</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : сохраните его с расширением .html, например </font></font><code>my-first-page.html</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Введите базовую структуру</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : введите структуру HTML, как показано в примере выше. Не стесняйтесь настраивать содержимое внутри тегов </font></font><code>&lt;title&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>&lt;body&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сохраните свою работу</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : после ввода HTML-кода сохраните файл.</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Просмотр в браузере</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : откройте файл в веб-браузере, чтобы увидеть свою веб-страницу в действии.</font></font></p>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это упражнение поможет вам понять, как основные компоненты HTML-документа работают вместе, образуя основу веб-страницы. По мере вашего обучения вы будете изучать более сложные элементы и атрибуты, которые добавляют функциональности и стиля вашим страницам.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Общие теги HTML и их использование</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этом разделе рассматриваются основные теги HTML, которые составляют основу создания веб-контента, с акцентом на их назначение, использование и то, как они влияют на структуру и внешний вид веб-контента. Освоив эти теги, вы сможете создавать более организованные и визуально привлекательные веб-страницы.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Абзацы, заголовки и форматирование текста</font></font></h4>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Параграфы ( </font></font><code>&lt;p&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">):</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> тег абзаца используется для определения блоков текста. Он создает видимое пространство между абзацем и прилегающим содержимым, помогая сделать текст более читабельным.</font></font></p>
+<pre><code class="language-html">&lt;p&gt;This is a paragraph of text. Here, you can include several sentences that form a complete thought.&lt;/p&gt;
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Заголовки ( </font></font><code>&lt;h1&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">до </font></font><code>&lt;h6&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">):</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Заголовки используются для определения заголовков и подзаголовков различных разделов контента, причем </font></font><code>&lt;h1&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">это самый высокий (или самый важный) уровень и </font></font><code>&lt;h6&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">самый низкий. Они имеют решающее значение для иерархической организации контента и для целей SEO.</font></font></p>
+<pre><code class="language-html">&lt;h1&gt;Main Title&lt;/h1&gt;<font></font>
+&lt;h2&gt;Subsection Title&lt;/h2&gt;<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Форматирование текста.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Теги типа </font></font><code>&lt;strong&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>&lt;em&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">используются для выделения текста. </font></font><code>&lt;strong&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">делает текст жирным, указывая на его большую важность, и </font></font><code>&lt;em&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">выделяет текст курсивом, показывая акцент или дифференциацию.</font></font></p>
+<pre><code class="language-html">&lt;p&gt;This is a &lt;strong&gt;very important&lt;/strong&gt; point. It should be noted by everyone.&lt;/p&gt;<font></font>
+&lt;p&gt;You should always &lt;em&gt;verify&lt;/em&gt; the information provided.&lt;/p&gt;<font></font>
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Создание ссылок и изображений</font></font></h4>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Гиперссылки ( </font></font><code>&lt;a&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">):</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> тег привязки используется для создания ссылок на другие страницы или ресурсы. Атрибут </font></font><code>href</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">указывает URL-адрес страницы, на которую ведет ссылка. Гиперссылки имеют основополагающее значение для навигации между веб-страницами.</font></font></p>
+<pre><code class="language-html">&lt;a href="https://www.example.com"&gt;Visit Example&lt;/a&gt;
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Изображения ( </font></font><code>&lt;img&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">):</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> тег изображения встраивает изображение на страницу. Атрибут </font></font><code>src</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">указывает путь к файлу изображения, а </font></font><code>alt</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">атрибут предоставляет альтернативный текст, описывающий изображение, если его невозможно отобразить.</font></font></p>
+<pre><code class="language-html">&lt;img src="image.jpg" alt="Descriptive text of the image"&gt;
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Списки и элементы деления</font></font></h4>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Списки:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> упорядоченные ( </font></font><code>&lt;ol&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) и неупорядоченные ( </font></font><code>&lt;ul&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) списки используются для создания списков элементов. Тег </font></font><code>&lt;li&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">используется для определения каждого элемента списка. В упорядоченных списках элементы отображаются в нумерованном формате, а в неупорядоченных списках используются маркеры.</font></font></p>
+<pre><code class="language-html">&lt;ul&gt;<font></font>
+    &lt;li&gt;First item&lt;/li&gt;<font></font>
+    &lt;li&gt;Second item&lt;/li&gt;<font></font>
+&lt;/ul&gt;<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Элементы разделения ( </font></font><code>&lt;div&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">):</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> тег div используется для группировки блоков контента, что упрощает стилизацию и расположение разделов веб-страницы с помощью CSS.</font></font></p>
+<pre><code class="language-html">&lt;div&gt;<font></font>
+    &lt;p&gt;This is a section of content grouped together.&lt;/p&gt;<font></font>
+&lt;/div&gt;<font></font>
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практическая практика</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Теперь давайте применим то, что вы узнали, создав простую веб-страницу. Ваша задача — создать HTML-документ, который включает в себя:</font></font></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Абзац ( </font></font><code>&lt;p&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">), представляющий вас.</font></font></strong></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Три заголовка ( </font></font><code>&lt;h1&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;h2&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>&lt;h3&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">), обозначающие различные разделы вашей веб-страницы, например «Обо мне», «Мои проекты» и «Контактная информация».</font></font></strong></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Текст внутри абзацев </font><font style="vertical-align: inherit;">жирным ( </font></font><code>&lt;strong&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) и курсивом ( ), чтобы подчеркнуть ключевые моменты.</font></font><code>&lt;em&gt;</code><font style="vertical-align: inherit;"></font></strong></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ссылка ( </font></font><code>&lt;a&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) на веб-сайт, который вам интересен, с кратким описанием того, почему вы его рекомендуете.</font></font></strong></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Изображение ( </font></font><code>&lt;img&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">), связанное с одним из ваших хобби или интересов, с соответствующим </font></font><code>alt</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">текстом.</font></font></strong></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Список ( </font></font><code>&lt;ul&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">или </font></font><code>&lt;ol&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) ваших любимых книг, фильмов или хобби.</font></font></strong></li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это упражнение не только поможет вам попрактиковаться в использовании основных HTML-тегов, но и поможет эффективно структурировать веб-контент. Сохраните файл с расширением .html и просмотрите его в веб-браузере, чтобы увидеть, как ваша работа оживает.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Семантическая разметка и атрибуты</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Понимание важности семантической разметки и роли атрибутов в HTML имеет решающее значение для разработки доступных и оптимизированных для SEO веб-страниц. В этом разделе подробно рассматриваются эти концепции, обеспечивая основу для улучшения структуры и значения веб-контента.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Важность семантической разметки</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Семантический HTML относится к использованию элементов HTML, которые передают значение типа контента, который они содержат, помимо аспектов их представления. Этот подход необходим по нескольким причинам:</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Доступность.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Семантическая разметка помогает вспомогательным технологиям (например, программам чтения с экрана) более эффективно интерпретировать веб-контент и перемещаться по нему, улучшая удобство использования для людей с ограниченными возможностями.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Поисковая оптимизация (SEO).</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Поисковые системы используют семантические элементы для понимания структуры и важности контента на веб-странице, что может повлиять на рейтинг страницы в результатах поиска.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Удобство сопровождения.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Хорошо структурированный документ с использованием семантических элементов легче читать, обновлять и поддерживать как для первоначального автора, так и для других, кто может работать над документом в будущем.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Примеры семантических элементов включают в себя:</font></font></p>
+<ul>
+<li><code>&lt;article&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: определяет контент, который образует независимую часть документа или сайта, например сообщение в блоге или новостную статью.</font></font></li>
+<li><code>&lt;section&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: представляет отдельный раздел в документе, который не имеет более конкретного семантического элемента для его представления.</font></font></li>
+<li><code>&lt;header&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: Содержит вводный контент или набор навигационных ссылок для раздела документа или всей страницы.</font></font></li>
+<li><code>&lt;footer&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: указывает нижний колонтитул документа или раздела, содержащий информацию об авторе, данные об авторских правах или связанные документы.</font></font></li>
+<li><code>&lt;nav&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: определяет раздел страницы, который ссылается на другие страницы или части страницы; раздел, предназначенный для навигации.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эти элементы отличаются от несемантических элементов, таких как </font></font><code>&lt;div&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, которые не несут никакого смысла в своем содержимом и используются в основном для стилизации или в качестве контейнера для других элементов.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Понимание атрибутов</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Атрибуты в HTML предоставляют дополнительную информацию об элементах, изменяя их поведение или внешний вид. Они включаются в открывающий тег элемента и состоят из пары имени и значения. Вот некоторые общие атрибуты:</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">id:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> присваивает элементу уникальный идентификатор, который можно использовать для стилизации и доступа к элементу с помощью JavaScript.</font></font><pre><code class="language-html">&lt;div id="header"&gt;&lt;/div&gt;
+</code></pre>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">class:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> указывает одно или несколько имен классов для элемента, которые могут использоваться CSS и JavaScript для применения стилей или выполнения задач.</font></font><pre><code class="language-html">&lt;div class="container"&gt;&lt;/div&gt;
+</code></pre>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">src:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> используется с </font></font><code>&lt;img&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">тегами </font></font><code>&lt;audio&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>&lt;video&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">указывает URL-адрес медиафайла.</font></font><pre><code class="language-html">&lt;img src="image.jpg" alt="Descriptive text"&gt;
+</code></pre>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">href:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> используется с </font></font><code>&lt;a&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">тегами и указывает целевой URL-адрес ссылки.</font></font><pre><code class="language-html">&lt;a href="https://www.example.com"&gt;Visit Example&lt;/a&gt;
+</code></pre>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">alt:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> предоставляет альтернативный текст для изображения, если изображение не может быть отображено.</font></font><pre><code class="language-html">&lt;img src="logo.png" alt="Company Logo"&gt;
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Интерактивное упражнение</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Для этого упражнения вернитесь к простой веб-странице, которую вы создали ранее. Улучшите его, включив семантические элементы и используя атрибуты, чтобы добавить больше деталей и структуры. Следуйте этим рекомендациям:</font></font></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Структурируйте свой контент с помощью семантических элементов.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Замените несемантические </font></font><code>&lt;div&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">элементы на </font></font><code>&lt;header&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;footer&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;article&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и, </font></font><code>&lt;section&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">где это необходимо. Например, оберните вводный абзац тегом </font></font><code>&lt;header&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и сгруппируйте связанный контент в тегах </font></font><code>&lt;article&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">или </font></font><code>&lt;section&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Используйте атрибуты для уточнения элементов:</font></font></strong> </p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Назначайте </font></font><code>id</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">или </font></font><code>class</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">атрибутируйте элементы, которые вы, возможно, захотите стилизовать по-другому или получить к ним доступ через JavaScript.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Убедитесь, что все изображения имеют </font></font><code>alt</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">атрибут с описательным текстом.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Если на вашей веб-странице есть ссылки, убедитесь, что они </font></font><code>href</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">правильно используют атрибут.</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Проверьте доступность и SEO:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> убедитесь, что использование семантических элементов и атрибутов способствует тому, чтобы ваша веб-страница стала более доступной и потенциально более заметной в результатах поисковых систем.</font></font></p>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это упражнение — шаг к созданию более значимого, доступного и эффективно структурированного веб-контента. Добросовестно применяя семантическую разметку и атрибуты, вы не просто пишете код для настоящего; вы строите основу для будущей доступности и успеха в SEO.</font></font></p>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js" integrity="sha512-LhccdVNGe2QMEfI3x4DVV3ckMRe36TfydKss6mJpdHjNFiV07dFpS2xzeZedptKZrwxfICJpez09iNioiSZ3hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+	<script>
+		let currentLanguage = 'en';
+		const copiedTexts = {
+			en: 'Copied to clipboard!',
+			hy: 'Պատճենվել է սեղմատախտակում:',
+			ru: 'Скопировано в буфер обмена!'
+		}
+
+		function copyCode(index) {
+			const code = document.getElementById('code-block-' + index).innerText;
+			const copied = document.getElementById('copied-' + index);
+		
+			navigator.clipboard.writeText(code).then(() => {
+				copied.innerText = copiedTexts[currentLanguage];
+			});
+
+			setTimeout(() => {
+				copied.innerText = '';
+			}, 3000);
+		}
+
+		// Initialize Highlight.js after the document is fully loaded
+		document.addEventListener('DOMContentLoaded', (event) => {
+			hljs.highlightAll();
+		});
+
+		let en = document.getElementById('en');
+		let hy = document.getElementById('hy');
+		let ru = document.getElementById('ru');
+		let html_en = document.getElementById('html_en');
+		let html_hy = document.getElementById('html_hy');
+		let html_ru = document.getElementById('html_ru');
+		
+		en.addEventListener('click', function(){
+			html_en.style.display = 'block';
+			html_hy.style.display = 'none';
+			html_ru.style.display = 'none';
+			
+			en.style.display = 'none';
+			hy.style.display = 'inline';
+			ru.style.display = 'inline';
+			
+			document.getElementsByTagName('title')[0].innerText = html_en.getElementsByTagName('h2')[0].innerText
+			currentLanguage = 'en';
+		});
+		
+		hy.addEventListener('click', function(){
+			html_en.style.display = 'none';
+			html_hy.style.display = 'block';
+			html_ru.style.display = 'none';
+			
+			en.style.display = 'inline';
+			hy.style.display = 'none';
+			ru.style.display = 'inline';
+			
+			document.getElementsByTagName('title')[0].innerText = html_hy.getElementsByTagName('h2')[0].innerText
+			
+			currentLanguage = 'hy';
+		});
+		
+		ru.addEventListener('click', function(){
+			html_en.style.display = 'none';
+			html_hy.style.display = 'none';
+			html_ru.style.display = 'block';
+			
+			en.style.display = 'inline';
+			hy.style.display = 'inline';
+			ru.style.display = 'none';
+			
+			document.getElementsByTagName('title')[0].innerText = html_ru.getElementsByTagName('h2')[0].innerText
+			currentLanguage = 'ru';
+		});
+
+		let presLang = {
+			en: document.querySelectorAll('#html_en pre'), 
+			hy: document.querySelectorAll('#html_hy pre'), 
+			ru: document.querySelectorAll('#html_ru pre')
+		};
+		
+		let key = 1;
+		
+		for(let lang in presLang){
+			let pres = presLang[lang];
+
+			pres.forEach(function(pre){
+				let copyText = lang == 'hy' ? 'Պատճենել' : lang == 'ru' ? 'Копировать' : 'Copy';
+				let card = document.createElement('div');
+				card.className = 'card bg-dark text-white';
+				pre.firstChild.id = 'code-block-' + key
+				let cardHtml = `
+					<div class="card-header">
+						<button class="btn btn-primary" onclick="copyCode(${key})">${copyText}</button>
+						<span id="copied-${key}" class="float-end"></span>
+					</div>
+					<div class="p-0">
+						<pre>${pre.innerHTML}</pre>
+					</div>
+				`
+				card.innerHTML = cardHtml;
+				
+				pre.parentNode.replaceChild(card, pre);
+				key++;
+			});
+		}
+	</script>
+</body>
+</html>

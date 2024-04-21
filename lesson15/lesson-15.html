@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lesson 15: ES6 Features: Arrow Functions, Classes, and Modules</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+        <style>
+            code {
+                background-color: lightgray;
+                color: black;
+                padding: 2px 5px;
+                margin: 0 5px;
+				border: 1px solid gray;
+				border-radius: 5px;
+            }
+			#md{
+				display: none;
+			}
+        </style>
+    </head>
+    <body class="p-5">
+    <a href="#" id="hy" class="btn btn-info">Հայերեն</a>
+    <a href="#" id="en" class="btn btn-info" style="display:none">English</a>
+    <a href="#" id="ru" class="btn btn-info">Русский</a>
+	
+	<hr>
+
+
+
+
+
+
+	<div id="html_en" class="html">
+<h2>Lesson 15: ES6 Features: Arrow Functions, Classes, and Modules</h2>
+<hr>
+<h3>Introduction to ES6 (ECMAScript 2015)</h3>
+<h4>Overview of ES6</h4>
+<p>ECMAScript 6, also known as ES6 and officially as ECMAScript 2015, represents a significant update to JavaScript, marking the first major update to the language since ES5 was standardized in 2009. ES6 introduced several new features and syntax improvements that modernized JavaScript, making it more powerful, efficient, and easier to work with, especially for developing complex applications. This update was pivotal in aligning JavaScript more closely with other high-level programming languages, enhancing its capabilities and robustness for both client-side and server-side development.</p>
+<p><strong>Historical Context and Significance:</strong></p>
+<ul>
+<li><strong>Closing the Gap:</strong> Prior to ES6, JavaScript lacked several constructs that were common in other languages, which sometimes made the language feel less equipped for certain types of heavy-duty applications. ES6 addressed many of these deficiencies.</li>
+<li><strong>Standardization:</strong> ES6 brought about a new era of JavaScript development with an emphasis on future-proofing and standardized features that ensure consistency across different JavaScript engines.</li>
+<li><strong>Developer Experience:</strong> By introducing a bevy of new features, ES6 made code simpler and more expressive, significantly improving the developer experience.</li>
+</ul>
+<h4>Key Features Overview</h4>
+<p>ES6 introduced a suite of new features that have since become fundamental to modern JavaScript programming. Hereâ€™s an overview of some of the most impactful features:</p>
+<ol>
+<li><p><strong>Arrow Functions:</strong></p>
+<ul>
+<li>Provides a more concise syntax for writing functions.</li>
+<li>Does not have its own <code>this</code>, <code>arguments</code>, <code>super</code>, or <code>new.target</code> bindings, which makes them ideal for situations where you want to retain the lexical <code>this</code> value from the surrounding code.</li>
+</ul>
+<pre><code class="language-javascript">const sum = (a, b) =&gt; a + b;
+</code></pre>
+</li>
+<li><p><strong>Classes:</strong></p>
+<ul>
+<li>JavaScript classes introduced in ES6 are primarily syntactical sugar over JavaScript's existing prototype-based inheritance and offer a much cleaner and clearer syntax to create objects and deal with inheritance.</li>
+</ul>
+<pre><code class="language-javascript">class Rectangle {
+    constructor(height, width) {
+        this.height = height;
+        this.width = width;
+    }
+}
+</code></pre>
+</li>
+<li><p><strong>Modules:</strong></p>
+<ul>
+<li>ES6 modules include support for exporting and importing functions, objects, and classes, which greatly enhances code reusability and maintainability.</li>
+</ul>
+<pre><code class="language-javascript">// file1.js
+export const pi = 3.14159;
+
+// file2.js
+import { pi } from './file1.js';
+console.log(pi); // 3.14159
+</code></pre>
+</li>
+<li><p><strong>Template Literals:</strong></p>
+<ul>
+<li>Template literals provide an easy way to create multiline strings and perform string interpolation, facilitating more readable code.</li>
+</ul>
+<pre><code class="language-javascript">const user = 'Jane';
+console.log(`Hi ${user}, welcome back!`);
+</code></pre>
+</li>
+<li><p><strong>Destructuring:</strong></p>
+<ul>
+<li>Destructuring allows binding using pattern matching, with support for matching arrays and objects. Destructuring is useful for extracting multiple properties from an object or array simultaneously.</li>
+</ul>
+<pre><code class="language-javascript">const [x, y] = [1, 2];
+const {a, b} = {a:1, b:2};
+</code></pre>
+</li>
+<li><p><strong>Spread/Rest Operators:</strong></p>
+<ul>
+<li>The spread operator allows an iterable such as an array to be expanded in places where zero or more arguments (for function calls) or elements (for array literals) are expected. The rest operator does the opposite, collecting multiple elements and condensing them into a single element.</li>
+</ul>
+<pre><code class="language-javascript">const nums = [1, 2, 3];
+const numsCopy = [...nums]; // Spread as copying an array
+
+function sum(...args) { // Rest as collecting function arguments
+    return args.reduce((total, n) =&gt; total + n, 0);
+}
+</code></pre>
+</li>
+</ol>
+<p>Each of these features introduced with ES6 has been carefully designed to address specific development needs, contributing to JavaScriptâ€™s evolution as a mature and comprehensive programming language suitable for a wide range of applications. The lesson will delve deeper into these features, illustrating how they can be effectively used in modern web development.</p>
+<h3>Arrow Functions in JavaScript</h3>
+<h4>Syntax of Arrow Functions</h4>
+<p>Arrow functions introduce a new and more concise syntax for writing functions in JavaScript, which not only simplifies the function declaration but also changes how <code>this</code> binds within the function.</p>
+<p><strong>Basic Syntax:</strong></p>
+<ul>
+<li><p>A simple arrow function with explicit parameters can be defined as follows:</p>
+<pre><code class="language-javascript">const add = (a, b) =&gt; a + b;
+</code></pre>
+<p>This function takes two parameters and returns their sum. Notice the absence of the <code>function</code> keyword and the use of <code>=&gt;</code>.</p>
+</li>
+<li><p>If the function has only one parameter, the parentheses around the parameter can be omitted:</p>
+<pre><code class="language-javascript">const square = x =&gt; x * x;
+</code></pre>
+</li>
+<li><p>For functions with no parameters, or multiple statements, you must use parentheses and curly braces, respectively:</p>
+<pre><code class="language-javascript">const greet = () =&gt; console.log("Hello World!");
+const multiply = (a, b) =&gt; {
+    let result = a * b;
+    return result;
+};
+</code></pre>
+</li>
+</ul>
+<p><strong><code>this</code> Binding:</strong></p>
+<p>Unlike traditional functions, arrow functions do not have their own <code>this</code> context. Instead, <code>this</code> is lexically inherited from the outer function where the arrow function is defined. This means that inside an arrow function, <code>this</code> remains the same throughout the lifecycle of the function and is always bound to the <code>this</code> value of the closest non-arrow parent function.</p>
+<h4>Benefits and Usage</h4>
+<p><strong>Lexical Scoping of <code>this</code>:</strong></p>
+<p>The main advantage of arrow functions is their handling of <code>this</code>. In traditional function expressions, <code>this</code> can change depending on the context in which the function is called. Arrow functions fix <code>this</code> based on the context where the function is created, not where it is invoked. This makes arrow functions particularly useful in scenarios where functions are used as arguments, such as event handlers or callbacks.</p>
+<p><strong>Concise Syntax:</strong></p>
+<p>Arrow functions provide a more succinct way to write functions. This shorter syntax is helpful not only for simple functions but also makes code look cleaner and more readable, especially when working with higher-order functions like <code>map</code>, <code>filter</code>, or <code>reduce</code> which commonly take callback functions as arguments.</p>
+<h4>Practical Exercise: Refactoring Traditional Functions</h4>
+<p><strong>Objective:</strong></p>
+<p>Refactor a series of traditional functions into arrow functions, highlighting how this can simplify the codebase and improve readability.</p>
+<p><strong>Before Refactoring:</strong></p>
+<ol>
+<li><p>A traditional function to filter even numbers from an array:</p>
+<pre><code class="language-javascript">function filterEvens(numbers) {
+    return numbers.filter(function(number) {
+        return number % 2 === 0;
+    });
+}
+</code></pre>
+</li>
+<li><p>A traditional function to compute the total of an array of numbers:</p>
+<pre><code class="language-javascript">function computeTotal(numbers) {
+    return numbers.reduce(function(total, number) {
+        return total + number;
+    }, 0);
+}
+</code></pre>
+</li>
+</ol>
+<p><strong>After Refactoring:</strong></p>
+<ol>
+<li><p>Refactored to use an arrow function:</p>
+<pre><code class="language-javascript">const filterEvens = numbers =&gt; numbers.filter(number =&gt; number % 2 === 0);
+</code></pre>
+</li>
+<li><p>Refactored to use an arrow function:</p>
+<pre><code class="language-javascript">const computeTotal = numbers =&gt; numbers.reduce((total, number) =&gt; total + number, 0);
+</code></pre>
+</li>
+</ol>
+<p><strong>Exercise Tasks:</strong></p>
+<ul>
+<li>Guide students through converting these and potentially more complex functions.</li>
+<li>Discuss how the refactor changes the way <code>this</code> behaves if these functions were methods of an object and how it might affect the method's interaction with the object's properties.</li>
+<li>Encourage students to explore using arrow functions with other array methods or as event handlers where lexical <code>this</code> would be beneficial.</li>
+</ul>
+<p>Through these exercises, students will not only learn to write cleaner, more modern JavaScript but also understand some subtle nuances of function execution context, particularly how <code>this</code> binding can simplify development in common programming patterns.</p>
+<h3>Classes in JavaScript</h3>
+<h4>Introduction to Classes</h4>
+<p>Classes in JavaScript, introduced in ES6, provide a syntactical sugar over the existing prototype-based inheritance and offer a clearer and more elegant syntax for creating objects and dealing with inheritance. Before ES6, inheritance in JavaScript was accomplished through prototype chains, which could be verbose and not as intuitive, especially for developers coming from class-based languages like Java or C#.</p>
+<p><strong>Syntax and Structure:</strong></p>
+<ul>
+<li><strong>Class Declaration</strong>: To declare a class, you use the <code>class</code> keyword followed by the class name.</li>
+<li><strong>Constructor</strong>: The <code>constructor</code> method is a special method for creating and initializing objects created with the class. There can only be one constructor method in a class.</li>
+<li><strong>Methods</strong>: Classes can contain multiple methods. Unlike function expressions, methods defined in a class are not hoisted, so they cannot be called before they are defined in the class body.</li>
+</ul>
+<pre><code class="language-javascript">class Rectangle {
+    constructor(height, width) {
+        this.height = height;
+        this.width = width;
+    }
+
+    area() {
+        return this.height * this.width;
+    }
+}
+</code></pre>
+<h4>Creating Classes and Inheritance</h4>
+<p><strong>Defining a Class</strong>:
+Using the <code>class</code> keyword simplifies the definition of complex objects with their own prototypes.</p>
+<p><strong>Inheritance</strong>:
+Inheritance is a way to create a class as a specialized version of one or more classes. JavaScript implements inheritance using the <code>extends</code> keyword.</p>
+<ul>
+<li><strong><code>extends</code> Keyword</strong>: The <code>extends</code> keyword is used in class declarations or class expressions to create a class as a child of another class.</li>
+</ul>
+<p><strong>Example of Inheritance</strong>:</p>
+<pre><code class="language-javascript">class Person {
+    constructor(name) {
+        this.name = name;
+    }
+
+    greet() {
+        return `Hello, my name is ${this.name}`;
+    }
+}
+
+class Student extends Person {
+    constructor(name, level) {
+        super(name); // Call the parent class constructor
+        this.level = level;
+    }
+
+    study() {
+        return `${this.name} is studying at level ${this.level}`;
+    }
+}
+</code></pre>
+<h4>Practical Examples</h4>
+<p>Classes are incredibly useful for modeling real-world entities and relationships. Hereâ€™s a practical example involving a <code>Person</code> class and a <code>Student</code> class that inherits from it:</p>
+<pre><code class="language-javascript">let student = new Student("John", 12);
+console.log(student.greet());  // "Hello, my name is John"
+console.log(student.study());  // "John is studying at level 12"
+</code></pre>
+<p>This example illustrates how <code>Student</code> inherits functionality from <code>Person</code> while adding its own unique behavior.</p>
+<h4>Hands-On Exercise: Creating Classes</h4>
+<p><strong>Objective</strong>:
+Students will create their own classes encapsulating functionality for a simple application. Example applications include a digital clock or a basic inventory system.</p>
+<p><strong>Digital Clock Example</strong>:</p>
+<ul>
+<li><strong>Goal</strong>: Create a <code>Clock</code> class that maintains the current time and updates it every second.</li>
+<li><strong>Implementation</strong>:</li>
+</ul>
+<pre><code class="language-javascript">class Clock {
+    constructor() {
+        this.currentTime = new Date();
+        this.updateTime();
+    }
+
+    updateTime() {
+        setInterval(() =&gt; {
+            this.currentTime = new Date(); // Update time every second
+            console.log(this.currentTime.toLocaleTimeString()); // Display time
+        }, 1000);
+    }
+}
+
+const myClock = new Clock(); // Create a new clock instance
+</code></pre>
+<p><strong>Basic Inventory System</strong>:</p>
+<ul>
+<li><strong>Goal</strong>: Develop an <code>Inventory</code> class that allows adding and tracking items.</li>
+<li><strong>Implementation</strong>:</li>
+</ul>
+<pre><code class="language-javascript">class Inventory {
+    constructor() {
+        this.items = [];
+    }
+
+    addItem(item) {
+        this.items.push(item);
+        console.log(`Added ${item} to inventory`);
+    }
+
+    listItems() {
+        console.log("Inventory Items:");
+        this.items.forEach(item =&gt; console.log(item));
+    }
+}
+
+const myInventory = new Inventory();
+myInventory.addItem("Backpack");
+myInventory.addItem("Notebook");
+myInventory.listItems();
+</code></pre>
+<p>These exercises provide a hands-on way for students to apply their knowledge of JavaScript classes, exploring both inheritance and the encapsulation of functionality within class structures. The goal is to illustrate how classes can be used to structure applications more effectively, enhancing readability and maintainability.</p>
+<h3>Modules in JavaScript</h3>
+<h4>Why Use Modules?</h4>
+<p>Modules are an essential aspect of building scalable and maintainable applications. By dividing a program into discrete chunks of functionality, modules offer several advantages:</p>
+<ol>
+<li><p><strong>Maintainability</strong>: Smaller, well-defined modules are easier to understand, debug, and update compared to large monolithic code bases. Each module has a clear focus and can be maintained independently of others.</p>
+</li>
+<li><p><strong>Reusability</strong>: Modules allow you to reuse code across different parts of an application or even between different projects. For example, a module handling date and time operations can be reused wherever such functionality is required without duplication.</p>
+</li>
+<li><p><strong>Namespace Management</strong>: Modules help in avoiding global namespace pollution. They encapsulate their variables and functions, exposing only what is explicitly exported. This reduces the risk of naming conflicts across your codebase.</p>
+</li>
+<li><p><strong>Dependency Management</strong>: With modules, it's clear which files depend on which other files, making the structure of projects clearer and helping to ensure that scripts are loaded in the correct order.</p>
+</li>
+</ol>
+<h4>Exporting and Importing Modules</h4>
+<p><strong>Exporting a Module</strong>:</p>
+<ul>
+<li><p><strong>Named Exports</strong>: You can export multiple objects, functions, or primitives from a module using named exports. Each export can be referenced by its own name upon import.</p>
+<pre><code class="language-javascript">// utils.js
+export const add = (a, b) =&gt; a + b;
+export const multiply = (a, b) =&gt; a * b;
+</code></pre>
+</li>
+<li><p><strong>Default Export</strong>: Each module can optionally export one default export, which is considered the main "value" that the module provides.</p>
+<pre><code class="language-javascript">// greeting.js
+export default function greet(name) {
+    return `Hello, ${name}!`;
+}
+</code></pre>
+</li>
+</ul>
+<p><strong>Importing a Module</strong>:</p>
+<ul>
+<li><p><strong>Importing Named Exports</strong>: You can import specific parts of a module by using the named exports.</p>
+<pre><code class="language-javascript">// app.js
+import { add, multiply } from './utils.js';
+console.log(add(2, 3));  // Output: 5
+console.log(multiply(2, 3));  // Output: 6
+</code></pre>
+</li>
+<li><p><strong>Importing Default Exports</strong>: Default exports are imported without the use of brackets.</p>
+<pre><code class="language-javascript">// main.js
+import greet from './greeting.js';
+console.log(greet('Alice'));  // Output: Hello, Alice!
+</code></pre>
+</li>
+</ul>
+<h4>Hands-On Activity: Modularizing a Small Application</h4>
+<p><strong>Objective</strong>: Students will modularize a simple application into distinct components. Let's assume a basic application that displays user data.</p>
+<p><strong>Structure</strong>:</p>
+<ol>
+<li><p><strong>Data Module</strong>: Holds the user data.</p>
+<ul>
+<li><strong>data.js</strong>:<pre><code class="language-javascript">const users = [{ name: 'Alice', age: 25 }, { name: 'Bob', age: 30 }];
+export default users;
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>Logic Module</strong>: Contains business logic, like a function to find a user by name.</p>
+<ul>
+<li><strong>userOperations.js</strong>:<pre><code class="language-javascript">import users from './data.js';
+
+export function findUserByName(name) {
+    return users.find(user =&gt; user.name === name);
+}
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>Presentation Module</strong>: Handles displaying information in the console or to the DOM.</p>
+<ul>
+<li><strong>presentation.js</strong>:<pre><code class="language-javascript">import { findUserByName } from './userOperations.js';
+
+export function displayUser(name) {
+    const user = findUserByName(name);
+    if(user) {
+        console.log(`User Found: Name - ${user.name}, Age - ${user.age}`);
+    } else {
+        console.log('User not found');
+    }
+}
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>Main Application File</strong>:</p>
+<ul>
+<li><strong>app.js</strong>:<pre><code class="language-javascript">import { displayUser } from './presentation.js';
+
+displayUser('Alice');  // Output: User Found: Name - Alice, Age - 25
+displayUser('Bob');  // Output: User Found: Name - Bob, Age - 30
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>Task</strong>:</p>
+<ul>
+<li>Each student will create these modules and link them together using ES6 module syntax.</li>
+<li>Optionally, students could add more functionality, like updating or deleting user data, to practice modularizing complex functionalities.</li>
+</ul>
+<p>This activity provides a practical example of how ES6 modules can be used to organize code in a real-world application, emphasizing clean separation of concerns and improving code manageability.</p>
+<h3>Additional ES6 Features</h3>
+<h4>Template Literals</h4>
+<p>Template literals enhance the creation of complex strings by allowing for embedded expressions and multi-line strings without the need for concatenation operators (<code>+</code>). They are enclosed by backticks (``) rather than the traditional single or double quotes.</p>
+<p><strong>Features of Template Literals:</strong></p>
+<ul>
+<li><strong>Multi-line Strings:</strong> Easily create strings that span multiple lines without needing to include newline characters manually.</li>
+<li><strong>Expression Interpolation:</strong> Insert expressions directly within the string using <code>${expression}</code> syntax, which gets evaluated and converted to a string.</li>
+</ul>
+<p><strong>Example Usage:</strong></p>
+<pre><code class="language-javascript">const name = "Alice";
+const age = 25;
+const greeting = `Hello, my name is ${name} and I am ${age} years old.`;
+console.log(greeting);
+// Output: Hello, my name is Alice and I am 25 years old.
+</code></pre>
+<h4>Destructuring</h4>
+<p>Destructuring allows you to unpack values from arrays or properties from objects into distinct variables.</p>
+<p><strong>Array Destructuring:</strong></p>
+<ul>
+<li>Extract elements from an array and assign them to variables.</li>
+</ul>
+<pre><code class="language-javascript">const numbers = [1, 2, 3];
+const [one, two, three] = numbers;
+console.log(one, two, three); // Output: 1 2 3
+</code></pre>
+<p><strong>Object Destructuring:</strong></p>
+<ul>
+<li>Extract properties from an object.</li>
+</ul>
+<pre><code class="language-javascript">const user = { name: "John", age: 30 };
+const { name, age } = user;
+console.log(name, age); // Output: John 30
+</code></pre>
+<h4>Spread and Rest Operators</h4>
+<p><strong>Spread Operator (<code>...</code>):</strong></p>
+<ul>
+<li><strong>Arrays:</strong> Spread elements of an array into a new array.</li>
+</ul>
+<pre><code class="language-javascript">const parts = ['shoulders', 'knees'];
+const bodyParts = ['head', ...parts, 'toes'];
+console.log(bodyParts); // Output: ["head", "shoulders", "knees", "toes"]
+</code></pre>
+<ul>
+<li><strong>Objects:</strong> Copy properties from one object to another.</li>
+</ul>
+<pre><code class="language-javascript">const item = { name: 'Coffee', price: 2 };
+const updatedItem = { ...item, price: 3 };
+console.log(updatedItem); // Output: { name: 'Coffee', price: 3 }
+</code></pre>
+<p><strong>Rest Parameters:</strong></p>
+<ul>
+<li>Represent an indefinite number of arguments as an array.</li>
+</ul>
+<pre><code class="language-javascript">function sum(...numbers) {
+    return numbers.reduce((total, n) =&gt; total + n, 0);
+}
+console.log(sum(1, 2, 3)); // Output: 6
+</code></pre>
+<h4>Practical Exercises</h4>
+<p><strong>Objective:</strong> Students apply template literals, destructuring, and spread/rest operators to simplify and enhance the functionality of JavaScript snippets.</p>
+<p><strong>Example Exercise:</strong> Improve a function that handles an object representing a new userâ€™s data.</p>
+<p><strong>Provided Snippet:</strong></p>
+<pre><code class="language-javascript">function createUser(displayName, email, id) {
+    return {
+        displayName: displayName,
+        email: email,
+        id: id
+    };
+}
+</code></pre>
+<p><strong>Improved Version Using ES6 Features:</strong></p>
+<ul>
+<li><strong>Refactor with Destructuring and Object Property Shorthand:</strong></li>
+</ul>
+<pre><code class="language-javascript">function createUser(user) {
+    const { displayName, email, id } = user;
+    return { displayName, email, id };
+}
+// Usage
+const userData = { displayName: "Alice", email: "alice@example.com", id: 1 };
+console.log(createUser(userData));
+</code></pre>
+<ul>
+<li><strong>Incorporate Template Literals for Output:</strong></li>
+</ul>
+<pre><code class="language-javascript">function displayUserInfo(user) {
+    const info = `User: ${user.displayName}, Email: ${user.email}`;
+    console.log(info);
+}
+displayUserInfo(userData);
+</code></pre>
+<p><strong>Task:</strong> Students are to take a code snippet that manually concatenates strings and uses index-based access for arrays and objects, and refactor it using the discussed ES6 features. This will demonstrate the power and simplicity that these features bring to JavaScript, making code more readable and maintainable.</p>
+	</div>
+
+
+
+
+
+
+	<div id="html_hy" class="html" style="display:none">
+<h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դաս 15. ES6-ի առանձնահատկությունները. սլաքի գործառույթներ, դասեր և մոդուլներ</font></font></h2>
+<hr>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներածություն ES6-ին (ECMAScript 2015)</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ES6-ի ակնարկ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ECMAScript 6-ը, որը նաև հայտնի է որպես ES6 և պաշտոնապես որպես ECMAScript 2015, ներկայացնում է JavaScript-ի զգալի թարմացում՝ նշելով լեզվի առաջին հիմնական թարմացումը 2009 թվականին ES5-ի ստանդարտացումից ի վեր: ES6-ը ներկայացրել է մի քանի նոր հնարավորություններ և շարահյուսական բարելավումներ, որոնք արդիականացրել են JavaScript-ը՝ դարձնելով այն ավելին: հզոր, արդյունավետ և ավելի հեշտ է աշխատել, հատկապես բարդ հավելվածներ մշակելու համար: Այս թարմացումը առանցքային նշանակություն ունեցավ JavaScript-ն ավելի սերտորեն համապատասխանեցնելու այլ բարձր մակարդակի ծրագրավորման լեզուներին՝ բարձրացնելով դրա հնարավորություններն ու կայունությունը ինչպես հաճախորդի, այնպես էլ սերվերի կողմից մշակման համար:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պատմական համատեքստ և նշանակություն.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Փակելով բացը.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> մինչև ES6-ը JavaScript-ը չուներ մի քանի կառուցվածքներ, որոնք տարածված էին այլ լեզուներում, ինչը երբեմն ստիպում էր լեզուն ավելի քիչ հագեցած թվալ որոշակի տեսակի ծանրաբեռնված ծրագրերի համար: ES6-ն անդրադարձել է այս թերություններից շատերին:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ստանդարտացում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ES6-ը բերեց JavaScript-ի զարգացման նոր դարաշրջան՝ շեշտը դնելով ապագան պաշտպանելու և ստանդարտացված հատկանիշների վրա, որոնք ապահովում են հետևողականություն տարբեր JavaScript շարժիչների միջև:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մշակողի փորձ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ներդնելով նոր հնարավորությունների մի շարք՝ ES6-ը դարձրեց կոդը ավելի պարզ և արտահայտիչ՝ զգալիորեն բարելավելով ծրագրավորողների փորձը:</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիմնական հատկանիշների ակնարկ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ES6-ը ներկայացրել է նոր հնարավորությունների փաթեթ, որոնք այդ ժամանակվանից դարձել են ժամանակակից JavaScript ծրագրավորման հիմնարար գործառույթներ: Ահա ամենաազդեցիկ հատկանիշներից մի քանիսի ակնարկ.</font></font></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սլաքի գործառույթները.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ապահովում է ավելի հակիրճ շարահյուսություն գրելու գործառույթների համար:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Չունի իր սեփական </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>arguments</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>super</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, կամ </font></font><code>new.target</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կապանքները, ինչը նրանց դարձնում է իդեալական այն իրավիճակների համար, երբ ցանկանում եք պահպանել բառապաշարի </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">արժեքը շրջապատող ծածկագրից:</font></font></li>
+</ul>
+<pre><code class="language-javascript">const sum = (a, b) =&gt; a + b;
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դասեր:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ES6-ում ներդրված JavaScript դասերը հիմնականում շարահյուսական են JavaScript-ի գոյություն ունեցող նախատիպի վրա հիմնված ժառանգության նկատմամբ և առաջարկում են շատ ավելի մաքուր և հստակ շարահյուսություն՝ օբյեկտներ ստեղծելու և ժառանգության հետ կապված:</font></font></li>
+</ul>
+<pre><code class="language-javascript">class Rectangle {<font></font>
+    constructor(height, width) {<font></font>
+        this.height = height;<font></font>
+        this.width = width;<font></font>
+    }<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մոդուլներ:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ES6 մոդուլները ներառում են գործառույթների, օբյեկտների և դասերի արտահանման և ներմուծման աջակցություն, ինչը մեծապես մեծացնում է կոդի կրկնակի օգտագործման և պահպանման հնարավորությունը:</font></font></li>
+</ul>
+<pre><code class="language-javascript">// file1.js<font></font>
+export const pi = 3.14159;<font></font>
+<font></font>
+// file2.js<font></font>
+import { pi } from './file1.js';<font></font>
+console.log(pi); // 3.14159<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կաղապարի բառացիությունը.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կաղապարների բառացիները հեշտ ճանապարհ են ստեղծում բազմագիծ տողեր ստեղծելու և տողերի ինտերպոլացիա կատարելու համար՝ հեշտացնելով ավելի ընթեռնելի ծածկագիրը:</font></font></li>
+</ul>
+<pre><code class="language-javascript">const user = 'Jane';<font></font>
+console.log(`Hi ${user}, welcome back!`);<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կործանում:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Destructuring-ը թույլ է տալիս կապել՝ օգտագործելով օրինաչափությունների համընկնումներ՝ համապատասխան զանգվածների և օբյեկտների աջակցությամբ: Destructuring-ը օգտակար է օբյեկտից կամ զանգվածից միաժամանակ մի քանի հատկություններ հանելու համար:</font></font></li>
+</ul>
+<pre><code class="language-javascript">const [x, y] = [1, 2];<font></font>
+const {a, b} = {a:1, b:2};<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տարածման/Հանգստի օպերատորներ.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տարածման օպերատորը թույլ է տալիս կրկնվող, օրինակ՝ զանգվածի ընդլայնումը այն վայրերում, որտեղ ակնկալվում են զրո կամ ավելի արգումենտներ (ֆունկցիայի կանչերի համար) կամ էլեմենտներ (զանգվածի բառացիների համար): Մնացած օպերատորը հակառակն է անում՝ հավաքելով բազմաթիվ տարրեր և խտացնելով դրանք մեկ տարրի մեջ։</font></font></li>
+</ul>
+<pre><code class="language-javascript">const nums = [1, 2, 3];<font></font>
+const numsCopy = [...nums]; // Spread as copying an array<font></font>
+<font></font>
+function sum(...args) { // Rest as collecting function arguments<font></font>
+    return args.reduce((total, n) =&gt; total + n, 0);<font></font>
+}<font></font>
+</code></pre>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ES6-ով ներկայացված այս հատկանիշներից յուրաքանչյուրը խնամքով նախագծված է մշակման հատուկ կարիքները լուծելու համար՝ նպաստելով JavaScript-ի էվոլյուցիային՝ որպես հասուն և համապարփակ ծրագրավորման լեզու, որը հարմար է կիրառությունների լայն շրջանակի համար: Դասը կխորանա այս հատկանիշների մեջ՝ ցույց տալով, թե ինչպես դրանք կարող են արդյունավետ օգտագործվել ժամանակակից վեբ մշակման մեջ:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սլաքի գործառույթները JavaScript-ում</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սլաքների ֆունկցիաների շարահյուսություն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սլաքների ֆունկցիաները ներկայացնում են JavaScript-ում ֆունկցիաներ գրելու նոր և ավելի հակիրճ շարահյուսություն, որը ոչ միայն պարզեցնում է ֆունկցիայի հայտարարությունը, այլև փոխում է </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ֆունկցիայի ներսում կապի ձևը:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիմնական շարահյուսություն.</font></font></strong></p>
+<ul>
+<li><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պարզ սլաքի գործառույթը հստակ պարամետրերով կարող է սահմանվել հետևյալ կերպ.</font></font></p>
+<pre><code class="language-javascript">const add = (a, b) =&gt; a + b;
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս ֆունկցիան վերցնում է երկու պարամետր և վերադարձնում դրանց գումարը։ Ուշադրություն դարձրեք հիմնաբառի բացակայությանը </font></font><code>function</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>=&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+</li>
+<li><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Եթե &ZeroWidthSpace;&ZeroWidthSpace;ֆունկցիան ունի միայն մեկ պարամետր, ապա պարամետրի շուրջ փակագծերը կարող են բաց թողնել.</font></font></p>
+<pre><code class="language-javascript">const square = x =&gt; x * x;
+</code></pre>
+</li>
+<li><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պարամետրեր չունեցող ֆունկցիաների կամ մի քանի հայտարարությունների համար դուք պետք է օգտագործեք փակագծեր և գանգուր փակագծեր, համապատասխանաբար.</font></font></p>
+<pre><code class="language-javascript">const greet = () =&gt; console.log("Hello World!");<font></font>
+const multiply = (a, b) =&gt; {<font></font>
+    let result = a * b;<font></font>
+    return result;<font></font>
+};<font></font>
+</code></pre>
+</li>
+</ul>
+<p><strong><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պարտադիր:</font></font></strong></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ի տարբերություն ավանդական ֆունկցիաների, սլաքների ֆունկցիաները չունեն իրենց սեփական </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">համատեքստը: Փոխարենը, </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բառապաշարով ժառանգվում է արտաքին ֆունկցիայից, որտեղ սահմանված է սլաքի ֆունկցիան: Սա նշանակում է, որ սլաքային ֆունկցիայի ներսում </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">նույնը մնում է ֆունկցիայի ողջ ցիկլի ընթացքում և միշտ կապված է </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ամենամոտ ոչ սլաք մայր ֆունկցիայի արժեքին:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Առավելությունները և օգտագործումը</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Լեքսիկական շրջանակը </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></strong></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սլաքների գործառույթների հիմնական առավելությունը դրանց կառավարումն է </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: Ավանդական ֆունկցիայի արտահայտություններում </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կարող է փոխվել՝ կախված այն համատեքստից, որում կոչվում է ֆունկցիան: Սլաքների գործառույթները շտկվում են </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">՝ հիմնվելով այն համատեքստի վրա, որտեղ ստեղծվել է ֆունկցիան, այլ ոչ թե այնտեղ, որտեղ այն կանչվել է: Սա սլաքների գործառույթները հատկապես օգտակար է դարձնում այն &ZeroWidthSpace;&ZeroWidthSpace;սցենարներում, որտեղ գործառույթներն օգտագործվում են որպես փաստարկներ, ինչպիսիք են իրադարձությունների մշակողները կամ հետադարձ զանգերը:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Համառոտ շարահյուսություն.</font></font></strong></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սլաքների գործառույթներն ապահովում են գործառույթները գրելու ավելի լակոնիկ եղանակ: Այս կարճ շարահյուսությունը օգտակար է ոչ միայն պարզ գործառույթների համար, այլև կոդն ավելի մաքուր և ընթեռնելի է դարձնում, հատկապես, երբ աշխատում եք ավելի բարձր կարգի ֆունկցիաների հետ, ինչպիսիք են </font></font><code>map</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>filter</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-ը, կամ </font></font><code>reduce</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">որոնք սովորաբար ընդունում են հետադարձ կապի գործառույթները որպես փաստարկներ:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական վարժություն. ավանդական ֆունկցիաների վերամշակում</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նպատակը:</font></font></strong></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերափոխեք մի շարք ավանդական գործառույթներ սլաքների գործառույթների մեջ՝ ընդգծելով, թե ինչպես դա կարող է պարզեցնել կոդերի բազան և բարելավել ընթերցանությունը:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նախքան վերամշակումը.</font></font></strong></p>
+<ol>
+<li><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զույգ թվերը զանգվածից զտելու ավանդական ֆունկցիա.</font></font></p>
+<pre><code class="language-javascript">function filterEvens(numbers) {<font></font>
+    return numbers.filter(function(number) {<font></font>
+        return number % 2 === 0;<font></font>
+    });<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ավանդական ֆունկցիա՝ թվերի զանգվածի ընդհանուր գումարը հաշվելու համար.</font></font></p>
+<pre><code class="language-javascript">function computeTotal(numbers) {<font></font>
+    return numbers.reduce(function(total, number) {<font></font>
+        return total + number;<font></font>
+    }, 0);<font></font>
+}<font></font>
+</code></pre>
+</li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերափոխումից հետո.</font></font></strong></p>
+<ol>
+<li><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերափոխվել է սլաքի ֆունկցիան օգտագործելու համար.</font></font></p>
+<pre><code class="language-javascript">const filterEvens = numbers =&gt; numbers.filter(number =&gt; number % 2 === 0);
+</code></pre>
+</li>
+<li><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերափոխվել է սլաքի ֆունկցիան օգտագործելու համար.</font></font></p>
+<pre><code class="language-javascript">const computeTotal = numbers =&gt; numbers.reduce((total, number) =&gt; total + number, 0);
+</code></pre>
+</li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զորավարժությունների առաջադրանքներ.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ուղղորդեք ուսանողներին այս և պոտենցիալ ավելի բարդ գործառույթների փոխակերպման միջոցով:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Քննարկեք, թե ինչպես է ռեֆակտորը փոխում իր վարքագիծը, </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">եթե այս գործառույթները լինեին օբյեկտի մեթոդներ, և ինչպես կարող է դա ազդել մեթոդի փոխազդեցության վրա օբյեկտի հատկությունների հետ:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Խրախուսեք ուսանողներին ուսումնասիրել՝ օգտագործելով սլաքների ֆունկցիաները զանգվածի այլ մեթոդների հետ կամ որպես իրադարձությունների մշակիչներ, որտեղ բառապաշարը </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">օգտակար կլինի:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժությունների միջոցով ուսանողները ոչ միայն կսովորեն գրել ավելի մաքուր, ավելի ժամանակակից JavaScript, այլև կհասկանան ֆունկցիաների կատարման համատեքստի որոշ նուրբ նրբերանգներ, մասնավորապես, թե ինչպես </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կարող է կապը հեշտացնել ծրագրավորման ընդհանուր օրինաչափությունների զարգացումը:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JavaScript-ի դասեր</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դասերի ներածություն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JavaScript-ի դասերը, որոնք ներդրվել են ES6-ում, ապահովում են շարահյուսական շաքար գոյություն ունեցող նախատիպի վրա հիմնված ժառանգության նկատմամբ և առաջարկում են ավելի հստակ և էլեգանտ շարահյուսություն՝ օբյեկտներ ստեղծելու և ժառանգականության հետ կապված: Մինչև ES6-ը, JavaScript-ում ժառանգությունն իրականացվում էր նախատիպային շղթաների միջոցով, որոնք կարող էին լինել մանրամասն և ոչ այնքան ինտուիտիվ, հատկապես այն ծրագրավորողների համար, ովքեր գալիս էին դասի վրա հիմնված լեզուներից, ինչպիսիք են Java-ն կամ C#-ը:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Շարահյուսություն և կառուցվածք.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դասի հռչակագիր</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Դաս հայտարարելու համար օգտագործում եք </font></font><code>class</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բանալի բառը, որին հաջորդում է դասի անվանումը:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կառուցիչ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font></font><code>constructor</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">մեթոդը հատուկ մեթոդ է դասի հետ ստեղծված օբյեկտների ստեղծման և սկզբնավորման համար: Դասում կարող է լինել միայն մեկ կոնստրուկտորական մեթոդ:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մեթոդներ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Դասերը կարող են պարունակել բազմաթիվ մեթոդներ: Ի տարբերություն ֆունկցիայի արտահայտությունների, դասում սահմանված մեթոդները չեն բարձրացվում, ուստի դրանք չեն կարող կանչվել մինչև դասի մարմնում սահմանված լինելը:</font></font></li>
+</ul>
+<pre><code class="language-javascript">class Rectangle {<font></font>
+    constructor(height, width) {<font></font>
+        this.height = height;<font></font>
+        this.width = width;<font></font>
+    }<font></font>
+<font></font>
+    area() {<font></font>
+        return this.height * this.width;<font></font>
+    }<font></font>
+}<font></font>
+</code></pre>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դասերի և ժառանգության ստեղծում</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դասի սահմանում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . հիմնաբառի օգտագործումը </font></font><code>class</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">պարզեցնում է բարդ օբյեկտների սահմանումը իրենց նախատիպերով:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ժառանգություն</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Ժառանգությունը դաս ստեղծելու միջոց է որպես մեկ կամ մի քանի դասերի մասնագիտացված տարբերակ: JavaScript-ն իրականացնում է ժառանգությունը՝ օգտագործելով </font></font><code>extends</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հիմնաբառը:</font></font></p>
+<ul>
+<li><strong><code>extends</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիմնաբառ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font></font><code>extends</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիմնաբառը օգտագործվում է դասի հայտարարություններում կամ դասի արտահայտություններում՝ որպես մեկ այլ դասի երեխա դաս ստեղծելու համար:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ժառանգության օրինակ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<pre><code class="language-javascript">class Person {<font></font>
+    constructor(name) {<font></font>
+        this.name = name;<font></font>
+    }<font></font>
+<font></font>
+    greet() {<font></font>
+        return `Hello, my name is ${this.name}`;<font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+class Student extends Person {<font></font>
+    constructor(name, level) {<font></font>
+        super(name); // Call the parent class constructor<font></font>
+        this.level = level;<font></font>
+    }<font></font>
+<font></font>
+    study() {<font></font>
+        return `${this.name} is studying at level ${this.level}`;<font></font>
+    }<font></font>
+}<font></font>
+</code></pre>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական օրինակներ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դասերը աներևակայելի օգտակար են իրական աշխարհի սուբյեկտների և հարաբերությունների մոդելավորման համար: Ահա գործնական օրինակ, որը ներառում է </font></font><code>Person</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">դաս և </font></font><code>Student</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">դաս, որը ժառանգում է դրանից.</font></font></p>
+<pre><code class="language-javascript">let student = new Student("John", 12);<font></font>
+console.log(student.greet());  // "Hello, my name is John"<font></font>
+console.log(student.study());  // "John is studying at level 12"<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս օրինակը ցույց է տալիս, թե ինչպես </font></font><code>Student</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">է ժառանգում ֆունկցիոնալությունը՝ </font></font><code>Person</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ավելացնելով իր յուրահատուկ վարքագիծը:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ձեռքի վարժություն. Դասերի ստեղծում</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նպատակը</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Ուսանողները կստեղծեն իրենց դասերը՝ պարփակելով ֆունկցիոնալությունը պարզ հավելվածի համար: Օրինակ հավելվածները ներառում են թվային ժամացույց կամ հիմնական գույքագրման համակարգ:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Թվային ժամացույցի օրինակ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նպատակ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Ստեղծեք </font></font><code>Clock</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">դաս, որը պահպանում է ընթացիկ ժամանակը և թարմացնում այն &ZeroWidthSpace;&ZeroWidthSpace;ամեն վայրկյան:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրականացում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></li>
+</ul>
+<pre><code class="language-javascript">class Clock {<font></font>
+    constructor() {<font></font>
+        this.currentTime = new Date();<font></font>
+        this.updateTime();<font></font>
+    }<font></font>
+<font></font>
+    updateTime() {<font></font>
+        setInterval(() =&gt; {<font></font>
+            this.currentTime = new Date(); // Update time every second<font></font>
+            console.log(this.currentTime.toLocaleTimeString()); // Display time<font></font>
+        }, 1000);<font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+const myClock = new Clock(); // Create a new clock instance<font></font>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիմնական գույքագրման համակարգ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նպատակը</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Մշակել </font></font><code>Inventory</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">դաս, որը թույլ է տալիս ավելացնել և հետևել տարրեր:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրականացում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></li>
+</ul>
+<pre><code class="language-javascript">class Inventory {<font></font>
+    constructor() {<font></font>
+        this.items = [];<font></font>
+    }<font></font>
+<font></font>
+    addItem(item) {<font></font>
+        this.items.push(item);<font></font>
+        console.log(`Added ${item} to inventory`);<font></font>
+    }<font></font>
+<font></font>
+    listItems() {<font></font>
+        console.log("Inventory Items:");<font></font>
+        this.items.forEach(item =&gt; console.log(item));<font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+const myInventory = new Inventory();<font></font>
+myInventory.addItem("Backpack");<font></font>
+myInventory.addItem("Notebook");<font></font>
+myInventory.listItems();<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժությունները գործնական ճանապարհ են տալիս ուսանողներին կիրառելու իրենց գիտելիքները JavaScript-ի դասերի վերաբերյալ՝ ուսումնասիրելով ինչպես ժառանգականությունը, այնպես էլ դասի կառուցվածքում ֆունկցիոնալության ամփոփումը: Նպատակն է ցույց տալ, թե ինչպես դասերը կարող են օգտագործվել հավելվածների ավելի արդյունավետ կառուցվածքի համար՝ բարձրացնելով ընթերցելիությունը և պահպանելիությունը:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մոդուլներ JavaScript-ում</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ինչու՞ օգտագործել մոդուլներ:</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մոդուլները մասշտաբային և պահպանվող ծրագրերի կառուցման էական կողմն են: Ծրագիրը ֆունկցիոնալության առանձին մասերի բաժանելով՝ մոդուլներն առաջարկում են մի քանի առավելություններ.</font></font></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պահպանելիություն</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . ավելի փոքր, լավ սահմանված մոդուլները ավելի հեշտ են հասկանալ, կարգաբերել և թարմացնել՝ համեմատած խոշոր մոնոլիտ կոդերի հիմքերի հետ: Յուրաքանչյուր մոդուլ ունի հստակ ուշադրություն և կարող է պահպանվել մյուսներից անկախ:</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կրկնակի օգտագործման հնարավորություն</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . մոդուլները թույլ են տալիս վերօգտագործել կոդը հավելվածի տարբեր մասերում կամ նույնիսկ տարբեր նախագծերի միջև: Օրինակ, մոդուլի մշակման ամսաթվի և ժամի գործառնությունները կարող են կրկին օգտագործվել այնտեղ, որտեղ նման գործառույթ է պահանջվում՝ առանց կրկնօրինակման:</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Անվան տարածության կառավարում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . մոդուլներն օգնում են խուսափել գլոբալ անվանումների տարածքի աղտոտումից: Նրանք ամփոփում են իրենց փոփոխականներն ու գործառույթները՝ բացահայտելով միայն այն, ինչ բացահայտ արտահանվում է: Սա նվազեցնում է ձեր կոդերի բազայի միջև կոնֆլիկտների անվանման ռիսկը:</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կախվածության կառավարում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . մոդուլների միջոցով պարզ է, թե որ ֆայլերը որ այլ ֆայլերից են կախված՝ ավելի պարզ դարձնելով նախագծերի կառուցվածքը և օգնելով ապահովել, որ սցենարները բեռնված են ճիշտ հերթականությամբ:</font></font></p>
+</li>
+</ol>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մոդուլների արտահանում և ներմուծում</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մոդուլի արտահանում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Անվանված արտահանումներ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Դուք կարող եք արտահանել բազմաթիվ օբյեկտներ, գործառույթներ կամ պրիմիտիվներ մոդուլից՝ օգտագործելով անվանված արտահանումները: Յուրաքանչյուր արտահանում ներմուծման ժամանակ կարող է նշվել իր անունով:</font></font></p>
+<pre><code class="language-javascript">// utils.js<font></font>
+export const add = (a, b) =&gt; a + b;<font></font>
+export const multiply = (a, b) =&gt; a * b;<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կանխադրված արտահանում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Յուրաքանչյուր մոդուլ կարող է կամայականորեն արտահանել մեկ լռելյայն արտահանում, որը համարվում է հիմնական «արժեքը», որը տրամադրում է մոդուլը:</font></font></p>
+<pre><code class="language-javascript">// greeting.js<font></font>
+export default function greet(name) {<font></font>
+    return `Hello, ${name}!`;<font></font>
+}<font></font>
+</code></pre>
+</li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մոդուլի ներմուծում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Անվանված արտահանումների ներմուծում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Դուք կարող եք ներմուծել մոդուլի որոշակի մասեր՝ օգտագործելով անվանված արտահանումները:</font></font></p>
+<pre><code class="language-javascript">// app.js<font></font>
+import { add, multiply } from './utils.js';<font></font>
+console.log(add(2, 3));  // Output: 5<font></font>
+console.log(multiply(2, 3));  // Output: 6<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կանխադրված արտահանումների ներմուծում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . լռելյայն արտահանումները ներմուծվում են առանց փակագծերի օգտագործման:</font></font></p>
+<pre><code class="language-javascript">// main.js<font></font>
+import greet from './greeting.js';<font></font>
+console.log(greet('Alice'));  // Output: Hello, Alice!<font></font>
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական գործունեություն. փոքր հավելվածի մոդուլյարացում</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նպատակը</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Ուսանողները պարզ հավելվածը կդարձնեն տարբեր բաղադրիչներ: Ենթադրենք հիմնական հավելված, որը ցուցադրում է օգտվողի տվյալները:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կառուցվածքը</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տվյալների մոդուլ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . պահում է օգտատիրոջ տվյալները:</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">data.js</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font><pre><code class="language-javascript">const users = [{ name: 'Alice', age: 25 }, { name: 'Bob', age: 30 }];<font></font>
+export default users;<font></font>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տրամաբանական մոդուլ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Պարունակում է բիզնես տրամաբանություն, ինչպես օգտատիրոջ անունով գտնելու գործառույթը:</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">userOperations.js</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font><pre><code class="language-javascript">import users from './data.js';<font></font>
+<font></font>
+export function findUserByName(name) {<font></font>
+    return users.find(user =&gt; user.name === name);<font></font>
+}<font></font>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներկայացման մոդուլ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Բռնակներ ցուցադրում է տեղեկատվություն վահանակում կամ DOM-ում:</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ներկայացում.js</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font><pre><code class="language-javascript">import { findUserByName } from './userOperations.js';<font></font>
+<font></font>
+export function displayUser(name) {<font></font>
+    const user = findUserByName(name);<font></font>
+    if(user) {<font></font>
+        console.log(`User Found: Name - ${user.name}, Age - ${user.age}`);<font></font>
+    } else {<font></font>
+        console.log('User not found');<font></font>
+    }<font></font>
+}<font></font>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիմնական հայտի ֆայլ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">app.js</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font><pre><code class="language-javascript">import { displayUser } from './presentation.js';<font></font>
+<font></font>
+displayUser('Alice');  // Output: User Found: Name - Alice, Age - 25<font></font>
+displayUser('Bob');  // Output: User Found: Name - Bob, Age - 30<font></font>
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Առաջադրանք</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Յուրաքանչյուր ուսանող կստեղծի այս մոդուլները և կկապի դրանք միասին՝ օգտագործելով ES6 մոդուլի շարահյուսությունը:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ընտրովի, ուսանողները կարող են ավելացնել ավելի շատ գործառույթներ, ինչպիսիք են օգտվողի տվյալների թարմացումը կամ ջնջումը, բարդ գործառույթների մոդուլյարացման համար:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս գործողությունը գործնական օրինակ է տալիս, թե ինչպես կարող են ES6 մոդուլները օգտագործվել իրական աշխարհի հավելվածում կոդը կազմակերպելու համար՝ ընդգծելով մտահոգությունների մաքուր տարանջատումը և բարելավելով կոդի կառավարելիությունը:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ES6-ի լրացուցիչ հնարավորություններ</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կաղապար բառացիներ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կաղապարի բառացիները ուժեղացնում են բարդ տողերի ստեղծումը՝ թույլ տալով ներկառուցված արտահայտություններ և բազմագիծ տողեր՝ առանց կապակցման օպերատորների ( </font></font><code>+</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">): Դրանք պարփակված են հետինտողերով (``), այլ ոչ թե ավանդական մեկ կամ կրկնակի չակերտներով:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կաղապարի Literals-ի առանձնահատկությունները.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բազմատող տողեր.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Հեշտությամբ ստեղծեք տողեր, որոնք ընդգրկում են մի քանի տողեր՝ առանց նոր տողերի նիշերը ձեռքով ներառելու անհրաժեշտության:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Արտահայտման ինտերպոլացիա.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Տեղադրեք արտահայտություններ անմիջապես տողի մեջ՝ օգտագործելով </font></font><code>${expression}</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">շարահյուսությունը, որը գնահատվում և փոխարկվում է տողի:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործման օրինակ.</font></font></strong></p>
+<pre><code class="language-javascript">const name = "Alice";<font></font>
+const age = 25;<font></font>
+const greeting = `Hello, my name is ${name} and I am ${age} years old.`;<font></font>
+console.log(greeting);<font></font>
+// Output: Hello, my name is Alice and I am 25 years old.<font></font>
+</code></pre>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կործանում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Destructuring-ը թույլ է տալիս զանգվածներից կամ հատկություններից արժեքները հանել օբյեկտներից՝ առանձին փոփոխականների մեջ:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զանգվածի ապակառուցում.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Քաղեք տարրեր զանգվածից և վերագրեք դրանք փոփոխականներին:</font></font></li>
+</ul>
+<pre><code class="language-javascript">const numbers = [1, 2, 3];<font></font>
+const [one, two, three] = numbers;<font></font>
+console.log(one, two, three); // Output: 1 2 3<font></font>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օբյեկտների ոչնչացում.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հատկություններ հանել օբյեկտից:</font></font></li>
+</ul>
+<pre><code class="language-javascript">const user = { name: "John", age: 30 };<font></font>
+const { name, age } = user;<font></font>
+console.log(name, age); // Output: John 30<font></font>
+</code></pre>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տարածման և հանգստի օպերատորներ</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Spread Operator ( </font></font><code>...</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">):</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զանգվածներ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> զանգվածի տարրերը տարածեք նոր զանգվածի մեջ:</font></font></li>
+</ul>
+<pre><code class="language-javascript">const parts = ['shoulders', 'knees'];<font></font>
+const bodyParts = ['head', ...parts, 'toes'];<font></font>
+console.log(bodyParts); // Output: ["head", "shoulders", "knees", "toes"]<font></font>
+</code></pre>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օբյեկտներ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> պատճենեք հատկությունները մեկ օբյեկտից մյուսը:</font></font></li>
+</ul>
+<pre><code class="language-javascript">const item = { name: 'Coffee', price: 2 };<font></font>
+const updatedItem = { ...item, price: 3 };<font></font>
+console.log(updatedItem); // Output: { name: 'Coffee', price: 3 }<font></font>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հանգստի պարամետրեր.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներկայացրե՛ք անորոշ թվով արգումենտներ որպես զանգված:</font></font></li>
+</ul>
+<pre><code class="language-javascript">function sum(...numbers) {<font></font>
+    return numbers.reduce((total, n) =&gt; total + n, 0);<font></font>
+}<font></font>
+console.log(sum(1, 2, 3)); // Output: 6<font></font>
+</code></pre>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական վարժություններ</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նպատակը.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ուսանողները կիրառում են ձևանմուշների բառացի, ապակառուցողական և տարածման/հանգստի օպերատորներ՝ պարզեցնելու և բարելավելու JavaScript հատվածների ֆունկցիոնալությունը:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օրինակ վարժություն.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Բարելավել գործառույթը, որը մշակում է նոր օգտվողի տվյալները ներկայացնող օբյեկտը:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տրամադրված հատված՝</font></font></strong></p>
+<pre><code class="language-javascript">function createUser(displayName, email, id) {<font></font>
+    return {<font></font>
+        displayName: displayName,<font></font>
+        email: email,<font></font>
+        id: id<font></font>
+    };<font></font>
+}<font></font>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բարելավված տարբերակ՝ օգտագործելով ES6-ի առանձնահատկությունները.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Refactor with Destructuring and Object Property Shortthand:</font></font></strong></li>
+</ul>
+<pre><code class="language-javascript">function createUser(user) {<font></font>
+    const { displayName, email, id } = user;<font></font>
+    return { displayName, email, id };<font></font>
+}<font></font>
+// Usage<font></font>
+const userData = { displayName: "Alice", email: "alice@example.com", id: 1 };<font></font>
+console.log(createUser(userData));<font></font>
+</code></pre>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներառեք ձևանմուշների բառացի նշումներ արդյունքի համար.</font></font></strong></li>
+</ul>
+<pre><code class="language-javascript">function displayUserInfo(user) {<font></font>
+    const info = `User: ${user.displayName}, Email: ${user.email}`;<font></font>
+    console.log(info);<font></font>
+}<font></font>
+displayUserInfo(userData);<font></font>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Առաջադրանք.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ուսանողները պետք է վերցնեն կոդի հատված, որը ձեռքով միացնում է տողերը և օգտագործում ինդեքսի վրա հիմնված հասանելիություն զանգվածների և օբյեկտների համար, և վերամշակում այն՝ օգտագործելով քննարկված ES6 հատկանիշները: Սա ցույց կտա այն ուժն ու պարզությունը, որ այս հատկանիշները բերում են JavaScript-ին՝ կոդն ավելի ընթեռնելի և պահպանելի դարձնելով:</font></font></p>
+	</div>
+
+
+
+
+
+
+	<div id="html_ru" class="html" style="display:none">
+<h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Урок 15. Возможности ES6: стрелочные функции, классы и модули</font></font></h2>
+<hr>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Введение в ES6 (ECMAScript 2015)</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обзор ES6</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ECMAScript 6, также известный как ES6 и официально как ECMAScript 2015, представляет собой значительное обновление JavaScript, отмечая первое крупное обновление языка с момента стандартизации ES5 в 2009 году. ES6 представил несколько новых функций и улучшений синтаксиса, которые модернизировали JavaScript, сделав его более удобным. мощный, эффективный и простой в использовании, особенно для разработки сложных приложений. Это обновление сыграло решающую роль в более тесном согласовании JavaScript с другими языками программирования высокого уровня, расширив его возможности и надежность как для клиентской, так и для серверной разработки.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Исторический контекст и значение:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Устранение разрыва:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> до ES6 в JavaScript отсутствовало несколько конструкций, которые были распространены в других языках, из-за чего иногда язык казался менее приспособленным для определенных типов тяжелых приложений. ES6 устранил многие из этих недостатков.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Стандартизация:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ES6 открыл новую эру разработки JavaScript с упором на перспективность и стандартизированные функции, которые обеспечивают согласованность между различными движками JavaScript.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Опыт разработчика.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Введя множество новых функций, ES6 сделал код более простым и выразительным, что значительно улучшило работу разработчиков.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обзор основных функций</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ES6 представил набор новых функций, которые с тех пор стали фундаментальными для современного программирования на JavaScript. Вот обзор некоторых из наиболее эффективных функций:</font></font></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Функции стрелок:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Предоставляет более краткий синтаксис для написания функций.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Не имеет собственных </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>arguments</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>super</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">или </font></font><code>new.target</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">привязок, что делает их идеальными для ситуаций, когда вы хотите сохранить лексическое </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">значение из окружающего кода.</font></font></li>
+</ul>
+<pre><code class="language-javascript">const sum = (a, b) =&gt; a + b;
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Классы:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Классы JavaScript, представленные в ES6, в первую очередь представляют собой синтаксический сахар по сравнению с существующим в JavaScript наследованием на основе прототипов и предлагают гораздо более чистый и понятный синтаксис для создания объектов и работы с наследованием.</font></font></li>
+</ul>
+<pre><code class="language-javascript">class Rectangle {<font></font>
+    constructor(height, width) {<font></font>
+        this.height = height;<font></font>
+        this.width = width;<font></font>
+    }<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Модули:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Модули ES6 включают поддержку экспорта и импорта функций, объектов и классов, что значительно повышает удобство повторного использования и сопровождения кода.</font></font></li>
+</ul>
+<pre><code class="language-javascript">// file1.js<font></font>
+export const pi = 3.14159;<font></font>
+<font></font>
+// file2.js<font></font>
+import { pi } from './file1.js';<font></font>
+console.log(pi); // 3.14159<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Литералы шаблона:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Литералы шаблонов предоставляют простой способ создания многострочных строк и выполнения интерполяции строк, что делает код более читаемым.</font></font></li>
+</ul>
+<pre><code class="language-javascript">const user = 'Jane';<font></font>
+console.log(`Hi ${user}, welcome back!`);<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Деструктуризация:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Деструктуризация позволяет выполнять связывание с использованием сопоставления с образцом с поддержкой сопоставления массивов и объектов. Деструктуризация полезна для одновременного извлечения нескольких свойств из объекта или массива.</font></font></li>
+</ul>
+<pre><code class="language-javascript">const [x, y] = [1, 2];<font></font>
+const {a, b} = {a:1, b:2};<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Операторы распространения/остановки:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Оператор расширения позволяет расширять итерацию, например массив, в тех местах, где ожидается ноль или более аргументов (для вызовов функций) или элементов (для литералов массива). Оператор rest делает обратное, собирая несколько элементов и объединяя их в один элемент.</font></font></li>
+</ul>
+<pre><code class="language-javascript">const nums = [1, 2, 3];<font></font>
+const numsCopy = [...nums]; // Spread as copying an array<font></font>
+<font></font>
+function sum(...args) { // Rest as collecting function arguments<font></font>
+    return args.reduce((total, n) =&gt; total + n, 0);<font></font>
+}<font></font>
+</code></pre>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Каждая из этих функций, представленных в ES6, была тщательно разработана для удовлетворения конкретных потребностей разработки, способствуя развитию JavaScript как зрелого и комплексного языка программирования, подходящего для широкого спектра приложений. На уроке мы углубимся в эти функции, показав, как их можно эффективно использовать в современной веб-разработке.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Стрелочные функции в JavaScript</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Синтаксис стрелочных функций</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Стрелочные функции представляют новый и более краткий синтаксис для написания функций в JavaScript, который не только упрощает объявление функции, но и меняет способ </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">привязки внутри функции.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Основной синтаксис:</font></font></strong></p>
+<ul>
+<li><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Простую стрелочную функцию с явными параметрами можно определить следующим образом:</font></font></p>
+<pre><code class="language-javascript">const add = (a, b) =&gt; a + b;
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эта функция принимает два параметра и возвращает их сумму. Обратите внимание на отсутствие </font></font><code>function</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ключевого слова и использование </font></font><code>=&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+</li>
+<li><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Если функция имеет только один параметр, круглые скобки вокруг параметра можно опустить:</font></font></p>
+<pre><code class="language-javascript">const square = x =&gt; x * x;
+</code></pre>
+</li>
+<li><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Для функций без параметров или с несколькими операторами необходимо использовать круглые и фигурные скобки соответственно:</font></font></p>
+<pre><code class="language-javascript">const greet = () =&gt; console.log("Hello World!");<font></font>
+const multiply = (a, b) =&gt; {<font></font>
+    let result = a * b;<font></font>
+    return result;<font></font>
+};<font></font>
+</code></pre>
+</li>
+</ul>
+<p><strong><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обвязка:</font></font></strong></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В отличие от традиционных функций, стрелочные функции не имеют собственного </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">контекста. Вместо этого </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">лексически наследуется от внешней функции, в которой определена стрелочная функция. Это означает, что внутри стрелочной функции </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">остается неизменным на протяжении всего жизненного цикла функции и всегда привязано к </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">значению ближайшей родительской функции, не являющейся стрелкой.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Преимущества и использование</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Лексическое определение </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></strong></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Основным преимуществом стрелочных функций является их обработка </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. В традиционных выражениях функций </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">может меняться в зависимости от контекста, в котором вызывается функция. Стрелочные функции исправляются </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">в зависимости от контекста, в котором функция создается, а не от того, где она вызывается. Это делает стрелочные функции особенно полезными в сценариях, где функции используются в качестве аргументов, например, в обработчиках событий или обратных вызовах.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Краткий синтаксис:</font></font></strong></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Стрелочные функции предоставляют более лаконичный способ написания функций. Этот более короткий синтаксис полезен не только для простых функций, но также делает код более чистым и читабельным, особенно при работе с функциями более высокого порядка, такими как </font></font><code>map</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>filter</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">или </font></font><code>reduce</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">которые обычно принимают функции обратного вызова в качестве аргументов.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практическое упражнение: рефакторинг традиционных функций</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цель:</font></font></strong></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Реорганизуйте ряд традиционных функций в функции стрелок, подчеркнув, как это может упростить базу кода и улучшить читаемость.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Перед рефакторингом:</font></font></strong></p>
+<ol>
+<li><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Традиционная функция для фильтрации четных чисел из массива:</font></font></p>
+<pre><code class="language-javascript">function filterEvens(numbers) {<font></font>
+    return numbers.filter(function(number) {<font></font>
+        return number % 2 === 0;<font></font>
+    });<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Традиционная функция для вычисления суммы массива чисел:</font></font></p>
+<pre><code class="language-javascript">function computeTotal(numbers) {<font></font>
+    return numbers.reduce(function(total, number) {<font></font>
+        return total + number;<font></font>
+    }, 0);<font></font>
+}<font></font>
+</code></pre>
+</li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">После рефакторинга:</font></font></strong></p>
+<ol>
+<li><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Рефакторинг для использования функции стрелки:</font></font></p>
+<pre><code class="language-javascript">const filterEvens = numbers =&gt; numbers.filter(number =&gt; number % 2 === 0);
+</code></pre>
+</li>
+<li><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Рефакторинг для использования функции стрелки:</font></font></p>
+<pre><code class="language-javascript">const computeTotal = numbers =&gt; numbers.reduce((total, number) =&gt; total + number, 0);
+</code></pre>
+</li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Задачи упражнения:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Помогите учащимся преобразовать эти и, возможно, более сложные функции.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обсудите, как рефакторинг меняет поведение, </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">если эти функции были методами объекта, и как это может повлиять на взаимодействие метода со свойствами объекта.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Поощряйте учащихся изучать использование стрелочных функций с другими методами работы с массивами или в качестве обработчиков событий, где лексика </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">будет полезна.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">С помощью этих упражнений учащиеся не только научатся писать более чистый и современный JavaScript, но также поймут некоторые тонкие нюансы контекста выполнения функций, в частности, как </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">связывание может упростить разработку в общих шаблонах программирования.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Классы в JavaScript</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Введение в классы</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Классы в JavaScript, представленные в ES6, обеспечивают синтаксическую «добавку» к существующему наследованию на основе прототипов и предлагают более ясный и элегантный синтаксис для создания объектов и работы с наследованием. До ES6 наследование в JavaScript осуществлялось через цепочки прототипов, которые могли быть многословными и не такими интуитивно понятными, особенно для разработчиков, использующих языки на основе классов, такие как Java или C#.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Синтаксис и структура:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Объявление класса</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Чтобы объявить класс, вы используете </font></font><code>class</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ключевое слово, за которым следует имя класса.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Конструктор</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : </font></font><code>constructor</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">метод представляет собой специальный метод для создания и инициализации объектов, созданных с помощью класса. В классе может быть только один метод-конструктор.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Методы</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Классы могут содержать несколько методов. В отличие от выражений функций, методы, определенные в классе, не поднимаются, поэтому их нельзя вызвать до того, как они будут определены в теле класса.</font></font></li>
+</ul>
+<pre><code class="language-javascript">class Rectangle {<font></font>
+    constructor(height, width) {<font></font>
+        this.height = height;<font></font>
+        this.width = width;<font></font>
+    }<font></font>
+<font></font>
+    area() {<font></font>
+        return this.height * this.width;<font></font>
+    }<font></font>
+}<font></font>
+</code></pre>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Создание классов и наследование</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Определение класса</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Использование </font></font><code>class</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ключевого слова упрощает определение сложных объектов с их собственными прототипами.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Наследование</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Наследование — это способ создания класса как специализированной версии одного или нескольких классов. JavaScript реализует наследование с использованием </font></font><code>extends</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ключевого слова.</font></font></p>
+<ul>
+<li><strong><code>extends</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ключевое слово</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : </font></font><code>extends</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ключевое слово используется в объявлениях классов или выражениях классов для создания класса как дочернего элемента другого класса.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример наследования</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<pre><code class="language-javascript">class Person {<font></font>
+    constructor(name) {<font></font>
+        this.name = name;<font></font>
+    }<font></font>
+<font></font>
+    greet() {<font></font>
+        return `Hello, my name is ${this.name}`;<font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+class Student extends Person {<font></font>
+    constructor(name, level) {<font></font>
+        super(name); // Call the parent class constructor<font></font>
+        this.level = level;<font></font>
+    }<font></font>
+<font></font>
+    study() {<font></font>
+        return `${this.name} is studying at level ${this.level}`;<font></font>
+    }<font></font>
+}<font></font>
+</code></pre>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практические примеры</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Классы невероятно полезны для моделирования реальных объектов и отношений. Вот практический пример, включающий </font></font><code>Person</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">класс и </font></font><code>Student</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">класс, который от него наследуется:</font></font></p>
+<pre><code class="language-javascript">let student = new Student("John", 12);<font></font>
+console.log(student.greet());  // "Hello, my name is John"<font></font>
+console.log(student.study());  // "John is studying at level 12"<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Этот пример иллюстрирует, как </font></font><code>Student</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">наследуется функциональность </font></font><code>Person</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">при добавлении собственного уникального поведения.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практическое упражнение: создание классов</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цель</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : учащиеся создадут свои собственные классы, воплощающие функциональность простого приложения. Примеры приложений включают цифровые часы или базовую систему инвентаризации.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример цифровых часов</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цель</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : создать </font></font><code>Clock</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">класс, который поддерживает текущее время и обновляет его каждую секунду.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Выполнение</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></li>
+</ul>
+<pre><code class="language-javascript">class Clock {<font></font>
+    constructor() {<font></font>
+        this.currentTime = new Date();<font></font>
+        this.updateTime();<font></font>
+    }<font></font>
+<font></font>
+    updateTime() {<font></font>
+        setInterval(() =&gt; {<font></font>
+            this.currentTime = new Date(); // Update time every second<font></font>
+            console.log(this.currentTime.toLocaleTimeString()); // Display time<font></font>
+        }, 1000);<font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+const myClock = new Clock(); // Create a new clock instance<font></font>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Базовая система инвентаря</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цель</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : разработать </font></font><code>Inventory</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">класс, позволяющий добавлять и отслеживать элементы.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Выполнение</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></li>
+</ul>
+<pre><code class="language-javascript">class Inventory {<font></font>
+    constructor() {<font></font>
+        this.items = [];<font></font>
+    }<font></font>
+<font></font>
+    addItem(item) {<font></font>
+        this.items.push(item);<font></font>
+        console.log(`Added ${item} to inventory`);<font></font>
+    }<font></font>
+<font></font>
+    listItems() {<font></font>
+        console.log("Inventory Items:");<font></font>
+        this.items.forEach(item =&gt; console.log(item));<font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+const myInventory = new Inventory();<font></font>
+myInventory.addItem("Backpack");<font></font>
+myInventory.addItem("Notebook");<font></font>
+myInventory.listItems();<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эти упражнения дают учащимся практический способ применить свои знания о классах JavaScript, изучая как наследование, так и инкапсуляцию функциональности в структурах классов. Цель состоит в том, чтобы проиллюстрировать, как классы можно использовать для более эффективного структурирования приложений, улучшая читаемость и удобство обслуживания.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Модули в JavaScript</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Зачем использовать модули?</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Модули являются важным аспектом создания масштабируемых и удобных в обслуживании приложений. Разделив программу на отдельные фрагменты функциональности, модули дают несколько преимуществ:</font></font></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Удобство сопровождения</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Меньшие, четко определенные модули легче понимать, отлаживать и обновлять по сравнению с большими монолитными базами кода. Каждый модуль имеет четкую направленность и может поддерживаться независимо от других.</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Возможность повторного использования</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Модули позволяют повторно использовать код в разных частях приложения или даже между разными проектами. Например, модуль, обрабатывающий операции с датой и временем, можно повторно использовать везде, где требуется такая функциональность, без дублирования.</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Управление пространством имен</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : модули помогают избежать глобального загрязнения пространства имен. Они инкапсулируют свои переменные и функции, раскрывая только то, что явно экспортируется. Это снижает риск конфликтов имен в вашей кодовой базе.</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Управление зависимостями</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : с помощью модулей становится ясно, какие файлы зависят от других файлов, что делает структуру проектов более понятной и помогает гарантировать, что сценарии загружаются в правильном порядке.</font></font></p>
+</li>
+</ol>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Экспорт и импорт модулей</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Экспорт модуля</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Именованный экспорт</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : вы можете экспортировать несколько объектов, функций или примитивов из модуля, используя именованный экспорт. При импорте на каждый экспорт можно ссылаться по собственному имени.</font></font></p>
+<pre><code class="language-javascript">// utils.js<font></font>
+export const add = (a, b) =&gt; a + b;<font></font>
+export const multiply = (a, b) =&gt; a * b;<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Экспорт по умолчанию</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : каждый модуль может дополнительно экспортировать один экспорт по умолчанию, который считается основным «значением», предоставляемым модулем.</font></font></p>
+<pre><code class="language-javascript">// greeting.js<font></font>
+export default function greet(name) {<font></font>
+    return `Hello, ${name}!`;<font></font>
+}<font></font>
+</code></pre>
+</li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Импорт модуля</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Импорт именованных экспортов</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Вы можете импортировать определенные части модуля, используя именованные экспорты.</font></font></p>
+<pre><code class="language-javascript">// app.js<font></font>
+import { add, multiply } from './utils.js';<font></font>
+console.log(add(2, 3));  // Output: 5<font></font>
+console.log(multiply(2, 3));  // Output: 6<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Импорт экспорта по умолчанию</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : экспорт по умолчанию импортируется без использования скобок.</font></font></p>
+<pre><code class="language-javascript">// main.js<font></font>
+import greet from './greeting.js';<font></font>
+console.log(greet('Alice'));  // Output: Hello, Alice!<font></font>
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практическое занятие: Модуляризация небольшого приложения</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цель</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : учащиеся разобьют простое приложение на отдельные компоненты. Предположим, что это базовое приложение, отображающее пользовательские данные.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Состав</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Модуль данных</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : содержит пользовательские данные.</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">данные.js</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font><pre><code class="language-javascript">const users = [{ name: 'Alice', age: 25 }, { name: 'Bob', age: 30 }];<font></font>
+export default users;<font></font>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Модуль логики</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : содержит бизнес-логику, например функцию поиска пользователя по имени.</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">userOperations.js</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font><pre><code class="language-javascript">import users from './data.js';<font></font>
+<font></font>
+export function findUserByName(name) {<font></font>
+    return users.find(user =&gt; user.name === name);<font></font>
+}<font></font>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Модуль презентации</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : управляет отображением информации в консоли или в DOM.</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">презентация.js</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font><pre><code class="language-javascript">import { findUserByName } from './userOperations.js';<font></font>
+<font></font>
+export function displayUser(name) {<font></font>
+    const user = findUserByName(name);<font></font>
+    if(user) {<font></font>
+        console.log(`User Found: Name - ${user.name}, Age - ${user.age}`);<font></font>
+    } else {<font></font>
+        console.log('User not found');<font></font>
+    }<font></font>
+}<font></font>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Основной файл приложения</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">приложение.js</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font><pre><code class="language-javascript">import { displayUser } from './presentation.js';<font></font>
+<font></font>
+displayUser('Alice');  // Output: User Found: Name - Alice, Age - 25<font></font>
+displayUser('Bob');  // Output: User Found: Name - Bob, Age - 30<font></font>
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Задача</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Каждый студент создаст эти модули и свяжет их вместе, используя синтаксис модулей ES6.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">При желании учащиеся могут добавить дополнительные функции, такие как обновление или удаление пользовательских данных, чтобы попрактиковаться в модульности сложных функций.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это занятие представляет собой практический пример того, как модули ES6 можно использовать для организации кода в реальном приложении, подчеркивая чистое разделение задач и улучшая управляемость кода.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Дополнительные возможности ES6</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Литералы шаблонов</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Литералы шаблонов расширяют возможности создания сложных строк, позволяя использовать встроенные выражения и многострочные строки без необходимости использования операторов конкатенации ( </font></font><code>+</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">). Они заключаются в обратные кавычки (``), а не в традиционные одинарные или двойные кавычки.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Особенности шаблонных литералов:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Многострочные строки:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> легко создавайте строки, занимающие несколько строк, без необходимости вручную включать символы новой строки.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Интерполяция выражений:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> вставляйте выражения непосредственно в строку, используя </font></font><code>${expression}</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">синтаксис, который оценивается и преобразуется в строку.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример использования:</font></font></strong></p>
+<pre><code class="language-javascript">const name = "Alice";<font></font>
+const age = 25;<font></font>
+const greeting = `Hello, my name is ${name} and I am ${age} years old.`;<font></font>
+console.log(greeting);<font></font>
+// Output: Hello, my name is Alice and I am 25 years old.<font></font>
+</code></pre>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Деструктуризация</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Деструктуризация позволяет распаковывать значения из массивов или свойства объектов в отдельные переменные.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Деструктуризация массива:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Извлекайте элементы из массива и присваивайте их переменным.</font></font></li>
+</ul>
+<pre><code class="language-javascript">const numbers = [1, 2, 3];<font></font>
+const [one, two, three] = numbers;<font></font>
+console.log(one, two, three); // Output: 1 2 3<font></font>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Деструктуризация объекта:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Извлечение свойств из объекта.</font></font></li>
+</ul>
+<pre><code class="language-javascript">const user = { name: "John", age: 30 };<font></font>
+const { name, age } = user;<font></font>
+console.log(name, age); // Output: John 30<font></font>
+</code></pre>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Операторы распространения и отдыха</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Оператор распространения ( </font></font><code>...</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">):</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Массивы:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> распространение элементов массива в новый массив.</font></font></li>
+</ul>
+<pre><code class="language-javascript">const parts = ['shoulders', 'knees'];<font></font>
+const bodyParts = ['head', ...parts, 'toes'];<font></font>
+console.log(bodyParts); // Output: ["head", "shoulders", "knees", "toes"]<font></font>
+</code></pre>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Объекты:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> копирование свойств одного объекта в другой.</font></font></li>
+</ul>
+<pre><code class="language-javascript">const item = { name: 'Coffee', price: 2 };<font></font>
+const updatedItem = { ...item, price: 3 };<font></font>
+console.log(updatedItem); // Output: { name: 'Coffee', price: 3 }<font></font>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Параметры покоя:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Представляйте неопределенное количество аргументов в виде массива.</font></font></li>
+</ul>
+<pre><code class="language-javascript">function sum(...numbers) {<font></font>
+    return numbers.reduce((total, n) =&gt; total + n, 0);<font></font>
+}<font></font>
+console.log(sum(1, 2, 3)); // Output: 6<font></font>
+</code></pre>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практические упражнения</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цель:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> учащиеся применяют литералы шаблонов, операторы деструктуризации и расширения/остановки для упрощения и улучшения функциональности фрагментов JavaScript.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример упражнения:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Улучшите функцию, обрабатывающую объект, представляющий данные нового пользователя.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Предоставленный фрагмент:</font></font></strong></p>
+<pre><code class="language-javascript">function createUser(displayName, email, id) {<font></font>
+    return {<font></font>
+        displayName: displayName,<font></font>
+        email: email,<font></font>
+        id: id<font></font>
+    };<font></font>
+}<font></font>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Улучшенная версия с использованием функций ES6:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Рефакторинг с деструктуризацией и сокращением свойств объекта:</font></font></strong></li>
+</ul>
+<pre><code class="language-javascript">function createUser(user) {<font></font>
+    const { displayName, email, id } = user;<font></font>
+    return { displayName, email, id };<font></font>
+}<font></font>
+// Usage<font></font>
+const userData = { displayName: "Alice", email: "alice@example.com", id: 1 };<font></font>
+console.log(createUser(userData));<font></font>
+</code></pre>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Включите литералы шаблона для вывода:</font></font></strong></li>
+</ul>
+<pre><code class="language-javascript">function displayUserInfo(user) {<font></font>
+    const info = `User: ${user.displayName}, Email: ${user.email}`;<font></font>
+    console.log(info);<font></font>
+}<font></font>
+displayUserInfo(userData);<font></font>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Задача:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> учащиеся должны взять фрагмент кода, который вручную объединяет строки и использует индексный доступ к массивам и объектам, и провести его рефакторинг с использованием обсуждаемых функций ES6. Это продемонстрирует мощь и простоту, которые эти функции привносят в JavaScript, делая код более читабельным и удобным в сопровождении.</font></font></p>
+	</div>
+
+	
+
+
+
+
+
+
+
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js" integrity="sha512-LhccdVNGe2QMEfI3x4DVV3ckMRe36TfydKss6mJpdHjNFiV07dFpS2xzeZedptKZrwxfICJpez09iNioiSZ3hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+	<script>
+		let currentLanguage = 'en';
+		const copiedTexts = {
+			en: 'Copied to clipboard!',
+			hy: 'Պատճենվել է սեղմատախտակում:',
+			ru: 'Скопировано в буфер обмена!'
+		}
+
+		function copyCode(index) {
+			const code = document.getElementById('code-block-' + index).innerText;
+			const copied = document.getElementById('copied-' + index);
+		
+			navigator.clipboard.writeText(code).then(() => {
+				copied.innerText = copiedTexts[currentLanguage];
+			});
+
+			setTimeout(() => {
+				copied.innerText = '';
+			}, 3000);
+		}
+
+		// Initialize Highlight.js after the document is fully loaded
+		document.addEventListener('DOMContentLoaded', (event) => {
+			hljs.highlightAll();
+		});
+
+		let en = document.getElementById('en');
+		let hy = document.getElementById('hy');
+		let ru = document.getElementById('ru');
+		let html_en = document.getElementById('html_en');
+		let html_hy = document.getElementById('html_hy');
+		let html_ru = document.getElementById('html_ru');
+		
+		en.addEventListener('click', function(){
+			html_en.style.display = 'block';
+			html_hy.style.display = 'none';
+			html_ru.style.display = 'none';
+			
+			en.style.display = 'none';
+			hy.style.display = 'inline';
+			ru.style.display = 'inline';
+			
+			document.getElementsByTagName('title')[0].innerText = html_en.getElementsByTagName('h2')[0].innerText
+			currentLanguage = 'en';
+		});
+		
+		hy.addEventListener('click', function(){
+			html_en.style.display = 'none';
+			html_hy.style.display = 'block';
+			html_ru.style.display = 'none';
+			
+			en.style.display = 'inline';
+			hy.style.display = 'none';
+			ru.style.display = 'inline';
+			
+			document.getElementsByTagName('title')[0].innerText = html_hy.getElementsByTagName('h2')[0].innerText
+			
+			currentLanguage = 'hy';
+		});
+		
+		ru.addEventListener('click', function(){
+			html_en.style.display = 'none';
+			html_hy.style.display = 'none';
+			html_ru.style.display = 'block';
+			
+			en.style.display = 'inline';
+			hy.style.display = 'inline';
+			ru.style.display = 'none';
+			
+			document.getElementsByTagName('title')[0].innerText = html_ru.getElementsByTagName('h2')[0].innerText
+			currentLanguage = 'ru';
+		});
+
+		let presLang = {
+			en: document.querySelectorAll('#html_en pre'), 
+			hy: document.querySelectorAll('#html_hy pre'), 
+			ru: document.querySelectorAll('#html_ru pre')
+		};
+		
+		let key = 1;
+		
+		for(let lang in presLang){
+			let pres = presLang[lang];
+
+			pres.forEach(function(pre){
+				let copyText = lang == 'hy' ? 'Պատճենել' : lang == 'ru' ? 'Копировать' : 'Copy';
+				let card = document.createElement('div');
+				card.className = 'card bg-dark text-white';
+				pre.firstChild.id = 'code-block-' + key
+				let cardHtml = `
+					<div class="card-header">
+						<button class="btn btn-primary" onclick="copyCode(${key})">${copyText}</button>
+						<span id="copied-${key}" class="float-end"></span>
+					</div>
+					<div class="p-0">
+						<pre>${pre.innerHTML}</pre>
+					</div>
+				`
+				card.innerHTML = cardHtml;
+				
+				pre.parentNode.replaceChild(card, pre);
+				key++;
+			});
+		}
+		
+	</script>
+</body>
+</html>
