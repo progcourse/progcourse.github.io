@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lesson 17: React Components: Props and State</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+        <style>
+            code {
+                background-color: lightgray;
+                color: black;
+                padding: 2px 5px;
+                margin: 0 5px;
+				border: 1px solid gray;
+				border-radius: 5px;
+            }
+			#md{
+				display: none;
+			}
+        </style>
+    </head>
+    <body class="p-5">
+		<a href="#" id="hy" class="btn btn-info">Հայերեն</a>
+		<a href="#" id="en" class="btn btn-info" style="display:none">English</a>
+		<a href="#" id="ru" class="btn btn-info">Русский</a>
+		
+		<hr>
+
+
+
+
+
+
+		<div id="html_en" class="html">
+<h2>Lesson 17: React Components: Props and State</h2>
+<hr>
+<h3>Understanding Props in React</h3>
+<h4>Introduction to Props</h4>
+<p>Props, short for &quot;properties,&quot; serve as a mechanism for passing data from a parent component to its child components in React. This is a fundamental aspect of React&#39;s component model, enabling you to create reusable and customizable components.</p>
+<p><strong>Key Characteristics of Props:</strong></p>
+<ul>
+<li><strong>Read-only:</strong> Props are immutable from the perspective of the component that receives them. A component cannot change its props, but it can call functions passed via props, which might initiate changes elsewhere.</li>
+<li><strong>Data Flow:</strong> Props allow for a unidirectional (downward) data flow, from parent to child. This design helps prevent common bugs caused by the unpredictable data flow in more complex architectures.</li>
+</ul>
+<h4>Using Props in Components</h4>
+<p>Props make components dynamic and reusable by providing a mechanism to feed data into a component from a parent. This makes the component more flexible and adaptable to different contexts within the application.</p>
+<p><strong>Example: Greeting Component</strong></p>
+<pre><code class="language-jsx">function Greeting({ username }) {
+	return &lt;h1&gt;Hello, {username}!&lt;/h1&gt;;
+}
+
+function App() {
+	return &lt;Greeting username=&quot;Alice&quot; /&gt;;
+}
+</code></pre>
+<p>In this example:</p>
+<ul>
+<li>The <code>Greeting</code> component receives a <code>username</code> prop and uses it to display a personalized message.</li>
+<li>The <code>App</code> component acts as the parent and passes the <code>username</code> prop to the <code>Greeting</code> component.</li>
+</ul>
+<h4>Props for Event Handling</h4>
+<p>Props are not limited to data; they can also be used to pass down functions, including event handlers, from parent to child components. This allows child components to communicate back to their parents, enabling interaction within the component hierarchy.</p>
+<p><strong>Example: User Interaction</strong></p>
+<pre><code class="language-jsx">function UserProfile({ user, onEdit }) {
+	return (
+		&lt;div&gt;
+			&lt;h2&gt;{user.name}&lt;/h2&gt;
+			&lt;p&gt;{user.email}&lt;/p&gt;
+			&lt;button onClick={onEdit}&gt;Edit&lt;/button&gt;
+		&lt;/div&gt;
+	);
+}
+
+function App() {
+	const user = { name: &quot;Alice&quot;, email: &quot;alice@example.com&quot; };
+	
+	const handleEdit = () =&gt; {
+		console.log(&#39;Editing user:&#39;, user.name);
+	};
+
+	return &lt;UserProfile user={user} onEdit={handleEdit} /&gt;;
+}
+</code></pre>
+<p>In this setup:</p>
+<ul>
+<li>The <code>UserProfile</code> component displays user information and includes an &quot;Edit&quot; button.</li>
+<li>The <code>App</code> parent component defines a function <code>handleEdit</code> that logs a message when called and passes this function as a prop to <code>UserProfile</code>.</li>
+<li>When the button in <code>UserProfile</code> is clicked, it triggers the <code>handleEdit</code> function defined in <code>App</code>.</li>
+</ul>
+<h4>Practical Exercise: User Profile Card Component</h4>
+<p><strong>Objective:</strong> Create a <code>UserProfileCard</code> component that displays a user&#39;s name, email, and image. It should also have an &quot;Edit&quot; button that triggers an editing mode defined in the parent component.</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li><p><strong>Define the UserProfileCard Component:</strong></p>
+<pre><code class="language-jsx">function UserProfileCard({ user, onEdit }) {
+	return (
+		&lt;div&gt;
+			&lt;img src={user.imageUrl} alt={`Profile of ${user.name}`} style={{width: &#39;100px&#39;, height: &#39;100px&#39;}} /&gt;
+			&lt;h2&gt;{user.name}&lt;/h2&gt;
+			&lt;p&gt;{user.email}&lt;/p&gt;
+			&lt;button onClick={onEdit}&gt;Edit Profile&lt;/button&gt;
+		&lt;/div&gt;
+	);
+}
+</code></pre>
+</li>
+<li><p><strong>Use UserProfileCard in a Parent Component:</strong></p>
+<pre><code class="language-jsx">function App() {
+	const user = {
+		name: &quot;Alice Wonderland&quot;,
+		email: &quot;alice@example.com&quot;,
+		imageUrl: &quot;http://example.com/alice.jpg&quot;
+	};
+
+	const handleEdit = () =&gt; {
+		// Implementation for toggling edit mode could go here
+		console.log(&quot;Edit mode activated&quot;);
+	};
+
+	return &lt;UserProfileCard user={user} onEdit={handleEdit} /&gt;;
+}
+</code></pre>
+</li>
+</ol>
+<p><strong>Exercise Deliverables:</strong></p>
+<ul>
+<li>Students should implement both the <code>UserProfileCard</code> and the <code>App</code> components.</li>
+<li>They should test passing different user data and functions to <code>UserProfileCard</code> to ensure it renders correctly and the &quot;Edit&quot; button functions as expected.</li>
+</ul>
+<p>This exercise will help students understand the power and flexibility of props in React, enabling them to build interactive and dynamic components that respond to user actions and display data effectively.</p>
+<h3>Managing State with useState in React</h3>
+<h4>Introduction to State</h4>
+<p>In React, <strong>state</strong> refers to a set of data that determines the behavior of a component and how it renders. Unlike props, which are passed from a parent component, state is managed within the component itself. It&#39;s mutable and can be initialized and updated based on user actions or other factors.</p>
+<p>State plays a crucial role in making components dynamic and interactive. For example, a form input&#39;s current value is typically held in state, or a toggle button might track whether it&#39;s on or off using state.</p>
+<h4>Using useState Hook</h4>
+<p>Introduced in React 16.8, the <code>useState</code> hook allows functional components to have their own state, previously only possible in class components. It&#39;s a fundamental hook, essential for adding state management capabilities to functional components.</p>
+<p><strong>Syntax and Usage:</strong></p>
+<ul>
+<li><code>useState</code> is a function that takes the initial state as an argument and returns an array containing the current state and a function to update it.</li>
+<li>The pattern <code>[state, setState] = useState(initialState)</code> is used to declare state in functional components.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-jsx">import React, { useState } from &#39;react&#39;;
+
+function Counter() {
+	const [count, setCount] = useState(0); // Initialize the state
+
+	const increment = () =&gt; {
+		setCount(count + 1); // Update the state
+	};
+
+	return (
+		&lt;div&gt;
+			&lt;p&gt;Count: {count}&lt;/p&gt;
+			&lt;button onClick={increment}&gt;Increment&lt;/button&gt;
+		&lt;/div&gt;
+	);
+}
+</code></pre>
+<p>In this example:</p>
+<ul>
+<li><code>count</code> is the state variable that holds the current value of the counter.</li>
+<li><code>setCount</code> is the function used to update <code>count</code>.</li>
+<li>Clicking the &quot;Increment&quot; button triggers <code>increment</code>, which calls <code>setCount</code> to increase <code>count</code> by 1.</li>
+</ul>
+<h4>State and Rendering</h4>
+<p>React components automatically re-render whenever their state changes. This is crucial for keeping the UI up to date with the latest data. React&#39;s re-rendering is optimized to be efficient, updating only the parts of the component tree that changed.</p>
+<p><strong>Key Concepts:</strong></p>
+<ul>
+<li>Changes to state via the setter function (e.g., <code>setCount</code>) trigger a re-render of the component.</li>
+<li>React batches state updates for performance benefits, meaning state updates may be asynchronous. For operations depending on the previous state, a functional update should be used:<pre><code class="language-jsx">setCount(prevCount =&gt; prevCount + 1);
+</code></pre>
+</li>
+</ul>
+<h4>Hands-On Exercise: Enhancing the UserProfileCard</h4>
+<p><strong>Objective:</strong> Enhance the <code>UserProfileCard</code> component to include editable user details. Implement state to manage the edit mode and form values.</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li><p><strong>Setup Initial State:</strong></p>
+<pre><code class="language-jsx">function UserProfileCard({ user }) {
+	const [editMode, setEditMode] = useState(false);
+	const [formData, setFormData] = useState({ name: user.name, email: user.email });
+
+	const handleEdit = () =&gt; setEditMode(true);
+	const handleSave = () =&gt; {
+		// Save the data to some API or state
+		console.log(&#39;Data saved&#39;, formData);
+		setEditMode(false);
+	};
+	const handleChange = (e) =&gt; setFormData({ ...formData, [e.target.name]: e.target.value });
+
+	return (
+		&lt;div&gt;
+			{editMode ? (
+				&lt;&gt;
+					&lt;input type=&quot;text&quot; name=&quot;name&quot; value={formData.name} onChange={handleChange} /&gt;
+					&lt;input type=&quot;email&quot; name=&quot;email&quot; value={formData.email} onChange={handleChange} /&gt;
+					&lt;button onClick={handleSave}&gt;Save&lt;/button&gt;
+				&lt;/&gt;
+			) : (
+				&lt;&gt;
+					&lt;h2&gt;{user.name}&lt;/h2&gt;
+					&lt;p&gt;{user.email}&lt;/p&gt;
+					&lt;button onClick={handleEdit}&gt;Edit&lt;/button&gt;
+				&lt;/&gt;
+			)}
+		&lt;/div&gt;
+	);
+}
+</code></pre>
+</li>
+<li><p><strong>Task for Students:</strong></p>
+<ul>
+<li>Implement the above changes in the <code>UserProfileCard</code>.</li>
+<li>Add functionality to toggle <code>editMode</code> and update user data using state.</li>
+<li>Test by making changes in the form and saving them.</li>
+</ul>
+</li>
+</ol>
+<p>This exercise will provide hands-on experience with managing both static and dynamic state in React components, helping students understand how to build interactive and responsive user interfaces.</p>
+<h3>Combining Props and State</h3>
+<h4>Component Interaction</h4>
+<p>In React, components often need to interact with each other to create dynamic and responsive applications. The interaction between components primarily happens through two mechanisms: props and state. While <strong>state</strong> is used to manage dynamic data within a component, <strong>props</strong> are used to pass data and event handlers down to child components. This setup allows for efficient data management and component communication in a predictable and structured manner.</p>
+<p><strong>Example of Component Interaction:</strong></p>
+<ul>
+<li>A parent component manages a list of tasks as its state.</li>
+<li>Each task from the list is passed to a child component to be rendered. This child component receives the task details as props and may also receive functions as props that allow it to interact with the parent component&#39;s state (e.g., to delete a task).</li>
+</ul>
+<p><strong>Example Code:</strong></p>
+<pre><code class="language-jsx">function TaskList() {
+	const [tasks, setTasks] = useState([&#39;Task 1&#39;, &#39;Task 2&#39;, &#39;Task 3&#39;]);
+
+	const removeTask = taskIndex =&gt; {
+		const newTasks = tasks.filter((_, index) =&gt; index !== taskIndex);
+		setTasks(newTasks);
+	};
+
+	return (
+		&lt;div&gt;
+			{tasks.map((task, index) =&gt; (
+				&lt;TaskItem key={index} task={task} onRemove={() =&gt; removeTask(index)} /&gt;
+			))}
+		&lt;/div&gt;
+	);
+}
+
+function TaskItem({ task, onRemove }) {
+	return (
+		&lt;div&gt;
+			&lt;p&gt;{task}&lt;/p&gt;
+			&lt;button onClick={onRemove}&gt;Remove&lt;/button&gt;
+		&lt;/div&gt;
+	);
+}
+</code></pre>
+<p>In this setup, the <code>TaskList</code> manages the state of tasks and passes each task to the <code>TaskItem</code> component, along with a function <code>onRemove</code> that can alter the state in <code>TaskList</code>.</p>
+<h4>State Lifting</h4>
+<p><strong>State lifting</strong> is a common pattern in React development where state is moved up to the closest common ancestor of the components that need access to it. This practice is particularly useful when multiple child components need to interact with the same state.</p>
+<p><strong>Benefits of State Lifting:</strong></p>
+<ul>
+<li><strong>Centralized State Management:</strong> Managing state at a higher level in the component hierarchy makes it easier to maintain and reason about, especially in larger applications.</li>
+<li><strong>Improved Data Consistency:</strong> When state is managed in one location and passed down as props, it ensures that all child components are synchronized and display the same data.</li>
+</ul>
+<p><strong>Example Scenario:</strong></p>
+<ul>
+<li>Suppose you have two sibling components that both need to update and display the same data. By lifting the state to their parent component, you ensure both siblings are always in sync.</li>
+</ul>
+<h4>Practical Application: Small Shopping Cart Application</h4>
+<p><strong>Objective:</strong> Create a shopping cart application where:</p>
+<ul>
+<li>Products are managed in the parent component&#39;s state.</li>
+<li>Each product is passed to a child component to display.</li>
+<li>Child components can remove a product from the cart using a handler passed as a prop.</li>
+</ul>
+<p><strong>Implementation Steps:</strong></p>
+<ol>
+<li><strong>Parent Component - ShoppingCart:</strong></li>
+</ol>
+<pre><code class="language-jsx">import React, { useState } from &#39;react&#39;;
+import Product from &#39;./Product&#39;;
+
+function ShoppingCart() {
+	const [products, setProducts] = useState([
+		{ id: 1, name: &#39;Apple&#39;, price: &#39;$1&#39; },
+		{ id: 2, name: &#39;Banana&#39;, price: &#39;$2&#39; }
+	]);
+
+	const handleRemove = productId =&gt; {
+		setProducts(products.filter(product =&gt; product.id !== productId));
+	};
+
+	return (
+		&lt;div&gt;
+			{products.map(product =&gt; (
+				&lt;Product key={product.id} product={product} onRemove={handleRemove} /&gt;
+			))}
+		&lt;/div&gt;
+	);
+}
+</code></pre>
+<ol start="2">
+<li><strong>Child Component - Product:</strong></li>
+</ol>
+<pre><code class="language-jsx">function Product({ product, onRemove }) {
+	return (
+		&lt;div&gt;
+			&lt;h3&gt;{product.name}&lt;/h3&gt;
+			&lt;p&gt;{product.price}&lt;/p&gt;
+			&lt;button onClick={() =&gt; onRemove(product.id)}&gt;Remove from Cart&lt;/button&gt;
+		&lt;/div&gt;
+	);
+}
+</code></pre>
+<p><strong>Exercise Tasks:</strong></p>
+<ul>
+<li>Students implement the <code>ShoppingCart</code> and <code>Product</code> components as described.</li>
+<li>Ensure that each product can be removed individually and that the UI updates accordingly when a product is removed.</li>
+</ul>
+<p>This exercise helps students understand the practical aspects of managing state in a parent component while using props to allow child components to interact with that state. This approach is foundational for building robust applications with React that require complex interactions between components.</p>
+<h3>Immutability in State Management</h3>
+<h4>Why Immutability?</h4>
+<p>Immutability refers to the practice of not changing (mutating) data after it has been created. In the context of React state management, immutability plays a crucial role. React&#39;s reactivity model is built around the idea of pure functions and avoiding side effects, which immutability supports. Here are the key benefits:</p>
+<ol>
+<li><strong>Predictability:</strong> Immutable state ensures that the state isn&#39;t changed unexpectedly elsewhere in the app, leading to more predictable behavior.</li>
+<li><strong>Consistency:</strong> With immutable data, every change produces a new object, which helps in maintaining consistency throughout the lifecycle of the application.</li>
+<li><strong>Performance Optimization:</strong> React can quickly determine if re-rendering is needed based on changes to the state or props by using shallow comparison. If the reference hasn&#39;t changed, React can skip re-rendering.</li>
+<li><strong>Easier Debugging:</strong> It&#39;s easier to track changes in state over time when each state update produces a new state rather than mutating the existing state. This can be particularly beneficial in complex applications.</li>
+</ol>
+<h4>Using Spread Operators in State Updates</h4>
+<p>The spread operator (<code>...</code>) in JavaScript is a useful syntax for making copies of objects or arrays, thus helping to maintain immutability. It allows for the expansion of an iterable (like an array or object) into its individual elements.</p>
+<p><strong>Example of Using Spread Operators for Immutability:</strong></p>
+<ul>
+<li><p><strong>Arrays:</strong>
+	When updating an array in the state, you can create a new array with the same elements plus any modifications needed, instead of modifying the original array directly.</p>
+<pre><code class="language-jsx">const [items, setItems] = useState([&#39;item1&#39;, &#39;item2&#39;]);
+
+const addItem = (item) =&gt; {
+	setItems([...items, item]); // Creates a new array with an added item
+};
+
+const removeItem = (index) =&gt; {
+	setItems(items.filter((_, i) =&gt; i !== index)); // Creates a new array without the specified index
+};
+</code></pre>
+</li>
+<li><p><strong>Objects:</strong>
+	When modifying properties of an object in the state, the spread operator can be used to create a new object with updated properties.</p>
+<pre><code class="language-jsx">const [user, setUser] = useState({ name: &#39;Alice&#39;, age: 25 });
+
+const updateUser = (newData) =&gt; {
+	setUser({ ...user, ...newData }); // Creates a new object with updated data
+};
+</code></pre>
+</li>
+</ul>
+<h4>Exercise: Update Shopping Cart Quantity</h4>
+<p><strong>Objective:</strong> Enhance the shopping cart application to include functionality for increasing or decreasing the quantity of items in the cart. It&#39;s crucial that all state updates adhere to immutability principles.</p>
+<p><strong>Steps to Implement:</strong></p>
+<ol>
+<li><p><strong>Update Initial State to Include Quantity:</strong></p>
+<pre><code class="language-jsx">const [products, setProducts] = useState([
+	{ id: 1, name: &#39;Apple&#39;, price: &#39;$1&#39;, quantity: 2 },
+	{ id: 2, name: &#39;Banana&#39;, price: &#39;$2&#39;, quantity: 3 }
+]);
+</code></pre>
+</li>
+<li><p><strong>Implement Functions to Modify Quantity:</strong></p>
+<pre><code class="language-jsx">const incrementQuantity = (productId) =&gt; {
+	setProducts(products.map(product =&gt; 
+		product.id === productId ? { ...product, quantity: product.quantity + 1 } : product
+	));
+};
+
+const decrementQuantity = (productId) =&gt; {
+	setProducts(products.map(product =&gt; 
+		product.id === productId ? { ...product, quantity: product.quantity - 1 } : product
+	));
+};
+</code></pre>
+</li>
+<li><p><strong>Integrate Quantity Adjustment into Product Component:</strong></p>
+<pre><code class="language-jsx">function Product({ product, onRemove, onIncrement, onDecrement }) {
+	return (
+		&lt;div&gt;
+			&lt;h3&gt;{product.name}&lt;/h3&gt;
+			&lt;p&gt;{product.price}&lt;/p&gt;
+			&lt;p&gt;Quantity: {product.quantity}&lt;/p&gt;
+			&lt;button onClick={() =&gt; onIncrement(product.id)}&gt;+&lt;/button&gt;
+			&lt;button onClick={() =&gt; onDecrement(product.id)}&gt;-&lt;/button&gt;
+			&lt;button onClick={() =&gt; onRemove(product.id)}&gt;Remove from Cart&lt;/button&gt;
+		&lt;/div&gt;
+	);
+}
+</code></pre>
+</li>
+<li><p><strong>Render the Updated Product Component:</strong>
+Ensure that the <code>ShoppingCart</code> component passes the new functions <code>incrementQuantity</code> and <code>decrementQuantity</code> as props to the <code>Product</code> component.</p>
+</li>
+</ol>
+<p><strong>Task for Students:</strong></p>
+<ul>
+<li>Implement the above changes in the <code>ShoppingCart</code> and <code>Product</code> components.</li>
+<li>Test the application to ensure that quantity adjustments work correctly and that state updates maintain immutability.</li>
+</ul>
+<p>This exercise not only solidifies the students&#39; understanding of state management and immutability but also enhances their ability to implement complex interactions within React applications.</p>
+<h3>Wrap-up and Q&amp;A</h3>
+<p>As we conclude today&#39;s session on essential React concepts, let&#39;s take a moment to review and consolidate the key topics we&#39;ve discussed. This will help ensure that you have a solid understanding and are prepared to apply these concepts to your own projects.</p>
+<h4>Review and Summary</h4>
+<p><strong>1. Understanding Props:</strong></p>
+<ul>
+<li>We explored <strong>props</strong> (short for &quot;properties&quot;), which are how components receive data from their parent components. Props are crucial for component configuration and ensuring components can be reusable and modular. They are read-only within the component that receives them, which helps in maintaining predictable data flow and behavior.</li>
+</ul>
+<p><strong>2. Managing State with useState:</strong></p>
+<ul>
+<li>We delved into managing <strong>state</strong> within components using the <code>useState</code> hook, a staple for functional components in React. State allows components to maintain dynamic information that changes over time, enabling them to be interactive (e.g., input fields, toggling UI elements).</li>
+<li>We also covered how state updates trigger component re-renders, facilitating updates to the user interface in response to user actions or other factors.</li>
+</ul>
+<p><strong>3. Combining Props and State:</strong></p>
+<ul>
+<li>We discussed how props and state work together to build robust applications. Props pass static or dynamic data down to child components, while state manages changes within components. Understanding both is essential for creating complex and well-functioning React applications.</li>
+</ul>
+<p><strong>4. Immutability in State Management:</strong></p>
+<ul>
+<li>The concept of <strong>immutability</strong> was highlighted, emphasizing its importance in state management. Using tools and methods like the spread operator ensures that the state is updated in a predictable manner, which enhances performance (due to efficient re-rendering) and simplifies debugging.</li>
+</ul>
+<p><strong>5. Practical Exercises:</strong></p>
+<ul>
+<li>Through hands-on exercises, you&#39;ve implemented these concepts by building components that interact through props and state, such as a user profile card and a shopping cart system. These exercises are designed to give you practical experience and confidence in using React&#39;s fundamental features.</li>
+</ul>
+<h4>Q&amp;A Session</h4>
+<p>Now, let&#39;s move into the Q&amp;A session. This is your opportunity to ask any questions that have arisen during today&#39;s lesson. Whether you need clarification on a specific topic, assistance with challenges you encountered during the exercises, or advice on applying these concepts to your projects, now is the time to ask. Consider the following:</p>
+<ul>
+<li><strong>Clarifications:</strong> If there&#39;s any aspect of props, state, or immutability that&#39;s unclear, please ask for more details.</li>
+<li><strong>Best Practices:</strong> For those interested in best practices around structuring large React applications or managing complex state interactions, feel free to delve into these topics.</li>
+<li><strong>Project Ideas:</strong> Discuss how you might use these concepts in potential project ideas or current work you are undertaking. Understanding how to apply what you&#39;ve learned today can significantly impact your effectiveness and efficiency as a React developer.</li>
+</ul>
+<p>This session aims to ensure you leave with a thorough understanding of today&#39;s material, ready to build more interactive and dynamic web applications using React.</p>	
+		</div>
+
+
+
+
+
+
+		<div id="html_hy" class="html" style="display:none">
+<h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դաս 17. Արձագանքել բաղադրիչներ. Հենակետեր և վիճակ</font></font></h2>
+<hr>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հասկանալով Props-ը React-ում</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներածություն Props</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Props-ը, որը կրճատված է «հատկություններ» բառից, ծառայում է որպես React-ում մայր բաղադրիչից տվյալների փոխանցման մեխանիզմ: Սա React-ի բաղադրիչ մոդելի հիմնարար ասպեկտն է, որը հնարավորություն է տալիս ստեղծել բազմակի օգտագործման և կարգավորելի բաղադրիչներ:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հենարանների հիմնական բնութագրերը.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Միայն կարդալու համար.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Հենակետերն անփոփոխ են դրանք ստացող բաղադրիչի տեսանկյունից: Բաղադրիչը չի կարող փոխել իր հենակետերը, բայց այն կարող է կանչել գործառույթներ, որոնք փոխանցվում են հենակետերի միջոցով, ինչը կարող է փոփոխություններ նախաձեռնել այլ վայրերում:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տվյալների հոսք.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> հենարանները թույլ են տալիս միակողմանի (ներքև) տվյալների հոսք՝ ծնողից երեխա: Այս դիզայնը օգնում է կանխել սովորական սխալները, որոնք առաջանում են տվյալների անկանխատեսելի հոսքի պատճառով ավելի բարդ ճարտարապետություններում:</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հենակետերի օգտագործումը բաղադրիչներում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հենակետերը բաղադրիչները դարձնում են դինամիկ և վերօգտագործելի՝ ապահովելով ծնողից ստացված բաղադրիչի տվյալները փոխանցելու մեխանիզմ: Սա բաղադրիչն ավելի ճկուն և հարմարվող է դարձնում հավելվածի տարբեր համատեքստերին:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օրինակ՝ ողջույնի բաղադրիչ</font></font></strong></p>
+<pre><code class="language-jsx">function Greeting({ username }) {<font></font>
+    return &lt;h1&gt;Hello, {username}!&lt;/h1&gt;;<font></font>
+}<font></font>
+<font></font>
+function App() {<font></font>
+    return &lt;Greeting username="Alice" /&gt;;<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս օրինակում.</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչը </font></font><code>Greeting</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ստանում է </font></font><code>username</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հենարան և օգտագործում այն &ZeroWidthSpace;&ZeroWidthSpace;անհատականացված հաղորդագրություն ցուցադրելու համար:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչը </font></font><code>App</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">գործում է որպես ծնող և փոխանցում է </font></font><code>username</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հենարանը բաղադրիչին </font></font><code>Greeting</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Միջոցառումների սպասարկման պարագաներ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հենակետերը չեն սահմանափակվում միայն տվյալներով. դրանք կարող են օգտագործվել նաև գործառույթները, ներառյալ իրադարձությունների մշակողները, ծնողներից երեխայի բաղադրիչներին փոխանցելու համար: Սա թույլ է տալիս երեխայի բաղադրիչներին հաղորդակցվել իրենց ծնողների հետ՝ հնարավորություն տալով փոխազդեցություն բաղադրիչի հիերարխիայում:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օրինակ՝ Օգտագործողի փոխազդեցություն</font></font></strong></p>
+<pre><code class="language-jsx">function UserProfile({ user, onEdit }) {<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            &lt;h2&gt;{user.name}&lt;/h2&gt;<font></font>
+            &lt;p&gt;{user.email}&lt;/p&gt;<font></font>
+            &lt;button onClick={onEdit}&gt;Edit&lt;/button&gt;<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+<font></font>
+function App() {<font></font>
+    const user = { name: "Alice", email: "alice@example.com" };<font></font>
+    <font></font>
+    const handleEdit = () =&gt; {<font></font>
+        console.log('Editing user:', user.name);<font></font>
+    };<font></font>
+<font></font>
+    return &lt;UserProfile user={user} onEdit={handleEdit} /&gt;;<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս կարգավորումներում.</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչը </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ցուցադրում է օգտվողի տեղեկությունները և ներառում է «Խմբագրել» կոճակը:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մայր </font></font><code>App</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բաղադրիչը սահմանում է ֆունկցիա </font></font><code>handleEdit</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, որը գրանցում է հաղորդագրությունը, երբ կանչվում է և փոխանցում է այս ֆունկցիան որպես հենակետ </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Երբ կոճակը </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">սեղմվում է, այն գործարկում է </font></font><code>handleEdit</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">գործառույթը, որը սահմանված է </font></font><code>App</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական վարժություն. Օգտվողի պրոֆիլի քարտի բաղադրիչ</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նպատակը.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ստեղծեք </font></font><code>UserProfileCard</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բաղադրիչ, որը ցուցադրում է օգտվողի անունը, էլ.փոստը և պատկերը: Այն պետք է ունենա նաև «Խմբագրել» կոճակը, որը գործարկում է խմբագրման ռեժիմը, որը սահմանված է մայր բաղադրիչում:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Քայլեր:</font></font></strong></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սահմանեք UserProfileCard բաղադրիչը.</font></font></strong></p>
+<pre><code class="language-jsx">function UserProfileCard({ user, onEdit }) {<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            &lt;img src={user.imageUrl} alt={`Profile of ${user.name}`} style={{width: '100px', height: '100px'}} /&gt;<font></font>
+            &lt;h2&gt;{user.name}&lt;/h2&gt;<font></font>
+            &lt;p&gt;{user.email}&lt;/p&gt;<font></font>
+            &lt;button onClick={onEdit}&gt;Edit Profile&lt;/button&gt;<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործեք UserProfileCard-ը ծնող բաղադրիչում.</font></font></strong></p>
+<pre><code class="language-jsx">function App() {<font></font>
+    const user = {<font></font>
+        name: "Alice Wonderland",<font></font>
+        email: "alice@example.com",<font></font>
+        imageUrl: "http://example.com/alice.jpg"<font></font>
+    };<font></font>
+<font></font>
+    const handleEdit = () =&gt; {<font></font>
+        // Implementation for toggling edit mode could go here<font></font>
+        console.log("Edit mode activated");<font></font>
+    };<font></font>
+<font></font>
+    return &lt;UserProfileCard user={user} onEdit={handleEdit} /&gt;;<font></font>
+}<font></font>
+</code></pre>
+</li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զորավարժությունների առաքում.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ուսանողները պետք է իրականացնեն և՛ բաղադրիչները, </font></font><code>UserProfileCard</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և՛ </font></font><code>App</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բաղադրիչները:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նրանք պետք է փորձարկեն օգտատիրոջ տարբեր տվյալներ և գործառույթներ փոխանցելը, որպեսզի </font></font><code>UserProfileCard</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">համոզվեն, որ դրանք ճիշտ են մատուցվում, և «Խմբագրել» կոճակը գործում է այնպես, ինչպես սպասվում էր:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժությունը կօգնի ուսանողներին հասկանալ React-ի ռեկորդների ուժն ու ճկունությունը՝ հնարավորություն տալով նրանց ստեղծել ինտերակտիվ և դինամիկ բաղադրիչներ, որոնք արձագանքում են օգտագործողի գործողություններին և արդյունավետ կերպով ցուցադրում տվյալները:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պետության կառավարում UseState-ով React-ում</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներածություն պետությանը</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ում </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">վիճակը</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> վերաբերում է տվյալների մի շարքին, որոնք որոշում են բաղադրիչի վարքագիծը և ինչպես է այն ցուցադրվում: Ի տարբերություն հենակետերի, որոնք փոխանցվում են մայր բաղադրիչից, վիճակը կառավարվում է հենց բաղադրիչի ներսում: Այն փոփոխական է և կարող է սկզբնավորվել և թարմացվել՝ ելնելով օգտագործողի գործողություններից կամ այլ գործոններից:</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պետությունը վճռորոշ դեր է խաղում բաղադրիչները դինամիկ և ինտերակտիվ դարձնելու գործում: Օրինակ՝ ձևի մուտքագրման ընթացիկ արժեքը սովորաբար պահվում է վիճակում, կամ փոխարկիչի կոճակը կարող է հետևել՝ արդյոք այն միացված է կամ անջատված՝ օգտագործելով վիճակը:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործելով useState Hook-ը</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React 16.8-ում ներկայացված </font></font><code>useState</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կեռիկը թույլ է տալիս ֆունկցիոնալ բաղադրիչներին ունենալ իրենց սեփական վիճակը, որը նախկինում հնարավոր էր միայն դասի բաղադրիչներում: Սա հիմնարար կարթ է, որն անհրաժեշտ է ֆունկցիոնալ բաղադրիչներին պետական &ZeroWidthSpace;&ZeroWidthSpace;կառավարման կարողություններ ավելացնելու համար:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Շարահյուսություն և օգտագործում.</font></font></strong></p>
+<ul>
+<li><code>useState</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ֆունկցիա է, որը սկզբնական վիճակն ընդունում է որպես արգումենտ և վերադարձնում է ընթացիկ վիճակը պարունակող զանգված և այն թարմացնելու ֆունկցիա։</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կաղապարն </font></font><code>[state, setState] = useState(initialState)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">օգտագործվում է ֆունկցիոնալ բաղադրիչներում վիճակ հայտարարելու համար:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օրինակ:</font></font></strong></p>
+<pre><code class="language-jsx">import React, { useState } from 'react';<font></font>
+<font></font>
+function Counter() {<font></font>
+    const [count, setCount] = useState(0); // Initialize the state<font></font>
+<font></font>
+    const increment = () =&gt; {<font></font>
+        setCount(count + 1); // Update the state<font></font>
+    };<font></font>
+<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            &lt;p&gt;Count: {count}&lt;/p&gt;<font></font>
+            &lt;button onClick={increment}&gt;Increment&lt;/button&gt;<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս օրինակում.</font></font></p>
+<ul>
+<li><code>count</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">վիճակի փոփոխականն է, որը պահում է հաշվիչի ընթացիկ արժեքը:</font></font></li>
+<li><code>setCount</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">այն գործառույթն է, որն օգտագործվում է թարմացնելու համար </font></font><code>count</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սեղմելով «Ավելացում» կոճակը գործարկվում է </font></font><code>increment</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, որը կոչ է անում </font></font><code>setCount</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ավելացնել </font></font><code>count</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1-ով:</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պետություն և մատուցում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React բաղադրիչները ինքնաբերաբար վերարտադրվում են, երբ դրանց վիճակը փոխվում է: Սա շատ կարևոր է միջերեսը վերջին տվյալներին արդի պահելու համար: React-ի վերարտադրումը օպտիմիզացված է արդյունավետ լինելու համար՝ թարմացնելով բաղադրիչի ծառի միայն այն մասերը, որոնք փոխվել են:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիմնական հասկացություններ.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սահմանող ֆունկցիայի միջոցով վիճակի փոփոխությունները (օրինակ՝ </font></font><code>setCount</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) հրահրում են բաղադրիչի վերարտադրումը:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React խմբաքանակները նշում են թարմացումները արդյունավետության առավելությունների համար, ինչը նշանակում է, որ վիճակի թարմացումները կարող են լինել ասինխրոն: Նախորդ վիճակից կախված գործողությունների համար պետք է օգտագործվի ֆունկցիոնալ թարմացում.</font></font><pre><code class="language-jsx">setCount(prevCount =&gt; prevCount + 1);
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ձեռքի վարժություն. Օգտվողի պրոֆիլի քարտի բարելավում</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նպատակը.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Բարելավել </font></font><code>UserProfileCard</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բաղադրիչը՝ ներառելով օգտվողի խմբագրման տվյալները: Իրականացնել վիճակը՝ խմբագրման ռեժիմը և ձևի արժեքները կառավարելու համար:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Քայլեր:</font></font></strong></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կարգավորման սկզբնական վիճակը.</font></font></strong></p>
+<pre><code class="language-jsx">function UserProfileCard({ user }) {<font></font>
+    const [editMode, setEditMode] = useState(false);<font></font>
+    const [formData, setFormData] = useState({ name: user.name, email: user.email });<font></font>
+<font></font>
+    const handleEdit = () =&gt; setEditMode(true);<font></font>
+    const handleSave = () =&gt; {<font></font>
+        // Save the data to some API or state<font></font>
+        console.log('Data saved', formData);<font></font>
+        setEditMode(false);<font></font>
+    };<font></font>
+    const handleChange = (e) =&gt; setFormData({ ...formData, [e.target.name]: e.target.value });<font></font>
+<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            {editMode ? (<font></font>
+                &lt;&gt;<font></font>
+                    &lt;input type="text" name="name" value={formData.name} onChange={handleChange} /&gt;<font></font>
+                    &lt;input type="email" name="email" value={formData.email} onChange={handleChange} /&gt;<font></font>
+                    &lt;button onClick={handleSave}&gt;Save&lt;/button&gt;<font></font>
+                &lt;/&gt;<font></font>
+            ) : (<font></font>
+                &lt;&gt;<font></font>
+                    &lt;h2&gt;{user.name}&lt;/h2&gt;<font></font>
+                    &lt;p&gt;{user.email}&lt;/p&gt;<font></font>
+                    &lt;button onClick={handleEdit}&gt;Edit&lt;/button&gt;<font></font>
+                &lt;/&gt;<font></font>
+            )}<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Առաջադրանք ուսանողների համար.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրականացնել վերը նշված փոփոխությունները </font></font><code>UserProfileCard</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+<li><font style="vertical-align: inherit;"></font><code>editMode</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ավելացրեք գործառույթ ՝ օգտատիրոջ տվյալները </font><font style="vertical-align: inherit;">փոխելու և թարմացնելու համար՝ օգտագործելով վիճակը:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Փորձարկեք՝ փոփոխություններ կատարելով ձևի մեջ և պահպանելով դրանք:</font></font></li>
+</ul>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժությունը գործնական փորձ կապահովի React բաղադրիչներում ստատիկ և դինամիկ վիճակի կառավարման հարցում՝ օգնելով ուսանողներին հասկանալ, թե ինչպես ստեղծել ինտերակտիվ և արձագանքող օգտատիրոջ միջերես:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հավասարակշռության և վիճակի համադրում</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչների փոխազդեցություն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ում բաղադրիչները հաճախ պետք է փոխազդեն միմյանց հետ՝ դինամիկ և արձագանքող հավելվածներ ստեղծելու համար: Բաղադրիչների միջև փոխազդեցությունը հիմնականում տեղի է ունենում երկու մեխանիզմների միջոցով՝ հենարաններ և վիճակ: Մինչ </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">վիճակն</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> օգտագործվում է բաղադրիչի ներսում դինամիկ տվյալները կառավարելու համար, </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">պրոֆիլները</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> օգտագործվում են տվյալների և իրադարձությունների մշակիչները երեխայի բաղադրիչներին փոխանցելու համար: Այս կարգավորումը թույլ է տալիս արդյունավետ կառավարել տվյալների և բաղադրիչների հաղորդակցությունը կանխատեսելի և կառուցվածքային եղանակով:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչների փոխազդեցության օրինակ.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ծնող բաղադրիչը կառավարում է առաջադրանքների ցանկը որպես իր վիճակ:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ցանկից յուրաքանչյուր առաջադրանք փոխանցվում է երեխայի բաղադրիչին, որը պետք է ներկայացվի: Այս երեխա բաղադրիչը ստանում է առաջադրանքի մանրամասները որպես հենակետեր և կարող է նաև ստանալ գործառույթներ որպես հենարաններ, որոնք թույլ են տալիս փոխազդել ծնող բաղադրիչի վիճակի հետ (օրինակ՝ ջնջել առաջադրանքը):</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օրինակ Կոդ:</font></font></strong></p>
+<pre><code class="language-jsx">function TaskList() {<font></font>
+    const [tasks, setTasks] = useState(['Task 1', 'Task 2', 'Task 3']);<font></font>
+<font></font>
+    const removeTask = taskIndex =&gt; {<font></font>
+        const newTasks = tasks.filter((_, index) =&gt; index !== taskIndex);<font></font>
+        setTasks(newTasks);<font></font>
+    };<font></font>
+<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            {tasks.map((task, index) =&gt; (<font></font>
+                &lt;TaskItem key={index} task={task} onRemove={() =&gt; removeTask(index)} /&gt;<font></font>
+            ))}<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+<font></font>
+function TaskItem({ task, onRemove }) {<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            &lt;p&gt;{task}&lt;/p&gt;<font></font>
+            &lt;button onClick={onRemove}&gt;Remove&lt;/button&gt;<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս կարգավորումում, </font></font><code>TaskList</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կառավարում է առաջադրանքների վիճակը և յուրաքանչյուր առաջադրանք փոխանցում բաղադրիչին </font></font><code>TaskItem</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, ինչպես նաև մի ֆունկցիա </font></font><code>onRemove</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, որը կարող է փոխել վիճակը </font></font><code>TaskList</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պետական &ZeroWidthSpace;&ZeroWidthSpace;լիֆթինգ</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վիճակի վերացումը</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> սովորական օրինաչափություն է React-ի մշակման մեջ, որտեղ վիճակը տեղափոխվում է դեպի այն բաղադրիչների ամենամոտ ընդհանուր նախահայրը, որոնք մուտքի կարիք ունեն: Այս պրակտիկան հատկապես օգտակար է, երբ մի քանի մանկական բաղադրիչներ պետք է փոխազդեն նույն վիճակի հետ:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պետական &ZeroWidthSpace;&ZeroWidthSpace;բարձրացման առավելությունները.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պետության կենտրոնացված կառավարում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> բաղադրամասի հիերարխիայում ավելի բարձր մակարդակի վիճակի կառավարումը հեշտացնում է դրա պահպանումն ու հիմնավորումը, հատկապես ավելի մեծ ծրագրերում:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բարելավված տվյալների հետևողականություն.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Երբ վիճակը կառավարվում է մեկ վայրում և փոխանցվում որպես հենակետ, այն ապահովում է, որ բոլոր մանկական բաղադրիչները համաժամանակացվեն և ցուցադրեն նույն տվյալները:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օրինակ սցենար.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ենթադրենք, դուք ունեք երկու եղբայր կամ եղբայր բաղադրիչ, որոնք երկուսն էլ պետք է թարմացնեն և ցուցադրեն նույն տվյալները: Բարձրացնելով վիճակը իրենց մայր բաղադրիչին, դուք ապահովում եք, որ երկու եղբայրներն ու եղբայրները միշտ համաժամանակյա են:</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական կիրառություն. Փոքր զամբյուղի հավելված</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նպատակը.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ստեղծեք զամբյուղի հավելված, որտեղ.</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ապրանքները կառավարվում են մայր բաղադրիչի վիճակում:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Յուրաքանչյուր ապրանք փոխանցվում է երեխայի բաղադրիչին՝ ցուցադրելու համար:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մանկական բաղադրիչները կարող են ապրանքը հեռացնել սայլակից՝ օգտագործելով որպես հենարան փոխանցվող կարգավորիչ:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրականացման քայլեր.</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ծնող բաղադրիչ - Գնումների զամբյուղ.</font></font></strong></li>
+</ol>
+<pre><code class="language-jsx">import React, { useState } from 'react';<font></font>
+import Product from './Product';<font></font>
+<font></font>
+function ShoppingCart() {<font></font>
+    const [products, setProducts] = useState([<font></font>
+        { id: 1, name: 'Apple', price: '$1' },<font></font>
+        { id: 2, name: 'Banana', price: '$2' }<font></font>
+    ]);<font></font>
+<font></font>
+    const handleRemove = productId =&gt; {<font></font>
+        setProducts(products.filter(product =&gt; product.id !== productId));<font></font>
+    };<font></font>
+<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            {products.map(product =&gt; (<font></font>
+                &lt;Product key={product.id} product={product} onRemove={handleRemove} /&gt;<font></font>
+            ))}<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<ol start="2">
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Երեխաների բաղադրիչ - Ապրանք:</font></font></strong></li>
+</ol>
+<pre><code class="language-jsx">function Product({ product, onRemove }) {<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            &lt;h3&gt;{product.name}&lt;/h3&gt;<font></font>
+            &lt;p&gt;{product.price}&lt;/p&gt;<font></font>
+            &lt;button onClick={() =&gt; onRemove(product.id)}&gt;Remove from Cart&lt;/button&gt;<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զորավարժությունների առաջադրանքներ.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ուսանողները կատարում են </font></font><code>ShoppingCart</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>Product</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բաղադրիչները, ինչպես նկարագրված է:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Համոզվեք, որ յուրաքանչյուր ապրանք կարող է առանձին հեռացվել, և որ միջերեսը համապատասխանաբար թարմացվում է, երբ արտադրանքը հեռացվում է:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժությունն օգնում է ուսանողներին հասկանալ ծնող բաղադրիչի վիճակը կառավարելու գործնական ասպեկտները՝ միաժամանակ օգտագործելով հենարաններ՝ երեխայի բաղադրիչներին այդ վիճակի հետ փոխազդելու համար: Այս մոտեցումը հիմնարար է React-ի հետ ամուր հավելվածներ ստեղծելու համար, որոնք պահանջում են բաղադրիչների միջև բարդ փոխազդեցություն:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Անփոփոխությունը պետական &ZeroWidthSpace;&ZeroWidthSpace;կառավարման մեջ</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ինչու՞ անփոփոխություն:</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Անփոփոխելիությունը վերաբերում է տվյալների ստեղծվելուց հետո չփոխելու (մուտացիայի ենթարկելու) պրակտիկային: React պետական &ZeroWidthSpace;&ZeroWidthSpace;կառավարման համատեքստում անփոփոխությունը վճռորոշ դեր է խաղում: React-ի ռեակտիվության մոդելը կառուցված է մաքուր գործառույթների և կողմնակի ազդեցություններից խուսափելու գաղափարի շուրջ, ինչին աջակցում է անփոփոխությունը: Ահա հիմնական առավելությունները.</font></font></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կանխատեսելիություն.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> անփոփոխ վիճակն ապահովում է, որ վիճակն անսպասելիորեն չի փոխվի հավելվածում, ինչը հանգեցնում է ավելի կանխատեսելի վարքագծի:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հետևողականություն.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Անփոփոխ տվյալների դեպքում յուրաքանչյուր փոփոխություն առաջացնում է նոր օբյեկտ, որն օգնում է պահպանել հետևողականությունը հավելվածի կյանքի ցիկլի ընթացքում:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Արդյունավետության օպտիմիզացում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> React-ը կարող է արագ որոշել, թե արդյոք անհրաժեշտ է վերաարտադրել՝ հիմնվելով վիճակի կամ հենակետերի փոփոխությունների վրա՝ օգտագործելով մակերեսային համեմատություն: Եթե &ZeroWidthSpace;&ZeroWidthSpace;հղումը չի փոխվել, React-ը կարող է բաց թողնել վերարտադրումը:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ավելի հեշտ վրիպազերծում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ավելի հեշտ է հետևել վիճակի փոփոխություններին ժամանակի ընթացքում, երբ յուրաքանչյուր վիճակի թարմացում ստեղծում է նոր վիճակ, քան գոյություն ունեցող վիճակի փոփոխության: Սա կարող է հատկապես օգտակար լինել բարդ ծրագրերում:</font></font></li>
+</ol>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Spread օպերատորների օգտագործումը պետական &ZeroWidthSpace;&ZeroWidthSpace;թարմացումներում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տարածված օպերատորը ( </font></font><code>...</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) JavaScript-ում օգտակար շարահյուսություն է՝ օբյեկտների կամ զանգվածների պատճեններ ստեղծելու համար՝ այդպիսով օգնելով պահպանել անփոփոխությունը։ Այն թույլ է տալիս ընդլայնել կրկնվողը (ինչպես զանգվածը կամ առարկան) իր առանձին տարրերի մեջ:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Անփոփոխելիության համար Spread օպերատորների օգտագործման օրինակ.</font></font></strong></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զանգվածներ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+ վիճակի մեջ զանգվածը թարմացնելիս կարող եք ստեղծել նոր զանգված՝ նույն տարրերով, գումարած անհրաժեշտ փոփոխությունները՝ սկզբնական զանգվածն ուղղակիորեն փոփոխելու փոխարեն:</font></font></p>
+<pre><code class="language-jsx">const [items, setItems] = useState(['item1', 'item2']);<font></font>
+<font></font>
+const addItem = (item) =&gt; {<font></font>
+    setItems([...items, item]); // Creates a new array with an added item<font></font>
+};<font></font>
+<font></font>
+const removeItem = (index) =&gt; {<font></font>
+    setItems(items.filter((_, i) =&gt; i !== index)); // Creates a new array without the specified index<font></font>
+};<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օբյեկտներ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+ վիճակում գտնվող օբյեկտի հատկությունները փոփոխելիս, տարածման օպերատորը կարող է օգտագործվել նորացված հատկություններով նոր օբյեկտ ստեղծելու համար:</font></font></p>
+<pre><code class="language-jsx">const [user, setUser] = useState({ name: 'Alice', age: 25 });<font></font>
+<font></font>
+const updateUser = (newData) =&gt; {<font></font>
+    setUser({ ...user, ...newData }); // Creates a new object with updated data<font></font>
+};<font></font>
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զորավարժություն. թարմացնել զամբյուղի քանակը</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նպատակը.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ընդլայնել զամբյուղի հավելվածը՝ ներառելու գործառույթներ զամբյուղում ապրանքների քանակն ավելացնելու կամ նվազեցնելու համար: Շատ կարևոր է, որ բոլոր պետական &ZeroWidthSpace;&ZeroWidthSpace;թարմացումները պահպանվեն անփոփոխելիության սկզբունքներին:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրականացման քայլեր.</font></font></strong></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Թարմացրեք սկզբնական վիճակը՝ քանակն ընդգրկելու համար.</font></font></strong></p>
+<pre><code class="language-jsx">const [products, setProducts] = useState([<font></font>
+    { id: 1, name: 'Apple', price: '$1', quantity: 2 },<font></font>
+    { id: 2, name: 'Banana', price: '$2', quantity: 3 }<font></font>
+]);<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Քանակը փոփոխելու գործառույթների իրականացում.</font></font></strong></p>
+<pre><code class="language-jsx">const incrementQuantity = (productId) =&gt; {<font></font>
+    setProducts(products.map(product =&gt; <font></font>
+        product.id === productId ? { ...product, quantity: product.quantity + 1 } : product<font></font>
+    ));<font></font>
+};<font></font>
+<font></font>
+const decrementQuantity = (productId) =&gt; {<font></font>
+    setProducts(products.map(product =&gt; <font></font>
+        product.id === productId ? { ...product, quantity: product.quantity - 1 } : product<font></font>
+    ));<font></font>
+};<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ինտեգրել քանակի ճշգրտումը արտադրանքի բաղադրիչի մեջ.</font></font></strong></p>
+<pre><code class="language-jsx">function Product({ product, onRemove, onIncrement, onDecrement }) {<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            &lt;h3&gt;{product.name}&lt;/h3&gt;<font></font>
+            &lt;p&gt;{product.price}&lt;/p&gt;<font></font>
+            &lt;p&gt;Quantity: {product.quantity}&lt;/p&gt;<font></font>
+            &lt;button onClick={() =&gt; onIncrement(product.id)}&gt;+&lt;/button&gt;<font></font>
+            &lt;button onClick={() =&gt; onDecrement(product.id)}&gt;-&lt;/button&gt;<font></font>
+            &lt;button onClick={() =&gt; onRemove(product.id)}&gt;Remove from Cart&lt;/button&gt;<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Արտադրեք թարմացված արտադրանքի բաղադրիչը.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+Համոզվեք, որ </font></font><code>ShoppingCart</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բաղադրիչը փոխանցում է նոր գործառույթները </font></font><code>incrementQuantity</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>decrementQuantity</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">որպես օժանդակ բաղադրիչ </font></font><code>Product</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></p>
+</li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Առաջադրանք ուսանողների համար.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրականացնել վերը նշված փոփոխությունները </font></font><code>ShoppingCart</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>Product</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բաղադրիչներում:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Փորձարկեք հավելվածը՝ համոզվելու համար, որ քանակի ճշգրտումները ճիշտ են աշխատում, և որ վիճակի թարմացումները պահպանում են անփոփոխությունը:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժությունը ոչ միայն ամրապնդում է ուսանողների ըմբռնումը պետական &ZeroWidthSpace;&ZeroWidthSpace;կառավարման և անփոփոխության մասին, այլև ուժեղացնում է նրանց կարողությունը բարդ փոխազդեցություններ իրականացնելու React հավելվածներում:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ամփոփում և հարց ու պատասխան</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Երբ մենք ավարտում ենք այսօրվա նիստը React-ի հիմնական հասկացությունների վերաբերյալ, եկեք մի պահ տրամադրենք վերանայելու և համախմբելու մեր քննարկած հիմնական թեմաները: Սա կօգնի ապահովել, որ դուք ունեք ամուր պատկերացում և պատրաստ եք կիրառել այս հասկացությունները ձեր սեփական նախագծերում:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերանայում և ամփոփում</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1. Հասկանալով Props:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մենք ուսումնասիրեցինք </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հենակետերը</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> (կարճ՝ «հատկություններ»), որոնցով բաղադրիչները տվյալներ են ստանում իրենց մայր բաղադրիչներից: Հենակետերը կարևոր են բաղադրիչի կազմաձևման համար և ապահովելու համար, որ բաղադրիչները կարող են կրկնակի օգտագործման և մոդուլային լինել: Դրանք միայն կարդալու են այն բաղադրիչում, որը ստանում է դրանք, ինչը օգնում է կանխատեսելի տվյալների հոսքի և վարքագծի պահպանմանը:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2. Կառավարող պետությունը useState-ով.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մենք խորացել ենք </font><font style="vertical-align: inherit;">բաղադրիչների ներսում </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">վիճակի</font></font></strong><font style="vertical-align: inherit;"></font><code>useState</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> կառավարման մեջ՝ օգտագործելով կեռիկը, որը React-ի ֆունկցիոնալ բաղադրիչների հիմնական բաղադրիչն է: Պետությունը թույլ է տալիս բաղադրիչներին պահպանել դինամիկ տեղեկատվություն, որը փոխվում է ժամանակի ընթացքում՝ հնարավորություն տալով նրանց լինել ինտերակտիվ (օրինակ՝ մուտքագրման դաշտեր, UI տարրերի փոփոխում):</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մենք նաև լուսաբանեցինք, թե ինչպես են պետական &ZeroWidthSpace;&ZeroWidthSpace;թարմացումները խթանում բաղադրիչի վերարտադրումը, ինչը հեշտացնում է օգտատիրոջ ինտերֆեյսի թարմացումները՝ ի պատասխան օգտատիրոջ գործողությունների կամ այլ գործոնների:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3. Հավասարակշռության և վիճակի համադրում.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մենք քննարկեցինք, թե ինչպես են օժանդակ միջոցները և պետությունը համագործակցում ամուր հավելվածներ ստեղծելու համար: Հենակետերը ստատիկ կամ դինամիկ տվյալներ են փոխանցում երեխայի բաղադրիչներին, մինչդեռ վիճակը կառավարում է բաղադրիչների փոփոխությունները: Երկուսն էլ հասկանալը կարևոր է բարդ և լավ գործող React հավելվածներ ստեղծելու համար:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4. Անփոփոխելիությունը պետական &ZeroWidthSpace;&ZeroWidthSpace;կառավարման մեջ.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կարեւորվեց </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">անփոփոխելիության</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> հայեցակարգը ՝ ընդգծելով դրա կարեւորությունը պետական &ZeroWidthSpace;&ZeroWidthSpace;կառավարման գործում։ </font><font style="vertical-align: inherit;">Գործիքների և մեթոդների օգտագործումը, ինչպիսին է տարածման օպերատորը, ապահովում է, որ վիճակը թարմացվում է կանխատեսելի ձևով, ինչը բարելավում է կատարողականությունը (արդյունավետ վերարտադրման շնորհիվ) և հեշտացնում է վրիպազերծումը:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5. Գործնական վարժություններ.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական վարժությունների միջոցով դուք իրականացրել եք այս հասկացությունները՝ կառուցելով բաղադրիչներ, որոնք փոխազդում են հենարանների և վիճակի միջոցով, ինչպիսիք են օգտատիրոջ պրոֆիլի քարտը և գնումների զամբյուղի համակարգը: Այս վարժությունները նախատեսված են ձեզ գործնական փորձ և վստահություն հաղորդելու React-ի հիմնարար հատկանիշները օգտագործելու համար:</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հարց ու պատասխան նիստ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիմա եկեք անցնենք հարցուպատասխանի նիստին: Սա ձեր հնարավորությունն է տալ ցանկացած հարց, որը ծագել է այսօրվա դասի ընթացքում: Անկախ նրանից, թե ձեզ պարզաբանումներ են պետք կոնկրետ թեմայի շուրջ, օգնություն՝ զորավարժությունների ընթացքում հանդիպած մարտահրավերների կամ խորհուրդներ՝ ձեր նախագծերում այս հասկացությունները կիրառելու վերաբերյալ, այժմ հարցնելու ժամանակն է: Հաշվի առեք հետևյալը.</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պարզաբանումներ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Եթե անհասկանալի է հենակետերի, վիճակի կամ անփոփոխելիության որևէ ասպեկտ, խնդրում ենք լրացուցիչ մանրամասների համար հարցնել:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Լավագույն պրակտիկա.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Նրանց համար, ովքեր հետաքրքրված են մեծ React հավելվածների կառուցվածքի կամ բարդ վիճակի փոխազդեցությունների կառավարմամբ լավագույն փորձով, ազատ զգալ խորանալ այս թեմաների մեջ:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ծրագրի գաղափարներ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Քննարկեք, թե ինչպես կարող եք օգտագործել այս հասկացությունները պոտենցիալ նախագծի գաղափարներում կամ ընթացիկ աշխատանքում, որը դուք ձեռնարկում եք: Հասկանալը, թե ինչպես կիրառել այն, ինչ սովորել եք այսօր, կարող է էապես ազդել ձեր արդյունավետության և արդյունավետության վրա՝ որպես React ծրագրավորող:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս նիստի նպատակն է ապահովել, որ դուք հեռանաք այսօրվա նյութի մանրակրկիտ ըմբռնմամբ, պատրաստ լինելով ստեղծելու ավելի ինտերակտիվ և դինամիկ վեբ հավելվածներ՝ օգտագործելով React:</font></font></p>
+		</div>
+
+
+
+
+
+
+		<div id="html_ru" class="html" style="display:none">
+<h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Урок 17: Компоненты React: реквизиты и состояние</font></font></h2>
+<hr>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Понимание реквизита в React</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Введение в реквизит</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пропсы, сокращение от «свойства», служат механизмом передачи данных от родительского компонента к его дочерним компонентам в React. Это фундаментальный аспект модели компонентов React, позволяющий создавать повторно используемые и настраиваемые компоненты.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ключевые характеристики реквизита:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Только для чтения:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> реквизиты неизменяемы с точки зрения компонента, который их получает. Компонент не может изменять свои свойства, но может вызывать функции, передаваемые через свойства, которые могут инициировать изменения в другом месте.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Поток данных:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> реквизиты обеспечивают однонаправленный (нисходящий) поток данных от родительского элемента к дочернему. Такая конструкция помогает предотвратить распространенные ошибки, вызванные непредсказуемым потоком данных в более сложных архитектурах.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Использование реквизитов в компонентах</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Реквизиты делают компоненты динамическими и пригодными для повторного использования, предоставляя механизм передачи данных в компонент от родителя. Это делает компонент более гибким и адаптируемым к различным контекстам приложения.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример: компонент приветствия</font></font></strong></p>
+<pre><code class="language-jsx">function Greeting({ username }) {<font></font>
+    return &lt;h1&gt;Hello, {username}!&lt;/h1&gt;;<font></font>
+}<font></font>
+<font></font>
+function App() {<font></font>
+    return &lt;Greeting username="Alice" /&gt;;<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этом примере:</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Компонент </font></font><code>Greeting</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">получает </font></font><code>username</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">свойство и использует его для отображения персонализированного сообщения.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Компонент </font></font><code>App</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">действует как родительский и передает </font></font><code>username</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">свойство компоненту </font></font><code>Greeting</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Реквизит для обработки событий</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Реквизит не ограничивается данными; их также можно использовать для передачи функций, включая обработчики событий, от родительских компонентов к дочерним. Это позволяет дочерним компонентам связываться со своими родителями, обеспечивая взаимодействие внутри иерархии компонентов.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример: взаимодействие с пользователем</font></font></strong></p>
+<pre><code class="language-jsx">function UserProfile({ user, onEdit }) {<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            &lt;h2&gt;{user.name}&lt;/h2&gt;<font></font>
+            &lt;p&gt;{user.email}&lt;/p&gt;<font></font>
+            &lt;button onClick={onEdit}&gt;Edit&lt;/button&gt;<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+<font></font>
+function App() {<font></font>
+    const user = { name: "Alice", email: "alice@example.com" };<font></font>
+    <font></font>
+    const handleEdit = () =&gt; {<font></font>
+        console.log('Editing user:', user.name);<font></font>
+    };<font></font>
+<font></font>
+    return &lt;UserProfile user={user} onEdit={handleEdit} /&gt;;<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этой настройке:</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Компонент </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">отображает информацию о пользователе и включает кнопку «Редактировать».</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Родительский </font></font><code>App</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">компонент определяет функцию </font></font><code>handleEdit</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, которая регистрирует сообщение при вызове и передает эту функцию в качестве свойства </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Когда кнопка нажата </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, она запускает </font></font><code>handleEdit</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">функцию, определенную в </font></font><code>App</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практическое упражнение: компонент карты профиля пользователя</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цель:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> создать </font></font><code>UserProfileCard</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">компонент, который отображает имя пользователя, адрес электронной почты и изображение. Он также должен иметь кнопку «Редактировать», которая запускает режим редактирования, определенный в родительском компоненте.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Шаги:</font></font></strong></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Определите компонент UserProfileCard:</font></font></strong></p>
+<pre><code class="language-jsx">function UserProfileCard({ user, onEdit }) {<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            &lt;img src={user.imageUrl} alt={`Profile of ${user.name}`} style={{width: '100px', height: '100px'}} /&gt;<font></font>
+            &lt;h2&gt;{user.name}&lt;/h2&gt;<font></font>
+            &lt;p&gt;{user.email}&lt;/p&gt;<font></font>
+            &lt;button onClick={onEdit}&gt;Edit Profile&lt;/button&gt;<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Используйте UserProfileCard в родительском компоненте:</font></font></strong></p>
+<pre><code class="language-jsx">function App() {<font></font>
+    const user = {<font></font>
+        name: "Alice Wonderland",<font></font>
+        email: "alice@example.com",<font></font>
+        imageUrl: "http://example.com/alice.jpg"<font></font>
+    };<font></font>
+<font></font>
+    const handleEdit = () =&gt; {<font></font>
+        // Implementation for toggling edit mode could go here<font></font>
+        console.log("Edit mode activated");<font></font>
+    };<font></font>
+<font></font>
+    return &lt;UserProfileCard user={user} onEdit={handleEdit} /&gt;;<font></font>
+}<font></font>
+</code></pre>
+</li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Результаты упражнения:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Студенты должны реализовать как компоненты, так </font></font><code>UserProfileCard</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>App</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">компоненты.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Им следует протестировать передачу различных пользовательских данных и функций, чтобы </font></font><code>UserProfileCard</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">убедиться, что они отображаются правильно и кнопка «Редактировать» работает должным образом.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это упражнение поможет учащимся понять мощь и гибкость реквизитов в React, что позволит им создавать интерактивные и динамические компоненты, которые реагируют на действия пользователя и эффективно отображают данные.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Управление состоянием с помощью useState в React</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Введение в состояние</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В React </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">состояние</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> относится к набору данных, которые определяют поведение компонента и то, как он отображается. В отличие от реквизитов, которые передаются из родительского компонента, состояние управляется внутри самого компонента. Он изменчив и может инициализироваться и обновляться в зависимости от действий пользователя или других факторов.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Состояние играет решающую роль в обеспечении динамичности и интерактивности компонентов. Например, текущее значение ввода формы обычно сохраняется в состоянии, или кнопка-переключатель может отслеживать, включено оно или выключено, используя состояние.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Использование хука useState</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Хук , представленный в React 16.8, </font></font><code>useState</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">позволяет функциональным компонентам иметь собственное состояние, что ранее было возможно только в компонентах классов. Это фундаментальный крючок, необходимый для добавления возможностей управления состоянием к функциональным компонентам.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Синтаксис и использование:</font></font></strong></p>
+<ul>
+<li><code>useState</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">— это функция, которая принимает начальное состояние в качестве аргумента и возвращает массив, содержащий текущее состояние, и функцию для его обновления.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Шаблон </font></font><code>[state, setState] = useState(initialState)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">используется для объявления состояния в функциональных компонентах.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример:</font></font></strong></p>
+<pre><code class="language-jsx">import React, { useState } from 'react';<font></font>
+<font></font>
+function Counter() {<font></font>
+    const [count, setCount] = useState(0); // Initialize the state<font></font>
+<font></font>
+    const increment = () =&gt; {<font></font>
+        setCount(count + 1); // Update the state<font></font>
+    };<font></font>
+<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            &lt;p&gt;Count: {count}&lt;/p&gt;<font></font>
+            &lt;button onClick={increment}&gt;Increment&lt;/button&gt;<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этом примере:</font></font></p>
+<ul>
+<li><code>count</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">— переменная состояния, содержащая текущее значение счетчика.</font></font></li>
+<li><code>setCount</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">это функция, используемая для обновления </font></font><code>count</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">При нажатии кнопки «Увеличить» срабатывает </font></font><code>increment</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, который вызывает </font></font><code>setCount</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">увеличение </font></font><code>count</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">на 1.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Состояние и рендеринг</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Компоненты React автоматически перерисовываются при каждом изменении их состояния. Это крайне важно для поддержания пользовательского интерфейса в актуальном состоянии с учетом последних данных. Повторный рендеринг React оптимизирован для повышения эффективности: обновляются только те части дерева компонентов, которые изменились.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ключевые идеи:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Изменения состояния через функцию установки (например, </font></font><code>setCount</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) вызывают повторную визуализацию компонента.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React пакетно обновляет состояние для повышения производительности, то есть обновления состояния могут быть асинхронными. Для операций, зависящих от предыдущего состояния, следует использовать функциональное обновление:</font></font><pre><code class="language-jsx">setCount(prevCount =&gt; prevCount + 1);
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практическое упражнение: улучшение UserProfileCard</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цель:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> усовершенствовать </font></font><code>UserProfileCard</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">компонент, включив в него редактируемые сведения о пользователе. Реализуйте состояние для управления режимом редактирования и значениями формы.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Шаги:</font></font></strong></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Начальное состояние настройки:</font></font></strong></p>
+<pre><code class="language-jsx">function UserProfileCard({ user }) {<font></font>
+    const [editMode, setEditMode] = useState(false);<font></font>
+    const [formData, setFormData] = useState({ name: user.name, email: user.email });<font></font>
+<font></font>
+    const handleEdit = () =&gt; setEditMode(true);<font></font>
+    const handleSave = () =&gt; {<font></font>
+        // Save the data to some API or state<font></font>
+        console.log('Data saved', formData);<font></font>
+        setEditMode(false);<font></font>
+    };<font></font>
+    const handleChange = (e) =&gt; setFormData({ ...formData, [e.target.name]: e.target.value });<font></font>
+<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            {editMode ? (<font></font>
+                &lt;&gt;<font></font>
+                    &lt;input type="text" name="name" value={formData.name} onChange={handleChange} /&gt;<font></font>
+                    &lt;input type="email" name="email" value={formData.email} onChange={handleChange} /&gt;<font></font>
+                    &lt;button onClick={handleSave}&gt;Save&lt;/button&gt;<font></font>
+                &lt;/&gt;<font></font>
+            ) : (<font></font>
+                &lt;&gt;<font></font>
+                    &lt;h2&gt;{user.name}&lt;/h2&gt;<font></font>
+                    &lt;p&gt;{user.email}&lt;/p&gt;<font></font>
+                    &lt;button onClick={handleEdit}&gt;Edit&lt;/button&gt;<font></font>
+                &lt;/&gt;<font></font>
+            )}<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Задание для учеников:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Внесите вышеуказанные изменения в файл </font></font><code>UserProfileCard</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Добавьте функциональность для переключения </font></font><code>editMode</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и обновления пользовательских данных с использованием состояния.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Протестируйте, внеся изменения в форму и сохранив их.</font></font></li>
+</ul>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это упражнение предоставит практический опыт управления статическим и динамическим состоянием в компонентах React, помогая студентам понять, как создавать интерактивные и адаптивные пользовательские интерфейсы.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Объединение реквизита и состояния</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Взаимодействие компонентов</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В React компонентам часто необходимо взаимодействовать друг с другом для создания динамичных и отзывчивых приложений. Взаимодействие между компонентами в основном происходит посредством двух механизмов: реквизита и состояния. В то время как </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">состояние</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> используется для управления динамическими данными внутри компонента, </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">реквизиты</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> используются для передачи данных и обработчиков событий дочерним компонентам. Такая настройка обеспечивает эффективное управление данными и взаимодействие компонентов предсказуемым и структурированным образом.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример взаимодействия компонентов:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Родительский компонент управляет списком задач в качестве своего состояния.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Каждая задача из списка передается дочернему компоненту для визуализации. Этот дочерний компонент получает сведения о задаче в качестве реквизита, а также может получать функции в качестве реквизита, которые позволяют ему взаимодействовать с состоянием родительского компонента (например, удалять задачу).</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример кода:</font></font></strong></p>
+<pre><code class="language-jsx">function TaskList() {<font></font>
+    const [tasks, setTasks] = useState(['Task 1', 'Task 2', 'Task 3']);<font></font>
+<font></font>
+    const removeTask = taskIndex =&gt; {<font></font>
+        const newTasks = tasks.filter((_, index) =&gt; index !== taskIndex);<font></font>
+        setTasks(newTasks);<font></font>
+    };<font></font>
+<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            {tasks.map((task, index) =&gt; (<font></font>
+                &lt;TaskItem key={index} task={task} onRemove={() =&gt; removeTask(index)} /&gt;<font></font>
+            ))}<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+<font></font>
+function TaskItem({ task, onRemove }) {<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            &lt;p&gt;{task}&lt;/p&gt;<font></font>
+            &lt;button onClick={onRemove}&gt;Remove&lt;/button&gt;<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этой настройке </font></font><code>TaskList</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">управляет состоянием задач и передает каждую задачу компоненту </font></font><code>TaskItem</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">вместе с функцией </font></font><code>onRemove</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, которая может изменять состояние в </font></font><code>TaskList</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Государственный подъем</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Поднятие состояния</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> — это распространенный шаблон в разработке React, когда состояние перемещается к ближайшему общему предку компонентов, которым необходим доступ к нему. Эта практика особенно полезна, когда нескольким дочерним компонентам необходимо взаимодействовать с одним и тем же состоянием.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Преимущества государственного подъема:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Централизованное управление состоянием.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Управление состоянием на более высоком уровне в иерархии компонентов упрощает обслуживание и анализ, особенно в более крупных приложениях.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Улучшенная согласованность данных:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> когда состояние управляется в одном месте и передается как реквизит, это гарантирует, что все дочерние компоненты синхронизированы и отображают одни и те же данные.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример сценария:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Предположим, у вас есть два родственных компонента, которым необходимо обновлять и отображать одни и те же данные. Передавая состояние их родительскому компоненту, вы гарантируете, что оба родственных компонента всегда синхронизированы.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практическое применение: небольшая тележка для покупок</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цель:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Создать приложение для корзины покупок, в котором:</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Продукты управляются в состоянии родительского компонента.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Каждый продукт передается дочернему компоненту для отображения.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Дочерние компоненты могут удалять товар из корзины с помощью обработчика, переданного в качестве реквизита.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Этапы реализации:</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Родительский компонент — ShoppingCart:</font></font></strong></li>
+</ol>
+<pre><code class="language-jsx">import React, { useState } from 'react';<font></font>
+import Product from './Product';<font></font>
+<font></font>
+function ShoppingCart() {<font></font>
+    const [products, setProducts] = useState([<font></font>
+        { id: 1, name: 'Apple', price: '$1' },<font></font>
+        { id: 2, name: 'Banana', price: '$2' }<font></font>
+    ]);<font></font>
+<font></font>
+    const handleRemove = productId =&gt; {<font></font>
+        setProducts(products.filter(product =&gt; product.id !== productId));<font></font>
+    };<font></font>
+<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            {products.map(product =&gt; (<font></font>
+                &lt;Product key={product.id} product={product} onRemove={handleRemove} /&gt;<font></font>
+            ))}<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<ol start="2">
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Дочерний компонент&nbsp;— Продукт:</font></font></strong></li>
+</ol>
+<pre><code class="language-jsx">function Product({ product, onRemove }) {<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            &lt;h3&gt;{product.name}&lt;/h3&gt;<font></font>
+            &lt;p&gt;{product.price}&lt;/p&gt;<font></font>
+            &lt;button onClick={() =&gt; onRemove(product.id)}&gt;Remove from Cart&lt;/button&gt;<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Задачи упражнения:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Учащиеся реализуют компоненты </font></font><code>ShoppingCart</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>Product</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, как описано.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Убедитесь, что каждый продукт можно удалить по отдельности и что пользовательский интерфейс обновляется соответствующим образом при удалении продукта.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это упражнение помогает учащимся понять практические аспекты управления состоянием родительского компонента при использовании свойств, позволяющих дочерним компонентам взаимодействовать с этим состоянием. Этот подход является основой для создания надежных приложений с помощью React, требующих сложного взаимодействия между компонентами.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Неизменяемость в управлении состоянием</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Почему неизменность?</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Неизменяемость означает практику неизменения (мутации) данных после их создания. В контексте управления состоянием React неизменяемость играет решающую роль. Модель реактивности React построена на идее чистых функций и исключении побочных эффектов, которые поддерживает неизменяемость. Вот ключевые преимущества:</font></font></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Предсказуемость.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Неизменяемое состояние гарантирует, что состояние не изменится неожиданно где-либо в приложении, что приводит к более предсказуемому поведению.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Согласованность.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Благодаря неизменяемым данным каждое изменение создает новый объект, что помогает поддерживать согласованность на протяжении всего жизненного цикла приложения.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Оптимизация производительности:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> React может быстро определить, нужен ли повторный рендеринг, на основе изменений состояния или реквизитов, используя поверхностное сравнение. Если ссылка не изменилась, React может пропустить повторный рендеринг.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Упрощенная отладка.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Легче отслеживать изменения состояния с течением времени, когда каждое обновление состояния создает новое состояние, а не изменяет существующее состояние. Это может быть особенно полезно в сложных приложениях.</font></font></li>
+</ol>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Использование операторов расширения в обновлениях состояния</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Оператор распространения ( </font></font><code>...</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) в JavaScript — это полезный синтаксис для создания копий объектов или массивов, помогающий поддерживать неизменяемость. Он позволяет расширять итерацию (например, массив или объект) на отдельные элементы.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример использования операторов распространения для неизменяемости:</font></font></strong></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Массивы:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+ при обновлении массива в состоянии вы можете создать новый массив с теми же элементами и любыми необходимыми изменениями вместо непосредственного изменения исходного массива.</font></font></p>
+<pre><code class="language-jsx">const [items, setItems] = useState(['item1', 'item2']);<font></font>
+<font></font>
+const addItem = (item) =&gt; {<font></font>
+    setItems([...items, item]); // Creates a new array with an added item<font></font>
+};<font></font>
+<font></font>
+const removeItem = (index) =&gt; {<font></font>
+    setItems(items.filter((_, i) =&gt; i !== index)); // Creates a new array without the specified index<font></font>
+};<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Объекты:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+ при изменении свойств объекта в состоянии оператор распространения можно использовать для создания нового объекта с обновленными свойствами.</font></font></p>
+<pre><code class="language-jsx">const [user, setUser] = useState({ name: 'Alice', age: 25 });<font></font>
+<font></font>
+const updateUser = (newData) =&gt; {<font></font>
+    setUser({ ...user, ...newData }); // Creates a new object with updated data<font></font>
+};<font></font>
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Упражнение: обновление количества в корзине покупок</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цель:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> расширить приложение корзины покупок, включив в него функции увеличения или уменьшения количества товаров в корзине. Крайне важно, чтобы все обновления состояния соответствовали принципам неизменности.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Шаги по реализации:</font></font></strong></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обновите исходное состояние, чтобы включить количество:</font></font></strong></p>
+<pre><code class="language-jsx">const [products, setProducts] = useState([<font></font>
+    { id: 1, name: 'Apple', price: '$1', quantity: 2 },<font></font>
+    { id: 2, name: 'Banana', price: '$2', quantity: 3 }<font></font>
+]);<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Реализация функций для изменения количества:</font></font></strong></p>
+<pre><code class="language-jsx">const incrementQuantity = (productId) =&gt; {<font></font>
+    setProducts(products.map(product =&gt; <font></font>
+        product.id === productId ? { ...product, quantity: product.quantity + 1 } : product<font></font>
+    ));<font></font>
+};<font></font>
+<font></font>
+const decrementQuantity = (productId) =&gt; {<font></font>
+    setProducts(products.map(product =&gt; <font></font>
+        product.id === productId ? { ...product, quantity: product.quantity - 1 } : product<font></font>
+    ));<font></font>
+};<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Интегрируйте корректировку количества в компонент продукта:</font></font></strong></p>
+<pre><code class="language-jsx">function Product({ product, onRemove, onIncrement, onDecrement }) {<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            &lt;h3&gt;{product.name}&lt;/h3&gt;<font></font>
+            &lt;p&gt;{product.price}&lt;/p&gt;<font></font>
+            &lt;p&gt;Quantity: {product.quantity}&lt;/p&gt;<font></font>
+            &lt;button onClick={() =&gt; onIncrement(product.id)}&gt;+&lt;/button&gt;<font></font>
+            &lt;button onClick={() =&gt; onDecrement(product.id)}&gt;-&lt;/button&gt;<font></font>
+            &lt;button onClick={() =&gt; onRemove(product.id)}&gt;Remove from Cart&lt;/button&gt;<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Отобразите обновленный компонент продукта.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+Убедитесь, что </font></font><code>ShoppingCart</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">компонент передает новые функции </font></font><code>incrementQuantity</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>decrementQuantity</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">реквизиты компоненту </font></font><code>Product</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+</li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Задание для учеников:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Внесите вышеуказанные изменения в компоненты </font></font><code>ShoppingCart</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>Product</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Протестируйте приложение, чтобы убедиться, что корректировки количества работают правильно и что обновления состояния сохраняют неизменность.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это упражнение не только укрепляет понимание студентами управления состоянием и неизменяемости, но также расширяет их способность реализовывать сложные взаимодействия в приложениях React.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Подведение итогов и вопросы и ответы</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Завершая сегодняшнюю сессию по основным концепциям React, давайте уделим немного времени обзору и обобщению ключевых тем, которые мы обсуждали. Это поможет вам получить четкое понимание и готовность применить эти концепции в своих собственных проектах.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обзор и резюме</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1. Понимание реквизита:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Мы рассмотрели </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">реквизиты</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> (сокращенно от «свойства»), которые определяют, как компоненты получают данные от своих родительских компонентов. Реквизиты имеют решающее значение для конфигурации компонентов и обеспечения возможности многократного использования и модульности компонентов. Они доступны только для чтения внутри компонента, который их получает, что помогает поддерживать предсказуемый поток и поведение данных.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2. Управление состоянием с помощью useState:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Мы углубились в управление </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">состоянием</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> компонентов с помощью </font></font><code>useState</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">хука — основного компонента функциональных компонентов в React. Состояние позволяет компонентам сохранять динамическую информацию, которая меняется со временем, что позволяет им быть интерактивными (например, поля ввода, переключение элементов пользовательского интерфейса).</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Мы также рассмотрели, как обновления состояния вызывают повторную отрисовку компонентов, облегчая обновление пользовательского интерфейса в ответ на действия пользователя или другие факторы.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3. Объединение реквизита и состояния:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Мы обсудили, как реквизиты и состояние работают вместе для создания надежных приложений. Реквизиты передают статические или динамические данные дочерним компонентам, а состояние управляет изменениями внутри компонентов. Понимание того и другого необходимо для создания сложных и хорошо функционирующих приложений React.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4. Неизменность в управлении состоянием:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Было выделено </font><font style="vertical-align: inherit;">понятие </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">неизменяемости</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , подчеркнуто его значение в государственном управлении. Использование инструментов и методов, таких как оператор распространения, гарантирует, что состояние обновляется предсказуемым образом, что повышает производительность (за счет эффективного повторного рендеринга) и упрощает отладку.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5. Практические упражнения:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">С помощью практических упражнений вы реализовали эти концепции, создав компоненты, которые взаимодействуют через реквизиты и состояние, такие как карточка профиля пользователя и система корзины покупок. Эти упражнения призваны дать вам практический опыт и уверенность в использовании фундаментальных функций React.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сессия вопросов и ответов</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Теперь давайте перейдем к сеансу вопросов и ответов. Это ваша возможность задать любые вопросы, возникшие в ходе сегодняшнего урока. Если вам нужны разъяснения по конкретной теме, помощь в решении проблем, с которыми вы столкнулись во время упражнений, или совет по применению этих концепций в ваших проектах, сейчас самое время спросить. Учтите следующее:</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пояснения:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> если какой-либо аспект реквизита, состояния или неизменяемости неясен, запросите дополнительную информацию.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Лучшие практики.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Тем, кто интересуется лучшими практиками структурирования больших приложений React или управления сложными взаимодействиями между состояниями, не стесняйтесь углубляться в эти темы.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Идеи проекта:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> обсудите, как вы могли бы использовать эти концепции в потенциальных идеях проекта или текущей работе, которую вы выполняете. Понимание того, как применять то, что вы узнали сегодня, может существенно повлиять на вашу эффективность и результативность как разработчика React.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Целью этого занятия является обеспечение того, чтобы вы закончили с глубоким пониманием сегодняшнего материала и были готовы создавать более интерактивные и динамичные веб-приложения с использованием React.</font></font></p>
+		</div>
+
+		
+
+
+
+
+
+
+
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js" integrity="sha512-LhccdVNGe2QMEfI3x4DVV3ckMRe36TfydKss6mJpdHjNFiV07dFpS2xzeZedptKZrwxfICJpez09iNioiSZ3hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+		<script>
+			let currentLanguage = 'en';
+			const copiedTexts = {
+				en: 'Copied to clipboard!',
+				hy: 'Պատճենվել է սեղմատախտակում:',
+				ru: 'Скопировано в буфер обмена!'
+			}
+
+			function copyCode(index) {
+				const code = document.getElementById('code-block-' + index).innerText;
+				const copied = document.getElementById('copied-' + index);
+			
+				navigator.clipboard.writeText(code).then(() => {
+					copied.innerText = copiedTexts[currentLanguage];
+				});
+
+				setTimeout(() => {
+					copied.innerText = '';
+				}, 3000);
+			}
+
+			// Initialize Highlight.js after the document is fully loaded
+			document.addEventListener('DOMContentLoaded', (event) => {
+				hljs.highlightAll();
+			});
+
+			let en = document.getElementById('en');
+			let hy = document.getElementById('hy');
+			let ru = document.getElementById('ru');
+			let html_en = document.getElementById('html_en');
+			let html_hy = document.getElementById('html_hy');
+			let html_ru = document.getElementById('html_ru');
+			
+			en.addEventListener('click', function(){
+				html_en.style.display = 'block';
+				html_hy.style.display = 'none';
+				html_ru.style.display = 'none';
+				
+				en.style.display = 'none';
+				hy.style.display = 'inline';
+				ru.style.display = 'inline';
+				
+				document.getElementsByTagName('title')[0].innerText = html_en.getElementsByTagName('h2')[0].innerText
+				currentLanguage = 'en';
+			});
+			
+			hy.addEventListener('click', function(){
+				html_en.style.display = 'none';
+				html_hy.style.display = 'block';
+				html_ru.style.display = 'none';
+				
+				en.style.display = 'inline';
+				hy.style.display = 'none';
+				ru.style.display = 'inline';
+				
+				document.getElementsByTagName('title')[0].innerText = html_hy.getElementsByTagName('h2')[0].innerText
+				
+				currentLanguage = 'hy';
+			});
+			
+			ru.addEventListener('click', function(){
+				html_en.style.display = 'none';
+				html_hy.style.display = 'none';
+				html_ru.style.display = 'block';
+				
+				en.style.display = 'inline';
+				hy.style.display = 'inline';
+				ru.style.display = 'none';
+				
+				document.getElementsByTagName('title')[0].innerText = html_ru.getElementsByTagName('h2')[0].innerText
+				currentLanguage = 'ru';
+			});
+
+			let presLang = {
+				en: document.querySelectorAll('#html_en pre'), 
+				hy: document.querySelectorAll('#html_hy pre'), 
+				ru: document.querySelectorAll('#html_ru pre')
+			};
+			
+			let key = 1;
+			
+			for(let lang in presLang){
+				let pres = presLang[lang];
+
+				pres.forEach(function(pre){
+					let copyText = lang == 'hy' ? 'Պատճենել' : lang == 'ru' ? 'Копировать' : 'Copy';
+					let card = document.createElement('div');
+					card.className = 'card bg-dark text-white';
+					pre.firstChild.id = 'code-block-' + key
+					let cardHtml = `
+						<div class="card-header">
+							<button class="btn btn-primary" onclick="copyCode(${key})">${copyText}</button>
+							<span id="copied-${key}" class="float-end"></span>
+						</div>
+						<div class="p-0">
+							<pre>${pre.innerHTML}</pre>
+						</div>
+					`
+					card.innerHTML = cardHtml;
+					
+					pre.parentNode.replaceChild(card, pre);
+					key++;
+				});
+			}
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lesson 16: Introduction to React JS: Understanding Components and JSX</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+        <style>
+            code {
+                background-color: lightgray;
+                color: black;
+                padding: 2px 5px;
+                margin: 0 5px;
+				border: 1px solid gray;
+				border-radius: 5px;
+            }
+			#md{
+				display: none;
+			}
+        </style>
+    </head>
+    <body class="p-5">
+    <a href="#" id="hy" class="btn btn-info">Հայերեն</a>
+    <a href="#" id="en" class="btn btn-info" style="display:none">English</a>
+    <a href="#" id="ru" class="btn btn-info">Русский</a>
+	
+	<hr>
+
+
+
+
+
+
+	<div id="html_en" class="html">
+<h2>Lesson 16: Introduction to React JS: Understanding Components and JSX</h2>
+<hr>
+<h3>Introduction to React JS</h3>
+<h4>What is React?</h4>
+<p>React is a declarative, efficient, and flexible JavaScript library for building user interfaces. It was developed by Facebook and is maintained by Facebook and a community of individual developers and companies. React has become one of the most popular and widely used libraries in modern web development due to its innovative approaches to rendering and updating user interfaces.</p>
+<p><strong>Key Features of React:</strong></p>
+<ol>
+<li><p><strong>Virtual DOM:</strong></p>
+<ul>
+<li>React creates a lightweight in-memory version of the actual DOM, known as the Virtual DOM. When changes in the UI occur, React first applies those changes to the Virtual DOM instead of the real DOM. It then calculates the most efficient way to update the real DOM to match the Virtual DOM. This process minimizes direct manipulations of the DOM, which are costly in terms of performance.</li>
+</ul>
+</li>
+<li><p><strong>One-Way Data Binding:</strong></p>
+<ul>
+<li>React follows a unidirectional data flow, meaning data has one, and only one, way to be transferred to other parts of the application. This approach makes the flow of data predictable and easier to understand, which simplifies debugging and enhances maintainability.</li>
+</ul>
+</li>
+<li><p><strong>Component-Based Architecture:</strong></p>
+<ul>
+<li>React is built around the concept of components. A component is a self-contained module that manages its own state and renders itself based on the data passed to it. Components can be reused throughout the application, which can lead to a more efficient development process as reusable components reduce the amount of code developers need to write.</li>
+</ul>
+</li>
+</ol>
+<h4>Why Use React?</h4>
+<p><strong>Efficiency:</strong></p>
+<ul>
+<li>The use of the Virtual DOM makes React exceptionally efficient at updating the UI, which is particularly beneficial for applications with complex user interfaces and high user interaction rates.</li>
+</ul>
+<p><strong>Reusability of Components:</strong></p>
+<ul>
+<li>Components are designed to be isolated, making them reusable across the application or even in different projects. This modularity allows developers to build complex applications with maintainable codebases.</li>
+</ul>
+<p><strong>Extensive Ecosystem:</strong></p>
+<ul>
+<li>React’s ecosystem includes a wide range of tools, libraries, and extensions that enhance its capabilities. Tools like Redux for state management and React Router for navigation complement React&#39;s core functionalities, making it more powerful.</li>
+</ul>
+<p><strong>Strong Community and Backing:</strong></p>
+<ul>
+<li>With strong backing from Facebook and a vibrant community of developers, React is continually updated with new features and improvements. The community also contributes a wealth of tutorials, guides, and third-party packages that make React even more robust.</li>
+</ul>
+<h4>Setting Up the Development Environment</h4>
+<p>To start working with React, one of the quickest and easiest methods is to use <strong>Create React App</strong>, a comfortable environment setup for React applications.</p>
+<p><strong>Steps to Set Up a React Project with Create React App:</strong></p>
+<ol>
+<li><p><strong>Install Node.js:</strong></p>
+<ul>
+<li>Node.js is required to run JavaScript on the server. Ensure it is installed on your machine.</li>
+</ul>
+</li>
+<li><p><strong>Install Create React App:</strong></p>
+<ul>
+<li>Open your terminal and install Create React App globally using npm:<pre><code class="language-bash">npm install -g create-react-app
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>Create a New React Application:</strong></p>
+<ul>
+<li>Once the installation is complete, you can create a new React project:<pre><code class="language-bash">create-react-app my-react-app
+</code></pre>
+</li>
+<li>This command creates a new folder named <code>my-react-app</code> with all the necessary setup, including a development server, webpack configuration, and Babel presets.</li>
+</ul>
+</li>
+<li><p><strong>Start the Development Server:</strong></p>
+<ul>
+<li>Navigate into your new project folder and start the development server:<pre><code class="language-bash">cd my-react-app
+npm start
+</code></pre>
+</li>
+<li>This will run the development server and open your new React application in a web browser.</li>
+</ul>
+</li>
+</ol>
+<p>This setup gives you a solid foundation for developing React applications, with a build system and local server ready to go out of the box.</p>
+<p>By the end of this introductory segment, students should have a clear understanding of what React is, why it&#39;s beneficial, and how to set up their development environment to start building React applications.</p>
+<h3>Understanding Components and JSX in React</h3>
+<h4>Components as Building Blocks</h4>
+<p>In React, components are the fundamental building blocks of the user interface. A component in React encapsulates everything it needs to function on its own—markup, styles, and behavior—making them self-sufficient and reusable. Components manage their own state (data) and are responsible for rendering themselves based on this state and the props (properties) they receive from their parent components.</p>
+<p><strong>Characteristics of React Components:</strong></p>
+<ul>
+<li><strong>Encapsulation</strong>: Components encapsulate functionality and separate concerns within a single unit of code, which can include rendering UI, handling user input, and managing state.</li>
+<li><strong>Reusability</strong>: Once defined, components can be reused throughout an application, which can significantly speed up development and maintain consistency.</li>
+<li><strong>Composability</strong>: Larger components can be composed of many smaller components, making it easier to build complex UIs from simple building blocks.</li>
+</ul>
+<h4>Introduction to JSX</h4>
+<p>JSX (JavaScript XML) is a syntax extension for JavaScript commonly used with React to describe what the UI should look like. JSX combines HTML with JavaScript functionality, allowing developers to write HTML structures in the same file as JavaScript code.</p>
+<p><strong>Features of JSX:</strong></p>
+<ul>
+<li><strong>HTML-like Syntax</strong>: JSX closely resembles HTML but comes with the full power of JavaScript. This familiarity makes it easier for developers to write and understand the structure of the UI.</li>
+<li><strong>JavaScript Integration</strong>: JSX allows developers to embed JavaScript expressions directly within the markup using curly braces <code>{}</code>, which enables dynamic content generation based on the component&#39;s state or props.</li>
+</ul>
+<p><strong>Example of JSX:</strong></p>
+<pre><code class="language-jsx">const element = &lt;h1&gt;Hello, world!&lt;/h1&gt;;
+</code></pre>
+<p><strong>JSX vs. HTML:</strong></p>
+<ul>
+<li>JSX requires <code>className</code> for CSS classes instead of <code>class</code>, as <code>class</code> is a reserved keyword in JavaScript.</li>
+<li>Properties and methods in JSX are camelCase, not lowercase: <code>onClick</code>, <code>onSubmit</code>, etc.</li>
+<li>Self-closing tags must end in a slash, e.g., <code>&lt;img src=&quot;url&quot; /&gt;</code>.</li>
+</ul>
+<h4>Writing Your First Component</h4>
+<p>Let&#39;s create a simple React component called <code>Greeting</code> that displays a greeting message. This component will illustrate the basic structure of a React component using JSX.</p>
+<p><strong>Example of a Simple Component:</strong></p>
+<pre><code class="language-jsx">import React from &#39;react&#39;;
+
+function Greeting() {
+    return &lt;h1&gt;Hello, React!&lt;/h1&gt;;
+}
+</code></pre>
+<p>In this example, <code>Greeting</code> is a functional component, which is one of the types of components you can define in React. It returns JSX that describes the UI.</p>
+<h4>Rendering Components</h4>
+<p>Components need to be rendered into the DOM to be visible. This is typically done using <code>ReactDOM.render()</code>, which handles updating the DOM to match the React elements.</p>
+<p><strong>Rendering a Component:</strong></p>
+<pre><code class="language-jsx">import React from &#39;react&#39;;
+import ReactDOM from &#39;react-dom&#39;;
+import Greeting from &#39;./Greeting&#39;;
+
+ReactDOM.render(&lt;Greeting /&gt;, document.getElementById(&#39;root&#39;));
+</code></pre>
+<ul>
+<li><strong>Root DOM Node</strong>: In a typical React application, there is a single root DOM node (often with an ID of <code>root</code>). React will manage everything inside this root DOM node, allowing it to control the entire UI.</li>
+</ul>
+<p>This approach keeps React&#39;s rendering performance optimized, as React only changes individual DOM nodes as necessary rather than refreshing the entire UI on each update.</p>
+<p><strong>Hands-on Exercise:</strong></p>
+<ol>
+<li><strong>Create a New Component</strong>: Ask students to create a new component called <code>UserProfile</code> that displays a user&#39;s name and email.</li>
+<li><strong>Render the Component</strong>: Guide them to render this component in the <code>root</code> DOM element of their application.</li>
+</ol>
+<p>By guiding students through creating and rendering their first React component, they will gain hands-on experience with React&#39;s component-based architecture and JSX syntax. This foundational knowledge is crucial for building more complex components and applications using React.</p>
+<h3>Props and State in Functional Components</h3>
+<h4>Props for Configuration</h4>
+<p><strong>Props</strong>, short for properties, are a way of passing data from parent to child components in React. They are read-only, which means the data a component receives from its props should not be changed by the component itself. Props can include anything from strings and numbers to more complex data structures and functions.</p>
+<p><strong>Features of Props:</strong></p>
+<ul>
+<li><strong>Immutability</strong>: Props are immutable within the component which means they cannot be modified by the component that receives them.</li>
+<li><strong>Configuration</strong>: They are used to configure a component by providing necessary data or callbacks. This makes components reusable and dynamic.</li>
+</ul>
+<p><strong>Example of Defining and Using Props:</strong></p>
+<pre><code class="language-jsx">// A child component that accepts props
+function UserProfile({ username, email }) {
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;{username}&lt;/h1&gt;
+            &lt;p&gt;{email}&lt;/p&gt;
+        &lt;/div&gt;
+    );
+}
+
+// A parent component that passes props to the child
+function App() {
+    return &lt;UserProfile username=&quot;JaneDoe&quot; email=&quot;jane@example.com&quot; /&gt;;
+}
+</code></pre>
+<p>In this example, <code>UserProfile</code> is a functional component that takes <code>props</code> as an argument and uses them to display data. The parent component <code>App</code> passes <code>username</code> and <code>email</code> as props to <code>UserProfile</code>.</p>
+<h4>State Management Basics</h4>
+<p>While props allow you to pass data down to your components, <strong>state</strong> allows components to manage and respond to data that changes over time. Unlike props, state is local to the component and can be changed.</p>
+<p><strong>Using the <code>useState</code> Hook:</strong>
+React hooks, introduced in React 16.8, allow you to use state and other React features in functional components. The <code>useState</code> hook lets you add React state to functional components.</p>
+<pre><code class="language-jsx">import React, { useState } from &#39;react&#39;;
+
+function Counter() {
+    const [count, setCount] = useState(0);
+
+    return (
+        &lt;div&gt;
+            &lt;p&gt;You clicked {count} times&lt;/p&gt;
+            &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+                Click me
+            &lt;/button&gt;
+        &lt;/div&gt;
+    );
+}
+</code></pre>
+<ul>
+<li><code>useState</code> returns a pair: the current state value and a function that lets you update it. You call it with the initial state and it returns the current state value (<code>count</code>), and a function (<code>setCount</code>) that lets you update the state.</li>
+</ul>
+<h4>Hands-On Exercise: Personalized Greeting Component</h4>
+<p><strong>Objective:</strong> Enhance the greeting component to accept user input and display a personalized greeting. Use props for configuration and state to manage user interactions.</p>
+<p><strong>Setup:</strong></p>
+<ol>
+<li><p><strong>Create a Greeting Component with Props and State:</strong></p>
+<pre><code class="language-jsx">import React, { useState } from &#39;react&#39;;
+
+function Greeting({ initialName }) {
+    const [name, setName] = useState(initialName);
+
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;Hello, {name}!&lt;/h1&gt;
+            &lt;input
+                type=&quot;text&quot;
+                value={name}
+                onChange={e =&gt; setName(e.target.value)}
+            /&gt;
+        &lt;/div&gt;
+    );
+}
+</code></pre>
+</li>
+<li><p><strong>Render the Greeting Component in the App:</strong></p>
+<pre><code class="language-jsx">function App() {
+    return &lt;Greeting initialName=&quot;React Developer&quot; /&gt;;
+}
+</code></pre>
+</li>
+</ol>
+<p>In this exercise:</p>
+<ul>
+<li><strong>Props</strong> are used to pass the initial name to the <code>Greeting</code> component, demonstrating how props can configure components with dynamic values.</li>
+<li><strong>State</strong> (<code>useState</code>) manages the name within the <code>Greeting</code> component, demonstrating state&#39;s role in handling user input and dynamic data within a component.</li>
+</ul>
+<p>This exercise will solidify the students&#39; understanding of how to effectively use props for passing data and configurations, and how state can be managed within functional components using hooks. This fundamental knowledge is crucial for building interactive and dynamic applications in React.</p>
+<h3>Practical Exercises and Component Composition in React</h3>
+<h4>Building a Small Application: Simple Task List</h4>
+<p>This practical exercise involves creating a small React application—a task list where each task is a component. This application will demonstrate how to use props, state, and component composition effectively.</p>
+<p><strong>Objective:</strong> Students will build a simple task list application using React. Each task will have its description and a button to mark the task as completed, showcasing how components manage their state and interact with each other.</p>
+<p><strong>Steps to Build the Task List Application:</strong></p>
+<ol>
+<li><p><strong>Setup the Project:</strong></p>
+<ul>
+<li>Ensure that all students have their development environment set up with Create React App. This tool provides a good starting point with a built-in development server, Webpack, and Babel configurations.</li>
+</ul>
+<pre><code class="language-bash">npx create-react-app task-list-app
+cd task-list-app
+npm start
+</code></pre>
+</li>
+<li><p><strong>Create Task Component:</strong></p>
+<ul>
+<li>Define a <code>Task</code> component that accepts a task description and an event handler as props. This component will display the task and a button to mark it as done.</li>
+</ul>
+<pre><code class="language-jsx">function Task({ description, onComplete }) {
+    return (
+        &lt;div className=&quot;task&quot;&gt;
+            &lt;p&gt;{description}&lt;/p&gt;
+            &lt;button onClick={onComplete}&gt;Mark as Done&lt;/button&gt;
+        &lt;/div&gt;
+    );
+}
+</code></pre>
+</li>
+<li><p><strong>Create TaskList Component:</strong></p>
+<ul>
+<li>The <code>TaskList</code> component will manage the state of the tasks, including adding new tasks and marking tasks as completed.</li>
+</ul>
+<pre><code class="language-jsx">import React, { useState } from &#39;react&#39;;
+import Task from &#39;./Task&#39;;
+
+function TaskList() {
+    const [tasks, setTasks] = useState([
+        { id: 1, text: &#39;Learn React&#39;, completed: false },
+        { id: 2, text: &#39;Write a new Component&#39;, completed: false }
+    ]);
+
+    const completeTask = taskId =&gt; {
+        const newTasks = tasks.map(task =&gt; {
+            if (task.id === taskId) {
+                return { ...task, completed: true };
+            }
+            return task;
+        });
+        setTasks(newTasks);
+    };
+
+    return (
+        &lt;div&gt;
+            {tasks.map(task =&gt; (
+                &lt;Task
+                    key={task.id}
+                    description={task.text}
+                    onComplete={() =&gt; completeTask(task.id)}
+                /&gt;
+            ))}
+        &lt;/div&gt;
+    );
+}
+</code></pre>
+</li>
+<li><p><strong>Integrate TaskList in the App Component:</strong></p>
+<ul>
+<li>Replace the content of <code>App.js</code> with the <code>TaskList</code> component.</li>
+</ul>
+<pre><code class="language-jsx">import React from &#39;react&#39;;
+import TaskList from &#39;./TaskList&#39;;
+
+function App() {
+    return (
+        &lt;div className=&quot;App&quot;&gt;
+            &lt;h1&gt;Task List&lt;/h1&gt;
+            &lt;TaskList /&gt;
+        &lt;/div&gt;
+    );
+}
+
+export default App;
+</code></pre>
+</li>
+</ol>
+<h4>Component Composition</h4>
+<p>Component composition is a powerful concept in React that allows developers to build complex UIs by nesting and combining components, similar to how HTML elements are nested.</p>
+<p><strong>Best Practices for Component Composition:</strong></p>
+<ul>
+<li><strong>Single Responsibility Principle:</strong> Each component should be responsible for a single functionality. This approach makes the component more reusable and easier to maintain.</li>
+<li><strong>Prop Driven Composition:</strong> Pass necessary data and callbacks via props to customize child components&#39; behavior from the parent component.</li>
+<li><strong>Minimize Prop Drilling:</strong> Use context or state management libraries (like Redux or Context API) to avoid passing props through many levels of nested components.</li>
+<li><strong>Composition over Inheritance:</strong> Favor composing components together rather than inheriting from them. React&#39;s compositional model is more powerful and flexible than classical inheritance.</li>
+</ul>
+<h4>Conclusion</h4>
+<p>This exercise not only helps students understand and implement component composition but also gives them hands-on experience in managing the state and props in a real-world application scenario. They learn how to structure an application into manageable, reusable components that interact to create dynamic and interactive user interfaces. Through this exercise, students gain the confidence to tackle larger and more complex React projects.</p>
+<h3>Wrap-up and Q&amp;A</h3>
+<p>As we conclude our comprehensive introduction to React, let&#39;s briefly recap the essential concepts we&#39;ve explored today. This review will solidify your understanding and help ensure you&#39;re well-prepared to apply these concepts in your projects.</p>
+<h4>Review and Summary</h4>
+<p><strong>1. Components as Building Blocks:</strong></p>
+<ul>
+<li>We began by defining React components, which are the core building blocks of any React application. Components allow you to break the UI into independent, reusable pieces that manage their own state and can be composed to make complex UIs.</li>
+</ul>
+<p><strong>2. Introduction to JSX:</strong></p>
+<ul>
+<li>JSX is a syntax extension for JavaScript that looks similar to HTML. It&#39;s used with React to describe what the UI should look like. JSX makes it easier to write add-on components and for the system to automatically pass data through the application.</li>
+</ul>
+<p><strong>3. Props for Configuration:</strong></p>
+<ul>
+<li>Props, short for properties, are how components receive data from their parent component. They are read-only and help make components reusable and dynamic. We discussed how props are used to configure components and pass static and dynamic information.</li>
+</ul>
+<p><strong>4. State Management Basics:</strong></p>
+<ul>
+<li>Unlike props, the state is internal and controlled by the component itself. We explored how to use the <code>useState</code> hook in functional components to add state management capabilities, allowing components to respond to user input and other actions.</li>
+</ul>
+<p><strong>5. Practical Exercises and Component Composition:</strong></p>
+<ul>
+<li>Through practical exercises, we applied the concepts of components, JSX, props, and state. We built a simple application—a task list, demonstrating component composition, which is akin to nesting HTML elements but with the added power of JavaScript.</li>
+</ul>
+<h4>Q&amp;A Session</h4>
+<p>Now, let&#39;s open the floor for any questions you may have. This is an excellent opportunity to clarify any part of the lesson that you found challenging or to discuss how you might apply these concepts in your own projects. Here are a few prompts to consider:</p>
+<ul>
+<li><strong>Component Design:</strong> Are there scenarios where the line between props and state isn&#39;t clear? How might you decide whether something should be a prop or part of the state?</li>
+<li><strong>JSX Tips:</strong> Do you have questions about specific JSX syntax, especially how it differs from HTML or integrates with JavaScript?</li>
+<li><strong>State Management:</strong> How do you manage state effectively in larger applications? When might you consider using context or Redux instead of local state?</li>
+<li><strong>Real-World Applications:</strong> How can you apply what you&#39;ve learned to improve the structure and performance of your existing projects?</li>
+</ul>
+<p>Feel free to ask questions or share insights based on your experiences. This discussion can provide valuable insights and help deepen everyone&#39;s understanding of React and its ecosystem. Whether you&#39;re planning a new project or refactoring an old one, the concepts we&#39;ve covered today are crucial tools in your web development arsenal.</p>
+
+    </div>
+
+
+
+
+
+
+	<div id="html_hy" class="html" style="display:none">
+<h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դաս 16. Ներածություն React JS. Հասկանալով բաղադրիչները և JSX-ը</font></font></h2>
+<hr>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React JS-ի ներածություն</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ի՞նչ է React-ը:</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ը դեկլարատիվ, արդյունավետ և ճկուն JavaScript գրադարան է օգտատերերի միջերեսներ ստեղծելու համար: Այն մշակվել է Facebook-ի կողմից և պահպանվում է Facebook-ի և առանձին ծրագրավորողների և ընկերությունների համայնքի կողմից: React-ը դարձել է ժամանակակից վեբ մշակման մեջ ամենահայտնի և լայնորեն օգտագործվող գրադարաններից մեկը՝ շնորհիվ օգտատերերի ինտերֆեյսի մատուցման և թարմացման իր նորարարական մոտեցումների:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ի հիմնական առանձնահատկությունները.</font></font></strong></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վիրտուալ DOM:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ը ստեղծում է իրական DOM-ի թեթև հիշողության տարբերակը, որը հայտնի է որպես Վիրտուալ DOM: Երբ UI-ում փոփոխություններ են տեղի ունենում, React-ը նախ կիրառում է այդ փոփոխությունները վիրտուալ DOM-ի վրա՝ իրական DOM-ի փոխարեն: Այնուհետև այն հաշվարկում է իրական DOM-ը թարմացնելու ամենաարդյունավետ միջոցը՝ վիրտուալ DOM-ին համապատասխանելու համար: Այս գործընթացը նվազագույնի է հասցնում DOM-ի ուղղակի մանիպուլյացիաները, որոնք ծախսատար են աշխատանքի առումով:</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տվյալների միակողմանի կապում.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ը հետևում է միակողմանի տվյալների հոսքին, ինչը նշանակում է, որ տվյալներն ունեն մեկ և միայն մեկ միջոց՝ հավելվածի այլ մասեր փոխանցելու համար: Այս մոտեցումը կանխատեսելի և հեշտ ըմբռնելի է դարձնում տվյալների հոսքը, ինչը հեշտացնում է վրիպազերծումը և բարձրացնում պահպանելիությունը:</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչների վրա հիմնված ճարտարապետություն.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ը կառուցված է բաղադրիչների հայեցակարգի շուրջ: Բաղադրիչը ինքնամփոփ մոդուլ է, որը կառավարում է իր սեփական վիճակը և իրեն տրամադրում է իրեն փոխանցված տվյալների հիման վրա: Բաղադրիչները կարող են կրկին օգտագործվել ամբողջ հավելվածում, ինչը կարող է հանգեցնել ավելի արդյունավետ զարգացման գործընթացի, քանի որ բազմակի օգտագործվող բաղադրիչները նվազեցնում են կոդ մշակողների կողմից գրելու անհրաժեշտությունը:</font></font></li>
+</ul>
+</li>
+</ol>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ինչու՞ օգտագործել React-ը:</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Արդյունավետություն:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վիրտուալ DOM-ի օգտագործումը React-ը դարձնում է բացառիկ արդյունավետ UI-ի թարմացման հարցում, ինչը հատկապես օգտակար է օգտատիրոջ բարդ ինտերֆեյսներով և օգտատիրոջ փոխգործակցության բարձր տեմպերով հավելվածների համար:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչների բազմակի օգտագործումը.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչները նախագծված են մեկուսացված լինելու համար՝ դարձնելով դրանք կրկին օգտագործելի ծրագրում կամ նույնիսկ տարբեր նախագծերում: Այս մոդուլյարությունը թույլ է տալիս ծրագրավորողներին ստեղծել բարդ հավելվածներ՝ պահպանվող կոդերի բազաներով:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ընդարձակ էկոհամակարգ.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ի էկոհամակարգը ներառում է գործիքների, գրադարանների և ընդլայնումների լայն շրջանակ, որոնք մեծացնում են նրա հնարավորությունները: Գործիքները, ինչպիսիք են Redux-ը պետական &ZeroWidthSpace;&ZeroWidthSpace;կառավարման համար և React Router-ը՝ նավիգացիայի համար, լրացնում են React-ի հիմնական գործառույթները՝ դարձնելով այն ավելի հզոր:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ուժեղ համայնք և աջակցություն.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ունենալով ուժեղ աջակցություն Facebook-ից և մշակողների աշխույժ համայնքից՝ React-ը շարունակաբար թարմացվում է նոր հնարավորություններով և բարելավումներով: Համայնքը նաև տրամադրում է բազմաթիվ ձեռնարկներ, ուղեցույցներ և երրորդ կողմի փաթեթներ, որոնք React-ն ավելի ամուր են դարձնում:</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զարգացման միջավայրի ստեղծում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ի հետ աշխատելու համար ամենաարագ և ամենահեշտ մեթոդներից մեկը </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Create React հավելվածն</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> է , որը հարմարավետ միջավայրի կարգավորում է React հավելվածների համար:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Create React հավելվածով React նախագիծը կարգավորելու քայլեր.</font></font></strong></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տեղադրեք Node.js:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Node.js-ը պահանջվում է JavaScript-ը սերվերի վրա գործարկելու համար: Համոզվեք, որ այն տեղադրված է ձեր մեքենայի վրա:</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տեղադրեք Create React հավելվածը.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բացեք ձեր տերմինալը և տեղադրեք Create React հավելվածը գլոբալ՝ օգտագործելով npm.</font></font><pre><code class="language-bash">npm install -g create-react-app
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ստեղծեք նոր React հավելված.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տեղադրումն ավարտվելուց հետո կարող եք ստեղծել նոր React նախագիծ.</font></font><pre><code class="language-bash">create-react-app my-react-app
+</code></pre>
+</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս հրամանը ստեղծում է նոր թղթապանակ, որը կոչվում է </font></font><code>my-react-app</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բոլոր անհրաժեշտ կարգավորումներով, ներառյալ զարգացման սերվերը, վեբ փաթեթի կազմաձևումը և Babel նախադրյալները:</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործարկել զարգացման սերվերը.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նավարկեք ձեր նոր նախագծի թղթապանակը և գործարկեք զարգացման սերվերը.</font></font><pre><code class="language-bash">cd my-react-app<font></font>
+npm start<font></font>
+</code></pre>
+</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սա կգործարկի զարգացման սերվերը և կբացի ձեր նոր React հավելվածը վեբ բրաուզերում:</font></font></li>
+</ul>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս կարգավորումը ձեզ ամուր հիմք է տալիս React հավելվածներ մշակելու համար՝ կառուցման համակարգով և տեղային սերվերով, որը պատրաստ է դուրս գալու:</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս ներածական հատվածի ավարտին ուսանողները պետք է հստակ պատկերացում ունենան, թե ինչ է React-ը, ինչու է դա ձեռնտու և ինչպես ստեղծել իրենց զարգացման միջավայրը, որպեսզի սկսեն ստեղծել React հավելվածներ:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հասկանալով բաղադրիչները և JSX-ը React-ում</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչները որպես շինանյութեր</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ում բաղադրիչները օգտատիրոջ ինտերֆեյսի հիմնական կառուցվածքային բլոկներն են: React-ի բաղադրիչը ներառում է այն ամենը, ինչ անհրաժեշտ է ինքնուրույն գործելու համար՝ նշագրում, ոճեր և վարքագիծ՝ դրանք դարձնելով ինքնաբավ և վերօգտագործելի: Բաղադրիչները կառավարում են իրենց սեփական վիճակը (տվյալները) և պատասխանատու են իրենց մատուցման համար՝ հիմնվելով այս վիճակի և իրենց հիմնական բաղադրիչներից ստացած հենակետերի (հատկությունների) վրա:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React բաղադրիչների բնութագրերը.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Էկապսուլյացիա</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Բաղադրիչները ներառում են ֆունկցիոնալությունը և տարանջատված մտահոգությունները կոդի մեկ միավորի մեջ, որը կարող է ներառել UI-ի մատուցում, օգտատիրոջ մուտքի մշակում և վիճակի կառավարում:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կրկնակի օգտագործման հնարավորություն</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Սահմանվելուց հետո բաղադրիչները կարող են կրկին օգտագործվել ամբողջ հավելվածում, ինչը կարող է զգալիորեն արագացնել զարգացումը և պահպանել հետևողականությունը:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կազմելու ունակություն</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . ավելի մեծ բաղադրիչները կարող են կազմված լինել շատ ավելի փոքր բաղադրիչներից, ինչը հեշտացնում է բարդ UI-ներ կառուցելը պարզ շինարարական բլոկներից:</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներածություն JSX</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JSX-ը (JavaScript XML) JavaScript-ի շարահյուսական ընդլայնում է, որը սովորաբար օգտագործվում է React-ի հետ՝ նկարագրելու համար, թե ինչպիսին պետք է լինի UI-ը: JSX-ը համատեղում է HTML-ը JavaScript-ի հետ՝ թույլ տալով ծրագրավորողներին գրել HTML կառուցվածքները նույն ֆայլում, ինչ JavaScript կոդը:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JSX-ի առանձնահատկությունները.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML-ի նման շարահյուսություն</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . JSX-ը շատ նման է HTML-ին, բայց գալիս է JavaScript-ի ողջ հզորությամբ: Այս ծանոթությունը ծրագրավորողների համար հեշտացնում է գրել և հասկանալ UI-ի կառուցվածքը:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JavaScript-ի ինտեգրում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . JSX-ը ծրագրավորողներին թույլ է տալիս տեղադրել JavaScript արտահայտությունները անմիջապես նշագծման մեջ՝ օգտագործելով գանգուր փակագծեր </font></font><code>{}</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, ինչը հնարավորություն է տալիս դինամիկ բովանդակություն ստեղծել՝ հիմնվելով բաղադրիչի վիճակի կամ հենակետերի վրա:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JSX-ի օրինակ.</font></font></strong></p>
+<pre><code class="language-jsx">const element = &lt;h1&gt;Hello, world!&lt;/h1&gt;;
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JSX ընդդեմ HTML:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JSX-ը պահանջում է </font></font><code>className</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CSS դասերի փոխարեն </font></font><code>class</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, ինչպես </font></font><code>class</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JavaScript-ում վերապահված հիմնաբառ է:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JSX-ի հատկությունները և մեթոդները camelCase-ն են, ոչ թե փոքրատառերը՝ </font></font><code>onClick</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>onSubmit</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, և այլն:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ինքնափակվող պիտակները պետք է ավարտվեն կտրվածքով, օրինակ՝ </font></font><code>&lt;img src="url" /&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գրելով ձեր առաջին բաղադրիչը</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Եկեք ստեղծենք մի պարզ React բաղադրիչ, որը կոչվում է, </font></font><code>Greeting</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">որը ցուցադրում է ողջույնի հաղորդագրություն: Այս բաղադրիչը ցույց կտա React բաղադրիչի հիմնական կառուցվածքը՝ օգտագործելով JSX:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պարզ բաղադրիչի օրինակ.</font></font></strong></p>
+<pre><code class="language-jsx">import React from 'react';<font></font>
+<font></font>
+function Greeting() {<font></font>
+	return &lt;h1&gt;Hello, React!&lt;/h1&gt;;<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս օրինակում </font></font><code>Greeting</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ֆունկցիոնալ բաղադրիչ է, որը բաղադրիչների տեսակներից մեկն է, որը կարող եք սահմանել React-ում: Այն վերադարձնում է JSX, որը նկարագրում է միջերեսը:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչների մատուցում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչները պետք է ներկայացվեն DOM-ում, որպեսզի տեսանելի լինեն: Սա սովորաբար արվում է օգտագործելով </font></font><code>ReactDOM.render()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, որը կարգավորում է DOM-ի թարմացումը՝ React տարրերին համապատասխանելու համար:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչի մատուցում.</font></font></strong></p>
+<pre><code class="language-jsx">import React from 'react';<font></font>
+import ReactDOM from 'react-dom';<font></font>
+import Greeting from './Greeting';<font></font>
+<font></font>
+ReactDOM.render(&lt;Greeting /&gt;, document.getElementById('root'));<font></font>
+</code></pre>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Root DOM հանգույց</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . սովորական React հավելվածում կա մեկ արմատային DOM հանգույց (հաճախ ID-ով </font></font><code>root</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">): React-ը կկառավարի ամեն ինչ այս արմատային DOM հանգույցի ներսում՝ թույլ տալով նրան վերահսկել ողջ միջերեսը:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս մոտեցումը պահպանում է React-ի մատուցման արդյունավետությունը օպտիմիզացված, քանի որ React-ը փոխում է միայն առանձին DOM հանգույցները՝ ըստ անհրաժեշտության, այլ ոչ թե թարմացնելու ամբողջ միջերեսը յուրաքանչյուր թարմացման ժամանակ:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական վարժություն.</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ստեղծեք նոր բաղադրիչ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Խնդրեք ուսանողներին ստեղծել նոր բաղադրիչ, որը կոչվում է, </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">որը ցուցադրում է օգտվողի անունը և էլ.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Render the Component</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Ուղղորդեք նրանց, որպեսզի այս բաղադրիչը ներկայացնեն </font></font><code>root</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">իրենց հավելվածի DOM տարրում:</font></font></li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ուսանողներին ուղղորդելով իրենց առաջին React բաղադրիչը ստեղծելու և մատուցելու միջոցով՝ նրանք գործնական փորձ ձեռք կբերեն React-ի բաղադրիչի վրա հիմնված ճարտարապետության և JSX շարահյուսության հետ: Այս հիմնարար գիտելիքները շատ կարևոր են React-ի միջոցով ավելի բարդ բաղադրիչներ և հավելվածներ ստեղծելու համար:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հենարաններ և վիճակը ֆունկցիոնալ բաղադրիչներում</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կազմաձևման հենարաններ</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Props-ը</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , որը կրճատվել է հատկությունների համար, React-ում տվյալներ ծնողից երեխայի բաղադրիչներին փոխանցելու միջոց է: Դրանք միայն կարդալու են, ինչը նշանակում է, որ բաղադրիչը ստացած տվյալները չպետք է փոխվեն հենց բաղադրիչի կողմից: Հենակետերը կարող են ներառել ամեն ինչ՝ տողերից և թվերից մինչև տվյալների ավելի բարդ կառուցվածքներ և գործառույթներ:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Props-ի առանձնահատկությունները.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Անփոփոխելիություն</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Հենակետերն անփոփոխ են բաղադրիչի ներսում, ինչը նշանակում է, որ դրանք չեն կարող փոփոխվել այն բաղադրիչի կողմից, որը ստանում է դրանք:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կազմաձևում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . դրանք օգտագործվում են բաղադրիչը կարգավորելու համար՝ տրամադրելով անհրաժեշտ տվյալներ կամ հետադարձ զանգեր: Սա բաղադրիչները դարձնում է բազմակի օգտագործման և դինամիկ:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հենակետերի սահմանման և օգտագործման օրինակ.</font></font></strong></p>
+<pre><code class="language-jsx">// A child component that accepts props<font></font>
+function UserProfile({ username, email }) {<font></font>
+	return (<font></font>
+		&lt;div&gt;<font></font>
+			&lt;h1&gt;{username}&lt;/h1&gt;<font></font>
+			&lt;p&gt;{email}&lt;/p&gt;<font></font>
+		&lt;/div&gt;<font></font>
+	);<font></font>
+}<font></font>
+<font></font>
+// A parent component that passes props to the child<font></font>
+function App() {<font></font>
+	return &lt;UserProfile username="JaneDoe" email="jane@example.com" /&gt;;<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս օրինակում </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ֆունկցիոնալ բաղադրիչ է, որն ընդունում է </font></font><code>props</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">որպես փաստարկ և օգտագործում դրանք տվյալների ցուցադրման համար: Ծնող բաղադրիչն </font></font><code>App</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">անցնում է </font></font><code>username</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>email</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">որպես հենարան դեպի </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պետական &ZeroWidthSpace;&ZeroWidthSpace;կառավարման հիմունքներ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Թեև հենակետերը թույլ են տալիս փոխանցել տվյալները ձեր բաղադրիչներին, </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">վիճակը</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> թույլ է տալիս բաղադրիչներին կառավարել և արձագանքել ժամանակի ընթացքում փոփոխվող տվյալներին: Ի տարբերություն ռեկորդների, վիճակը տեղական է բաղադրիչի համար և կարող է փոխվել:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործելով </font></font><code>useState</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hook.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+React կեռիկները, որոնք ներկայացված են React 16.8-ում, թույլ են տալիս օգտագործել պետական &ZeroWidthSpace;&ZeroWidthSpace;և այլ React գործառույթները ֆունկցիոնալ բաղադրիչներում: Կեռիկը </font></font><code>useState</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">թույլ է տալիս React վիճակն ավելացնել ֆունկցիոնալ բաղադրիչներին:</font></font></p>
+<pre><code class="language-jsx">import React, { useState } from 'react';<font></font>
+<font></font>
+function Counter() {<font></font>
+	const [count, setCount] = useState(0);<font></font>
+<font></font>
+	return (<font></font>
+		&lt;div&gt;<font></font>
+			&lt;p&gt;You clicked {count} times&lt;/p&gt;<font></font>
+			&lt;button onClick={() =&gt; setCount(count + 1)}&gt;<font></font>
+				Click me<font></font>
+			&lt;/button&gt;<font></font>
+		&lt;/div&gt;<font></font>
+	);<font></font>
+}<font></font>
+</code></pre>
+<ul>
+<li><code>useState</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">վերադարձնում է զույգ. ընթացիկ վիճակի արժեքը և ֆունկցիան, որը թույլ է տալիս թարմացնել այն: Դուք այն անվանում եք սկզբնական վիճակով և այն վերադարձնում է ընթացիկ վիճակի արժեքը ( </font></font><code>count</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">), և ֆունկցիա ( </font></font><code>setCount</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">), որը թույլ է տալիս թարմացնել վիճակը։</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ձեռքի վրա վարժություն. անհատականացված ողջույնի բաղադրիչ</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նպատակը.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Բարելավեք ողջույնի բաղադրիչը, որպեսզի ընդունեք օգտվողի մուտքը և ցուցադրեք անհատականացված ողջույնը: Օգտատերերի փոխազդեցությունները կառավարելու համար օգտագործեք կոնֆիգուրացիայի և վիճակի հենարաններ:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կարգավորում:</font></font></strong></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ստեղծեք ողջույնի բաղադրիչ՝ Props-ով և վիճակով.</font></font></strong></p>
+<pre><code class="language-jsx">import React, { useState } from 'react';<font></font>
+<font></font>
+function Greeting({ initialName }) {<font></font>
+	const [name, setName] = useState(initialName);<font></font>
+<font></font>
+	return (<font></font>
+		&lt;div&gt;<font></font>
+			&lt;h1&gt;Hello, {name}!&lt;/h1&gt;<font></font>
+			&lt;input<font></font>
+				type="text"<font></font>
+				value={name}<font></font>
+				onChange={e =&gt; setName(e.target.value)}<font></font>
+			/&gt;<font></font>
+		&lt;/div&gt;<font></font>
+	);<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներկայացրեք ողջույնի բաղադրիչը հավելվածում.</font></font></strong></p>
+<pre><code class="language-jsx">function App() {<font></font>
+	return &lt;Greeting initialName="React Developer" /&gt;;<font></font>
+}<font></font>
+</code></pre>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժությունում.</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հենակետերն</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> օգտագործվում են բաղադրիչի սկզբնական անվանումը փոխանցելու համար </font></font><code>Greeting</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">՝ ցույց տալով, թե ինչպես կարող են պրոֆիլները կարգավորել դինամիկ արժեքներով բաղադրիչները:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">State</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ( </font></font><code>useState</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">)-ը կառավարում է բաղադրիչի անվանումը </font></font><code>Greeting</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">՝ ցույց տալով պետության դերը բաղադրիչի ներսում օգտագործողի մուտքագրման և դինամիկ տվյալների մշակման գործում:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժությունը կամրապնդի ուսանողների ըմբռնումը, թե ինչպես արդյունավետ կերպով օգտագործել ռեկորդները տվյալների և կոնֆիգուրացիաների փոխանցման համար, և ինչպես կարելի է վիճակը կառավարել ֆունկցիոնալ բաղադրիչների ներսում՝ օգտագործելով կեռիկներ: Այս հիմնարար գիտելիքները շատ կարևոր են React-ում ինտերակտիվ և դինամիկ հավելվածներ ստեղծելու համար:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական վարժություններ և բաղադրիչի կազմություն React-ում</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Փոքր հավելվածի ստեղծում. պարզ առաջադրանքների ցանկ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս գործնական վարժությունը ներառում է փոքր React հավելվածի ստեղծում՝ առաջադրանքների ցուցակ, որտեղ յուրաքանչյուր առաջադրանք բաղադրիչ է: Այս հավելվածը ցույց կտա, թե ինչպես արդյունավետ օգտագործել ռեկվիզիտները, վիճակը և բաղադրիչի կազմը:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նպատակը.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ուսանողները React-ի միջոցով կստեղծեն առաջադրանքների ցուցակի պարզ հավելված: Յուրաքանչյուր առաջադրանք կունենա իր նկարագրությունը և կոճակը՝ առաջադրանքը որպես ավարտված նշելու համար՝ ցույց տալով, թե ինչպես են բաղադրիչները կառավարում իրենց վիճակը և փոխազդում միմյանց հետ:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Առաջադրանքների ցանկի հավելվածը ստեղծելու քայլեր.</font></font></strong></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ստեղծեք նախագիծը.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Համոզվեք, որ բոլոր ուսանողներն ունեն իրենց զարգացման միջավայրը ստեղծվել Create React հավելվածով: Այս գործիքը լավ մեկնարկային կետ է ապահովում ներկառուցված զարգացման սերվերի, Webpack և Babel կոնֆիգուրացիաներով:</font></font></li>
+</ul>
+<pre><code class="language-bash">npx create-react-app task-list-app<font></font>
+cd task-list-app<font></font>
+npm start<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ստեղծեք առաջադրանքի բաղադրիչ.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սահմանեք </font></font><code>Task</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բաղադրիչ, որն ընդունում է առաջադրանքի նկարագրությունը և իրադարձությունների մշակիչը որպես հենակետ: Այս բաղադրիչը կցուցադրի առաջադրանքը և կոճակը՝ այն որպես կատարված նշելու համար:</font></font></li>
+</ul>
+<pre><code class="language-jsx">function Task({ description, onComplete }) {<font></font>
+	return (<font></font>
+		&lt;div className="task"&gt;<font></font>
+			&lt;p&gt;{description}&lt;/p&gt;<font></font>
+			&lt;button onClick={onComplete}&gt;Mark as Done&lt;/button&gt;<font></font>
+		&lt;/div&gt;<font></font>
+	);<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ստեղծեք TaskList բաղադրիչ.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչը </font></font><code>TaskList</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կկառավարի առաջադրանքների վիճակը, ներառյալ նոր առաջադրանքների ավելացումը և առաջադրանքները որպես ավարտված նշելու:</font></font></li>
+</ul>
+<pre><code class="language-jsx">import React, { useState } from 'react';<font></font>
+import Task from './Task';<font></font>
+<font></font>
+function TaskList() {<font></font>
+	const [tasks, setTasks] = useState([<font></font>
+		{ id: 1, text: 'Learn React', completed: false },<font></font>
+		{ id: 2, text: 'Write a new Component', completed: false }<font></font>
+	]);<font></font>
+<font></font>
+	const completeTask = taskId =&gt; {<font></font>
+		const newTasks = tasks.map(task =&gt; {<font></font>
+			if (task.id === taskId) {<font></font>
+				return { ...task, completed: true };<font></font>
+			}<font></font>
+			return task;<font></font>
+		});<font></font>
+		setTasks(newTasks);<font></font>
+	};<font></font>
+<font></font>
+	return (<font></font>
+		&lt;div&gt;<font></font>
+			{tasks.map(task =&gt; (<font></font>
+				&lt;Task<font></font>
+					key={task.id}<font></font>
+					description={task.text}<font></font>
+					onComplete={() =&gt; completeTask(task.id)}<font></font>
+				/&gt;<font></font>
+			))}<font></font>
+		&lt;/div&gt;<font></font>
+	);<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ինտեգրել TaskList-ը հավելվածի բաղադրիչում.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Փոխարինեք բովանդակությունը </font></font><code>App.js</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բաղադրիչով </font></font><code>TaskList</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></li>
+</ul>
+<pre><code class="language-jsx">import React from 'react';<font></font>
+import TaskList from './TaskList';<font></font>
+<font></font>
+function App() {<font></font>
+	return (<font></font>
+		&lt;div className="App"&gt;<font></font>
+			&lt;h1&gt;Task List&lt;/h1&gt;<font></font>
+			&lt;TaskList /&gt;<font></font>
+		&lt;/div&gt;<font></font>
+	);<font></font>
+}<font></font>
+<font></font>
+export default App;<font></font>
+</code></pre>
+</li>
+</ol>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչի կազմը</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչների կոմպոզիցիան հզոր հայեցակարգ է React-ում, որը թույլ է տալիս ծրագրավորողներին կառուցել բարդ UI-ներ՝ տեղադրելով և համատեղելով բաղադրիչները, ինչպես HTML տարրերը տեղադրվում են:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչի բաղադրության լավագույն փորձը.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Միասնական պատասխանատվության սկզբունք.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Յուրաքանչյուր բաղադրիչ պետք է պատասխանատու լինի մեկ գործառույթի համար: Այս մոտեցումը բաղադրիչը դարձնում է ավելի բազմակի օգտագործման և ավելի հեշտ է պահպանել:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հենակետային կոմպոզիցիա.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> փոխանցեք անհրաժեշտ տվյալները և հետադարձ զանգերը հենարանների միջոցով՝ երեխայի բաղադրիչների վարքագիծը ծնող բաղադրիչից հարմարեցնելու համար:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նվազագույնի հասցրեք հենակետային հորատումը.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> օգտագործեք համատեքստի կամ պետական &ZeroWidthSpace;&ZeroWidthSpace;կառավարման գրադարաններ (օրինակ՝ Redux կամ Context API), որպեսզի խուսափեք տեղադրվող բաղադրիչների բազմաթիվ մակարդակներով հենակետեր անցնելուց:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կազմը ժառանգության փոխարեն.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> նախընտրեք բաղադրիչները միասին կազմելը, քան դրանցից ժառանգելը: React-ի կոմպոզիցիոն մոդելն ավելի հզոր և ճկուն է, քան դասական ժառանգությունը:</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Եզրակացություն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժությունը ոչ միայն օգնում է ուսանողներին հասկանալ և իրականացնել բաղադրիչի կազմը, այլև նրանց տալիս է գործնական փորձ՝ կառավարելու վիճակը և հենակետերը իրական աշխարհի կիրառման սցենարում: Նրանք սովորում են, թե ինչպես ձևավորել հավելվածը կառավարելի, բազմակի օգտագործման բաղադրիչների, որոնք փոխազդում են դինամիկ և ինտերակտիվ օգտատերերի միջերեսներ ստեղծելու համար: Այս վարժության միջոցով ուսանողները ձեռք են բերում վստահություն՝ լուծելու ավելի մեծ և բարդ React նախագծերը:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ամփոփում և հարց ու պատասխան</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Երբ մենք ավարտում ենք React-ի մեր համապարփակ ներածությունը, եկեք հակիրճ ամփոփենք այն հիմնական հասկացությունները, որոնք մենք այսօր ուսումնասիրել ենք: Այս վերանայումը կամրապնդի ձեր հասկացողությունը և կօգնի համոզվել, որ դուք լավ պատրաստված եք այս հասկացությունները կիրառելու ձեր նախագծերում:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերանայում և ամփոփում</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1. Բաղադրիչները որպես շինանյութեր.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մենք սկսեցինք սահմանելով React բաղադրիչները, որոնք հանդիսանում են ցանկացած React հավելվածի հիմնական շինարարական բլոկները: Բաղադրիչները թույլ են տալիս բաժանել միջերեսը անկախ, բազմակի օգտագործման մասերի, որոնք կառավարում են իրենց վիճակը և կարող են կազմվել բարդ միջերեսներ ստեղծելու համար:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2. Ներածություն JSX:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JSX-ը JavaScript-ի շարահյուսական ընդլայնում է, որը նման է HTML-ին: Այն օգտագործվում է React-ի հետ՝ նկարագրելու համար, թե ինչպիսին պետք է լինի միջերեսը: JSX-ը հեշտացնում է հավելյալ բաղադրիչներ գրելը և համակարգի համար տվյալների ավտոմատ փոխանցումը հավելվածի միջոցով:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3. Կազմաձևման հենարաններ.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հենակետերը, հատկությունների կրճատ, այն է, թե ինչպես են բաղադրիչները ստանում տվյալներ իրենց մայր բաղադրիչից: Դրանք միայն կարդալու են և օգնում են բաղադրիչները դարձնել բազմակի օգտագործման և դինամիկ: Մենք քննարկեցինք, թե ինչպես են օժանդակ սարքերն օգտագործվում բաղադրիչները կարգավորելու և ստատիկ և դինամիկ տեղեկատվություն փոխանցելու համար:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4. Պետական &ZeroWidthSpace;&ZeroWidthSpace;կառավարման հիմունքներ.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ի տարբերություն ռեկվիզիտների, պետությունը ներքին է և վերահսկվում է հենց բաղադրիչի կողմից: Մենք ուսումնասիրեցինք, թե ինչպես կարելի է օգտագործել </font></font><code>useState</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կեռիկը ֆունկցիոնալ բաղադրիչներում՝ ավելացնելու պետական &ZeroWidthSpace;&ZeroWidthSpace;կառավարման հնարավորությունները՝ թույլ տալով բաղադրիչներին արձագանքել օգտվողի մուտքագրմանը և այլ գործողություններին:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5. Գործնական վարժություններ և բաղադրիչ կազմ.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական վարժությունների միջոցով մենք կիրառեցինք բաղադրիչներ, JSX, ռեկվիզներ և վիճակ հասկացությունները: Մենք կառուցեցինք պարզ հավելված՝ առաջադրանքների ցուցակ, որը ցույց է տալիս բաղադրիչի կազմը, որը նման է HTML տարրերի ներկառուցմանը, բայց JavaScript-ի ավելացված հզորությամբ:</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հարց ու պատասխան նիստ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այժմ, եկեք բացենք ձեր ցանկացած հարցի համար: Սա հիանալի հնարավորություն է պարզաբանելու դասի ցանկացած հատված, որը ձեզ համար դժվար է կամ քննարկելու, թե ինչպես կարող եք կիրառել այս հասկացությունները ձեր սեփական նախագծերում: Ահա մի քանի հուշումներ, որոնք պետք է հաշվի առնել.</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչի ձևավորում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Կա՞ն սցենարներ, որտեղ հստակ չէ սահմանը հենակետերի և վիճակի միջև: Ինչպե՞ս կարող եք որոշել՝ ինչ-որ բան պետք է լինի հենարան, թե պետության մաս:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JSX Tips.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Հարցեր ունե՞ք կոնկրետ JSX շարահյուսության վերաբերյալ, հատկապես, թե ինչպես է այն տարբերվում HTML-ից կամ ինտեգրվում JavaScript-ին:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պետական &ZeroWidthSpace;&ZeroWidthSpace;կառավարում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ինչպե՞ս եք արդյունավետ կառավարում պետությունը ավելի մեծ ծրագրերում: Ե՞րբ կարող եք դիտարկել համատեքստի կամ Redux-ի օգտագործումը տեղական պետության փոխարեն:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրական աշխարհի հավելվածներ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ինչպե՞ս կարող եք կիրառել այն, ինչ սովորել եք՝ բարելավելու ձեր գոյություն ունեցող նախագծերի կառուցվածքն ու կատարումը:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ազատորեն հարցեր տվեք կամ կիսվեք պատկերացումներով՝ հիմնված ձեր փորձի վրա: Այս քննարկումը կարող է արժեքավոր պատկերացումներ տալ և օգնել խորացնել բոլորի ըմբռնումը React-ի և նրա էկոհամակարգի մասին: Անկախ նրանից՝ դուք պլանավորում եք նոր նախագիծ, թե վերամշակում եք հինը, այն հասկացությունները, որոնք մենք այսօր անդրադարձել ենք, կարևոր գործիքներ են ձեր վեբ զարգացման զինանոցում:</font></font></p>
+    </div>
+
+
+
+
+
+
+	<div id="html_ru" class="html" style="display:none">
+<h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Урок 16: Введение в React JS: понимание компонентов и JSX</font></font></h2>
+<hr>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Введение в React JS</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Что такое Реакт?</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React — это декларативная, эффективная и гибкая библиотека JavaScript для создания пользовательских интерфейсов. Он был разработан Facebook и поддерживается Facebook и сообществом отдельных разработчиков и компаний. React стала одной из самых популярных и широко используемых библиотек в современной веб-разработке благодаря своим инновационным подходам к рендерингу и обновлению пользовательских интерфейсов.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ключевые особенности React:</font></font></strong></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Виртуальный ДОМ:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React создает в памяти облегченную версию реального DOM, известную как Virtual DOM. Когда происходят изменения в пользовательском интерфейсе, React сначала применяет эти изменения к виртуальному DOM, а не к реальному DOM. Затем он вычисляет наиболее эффективный способ обновления реального DOM, чтобы он соответствовал виртуальному DOM. Этот процесс сводит к минимуму прямые манипуляции с DOM, которые являются дорогостоящими с точки зрения производительности.</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Односторонняя привязка данных:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React следует однонаправленному потоку данных, то есть данные имеют один и только один способ передачи в другие части приложения. Такой подход делает поток данных предсказуемым и понятным, что упрощает отладку и повышает удобство обслуживания.</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Компонентная архитектура:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React построен на концепции компонентов. Компонент — это автономный модуль, который управляет своим состоянием и отображает себя на основе переданных ему данных. Компоненты можно повторно использовать в приложении, что может привести к более эффективному процессу разработки, поскольку повторно используемые компоненты сокращают объем кода, который необходимо написать разработчикам.</font></font></li>
+</ul>
+</li>
+</ol>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Зачем использовать React?</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эффективность:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Использование Virtual DOM делает React исключительно эффективным при обновлении пользовательского интерфейса, что особенно полезно для приложений со сложными пользовательскими интерфейсами и высокой скоростью взаимодействия с пользователем.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Возможность повторного использования компонентов:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Компоненты спроектированы так, чтобы быть изолированными, что позволяет многократно использовать их в приложении или даже в разных проектах. Эта модульность позволяет разработчикам создавать сложные приложения с поддерживаемой кодовой базой.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обширная экосистема:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Экосистема React включает в себя широкий спектр инструментов, библиотек и расширений, расширяющих его возможности. Такие инструменты, как Redux для управления состоянием и React Router для навигации, дополняют основные функции React, делая его более мощным.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сильное сообщество и поддержка:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Благодаря мощной поддержке Facebook и энергичному сообществу разработчиков React постоянно обновляется новыми функциями и улучшениями. Сообщество также предоставляет множество учебных пособий, руководств и сторонних пакетов, которые делают React еще более надежным.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Настройка среды разработки</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Чтобы начать работать с React, одним из самых быстрых и простых способов является использование </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Create React App</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , удобной настройки среды для приложений React.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Шаги по настройке проекта React с помощью Create React App:</font></font></strong></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Установите Node.js:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Node.js необходим для запуска JavaScript на сервере. Убедитесь, что оно установлено на вашем компьютере.</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Установите приложение Create React:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Откройте свой терминал и установите приложение Create React App глобально, используя npm:</font></font><pre><code class="language-bash">npm install -g create-react-app
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Создайте новое приложение React:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">После завершения установки вы можете создать новый проект React:</font></font><pre><code class="language-bash">create-react-app my-react-app
+</code></pre>
+</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эта команда создает новую папку </font></font><code>my-react-app</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">со всеми необходимыми настройками, включая сервер разработки, конфигурацию веб-пакета и пресеты Babel.</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Запустите сервер разработки:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Перейдите в папку нового проекта и запустите сервер разработки:</font></font><pre><code class="language-bash">cd my-react-app<font></font>
+npm start<font></font>
+</code></pre>
+</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это запустит сервер разработки и откроет ваше новое приложение React в веб-браузере.</font></font></li>
+</ul>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эта настройка дает вам прочную основу для разработки приложений React с системой сборки и локальным сервером, готовым к работе «из коробки».</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">К концу этого вводного сегмента учащиеся должны иметь четкое представление о том, что такое React, почему он полезен и как настроить среду разработки, чтобы начать создавать приложения React.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Понимание компонентов и JSX в React</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Компоненты как строительные блоки</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В React компоненты являются фундаментальными строительными блоками пользовательского интерфейса. Компонент в React инкапсулирует все, что ему нужно для самостоятельного функционирования — разметку, стили и поведение, — что делает их самодостаточными и пригодными для повторного использования. Компоненты управляют своим собственным состоянием (данными) и отвечают за рендеринг на основе этого состояния и реквизитов (свойств), которые они получают от своих родительских компонентов.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Характеристики компонентов React:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Инкапсуляция</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Компоненты инкапсулируют функциональность и отдельные задачи в одной единице кода, которая может включать в себя рендеринг пользовательского интерфейса, обработку пользовательского ввода и управление состоянием.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Возможность повторного использования</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . После определения компоненты можно повторно использовать в приложении, что может значительно ускорить разработку и обеспечить согласованность.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Компонуемость</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : более крупные компоненты могут состоять из множества более мелких компонентов, что упрощает создание сложных пользовательских интерфейсов из простых строительных блоков.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Введение в JSX</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JSX (JavaScript XML) — это расширение синтаксиса JavaScript, обычно используемое в React для описания того, как должен выглядеть пользовательский интерфейс. JSX сочетает в себе функции HTML и JavaScript, позволяя разработчикам писать структуры HTML в том же файле, что и код JavaScript.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Особенности JSX:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML-подобный синтаксис</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : JSX очень похож на HTML, но обладает всеми возможностями JavaScript. Это знакомство облегчает разработчикам написание и понимание структуры пользовательского интерфейса.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Интеграция JavaScript</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : JSX позволяет разработчикам встраивать выражения JavaScript непосредственно в разметку с помощью фигурных скобок </font></font><code>{}</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, что позволяет генерировать динамическое содержимое на основе состояния или свойств компонента.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример JSX:</font></font></strong></p>
+<pre><code class="language-jsx">const element = &lt;h1&gt;Hello, world!&lt;/h1&gt;;
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JSX против HTML:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JSX требует </font></font><code>className</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">наличия классов CSS вместо </font></font><code>class</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, поскольку </font></font><code>class</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">это зарезервированное ключевое слово в JavaScript.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Свойства и методы в JSX имеют верблюжий регистр, а не строчные: </font></font><code>onClick</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>onSubmit</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и т.&nbsp;д.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Самозакрывающиеся теги должны заканчиваться косой чертой, например, </font></font><code>&lt;img src="url" /&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Написание вашего первого компонента</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Давайте создадим простой компонент React, </font></font><code>Greeting</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">который отображает приветственное сообщение. Этот компонент проиллюстрирует базовую структуру компонента React с использованием JSX.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример простого компонента:</font></font></strong></p>
+<pre><code class="language-jsx">import React from 'react';<font></font>
+<font></font>
+function Greeting() {<font></font>
+	return &lt;h1&gt;Hello, React!&lt;/h1&gt;;<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этом примере </font></font><code>Greeting</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">— функциональный компонент, который является одним из типов компонентов, которые вы можете определить в React. Он возвращает JSX, описывающий пользовательский интерфейс.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Рендеринг компонентов</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Чтобы компоненты были видимыми, их необходимо визуализировать в DOM. Обычно это делается с помощью </font></font><code>ReactDOM.render()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, который обрабатывает обновление DOM в соответствии с элементами React.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Рендеринг компонента:</font></font></strong></p>
+<pre><code class="language-jsx">import React from 'react';<font></font>
+import ReactDOM from 'react-dom';<font></font>
+import Greeting from './Greeting';<font></font>
+<font></font>
+ReactDOM.render(&lt;Greeting /&gt;, document.getElementById('root'));<font></font>
+</code></pre>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Корневой узел DOM</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . В типичном приложении React имеется один корневой узел DOM (часто с идентификатором </font></font><code>root</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">). React будет управлять всем внутри этого корневого узла DOM, позволяя ему контролировать весь пользовательский интерфейс.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Такой подход обеспечивает оптимизацию производительности рендеринга React, поскольку React изменяет только отдельные узлы DOM по мере необходимости, а не обновляет весь пользовательский интерфейс при каждом обновлении.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практическое упражнение:</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Создайте новый компонент</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : попросите учащихся создать новый компонент под названием, </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">который отображает имя пользователя и адрес электронной почты.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Визуализация компонента</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Помогите им отобразить этот компонент в </font></font><code>root</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">элементе DOM своего приложения.</font></font></li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Помогая студентам создавать и отображать свой первый компонент React, они получат практический опыт работы с компонентной архитектурой React и синтаксисом JSX. Эти фундаментальные знания имеют решающее значение для создания более сложных компонентов и приложений с использованием React.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Реквизит и состояние в функциональных компонентах</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Реквизит для конфигурации</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Props</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , сокращение от свойств, — это способ передачи данных от родительского компонента к дочернему в React. Они доступны только для чтения, что означает, что данные, которые компонент получает от своих свойств, не должны изменяться самим компонентом. Реквизит может включать в себя что угодно: от строк и чисел до более сложных структур данных и функций.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Особенности реквизита:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Неизменяемость</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : реквизиты неизменяемы внутри компонента, что означает, что они не могут быть изменены компонентом, который их получает.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Конфигурация</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : они используются для настройки компонента путем предоставления необходимых данных или обратных вызовов. Это делает компоненты многоразовыми и динамичными.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример определения и использования реквизита:</font></font></strong></p>
+<pre><code class="language-jsx">// A child component that accepts props<font></font>
+function UserProfile({ username, email }) {<font></font>
+	return (<font></font>
+		&lt;div&gt;<font></font>
+			&lt;h1&gt;{username}&lt;/h1&gt;<font></font>
+			&lt;p&gt;{email}&lt;/p&gt;<font></font>
+		&lt;/div&gt;<font></font>
+	);<font></font>
+}<font></font>
+<font></font>
+// A parent component that passes props to the child<font></font>
+function App() {<font></font>
+	return &lt;UserProfile username="JaneDoe" email="jane@example.com" /&gt;;<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этом примере </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">— это функциональный компонент, который принимает </font></font><code>props</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">аргументы и использует их для отображения данных. Родительский компонент </font></font><code>App</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">передает </font></font><code>username</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>email</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">в качестве реквизита в </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Основы управления состоянием</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В то время как реквизиты позволяют передавать данные вашим компонентам, </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">состояние</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> позволяет компонентам управлять данными, которые изменяются с течением времени, и реагировать на них. В отличие от реквизита, состояние является локальным для компонента и может быть изменено.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Использование </font></font><code>useState</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">хука:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+хуки React, представленные в React 16.8, позволяют использовать состояние и другие функции React в функциональных компонентах. Этот </font></font><code>useState</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">хук позволяет добавлять состояние React к функциональным компонентам.</font></font></p>
+<pre><code class="language-jsx">import React, { useState } from 'react';<font></font>
+<font></font>
+function Counter() {<font></font>
+	const [count, setCount] = useState(0);<font></font>
+<font></font>
+	return (<font></font>
+		&lt;div&gt;<font></font>
+			&lt;p&gt;You clicked {count} times&lt;/p&gt;<font></font>
+			&lt;button onClick={() =&gt; setCount(count + 1)}&gt;<font></font>
+				Click me<font></font>
+			&lt;/button&gt;<font></font>
+		&lt;/div&gt;<font></font>
+	);<font></font>
+}<font></font>
+</code></pre>
+<ul>
+<li><code>useState</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">возвращает пару: текущее значение состояния и функцию, позволяющую его обновить. Вы вызываете его с исходным состоянием, и он возвращает текущее значение состояния ( </font></font><code>count</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) и функцию ( </font></font><code>setCount</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">), которая позволяет обновлять состояние.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практическое упражнение: компонент персонализированного приветствия</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цель:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> усовершенствовать компонент приветствия, чтобы он мог принимать вводимые пользователем данные и отображать персонализированное приветствие. Используйте реквизиты для конфигурации и состояния для управления взаимодействием с пользователем.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Настраивать:</font></font></strong></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Создайте компонент приветствия с реквизитами и состоянием:</font></font></strong></p>
+<pre><code class="language-jsx">import React, { useState } from 'react';<font></font>
+<font></font>
+function Greeting({ initialName }) {<font></font>
+	const [name, setName] = useState(initialName);<font></font>
+<font></font>
+	return (<font></font>
+		&lt;div&gt;<font></font>
+			&lt;h1&gt;Hello, {name}!&lt;/h1&gt;<font></font>
+			&lt;input<font></font>
+				type="text"<font></font>
+				value={name}<font></font>
+				onChange={e =&gt; setName(e.target.value)}<font></font>
+			/&gt;<font></font>
+		&lt;/div&gt;<font></font>
+	);<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Отобразите компонент приветствия в приложении:</font></font></strong></p>
+<pre><code class="language-jsx">function App() {<font></font>
+	return &lt;Greeting initialName="React Developer" /&gt;;<font></font>
+}<font></font>
+</code></pre>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этом упражнении:</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Свойства</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> используются для передачи исходного имени компоненту </font></font><code>Greeting</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, демонстрируя, как реквизиты могут настраивать компоненты с динамическими значениями.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">State</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ( </font></font><code>useState</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) управляет именем внутри </font></font><code>Greeting</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">компонента, демонстрируя роль состояния в обработке пользовательского ввода и динамических данных внутри компонента.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это упражнение укрепит понимание учащихся того, как эффективно использовать реквизиты для передачи данных и конфигураций, а также как можно управлять состоянием внутри функциональных компонентов с помощью перехватчиков. Эти фундаментальные знания имеют решающее значение для создания интерактивных и динамических приложений в React.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практические упражнения и композиция компонентов в React</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Создание небольшого приложения: простой список задач</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это практическое упражнение включает в себя создание небольшого приложения React — списка задач, в котором каждая задача является компонентом. Это приложение продемонстрирует, как эффективно использовать реквизиты, состояние и композицию компонентов.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цель:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> учащиеся создадут простое приложение со списком задач с помощью React. Каждая задача будет иметь свое описание и кнопку, позволяющую отметить задачу как выполненную, демонстрирующую, как компоненты управляют своим состоянием и взаимодействуют друг с другом.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Шаги по созданию приложения списка задач:</font></font></strong></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Настройте проект:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Убедитесь, что у всех учащихся настроена среда разработки с помощью приложения Create React. Этот инструмент обеспечивает хорошую отправную точку со встроенным сервером разработки, конфигурациями Webpack и Babel.</font></font></li>
+</ul>
+<pre><code class="language-bash">npx create-react-app task-list-app<font></font>
+cd task-list-app<font></font>
+npm start<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Создать компонент задачи:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Определите </font></font><code>Task</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">компонент, который принимает описание задачи и обработчик событий в качестве реквизита. Этот компонент отобразит задачу и кнопку, позволяющую отметить ее как выполненную.</font></font></li>
+</ul>
+<pre><code class="language-jsx">function Task({ description, onComplete }) {<font></font>
+	return (<font></font>
+		&lt;div className="task"&gt;<font></font>
+			&lt;p&gt;{description}&lt;/p&gt;<font></font>
+			&lt;button onClick={onComplete}&gt;Mark as Done&lt;/button&gt;<font></font>
+		&lt;/div&gt;<font></font>
+	);<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Создайте компонент TaskList:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Компонент </font></font><code>TaskList</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">будет управлять состоянием задач, включая добавление новых задач и пометку задач как выполненных.</font></font></li>
+</ul>
+<pre><code class="language-jsx">import React, { useState } from 'react';<font></font>
+import Task from './Task';<font></font>
+<font></font>
+function TaskList() {<font></font>
+	const [tasks, setTasks] = useState([<font></font>
+		{ id: 1, text: 'Learn React', completed: false },<font></font>
+		{ id: 2, text: 'Write a new Component', completed: false }<font></font>
+	]);<font></font>
+<font></font>
+	const completeTask = taskId =&gt; {<font></font>
+		const newTasks = tasks.map(task =&gt; {<font></font>
+			if (task.id === taskId) {<font></font>
+				return { ...task, completed: true };<font></font>
+			}<font></font>
+			return task;<font></font>
+		});<font></font>
+		setTasks(newTasks);<font></font>
+	};<font></font>
+<font></font>
+	return (<font></font>
+		&lt;div&gt;<font></font>
+			{tasks.map(task =&gt; (<font></font>
+				&lt;Task<font></font>
+					key={task.id}<font></font>
+					description={task.text}<font></font>
+					onComplete={() =&gt; completeTask(task.id)}<font></font>
+				/&gt;<font></font>
+			))}<font></font>
+		&lt;/div&gt;<font></font>
+	);<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Интегрируйте TaskList в компонент приложения:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Замените содержимое </font></font><code>App.js</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">компонентом </font></font><code>TaskList</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+</ul>
+<pre><code class="language-jsx">import React from 'react';<font></font>
+import TaskList from './TaskList';<font></font>
+<font></font>
+function App() {<font></font>
+	return (<font></font>
+		&lt;div className="App"&gt;<font></font>
+			&lt;h1&gt;Task List&lt;/h1&gt;<font></font>
+			&lt;TaskList /&gt;<font></font>
+		&lt;/div&gt;<font></font>
+	);<font></font>
+}<font></font>
+<font></font>
+export default App;<font></font>
+</code></pre>
+</li>
+</ol>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Компонентный состав</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Композиция компонентов — это мощная концепция React, которая позволяет разработчикам создавать сложные пользовательские интерфейсы путем вложения и комбинирования компонентов, аналогично тому, как вложены элементы HTML.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Лучшие практики для композиции компонентов:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Принцип единой ответственности:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> каждый компонент должен отвечать за одну функциональность. Такой подход делает компонент более пригодным для повторного использования и упрощает обслуживание.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Композиция, управляемая реквизитами:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> передавайте необходимые данные и обратные вызовы через реквизиты, чтобы настроить поведение дочерних компонентов из родительского компонента.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Минимизируйте детализацию реквизитов:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> используйте библиотеки управления контекстом или состоянием (например, Redux или Context API), чтобы избежать передачи реквизитов через множество уровней вложенных компонентов.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Композиция, а не наследование.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Отдавайте предпочтение композиции компонентов вместе, а не наследованию от них. Композиционная модель React более мощная и гибкая, чем классическое наследование.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Заключение</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это упражнение не только помогает учащимся понять и реализовать композицию компонентов, но также дает им практический опыт управления состоянием и реквизитами в сценарии реального приложения. Они узнают, как структурировать приложение на управляемые, повторно используемые компоненты, которые взаимодействуют для создания динамических и интерактивных пользовательских интерфейсов. Благодаря этому упражнению студенты обретают уверенность в том, что смогут решать более крупные и сложные проекты React.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Подведение итогов и вопросы и ответы</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Завершая наше подробное введение в React, давайте кратко резюмируем основные концепции, которые мы сегодня изучили. Этот обзор укрепит ваше понимание и поможет убедиться, что вы хорошо подготовлены к применению этих концепций в своих проектах.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обзор и резюме</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1. Компоненты как строительные блоки:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Мы начали с определения компонентов React, которые являются основными строительными блоками любого приложения React. Компоненты позволяют разбить пользовательский интерфейс на независимые, многократно используемые части, которые управляют своим собственным состоянием и могут быть составлены для создания сложных пользовательских интерфейсов.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2. Введение в JSX:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JSX — это расширение синтаксиса JavaScript, похожее на HTML. Он используется с React для описания того, как должен выглядеть пользовательский интерфейс. JSX упрощает написание дополнительных компонентов и автоматическую передачу данных через приложение.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3. Реквизит для конфигурации:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Props, сокращение от свойств, — это то, как компоненты получают данные от своего родительского компонента. Они доступны только для чтения и помогают сделать компоненты многоразовыми и динамическими. Мы обсудили, как реквизиты используются для настройки компонентов и передачи статической и динамической информации.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4. Основы управления состоянием:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В отличие от реквизита, состояние является внутренним и контролируется самим компонентом. Мы рассмотрели, как использовать </font></font><code>useState</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">перехватчик в функциональных компонентах для добавления возможностей управления состоянием, позволяющих компонентам реагировать на ввод пользователя и другие действия.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5. Практические упражнения и состав компонентов:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В ходе практических упражнений мы применили концепции компонентов, JSX, реквизита и состояния. Мы создали простое приложение — список задач, демонстрирующий композицию компонентов, что похоже на вложение элементов HTML, но с добавленной мощью JavaScript.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сессия вопросов и ответов</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Теперь давайте предоставим слово для любых вопросов, которые могут у вас возникнуть. Это прекрасная возможность прояснить любую часть урока, которая показалась вам сложной, или обсудить, как вы можете применить эти концепции в своих собственных проектах. Вот несколько подсказок, на которые следует обратить внимание:</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Проектирование компонентов:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> существуют ли сценарии, в которых грань между реквизитами и состоянием нечеткая? Как вы можете решить, должно ли что-то быть собственностью или частью государства?</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Советы по JSX.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Есть ли у вас вопросы о конкретном синтаксисе JSX, особенно о том, чем он отличается от HTML или интегрируется с JavaScript?</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Управление состоянием:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> как эффективно управлять состоянием в более крупных приложениях? Когда вы могли бы рассмотреть возможность использования контекста или Redux вместо локального состояния?</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Реальные приложения.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Как вы можете применить полученные знания для улучшения структуры и производительности существующих проектов?</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Не стесняйтесь задавать вопросы или делиться мыслями, основанными на вашем опыте. Это обсуждение может дать ценную информацию и помочь каждому глубже понять React и его экосистему. Планируете ли вы новый проект или проводите рефакторинг старого, концепции, которые мы рассмотрели сегодня, являются важнейшими инструментами в вашем арсенале веб-разработки.</font></font></p>
+    </div>
+
+	
+
+
+
+
+
+
+
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js" integrity="sha512-LhccdVNGe2QMEfI3x4DVV3ckMRe36TfydKss6mJpdHjNFiV07dFpS2xzeZedptKZrwxfICJpez09iNioiSZ3hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+	<script>
+		let currentLanguage = 'en';
+		const copiedTexts = {
+			en: 'Copied to clipboard!',
+			hy: 'Պատճենվել է սեղմատախտակում:',
+			ru: 'Скопировано в буфер обмена!'
+		}
+
+		function copyCode(index) {
+			const code = document.getElementById('code-block-' + index).innerText;
+			const copied = document.getElementById('copied-' + index);
+		
+			navigator.clipboard.writeText(code).then(() => {
+				copied.innerText = copiedTexts[currentLanguage];
+			});
+
+			setTimeout(() => {
+				copied.innerText = '';
+			}, 3000);
+		}
+
+		// Initialize Highlight.js after the document is fully loaded
+		document.addEventListener('DOMContentLoaded', (event) => {
+			hljs.highlightAll();
+		});
+
+		let en = document.getElementById('en');
+		let hy = document.getElementById('hy');
+		let ru = document.getElementById('ru');
+		let html_en = document.getElementById('html_en');
+		let html_hy = document.getElementById('html_hy');
+		let html_ru = document.getElementById('html_ru');
+		
+		en.addEventListener('click', function(){
+			html_en.style.display = 'block';
+			html_hy.style.display = 'none';
+			html_ru.style.display = 'none';
+			
+			en.style.display = 'none';
+			hy.style.display = 'inline';
+			ru.style.display = 'inline';
+			
+			document.getElementsByTagName('title')[0].innerText = html_en.getElementsByTagName('h2')[0].innerText
+			currentLanguage = 'en';
+		});
+		
+		hy.addEventListener('click', function(){
+			html_en.style.display = 'none';
+			html_hy.style.display = 'block';
+			html_ru.style.display = 'none';
+			
+			en.style.display = 'inline';
+			hy.style.display = 'none';
+			ru.style.display = 'inline';
+			
+			document.getElementsByTagName('title')[0].innerText = html_hy.getElementsByTagName('h2')[0].innerText
+			
+			currentLanguage = 'hy';
+		});
+		
+		ru.addEventListener('click', function(){
+			html_en.style.display = 'none';
+			html_hy.style.display = 'none';
+			html_ru.style.display = 'block';
+			
+			en.style.display = 'inline';
+			hy.style.display = 'inline';
+			ru.style.display = 'none';
+			
+			document.getElementsByTagName('title')[0].innerText = html_ru.getElementsByTagName('h2')[0].innerText
+			currentLanguage = 'ru';
+		});
+
+		let presLang = {
+			en: document.querySelectorAll('#html_en pre'), 
+			hy: document.querySelectorAll('#html_hy pre'), 
+			ru: document.querySelectorAll('#html_ru pre')
+		};
+		
+		let key = 1;
+		
+		for(let lang in presLang){
+			let pres = presLang[lang];
+
+			pres.forEach(function(pre){
+				let copyText = lang == 'hy' ? 'Պատճենել' : lang == 'ru' ? 'Копировать' : 'Copy';
+				let card = document.createElement('div');
+				card.className = 'card bg-dark text-white';
+				pre.firstChild.id = 'code-block-' + key
+				let cardHtml = `
+					<div class="card-header">
+						<button class="btn btn-primary" onclick="copyCode(${key})">${copyText}</button>
+						<span id="copied-${key}" class="float-end"></span>
+					</div>
+					<div class="p-0">
+						<pre>${pre.innerHTML}</pre>
+					</div>
+				`
+				card.innerHTML = cardHtml;
+				
+				pre.parentNode.replaceChild(card, pre);
+				key++;
+			});
+		}
+		
+	</script>
+	</body>
+</html>
