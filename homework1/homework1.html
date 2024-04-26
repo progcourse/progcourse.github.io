@@ -1,19 +1,403 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Work</title>
-    <style>
-        body {
-            height: 1300px;
-            background-image: url("profile.png");
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-    </style>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Homework 1: Building a Structured Webpage with HTML</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+        <style>
+            code {
+                background-color: lightgray;
+                color: black;
+                padding: 2px 5px;
+                margin: 0 5px;
+				border: 1px solid gray;
+				border-radius: 5px;
+            }
+			#md{
+				display: none;
+			}
+        </style>
+    </head>
+    <body class="p-5">
+		<a href="#" id="hy" class="btn btn-info">Հայերեն</a>
+		<a href="#" id="en" class="btn btn-info" style="display:none">English</a>
+		<a href="#" id="ru" class="btn btn-info">Русский</a>
+		
+		<hr>
+
+
+
+
+
+
+		<div id="html_en" class="html">
+<h2>Homework 1: Building a Structured Webpage with HTML</h2>
+<h4>Overview</h4>
+<p>This assignment will allow you to consolidate your knowledge of HTML by building a more complex webpage. You will apply your understanding of HTML structure, common elements and tags, semantic markup, and attributes.</p>
+<h4>Objectives</h4>
+<ul>
+<li>Demonstrate mastery of HTML document structure.</li>
+<li>Implement various HTML elements to create a logically structured webpage.</li>
+<li>Use semantic markup effectively to enhance accessibility and SEO.</li>
+<li>Properly utilize attributes to define the behavior and appearance of webpage elements.</li>
+</ul>
+<h4>Requirements</h4>
+<h5>Part 1: HTML Document Setup</h5>
+<ol>
+<li><strong>Create an HTML Document</strong>: Start by creating an HTML file named <code>project.html</code>. Ensure your document includes the basic HTML5 structure (<code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, and <code>&lt;body&gt;</code>).</li>
+<li><strong>Head Section</strong>:<ul>
+<li>Include a <code>&lt;title&gt;</code> for your webpage.</li>
+<li>Use <code>&lt;meta&gt;</code> tags to specify the character set and a description of the webpage.</li>
+</ul>
+</li>
+</ol>
+<h5>Part 2: Webpage Content</h5>
+<ol>
+<li><p><strong>Header and Navigation</strong>:</p>
+<ul>
+<li>Create a <code>&lt;header&gt;</code> section containing a website logo and a navigation bar using <code>&lt;nav&gt;</code> and <code>&lt;ul&gt;</code> with links to sections of your page (e.g., Home, About, Services).</li>
+</ul>
+</li>
+<li><p><strong>Main Content</strong>:</p>
+<ul>
+<li>Use <code>&lt;main&gt;</code> to include the primary content.</li>
+<li>Divide the main content into sections using <code>&lt;section&gt;</code> tags. Each section should have a relevant <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code> heading and include several paragraphs (<code>&lt;p&gt;</code>).</li>
+<li>Include a combination of images (<code>&lt;img&gt;</code> with <code>src</code> and <code>alt</code> attributes) and hyperlinks (<code>&lt;a&gt;</code> with <code>href</code> attributes).</li>
+</ul>
+</li>
+<li><p><strong>Lists and Additional Content</strong>:</p>
+<ul>
+<li>Add an unordered list (<code>&lt;ul&gt;</code>) or ordered list (<code>&lt;ol&gt;</code>) with items (<code>&lt;li&gt;</code>) describing services or products.</li>
+<li>Incorporate text formatting elements like <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> to emphasize key points.</li>
+</ul>
+</li>
+<li><p><strong>Footer</strong>:</p>
+<ul>
+<li>Add a <code>&lt;footer&gt;</code> containing copyright information, social media links (as <code>&lt;a&gt;</code> tags), and a brief contact information section.</li>
+</ul>
+</li>
+</ol>
+<h5>Part 3: Semantic Structuring and Attributes</h5>
+<ol>
+<li><p><strong>Semantic Markup</strong>:</p>
+<ul>
+<li>Use semantic elements like <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>, and <code>&lt;footer&gt;</code> appropriately to structure the content.</li>
+<li>Implement <code>&lt;div&gt;</code> tags where specific grouping is necessary for styling purposes (not covered in this lesson but important for overall structure).</li>
+</ul>
+</li>
+<li><p><strong>Attributes</strong>:</p>
+<ul>
+<li>Use <code>id</code> and <code>class</code> attributes to help identify elements uniquely or as part of a group for hypothetical future CSS styling.</li>
+<li>Ensure all <code>&lt;img&gt;</code> elements have <code>alt</code> attributes describing the image content, and all <code>&lt;a&gt;</code> tags include titles through <code>title</code> attributes.</li>
+</ul>
+</li>
+</ol>
+<h4>Submission Guidelines</h4>
+<ul>
+<li><strong>Prepare your HTML file</strong>: Ensure that your file is well-formatted and free of syntax errors.</li>
+<li><strong>Comment your code</strong>: Include comments in your HTML to describe sections and elements, explaining their purpose on the page.</li>
+<li><strong>Zip your HTML file</strong>: If additional resources are used (like images hosted locally), include them in your zip file.</li>
+<li><strong>Upload to the course portal</strong>: Submit your zip file through the online course platform.</li>
+<li><strong>Deadline</strong>: Your assignment is due by the end of the following week.</li>
+</ul>
+<h4>Evaluation Criteria</h4>
+<ul>
+<li><strong>Correctness and Completeness</strong>: All HTML elements should be used as instructed, demonstrating understanding of their purpose and function.</li>
+<li><strong>Structure and Semantics</strong>: The webpage should be logically organized using semantic HTML where appropriate.</li>
+<li><strong>Code Quality</strong>: Your HTML should be clean, well-organized, and easy to read with appropriate use of comments.</li>
+</ul>
+<p>This assignment will help you practice creating structured and meaningful web content, setting a strong foundation for more advanced web development tasks.</p>
+
+		</div>
+
+
+
+
+
+
+		<div id="html_hy" class="html" style="display:none">
+<h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տնային առաջադրանք 1. Կառուցված վեբ էջ կառուցել HTML-ով</font></font></h2>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ընդհանուր ակնարկ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս հանձնարարությունը թույլ կտա համախմբել ձեր գիտելիքները HTML-ի մասին՝ կառուցելով ավելի բարդ վեբ էջ: Դուք կկիրառեք ձեր պատկերացումները HTML կառուցվածքի, ընդհանուր տարրերի և պիտակների, իմաստային նշագրման և ատրիբուտների մասին:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նպատակներ</font></font></h4>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ցույց տալ HTML փաստաթղթի կառուցվածքի տիրապետում:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրականացնել տարբեր HTML տարրեր՝ տրամաբանորեն կառուցվածքային վեբ էջ ստեղծելու համար:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Արդյունավետ օգտագործեք իմաստային նշումներ՝ մատչելիությունը և SEO-ն բարձրացնելու համար:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պատշաճ կերպով օգտագործեք ատրիբուտները՝ որոշելու վեբ էջի տարրերի վարքն ու տեսքը:</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պահանջներ</font></font></h4>
+<h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մաս 1. HTML փաստաթղթի կարգավորում</font></font></h5>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ստեղծեք HTML փաստաթուղթ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . սկսեք ստեղծելով HTML ֆայլ անունով </font></font><code>project.html</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: Համոզվեք, որ ձեր փաստաթուղթը ներառում է հիմնական HTML5 կառուցվածքը ( </font></font><code>&lt;!DOCTYPE html&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;html&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;head&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>&lt;body&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">):</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գլխի բաժին</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font><ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներառեք </font></font><code>&lt;title&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ձեր վեբ էջի համար:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործեք </font></font><code>&lt;meta&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">պիտակներ՝ նշելու նիշերի հավաքածուն և վեբ էջի նկարագրությունը:</font></font></li>
+</ul>
+</li>
+</ol>
+<h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մաս 2. Վեբ էջի բովանդակություն</font></font></h5>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերնագիր և նավարկություն</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ստեղծեք մի </font></font><code>&lt;header&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բաժին, որը պարունակում է վեբկայքի լոգոն և նավիգացիոն գիծ՝ օգտագործելով </font></font><code>&lt;nav&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>&lt;ul&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հղումներով դեպի ձեր էջի բաժինները (օրինակ՝ Գլխավոր, Մասին, Ծառայություններ):</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիմնական բովանդակություն</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործեք </font></font><code>&lt;main&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հիմնական բովանդակությունը ներառելու համար:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիմնական բովանդակությունը բաժանեք բաժինների՝ օգտագործելով </font></font><code>&lt;section&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">պիտակներ: Յուրաքանչյուր բաժին պետք է ունենա վերնագրին համապատասխան </font></font><code>&lt;h1&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>&lt;h6&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ներառի մի քանի պարբերություն ( </font></font><code>&lt;p&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">):</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներառեք պատկերների համակցություն ( </font></font><code>&lt;img&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հատկանիշներով </font></font><code>src</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>alt</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ատրիբուտներով) և հիպերհղումներ ( </font></font><code>&lt;a&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ատրիբուտներով </font></font><code>href</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">):</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ցուցակներ և լրացուցիչ բովանդակություն</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ավելացրեք չպատվիրված ցուցակ ( </font></font><code>&lt;ul&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) կամ պատվիրված ցուցակ ( ) </font><font style="vertical-align: inherit;">ծառայություններ կամ ապրանքներ նկարագրող </font></font><code>&lt;ol&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ապրանքներով ( ):</font></font><code>&lt;li&gt;</code><font style="vertical-align: inherit;"></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներառեք տեքստի ձևաչափման տարրեր, ինչպիսիք են </font></font><code>&lt;strong&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>&lt;em&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">շեշտադրելու հիմնական կետերը:</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ստորագիր</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ավելացրեք </font></font><code>&lt;footer&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հեղինակային իրավունքի մասին տեղեկատվություն, սոցիալական մեդիայի հղումներ (որպես </font></font><code>&lt;a&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">պիտակներ) և կոնտակտային տեղեկատվության համառոտ բաժին:</font></font></li>
+</ul>
+</li>
+</ol>
+<h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մաս 3. Իմաստային կառուցվածք և հատկանիշներ</font></font></h5>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իմաստային նշում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործեք իմաստային տարրեր, ինչպիսիք են </font></font><code>&lt;article&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;aside&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>&lt;footer&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">համապատասխանաբար բովանդակությունը կառուցվածքի համար:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կիրառեք </font></font><code>&lt;div&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">պիտակներ, որտեղ հատուկ խմբավորումն անհրաժեշտ է ոճավորման նպատակների համար (այս դասում չընդգրկված, բայց ընդհանուր կառուցվածքի համար կարևոր է):</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հատկանիշներ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործեք </font></font><code>id</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>class</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ատրիբուտներ՝ օգնելու տարրերը եզակիորեն կամ որպես խմբի մաս բացահայտելու հիպոթետիկ ապագա CSS ոճավորման համար:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Համոզվեք, որ բոլոր </font></font><code>&lt;img&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">տարրերն ունեն </font></font><code>alt</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">նկարի բովանդակությունը նկարագրող հատկանիշներ, և բոլոր </font></font><code>&lt;a&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">պիտակները ներառում են վերնագրեր </font></font><code>title</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ատրիբուտների միջոցով:</font></font></li>
+</ul>
+</li>
+</ol>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներկայացման ուղեցույցներ</font></font></h4>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պատրաստեք ձեր HTML ֆայլը</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Համոզվեք, որ ձեր ֆայլը լավ ձևաչափված է և զերծ է շարահյուսական սխալներից:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մեկնաբանեք ձեր կոդը</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . ներառեք մեկնաբանություններ ձեր HTML-ում՝ բաժինները և տարրերը նկարագրելու համար՝ բացատրելով դրանց նպատակը էջում:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Zip ձեր HTML ֆայլը</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Եթե լրացուցիչ ռեսուրսներ են օգտագործվում (ինչպես պատկերները, որոնք տեղակայված են տեղում), ներառեք դրանք ձեր zip ֆայլում:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերբեռնեք դասընթացի պորտալում</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Ներկայացրեք ձեր zip ֆայլը առցանց դասընթացների հարթակի միջոցով:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերջնաժամկետ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Ձեր առաջադրանքը կավարտվի մինչև հաջորդ շաբաթվա վերջ:</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գնահատման չափանիշներ</font></font></h4>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ճշգրտություն և ամբողջականություն</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . HTML-ի բոլոր տարրերը պետք է օգտագործվեն հրահանգների համաձայն՝ ցույց տալով դրանց նպատակի և գործառույթի իմացությունը:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կառուցվածք և իմաստաբանություն</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . վեբ էջը պետք է տրամաբանորեն կազմակերպված լինի՝ օգտագործելով իմաստային HTML, որտեղ անհրաժեշտ է:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կոդի որակ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Ձեր HTML-ը պետք է լինի մաքուր, լավ կազմակերպված և հեշտ ընթեռնելի՝ մեկնաբանությունների համապատասխան օգտագործմամբ:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս հանձնարարությունը կօգնի ձեզ վարժեցնել կառուցվածքային և բովանդակալից վեբ բովանդակություն ստեղծելը՝ ամուր հիմք ստեղծելով ավելի առաջադեմ վեբ մշակման առաջադրանքների համար:</font></font></p>
+		</div>
+
+
+
+
+
+
+		<div id="html_ru" class="html" style="display:none">
+<h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Домашнее задание&nbsp;1. Создание структурированной веб-страницы с помощью HTML.</font></font></h2>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обзор</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это задание позволит вам закрепить свои знания HTML и создать более сложную веб-страницу. Вы примените свое понимание структуры HTML, общих элементов и тегов, семантической разметки и атрибутов.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цели</font></font></h4>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Продемонстрировать мастерство структуры HTML-документа.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Внедряйте различные элементы HTML для создания логически структурированной веб-страницы.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эффективно используйте семантическую разметку для улучшения доступности и SEO.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Правильно используйте атрибуты для определения поведения и внешнего вида элементов веб-страницы.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Требования</font></font></h4>
+<h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Часть 1. Настройка HTML-документа</font></font></h5>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Создайте HTML-документ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Начните с создания HTML-файла с именем </font></font><code>project.html</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. Убедитесь, что ваш документ содержит базовую структуру HTML5 ( </font></font><code>&lt;!DOCTYPE html&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;html&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;head&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>&lt;body&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">).</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Головной отдел</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font><ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Включите </font></font><code>&lt;title&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">для своей веб-страницы.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Используйте </font></font><code>&lt;meta&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">теги, чтобы указать набор символов и описание веб-страницы.</font></font></li>
+</ul>
+</li>
+</ol>
+<h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Часть 2: Содержимое веб-страницы</font></font></h5>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Заголовок и навигация</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Создайте </font></font><code>&lt;header&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">раздел, содержащий логотип веб-сайта и панель навигации, используя </font><font style="vertical-align: inherit;">ссылки на разделы вашей страницы (например, «Главная», «О программе», «Услуги») </font></font><code>&lt;nav&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и со ссылками на них.</font></font><code>&lt;ul&gt;</code><font style="vertical-align: inherit;"></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Основное содержание</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Используйте </font></font><code>&lt;main&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">для включения основного контента.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Разделите основной контент на разделы с помощью </font></font><code>&lt;section&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">тегов. Каждый раздел должен иметь релевантный </font></font><code>&lt;h1&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">заголовок </font></font><code>&lt;h6&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и включать несколько абзацев ( </font></font><code>&lt;p&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">).</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Включите комбинацию изображений ( </font></font><code>&lt;img&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">с атрибутами </font></font><code>src</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>alt</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) и гиперссылок ( </font></font><code>&lt;a&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">с </font></font><code>href</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">атрибутами).</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Списки и дополнительный контент</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Добавьте неупорядоченный список ( </font></font><code>&lt;ul&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) или упорядоченный список ( </font></font><code>&lt;ol&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) с элементами ( </font></font><code>&lt;li&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">), описывающими услуги или продукты.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Включите элементы форматирования текста, такие как </font></font><code>&lt;strong&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>&lt;em&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, чтобы подчеркнуть ключевые моменты.</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Нижний колонтитул</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Добавьте </font></font><code>&lt;footer&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">информацию об авторских правах, ссылки на социальные сети (в виде </font></font><code>&lt;a&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">тегов) и раздел с краткой контактной информацией.</font></font></li>
+</ul>
+</li>
+</ol>
+<h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Часть 3: Семантическое структурирование и атрибуты</font></font></h5>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Семантическая разметка</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Используйте семантические элементы, такие как </font></font><code>&lt;article&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;aside&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>&lt;footer&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, чтобы структурировать контент.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Внедряйте </font></font><code>&lt;div&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">теги там, где для целей стилизации необходима определенная группировка (не рассматривается в этом уроке, но важно для общей структуры).</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Атрибуты</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> :</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Используйте атрибуты </font></font><code>id</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>class</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, чтобы идентифицировать элементы уникально или как часть группы для гипотетического будущего стиля CSS.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Убедитесь, что все </font></font><code>&lt;img&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">элементы имеют </font></font><code>alt</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">атрибуты, описывающие содержимое изображения, а все </font></font><code>&lt;a&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">теги включают заголовки через </font></font><code>title</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">атрибуты.</font></font></li>
+</ul>
+</li>
+</ol>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Рекомендации по подаче</font></font></h4>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Подготовьте HTML-файл</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Убедитесь, что ваш файл правильно отформатирован и не содержит синтаксических ошибок.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Комментируйте свой код</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Включите комментарии в свой HTML-код для описания разделов и элементов, объясняя их назначение на странице.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Заархивируйте HTML-файл</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Если используются дополнительные ресурсы (например, изображения, размещенные локально), включите их в свой zip-файл.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Загрузите на портал курса</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : отправьте zip-файл через платформу онлайн-курса.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Крайний срок</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : Ваше задание должно быть сдано до конца следующей недели.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Критерии оценки</font></font></h4>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Корректность и полнота</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Все элементы HTML следует использовать в соответствии с инструкциями, демонстрируя понимание их назначения и функции.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Структура и семантика</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Веб-страница должна быть логически организована с использованием семантического HTML, где это возможно.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Качество кода</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Ваш HTML-код должен быть чистым, хорошо организованным и легко читаемым, с соответствующим использованием комментариев.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это задание поможет вам попрактиковаться в создании структурированного и значимого веб-контента, заложив прочную основу для более сложных задач веб-разработки.</font></font></p>
+		</div>
+
+		
+
+
+
+
+
+
+
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js" integrity="sha512-LhccdVNGe2QMEfI3x4DVV3ckMRe36TfydKss6mJpdHjNFiV07dFpS2xzeZedptKZrwxfICJpez09iNioiSZ3hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+		<script>
+			let currentLanguage = 'en';
+			const copiedTexts = {
+				en: 'Copied to clipboard!',
+				hy: 'Պատճենվել է սեղմատախտակում:',
+				ru: 'Скопировано в буфер обмена!'
+			}
+
+			function copyCode(index) {
+				const code = document.getElementById('code-block-' + index).innerText;
+				const copied = document.getElementById('copied-' + index);
+			
+				navigator.clipboard.writeText(code).then(() => {
+					copied.innerText = copiedTexts[currentLanguage];
+				});
+
+				setTimeout(() => {
+					copied.innerText = '';
+				}, 3000);
+			}
+
+			// Initialize Highlight.js after the document is fully loaded
+			document.addEventListener('DOMContentLoaded', (event) => {
+				hljs.highlightAll();
+			});
+
+			let en = document.getElementById('en');
+			let hy = document.getElementById('hy');
+			let ru = document.getElementById('ru');
+			let html_en = document.getElementById('html_en');
+			let html_hy = document.getElementById('html_hy');
+			let html_ru = document.getElementById('html_ru');
+			
+			en.addEventListener('click', function(){
+				html_en.style.display = 'block';
+				html_hy.style.display = 'none';
+				html_ru.style.display = 'none';
+				
+				en.style.display = 'none';
+				hy.style.display = 'inline';
+				ru.style.display = 'inline';
+				
+				document.getElementsByTagName('title')[0].innerText = html_en.getElementsByTagName('h2')[0].innerText
+				currentLanguage = 'en';
+			});
+			
+			hy.addEventListener('click', function(){
+				html_en.style.display = 'none';
+				html_hy.style.display = 'block';
+				html_ru.style.display = 'none';
+				
+				en.style.display = 'inline';
+				hy.style.display = 'none';
+				ru.style.display = 'inline';
+				
+				document.getElementsByTagName('title')[0].innerText = html_hy.getElementsByTagName('h2')[0].innerText
+				
+				currentLanguage = 'hy';
+			});
+			
+			ru.addEventListener('click', function(){
+				html_en.style.display = 'none';
+				html_hy.style.display = 'none';
+				html_ru.style.display = 'block';
+				
+				en.style.display = 'inline';
+				hy.style.display = 'inline';
+				ru.style.display = 'none';
+				
+				document.getElementsByTagName('title')[0].innerText = html_ru.getElementsByTagName('h2')[0].innerText
+				currentLanguage = 'ru';
+			});
+
+			let presLang = {
+				en: document.querySelectorAll('#html_en pre'), 
+				hy: document.querySelectorAll('#html_hy pre'), 
+				ru: document.querySelectorAll('#html_ru pre')
+			};
+			
+			let key = 1;
+			
+			for(let lang in presLang){
+				let pres = presLang[lang];
+
+				pres.forEach(function(pre){
+					let copyText = lang == 'hy' ? 'Պատճենել' : lang == 'ru' ? 'Копировать' : 'Copy';
+					let card = document.createElement('div');
+					card.className = 'card bg-dark text-white';
+					pre.firstChild.id = 'code-block-' + key
+					let cardHtml = `
+						<div class="card-header">
+							<button class="btn btn-primary" onclick="copyCode(${key})">${copyText}</button>
+							<span id="copied-${key}" class="float-end"></span>
+						</div>
+						<div class="p-0">
+							<pre>${pre.innerHTML}</pre>
+						</div>
+					`
+					card.innerHTML = cardHtml;
+					
+					pre.parentNode.replaceChild(card, pre);
+					key++;
+				});
+			}
+			
+		</script>
+	</body>
 </html>
