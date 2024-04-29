@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lesson 3: HTML5: Semantic Elements and Best Practices</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+        <style>
+            code {
+                background-color: lightgray;
+                color: black;
+                padding: 2px 5px;
+                margin: 0 5px;
+				border: 1px solid gray;
+				border-radius: 5px;
+            }
+			#md{
+				display: none;
+			}
+        </style>
+    </head>
+    <body class="p-5">
+		<a href="#" id="hy" class="btn btn-info">Հայերեն</a>
+		<a href="#" id="en" class="btn btn-info" style="display:none">English</a>
+		<a href="#" id="ru" class="btn btn-info">Русский</a>
+		
+		<hr>
+
+
+
+
+
+
+		<div id="html_en" class="html">
+<h2>Lesson 3: HTML5: Semantic Elements and Best Practices</h2>
+<hr>
+<h3>Introduction to HTML5 and Semantic Elements</h3>
+<h4>Overview of HTML5</h4>
+<p>HTML5 represents a significant evolution in the development of the HTML standard, offering a more robust framework for building web pages and applications. Introduced as the fifth major version of HTML, its development began in the mid-2000s, with the final specification being officially finalized by the W3C (World Wide Web Consortium) in 2014. The advent of HTML5 addressed the growing need for a standardized, open web platform that could handle the increasing demands for multimedia content, web applications, and interactive experiences without relying on proprietary plugins like Flash.</p>
+<p>The goals of HTML5 were multifaceted:</p>
+<ul>
+<li><strong>Support for Multimedia:</strong> HTML5 introduced elements like <code>&lt;video&gt;</code> and <code>&lt;audio&gt;</code>, making it easier to embed and control media content directly in web pages without external plugins.</li>
+<li><strong>Enhanced Interactivity:</strong> With new form controls, APIs, and the <code>&lt;canvas&gt;</code> element, HTML5 allows for the creation of complex interactive experiences and graphical content natively in the browser.</li>
+<li><strong>Improved Markup:</strong> HTML5 aimed to simplify the structure of web documents with clearer semantics, making web pages more understandable and maintainable.</li>
+</ul>
+<h4>Semantic Elements in HTML5</h4>
+<p>One of the hallmark features of HTML5 is the introduction of semantic elements. These elements provide a way to describe the structure and purpose of content in a more meaningful way than the previously used generic containers like <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code>. Semantic elements include:</p>
+<ul>
+<li><strong><code>&lt;header&gt;</code></strong>: Defines a header for a document or section, often containing introductory content or navigational links.</li>
+<li><strong><code>&lt;nav&gt;</code></strong>: Designates navigation links to help users navigate the document or related documents.</li>
+<li><strong><code>&lt;section&gt;</code></strong>: Represents a standalone section within a document, which should logically be grouped together.</li>
+<li><strong><code>&lt;article&gt;</code></strong>: Denotes content that forms an independent part of a document or site, such as a blog post, news article, or forum post.</li>
+<li><strong><code>&lt;aside&gt;</code></strong>: Marks content that is tangentially related to the content around it, such as sidebars, call-out boxes, or advertisements.</li>
+<li><strong><code>&lt;footer&gt;</code></strong>: Indicates a footer for a document or section, typically containing authorship information, copyright notices, or related documents.</li>
+</ul>
+<p>The use of these elements instead of non-semantic ones like <code>&lt;div&gt;</code> allows developers to create a page structure that is easily interpreted by both browsers and humans, improving the web&#39;s overall usability and accessibility.</p>
+<h4>Benefits of Semantic Elements</h4>
+<p>Semantic elements offer several key advantages:</p>
+<ul>
+<li><strong>Accessibility:</strong> Assistive technologies, such as screen readers, rely on the semantics of web content to provide a richer, more navigable experience for users with disabilities. By using semantic elements, developers can ensure that the structure and meaning of web content are conveyed effectively to these users.</li>
+<li><strong>SEO Benefits:</strong> Search engines use the semantic meaning of HTML elements to better understand and index web content. Pages utilizing semantic elements are likely to be interpreted more accurately by search engines, potentially leading to better search rankings.</li>
+<li><strong>Easier Maintenance and Styling:</strong> Semantic elements make web documents more logical and organized, simplifying maintenance and styling with CSS. Developers can apply styles more intuitively and efficiently when the structure of a document clearly reflects its content.</li>
+</ul>
+<p>The introduction of HTML5 and its semantic elements marked a significant step forward in web development, promoting a more accessible, interoperable, and efficient web. By adopting semantic elements, developers not only adhere to best practices but also contribute to the creation of a more structured and meaningful web.</p>
+<h3>Deep Dive into Semantic Elements</h3>
+<p>Understanding and correctly implementing semantic elements in HTML5 is crucial for developing web content that is accessible, logically structured, and SEO-friendly. Let&#39;s explore each semantic element in detail, discussing its purpose and how it can be effectively used in a web page&#39;s structure.</p>
+<h4>Detailed Exploration of Each Element</h4>
+<ul>
+<li><p><strong><code>&lt;header&gt;</code></strong>: This element typically contains introductory content for a page or a section, such as logos, navigation links, or page titles. Unlike non-semantic containers, <code>&lt;header&gt;</code> clearly indicates the beginning of a significant portion of content.</p>
+<pre><code class="language-html">&lt;header&gt;
+    &lt;h1&gt;My Website&lt;/h1&gt;
+    &lt;nav&gt;
+        &lt;!-- Navigation links go here --&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+</code></pre>
+</li>
+<li><p><strong><code>&lt;nav&gt;</code></strong>: Dedicated to navigation links, <code>&lt;nav&gt;</code> helps users and search engines understand the main navigation areas of a website. It&#39;s not limited to the header; you can use <code>&lt;nav&gt;</code> wherever navigation links appear, such as footers or sidebars.</p>
+<pre><code class="language-html">&lt;nav&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&quot;#home&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+        &lt;!-- More links --&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+</code></pre>
+</li>
+<li><p><strong><code>&lt;section&gt;</code></strong>: Represents a standalone section of content that logically groups together thematic content. Each <code>&lt;section&gt;</code> should ideally have a heading (<code>&lt;h1&gt;</code>-<code>&lt;h6&gt;</code>) and content that relates directly to the heading.</p>
+<pre><code class="language-html">&lt;section&gt;
+    &lt;h2&gt;About Us&lt;/h2&gt;
+    &lt;p&gt;Our company was founded in...&lt;/p&gt;
+&lt;/section&gt;
+</code></pre>
+</li>
+<li><p><strong><code>&lt;article&gt;</code></strong>: Contains content that stands on its own as a discrete piece, such as a blog post, news article, or forum thread. Articles should make sense independently if removed from the site.</p>
+<pre><code class="language-html">&lt;article&gt;
+    &lt;h2&gt;Blog Post Title&lt;/h2&gt;
+    &lt;p&gt;Blog post content...&lt;/p&gt;
+&lt;/article&gt;
+</code></pre>
+</li>
+<li><p><strong><code>&lt;aside&gt;</code></strong>: Marks content that&#39;s tangentially related to the main content, like sidebars, related links, or author bios. It&#39;s not essential to the main content but provides additional context or information.</p>
+<pre><code class="language-html">&lt;aside&gt;
+    &lt;h3&gt;Related Posts&lt;/h3&gt;
+    &lt;!-- Related links or content --&gt;
+&lt;/aside&gt;
+</code></pre>
+</li>
+<li><p><strong><code>&lt;footer&gt;</code></strong>: Typically contains information about the author, copyright notices, contact information, and links to legal documents or privacy policies. It marks the end of a page or section content.</p>
+<pre><code class="language-html">&lt;footer&gt;
+    &lt;p&gt;Copyright © 2024 My Website&lt;/p&gt;
+&lt;/footer&gt;
+</code></pre>
+</li>
+</ul>
+<h4>Practical Examples and Exercises</h4>
+<p><strong>Exercise 1: Refactoring a Web Page Using Semantic Elements</strong></p>
+<p>Take a web page or section written with non-semantic markup (e.g., using <code>&lt;div&gt;</code> elements for headers, footers, navigation) and refactor it to use semantic elements. For instance, replace <code>&lt;div id=&quot;header&quot;&gt;</code> with <code>&lt;header&gt;</code>, <code>&lt;div id=&quot;nav&quot;&gt;</code> with <code>&lt;nav&gt;</code>, and so on. Focus on ensuring that each part of the content is enclosed in the most appropriate semantic element.</p>
+<p><strong>Exercise 2: Building a Blog Page</strong></p>
+<p>Create a simple blog page structure using semantic elements. Include a header with navigation, a main section with an article for the blog post, an aside for related links or author bio, and a footer with copyright information.</p>
+<h4>Interactive Group Activity</h4>
+<p>In small groups, visit various websites and analyze their use of semantic elements. Look for:</p>
+<ul>
+<li>Proper use of <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>, and <code>&lt;footer&gt;</code>.</li>
+<li>Missed opportunities where non-semantic markup could be replaced with semantic elements.</li>
+<li>Any misuse of semantic elements that could confuse the structure or meaning of the content.</li>
+</ul>
+<p>Each group should present their findings, highlighting both positive uses of semantic elements and areas for improvement. This activity encourages critical thinking about web structure and the practical application of semantic markup to enhance accessibility, SEO, and maintainability of web content.</p>
+<h3>Best Practices in HTML5 Development</h3>
+<p>Ensuring adherence to best practices in HTML5 development is crucial for creating web content that is robust, accessible, and optimized for search engines. This part of the lesson focuses on several key areas of best practices, including meta tags, mobile-friendly design, and coding standards.</p>
+<h4>Meta Tags and Character Encoding</h4>
+<p>Meta tags play a significant role in HTML5 by providing essential metadata about the web page. They are placed in the <code>&lt;head&gt;</code> section of the HTML document and are not visible to users but are critical for browsers and search engines.</p>
+<ul>
+<li><p><strong>Character Encoding (<code>&lt;meta charset=&quot;utf-8&quot;&gt;</code>):</strong> This tag specifies the character encoding for the HTML document. Using UTF-8, a universal character set, ensures that all characters in your content, including special characters from various languages, are correctly displayed.</p>
+<pre><code class="language-html">&lt;meta charset=&quot;utf-8&quot;&gt;
+</code></pre>
+</li>
+<li><p><strong>Viewport Settings for Mobile Devices:</strong> The viewport meta tag helps control the page&#39;s dimensions and scaling on mobile devices. Setting <code>width=device-width</code> makes the page match the screen&#39;s width in device-independent pixels, and <code>initial-scale=1.0</code> establishes a 1:1 relationship between CSS pixels and device-independent pixels. This setup is crucial for responsive design.</p>
+<pre><code class="language-html">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+</code></pre>
+</li>
+<li><p><strong>Descriptions and Keywords for SEO:</strong> Meta tags for description and keywords inform search engines about the content of your page. While the keywords meta tag has diminished in importance due to historical abuse, the description tag plays a vital role in search engine results, providing a summary of the page&#39;s content.</p>
+<pre><code class="language-html">&lt;meta name=&quot;description&quot; content=&quot;A brief description of the page&#39;s content.&quot;&gt;
+</code></pre>
+</li>
+</ul>
+<p>These practices enhance the accessibility of web content and its visibility on search engines, contributing to a better user experience and potentially higher page rankings.</p>
+<h4>Mobile-Friendly Design</h4>
+<p>With the increasing use of mobile devices to access the internet, creating web pages that are responsive and mobile-friendly is non-negotiable. Responsive design ensures that your site looks and functions well across all devices, from desktops to smartphones.</p>
+<ul>
+<li><p><strong>Fluid Layouts:</strong> Use flexible grid layouts based on percentages rather than fixed units like pixels. This approach allows elements to resize relative to the screen size, ensuring content remains readable and accessible on any device.</p>
+</li>
+<li><p><strong>Media Queries:</strong> CSS media queries enable you to apply different styling rules based on the device&#39;s characteristics, such as its width, height, or orientation. They are a cornerstone of responsive design, allowing for the customization of presentations to different viewing contexts.</p>
+<pre><code class="language-css">@media (max-width: 600px) {
+  .sidebar {
+    display: none;
+  }
+}
+</code></pre>
+</li>
+<li><p><strong>Scalable Images:</strong> Ensure images scale correctly within the layout by using CSS properties like <code>max-width: 100%;</code> and <code>height: auto;</code>. This prevents images from exceeding the container&#39;s width, making them responsive.</p>
+</li>
+</ul>
+<h4>Encouraging Best Practices</h4>
+<p>Maintaining high standards in coding practice is essential for the longevity and maintainability of web projects. Here are some key points to encourage best practices:</p>
+<ul>
+<li><p><strong>Proper Element Nesting:</strong> Ensure that HTML elements are correctly nested within each other, following the rules of the HTML specification. This reduces errors and enhances page readability.</p>
+</li>
+<li><p><strong>Attribute Quoting:</strong> Always quote attribute values to avoid potential parsing errors. This is particularly important when values contain spaces.</p>
+<pre><code class="language-html">&lt;input type=&quot;text&quot; name=&quot;user_name&quot;&gt;
+</code></pre>
+</li>
+<li><p><strong>HTML Validation:</strong> Use tools like the W3C HTML Validator to check your HTML documents for errors. Passing validation tests means your code adheres to the standards, ensuring greater compatibility across different browsers and devices.</p>
+</li>
+</ul>
+<p>Adhering to these best practices in HTML5 development not only enhances the immediate user experience but also sets the foundation for future-proof, accessible, and search-engine-friendly web content.</p>
+<h3>Wrap-up and Q&amp;A</h3>
+<p>As we conclude this comprehensive exploration of HTML5 and its crucial aspects, let&#39;s summarize the key points we&#39;ve covered throughout the lesson. This recap will solidify your understanding of the fundamental principles of modern web development, emphasizing the significance of semantic elements, meta tags, and responsive design.</p>
+<h4>Review and Summary</h4>
+<ul>
+<li><p><strong>Semantic Elements in HTML5:</strong> We began with an introduction to HTML5, focusing on its evolution and the introduction of semantic elements. These elements, such as <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>, and <code>&lt;footer&gt;</code>, provide meaningful structure to web content. They enhance accessibility, improve SEO by giving clear cues about the content structure to search engines, and make web documents more intuitive to manage and style.</p>
+</li>
+<li><p><strong>Meta Tags and Character Encoding:</strong> Meta tags are essential for defining the character set of your document (<code>&lt;meta charset=&quot;utf-8&quot;&gt;</code>), configuring the viewport for mobile devices (<code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</code>), and specifying page descriptions for SEO. These practices contribute to making your web content more accessible and search-engine friendly, ensuring a broad and inclusive reach.</p>
+</li>
+<li><p><strong>Mobile-Friendly Design:</strong> The importance of responsive design in today&#39;s mobile-centric world cannot be overstated. We discussed the significance of creating web pages that function well across all devices, focusing on fluid layouts, media queries, and scalable images. These techniques ensure that your content is accessible and user-friendly, regardless of the device used to access it.</p>
+</li>
+<li><p><strong>Best Practices in HTML5 Development:</strong> Adherence to web standards and best practices, such as proper element nesting, quoting attribute values, and ensuring documents pass HTML validation tests, is vital for the integrity and sustainability of web projects. These practices ensure that your code is robust, accessible, and future-proof.</p>
+</li>
+</ul>
+<h4>Q&amp;A Session</h4>
+<p>Now, we open the floor to questions. This is your opportunity to seek clarification, delve deeper into any of the topics we&#39;ve covered, or explore new areas related to semantic HTML, accessibility, SEO, and responsive design. Whether you&#39;re curious about best practices in coding, want to know more about optimizing your site for mobile devices, or have questions about the nuances of semantic elements, we&#39;re here to help.</p>
+<ul>
+<li><p><strong>Ask Anything:</strong> No question is too basic or too complex. If you&#39;re wondering about how to implement a specific HTML5 feature, the implications of semantic markup on accessibility, or strategies for improving your site&#39;s SEO, feel free to ask.</p>
+</li>
+<li><p><strong>Share Your Thoughts:</strong> If you have insights or experiences related to the topics discussed, sharing these can provide valuable learning opportunities for everyone. Contributions that highlight challenges faced, solutions discovered, or innovative approaches to web development are welcome.</p>
+</li>
+</ul>
+<p>This Q&amp;A session is designed to enrich your understanding and application of HTML5 in your web development projects. By engaging with these topics, you&#39;re taking important steps toward creating more accessible, efficient, and future-ready web content.</p>
+
+		</div>
+
+
+
+
+
+
+		<div id="html_hy" class="html" style="display:none">
+<h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դաս 3. HTML5. Իմաստային տարրեր և լավագույն պրակտիկա</font></font></h2>
+<hr>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML5-ի և իմաստային տարրերի ներածություն</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML5-ի ակնարկ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML5-ը զգալի էվոլյուցիա է ներկայացնում HTML ստանդարտի մշակման մեջ՝ առաջարկելով ավելի ամուր շրջանակ վեբ էջեր և հավելվածներ կառուցելու համար: Ներկայացվել է որպես HTML-ի հինգերորդ հիմնական տարբերակ, դրա զարգացումը սկսվել է 2000-ականների կեսերին, երբ վերջնական ճշգրտումը պաշտոնապես վերջնական տեսքի բերվել է W3C-ի (World Wide Web Consortium) կողմից 2014 թվականին: վեբ հարթակ, որը կարող է կարգավորել մուլտիմեդիա բովանդակության, վեբ հավելվածների և ինտերակտիվ փորձառությունների աճող պահանջները՝ առանց հենվելու սեփական պլագինների վրա, ինչպիսին է Flash-ը:</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML5-ի նպատակները բազմակողմանի էին.</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Աջակցություն Մուլտիմեդիայի համար.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> HTML5-ը ներկայացրել է այնպիսի տարրեր, ինչպիսիք են </font></font><code>&lt;video&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և ը </font></font><code>&lt;audio&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, ինչը հեշտացնում է մեդիա բովանդակությունը ուղղակիորեն վեբ էջերում առանց արտաքին հավելումների տեղադրումն ու կառավարումը:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ընդլայնված ինտերակտիվություն.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> նոր ձևերի վերահսկումներով, API-ներով և </font></font><code>&lt;canvas&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">տարրով, HTML5-ը թույլ է տալիս զննարկիչում ստեղծել բարդ ինտերակտիվ փորձառություններ և գրաֆիկական բովանդակություն:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բարելավված նշագրում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> HTML5-ը նպատակ ուներ պարզեցնել վեբ փաստաթղթերի կառուցվածքը ավելի հստակ իմաստաբանությամբ՝ դարձնելով վեբ էջերն ավելի հասկանալի և պահպանելի:</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իմաստային տարրեր HTML5-ում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML5-ի բնորոշ հատկանիշներից մեկը իմաստային տարրերի ներդրումն է: Այս տարրերը հնարավորություն են տալիս նկարագրել բովանդակության կառուցվածքը և նպատակը ավելի բովանդակալից կերպով, քան նախկինում օգտագործված ընդհանուր բեռնարկղերը, ինչպիսիք են </font></font><code>&lt;div&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>&lt;span&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. Իմաստաբանական տարրերը ներառում են.</font></font></p>
+<ul>
+<li><strong><code>&lt;header&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սահմանում է վերնագիր փաստաթղթի կամ բաժնի համար, որը հաճախ պարունակում է ներածական բովանդակություն կամ նավիգացիոն հղումներ:</font></font></li>
+<li><strong><code>&lt;nav&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նշանակում է նավիգացիոն հղումներ՝ օգնելու օգտվողներին նավարկելու փաստաթուղթը կամ հարակից փաստաթղթերը:</font></font></li>
+<li><strong><code>&lt;section&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներկայացնում է փաստաթղթի առանձին բաժին, որը տրամաբանորեն պետք է խմբավորվի միասին:</font></font></li>
+<li><strong><code>&lt;article&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նշում է բովանդակություն, որը կազմում է փաստաթղթի կամ կայքի անկախ մաս, օրինակ՝ բլոգի գրառումը, նորությունների հոդվածը կամ ֆորումի գրառումը:</font></font></li>
+<li><strong><code>&lt;aside&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նշում է բովանդակությունը, որը շոշափելիորեն կապված է իր շուրջը գտնվող բովանդակության հետ, ինչպիսիք են կողագոտիները, զանգերի տուփերը կամ գովազդները:</font></font></li>
+<li><strong><code>&lt;footer&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ցույց է տալիս փաստաթղթի կամ բաժնի ստորագիր, որը սովորաբար պարունակում է հեղինակային տեղեկատվություն, հեղինակային իրավունքի մասին ծանուցումներ կամ հարակից փաստաթղթեր:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս տարրերի օգտագործումը ոչ իմաստային տարրերի փոխարեն, ինչպես օրինակ, </font></font><code>&lt;div&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">թույլ է տալիս ծրագրավորողներին ստեղծել էջի կառուցվածք, որը հեշտությամբ մեկնաբանվում է ինչպես բրաուզերների, այնպես էլ մարդկանց կողմից՝ բարելավելով համացանցի ընդհանուր օգտագործման և մատչելիությունը:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իմաստային տարրերի առավելությունները</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իմաստային տարրերն առաջարկում են մի քանի հիմնական առավելություններ.</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մատչելիություն.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Օժանդակ տեխնոլոգիաները, ինչպիսիք են էկրանի ընթերցողները, հենվում են վեբ բովանդակության իմաստաբանության վրա՝ հաշմանդամություն ունեցող օգտատերերի համար ավելի հարուստ և նավարկելի փորձ ապահովելու համար: Օգտագործելով իմաստային տարրեր, մշակողները կարող են ապահովել, որ վեբ բովանդակության կառուցվածքը և իմաստը արդյունավետ կերպով փոխանցվեն այս օգտվողներին:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SEO-ի առավելությունները.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Որոնողական համակարգերն օգտագործում են HTML տարրերի իմաստային նշանակությունը՝ ավելի լավ հասկանալու և ինդեքսավորելու վեբ բովանդակությունը: Իմաստային տարրեր օգտագործող էջերը, ամենայն հավանականությամբ, կմեկնաբանվեն ավելի ճշգրիտ որոնման համակարգերի կողմից, ինչը պոտենցիալ կհանգեցնի որոնման ավելի լավ վարկանիշի:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ավելի հեշտ սպասարկում և ոճավորում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Իմաստային տարրերը վեբ փաստաթղթերը դարձնում են ավելի տրամաբանական և կազմակերպված՝ հեշտացնելով սպասարկումն ու ոճավորումը CSS-ի միջոցով: Մշակողները կարող են ոճերը կիրառել ավելի ինտուիտիվ և արդյունավետ, երբ փաստաթղթի կառուցվածքը հստակ արտացոլում է դրա բովանդակությունը:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML5-ի և դրա իմաստային տարրերի ներդրումը նշանակալից առաջընթաց նշանավորեց վեբ զարգացման գործում՝ խթանելով ավելի մատչելի, փոխգործունակ և արդյունավետ վեբ: Ընդունելով իմաստային տարրեր՝ մշակողները ոչ միայն հավատարիմ են մնում լավագույն փորձին, այլև նպաստում են ավելի կառուցվածքային և բովանդակալից ցանցի ստեղծմանը:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Deep Dive into Semantic Elements</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML5-ում իմաստային տարրերի ըմբռնումն ու ճիշտ կիրառումը շատ կարևոր է վեբ բովանդակություն զարգացնելու համար, որը հասանելի է, տրամաբանորեն կառուցված և SEO-բարեկամական: Եկեք մանրամասն ուսումնասիրենք յուրաքանչյուր իմաստային տարր՝ քննարկելով դրա նպատակը և այն, թե ինչպես կարելի է արդյունավետ օգտագործել վեբ էջի կառուցվածքում:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Յուրաքանչյուր տարրի մանրամասն ուսումնասիրություն</font></font></h4>
+<ul>
+<li><p><strong><code>&lt;header&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս տարրը սովորաբար պարունակում է էջի կամ հատվածի ներածական բովանդակություն, ինչպիսիք են լոգոները, նավիգացիոն հղումները կամ էջի վերնագրերը: Ի տարբերություն ոչ իմաստային բեռնարկղերի, </font></font><code>&lt;header&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հստակ ցույց է տալիս բովանդակության զգալի մասի սկիզբը:</font></font></p>
+<pre><code class="language-html">&lt;header&gt;<font></font>
+    &lt;h1&gt;My Website&lt;/h1&gt;<font></font>
+    &lt;nav&gt;<font></font>
+        &lt;!-- Navigation links go here --&gt;<font></font>
+    &lt;/nav&gt;<font></font>
+&lt;/header&gt;<font></font>
+</code></pre>
+</li>
+<li><p><strong><code>&lt;nav&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նվիրված է նավիգացիոն հղումներին, </font></font><code>&lt;nav&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">օգնում է օգտատերերին և որոնման համակարգերին հասկանալ կայքի հիմնական նավիգացիոն ոլորտները: Այն չի սահմանափակվում վերնագրով. դուք կարող եք օգտագործել </font></font><code>&lt;nav&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ամենուր, որտեղ հայտնվեն նավիգացիոն հղումներ, օրինակ՝ ստորագիր կամ կողային տողեր:</font></font></p>
+<pre><code class="language-html">&lt;nav&gt;<font></font>
+    &lt;ul&gt;<font></font>
+        &lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;<font></font>
+        &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;<font></font>
+        &lt;!-- More links --&gt;<font></font>
+    &lt;/ul&gt;<font></font>
+&lt;/nav&gt;<font></font>
+</code></pre>
+</li>
+<li><p><strong><code>&lt;section&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներկայացնում է բովանդակության առանձին բաժին, որը տրամաբանորեն միավորում է թեմատիկ բովանդակությունը: Իդեալականորեն </font><font style="vertical-align: inherit;">յուրաքանչյուրը </font></font><code>&lt;section&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">պետք է ունենա վերնագիր ( </font></font><code>&lt;h1&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font><code>&lt;h6&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) և բովանդակություն, որն ուղղակիորեն առնչվում է վերնագրի հետ:</font></font></p>
+<pre><code class="language-html">&lt;section&gt;<font></font>
+    &lt;h2&gt;About Us&lt;/h2&gt;<font></font>
+    &lt;p&gt;Our company was founded in...&lt;/p&gt;<font></font>
+&lt;/section&gt;<font></font>
+</code></pre>
+</li>
+<li><p><strong><code>&lt;article&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պարունակում է բովանդակություն, որն ինքնին կանգնած է որպես առանձին հատված, օրինակ՝ բլոգի գրառում, նորությունների հոդված կամ ֆորումի թեմա: Հոդվածները պետք է ինքնուրույն իմաստ ունենան, եթե հեռացվեն կայքից:</font></font></p>
+<pre><code class="language-html">&lt;article&gt;<font></font>
+    &lt;h2&gt;Blog Post Title&lt;/h2&gt;<font></font>
+    &lt;p&gt;Blog post content...&lt;/p&gt;<font></font>
+&lt;/article&gt;<font></font>
+</code></pre>
+</li>
+<li><p><strong><code>&lt;aside&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նշում է բովանդակությունը, որը շոշափելիորեն կապված է հիմնական բովանդակության հետ, ինչպիսիք են կողագոտերը, հարակից հղումները կամ հեղինակի կենսագրությունը: Այն էական չէ հիմնական բովանդակության համար, այլ տրամադրում է լրացուցիչ համատեքստ կամ տեղեկատվություն:</font></font></p>
+<pre><code class="language-html">&lt;aside&gt;<font></font>
+    &lt;h3&gt;Related Posts&lt;/h3&gt;<font></font>
+    &lt;!-- Related links or content --&gt;<font></font>
+&lt;/aside&gt;<font></font>
+</code></pre>
+</li>
+<li><p><strong><code>&lt;footer&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սովորաբար պարունակում է տեղեկություններ հեղինակի մասին, հեղինակային իրավունքի մասին ծանուցումներ, կոնտակտային տվյալներ և հղումներ իրավական փաստաթղթերին կամ գաղտնիության քաղաքականությանը: Այն նշում է էջի կամ բաժնի բովանդակության ավարտը:</font></font></p>
+<pre><code class="language-html">&lt;footer&gt;<font></font>
+    &lt;p&gt;Copyright © 2024 My Website&lt;/p&gt;<font></font>
+&lt;/footer&gt;<font></font>
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական օրինակներ և վարժություններ</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վարժություն 1. Վեբ էջի վերակառուցում իմաստային տարրերի միջոցով</font></font></strong></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերցրեք վեբ էջը կամ բաժինը, որը գրված է ոչ իմաստային նշագրմամբ (օրինակ՝ օգտագործելով </font></font><code>&lt;div&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">տարրեր վերնագրերի, ստորոտների, նավիգացիայի համար) և վերափոխեք այն՝ իմաստային տարրեր օգտագործելու համար: Օրինակ, փոխարինեք </font></font><code>&lt;div id="header"&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;header&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-ով </font></font><code>&lt;div id="nav"&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>&lt;nav&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">այլն: Կենտրոնացեք ապահովելու վրա, որ բովանդակության յուրաքանչյուր մաս կցված է ամենահարմար իմաստային տարրի մեջ:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վարժություն 2. Բլոգի էջի կառուցում</font></font></strong></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ստեղծեք բլոգի էջի պարզ կառուցվածք՝ օգտագործելով իմաստային տարրեր: Ներառեք նավարկությամբ վերնագիր, բլոգի գրառման հոդվածով հիմնական բաժին, հարակից հղումների կամ հեղինակի կենսագրության մի կողմ և հեղինակային իրավունքի մասին տեղեկություններով ստորագիր:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Խմբի ինտերակտիվ գործունեություն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Փոքր խմբերով այցելեք տարբեր կայքեր և վերլուծեք դրանց իմաստային տարրերի օգտագործումը: Փնտրել:</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"></font><code>&lt;header&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;nav&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;section&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;article&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;aside&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font><font style="vertical-align: inherit;">և </font></font><code>&lt;footer&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաց թողնված հնարավորություններ, որտեղ ոչ իմաստային նշումները կարող են փոխարինվել իմաստային տարրերով:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իմաստային տարրերի ցանկացած սխալ օգտագործում, որը կարող է շփոթել բովանդակության կառուցվածքը կամ իմաստը:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Յուրաքանչյուր խումբ պետք է ներկայացնի իր բացահայտումները՝ ընդգծելով իմաստային տարրերի և՛ դրական կիրառությունները, և՛ բարելավման ոլորտները: Այս գործունեությունը խրախուսում է վեբ կառուցվածքի վերաբերյալ քննադատական &ZeroWidthSpace;&ZeroWidthSpace;մտածելակերպը և իմաստային նշագրման գործնական կիրառումը` վեբ բովանդակության մատչելիությունը, SEO-ն և պահպանելիությունը բարձրացնելու համար:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML5-ի մշակման լավագույն փորձը</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML5-ի մշակման լավագույն փորձին հետևելու ապահովումը կարևոր է որոնման համակարգերի համար ամուր, հասանելի և օպտիմիզացված վեբ բովանդակություն ստեղծելու համար: Դասի այս հատվածը կենտրոնանում է լավագույն փորձի մի քանի հիմնական ոլորտների վրա, ներառյալ մետա թեգերը, շարժական սարքերի համար հարմար դիզայնը և կոդավորման ստանդարտները:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մետա պիտակներ և նիշերի կոդավորում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մետա թեգերը զգալի դեր են խաղում HTML5-ում՝ ապահովելով վեբ էջի մասին կարևոր մետատվյալներ: Դրանք տեղադրված են </font></font><code>&lt;head&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML փաստաթղթի բաժնում և տեսանելի չեն օգտատերերի համար, բայց կարևոր նշանակություն ունեն բրաուզերների և որոնման համակարգերի համար:</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նիշերի կոդավորում ( </font></font><code>&lt;meta charset="utf-8"&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">):</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Այս թեգը նշում է HTML փաստաթղթի նիշերի կոդավորումը: Օգտագործելով UTF-8՝ ունիվերսալ նիշերի հավաքածուն, ապահովում է, որ ձեր բովանդակության բոլոր նիշերը, ներառյալ տարբեր լեզուների հատուկ նիշերը, ճիշտ ցուցադրվեն:</font></font></p>
+<pre><code class="language-html">&lt;meta charset="utf-8"&gt;
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Viewport-ի կարգավորումներ շարժական սարքերի համար.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> տեսադաշտի մետա-պիտակը օգնում է վերահսկել էջի չափերը և մասշտաբը շարժական սարքերում: Կարգավորումը </font></font><code>width=device-width</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ստիպում է էջը համապատասխանեցնել էկրանի լայնությանը սարքից անկախ պիքսելներով և </font></font><code>initial-scale=1.0</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">սահմանում է 1:1 հարաբերություն CSS պիքսելների և սարքից անկախ պիքսելների միջև: Այս կարգավորումը շատ կարևոր է արձագանքող դիզայնի համար:</font></font></p>
+<pre><code class="language-html">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նկարագրություններ և հիմնաբառեր SEO-ի համար.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> նկարագրության և հիմնաբառերի մետա թեգերը տեղեկացնում են որոնման համակարգերին ձեր էջի բովանդակության մասին: Թեև հիմնաբառերի մետա թեգը նվազել է իր կարևորությունը պատմական չարաշահումների պատճառով, նկարագրության պիտակը կենսական դեր է խաղում որոնման արդյունքների մեջ՝ տրամադրելով էջի բովանդակության ամփոփում:</font></font></p>
+<pre><code class="language-html">&lt;meta name="description" content="A brief description of the page's content."&gt;
+</code></pre>
+</li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս պրակտիկաները մեծացնում են վեբ բովանդակության հասանելիությունը և դրա տեսանելիությունը որոնողական համակարգերում՝ նպաստելով օգտատերերի ավելի լավ փորձի և էջի պոտենցիալ ավելի բարձր վարկանիշի:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բջջային հարմարավետ դիզայն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ինտերնետ մուտք գործելու համար շարժական սարքերի աճող օգտագործման հետ մեկտեղ, վեբ էջերի ստեղծումը, որոնք պատասխանատու են և հարմարեցված են շարժական սարքերին, սակարկելի չէ: Պատասխանատու դիզայնը երաշխավորում է, որ ձեր կայքը լավ տեսք ունի և գործում է բոլոր սարքերում՝ աշխատասեղանից մինչև սմարթֆոն:</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fluid Layouts.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Օգտագործեք ճկուն ցանցային դասավորություններ՝ հիմնված տոկոսների վրա, այլ ոչ թե ֆիքսված միավորների, ինչպիսիք են պիքսելները: Այս մոտեցումը թույլ է տալիս տարրերին չափափոխել էկրանի չափի համեմատ՝ ապահովելով բովանդակությունը ընթեռնելի և հասանելի ցանկացած սարքի վրա:</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մեդիա հարցումներ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> CSS մեդիա հարցումները թույլ են տալիս կիրառել ոճավորման տարբեր կանոններ՝ հիմնվելով սարքի բնութագրերի վրա, ինչպիսիք են լայնությունը, բարձրությունը կամ կողմնորոշումը: Դրանք արձագանքող դիզայնի անկյունաքարն են, որը թույլ է տալիս պրեզենտացիաները հարմարեցնել դիտման տարբեր համատեքստերին:</font></font></p>
+<pre><code class="language-css">@media (max-width: 600px) {<font></font>
+  .sidebar {<font></font>
+    display: none;<font></font>
+  }<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Scalable Images.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Համոզվեք, որ պատկերները ճիշտ մասշտաբավորվում են դասավորության մեջ՝ օգտագործելով CSS հատկությունները, ինչպիսիք են </font></font><code>max-width: 100%;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>height: auto;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. Սա թույլ չի տալիս պատկերները գերազանցել կոնտեյների լայնությունը՝ դարձնելով դրանք արձագանքող:</font></font></p>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Լավագույն փորձի խրախուսում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կոդավորման պրակտիկայում բարձր չափանիշների պահպանումը կարևոր է վեբ նախագծերի երկարակեցության և պահպանման համար: Ահա մի քանի հիմնական կետեր, որոնք խրախուսում են լավագույն փորձը.</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տարրերի պատշաճ տեղադրում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Համոզվեք, որ HTML տարրերը ճիշտ տեղադրվում են միմյանց մեջ՝ հետևելով HTML բնութագրերի կանոններին: Սա նվազեցնում է սխալները և մեծացնում էջի ընթեռնելիությունը:</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հատկանիշների մեջբերում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Միշտ մեջբերեք հատկանիշի արժեքները՝ վերլուծման հնարավոր սխալներից խուսափելու համար: Սա հատկապես կարևոր է, երբ արժեքները պարունակում են բացատներ:</font></font></p>
+<pre><code class="language-html">&lt;input type="text" name="user_name"&gt;
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML վավերացում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Օգտագործեք գործիքներ, ինչպիսին է W3C HTML Validator-ը՝ ձեր HTML փաստաթղթերը սխալների համար ստուգելու համար: Վավերացման թեստեր անցնելը նշանակում է, որ ձեր կոդը համապատասխանում է ստանդարտներին՝ ապահովելով ավելի մեծ համատեղելիություն տարբեր բրաուզերների և սարքերի միջև:</font></font></p>
+</li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML5-ի մշակման այս լավագույն փորձին հավատարիմ մնալը ոչ միայն ուժեղացնում է օգտատիրոջ անմիջական փորձը, այլև հիմք է դնում ապագայի հուսալի, հասանելի և որոնիչների համար հարմար վեբ բովանդակության համար:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ամփոփում և հարց ու պատասխան</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Երբ մենք ավարտում ենք HTML5-ի և դրա կարևոր ասպեկտների այս համապարփակ ուսումնասիրությունը, եկեք ամփոփենք հիմնական կետերը, որոնք մենք անդրադարձել ենք դասի ընթացքում: Այս ամփոփումը կամրապնդի ձեր պատկերացումները ժամանակակից վեբ զարգացման հիմնարար սկզբունքների մասին՝ ընդգծելով իմաստային տարրերի, մետա թեգերի և արձագանքող դիզայնի նշանակությունը:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերանայում և ամփոփում</font></font></h4>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իմաստային տարրեր HTML5-ում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Մենք սկսեցինք HTML5-ի ներածությունից՝ կենտրոնանալով դրա էվոլյուցիայի և իմաստային տարրերի ներդրման վրա: Այս տարրերը, ինչպիսիք են </font></font><code>&lt;header&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;nav&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;section&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;article&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;aside&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>&lt;footer&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, ապահովում են վեբ բովանդակության իմաստալից կառուցվածքը: Նրանք բարելավում են մատչելիությունը, բարելավում են SEO-ն՝ հստակ ակնարկներ տալով բովանդակության կառուցվածքի մասին որոնման համակարգերին, և վեբ փաստաթղթերը դարձնում են ավելի ինտուիտիվ՝ կառավարելու և ոճավորելու համար:</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մետա պիտակներ և նիշերի կոդավորում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> մետա թեգերը կարևոր են ձեր փաստաթղթի նիշերի հավաքածուն որոշելու համար ( </font></font><code>&lt;meta charset="utf-8"&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">), շարժական սարքերի տեսադաշտը կարգավորելու </font></font><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և SEO-ի համար էջի նկարագրությունները նշելու համար: Այս պրակտիկան նպաստում է ձեր վեբ բովանդակությունը ավելի մատչելի դարձնելուն և որոնիչներին հարմարեցնելուն՝ ապահովելով լայն և ընդգրկուն հասանելիություն:</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բջջային սարքերի համար հարմար դիզայն.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> արձագանքող դիզայնի կարևորությունը այսօրվա բջջային աշխարհում չի կարելի գերագնահատել: Մենք քննարկեցինք բոլոր սարքերում լավ գործող վեբ էջերի ստեղծման նշանակությունը՝ կենտրոնանալով հեղուկ դասավորությունների, մեդիա հարցումների և մասշտաբային պատկերների վրա: Այս տեխնիկան ապահովում է, որ ձեր բովանդակությունը հասանելի է և օգտագործողի համար հարմար՝ անկախ այն սարքից, որն օգտագործվում է այն մուտք գործելու համար:</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Լավագույն պրակտիկա HTML5-ի մշակման մեջ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> վեբ ստանդարտներին և լավագույն փորձին հետևելը, ինչպիսիք են տարրերի պատշաճ տեղադրումը, ատրիբուտների արժեքների մեջբերումը և փաստաթղթերի HTML վավերացման թեստերը անցնելու ապահովումը, կենսական նշանակություն ունեն վեբ նախագծերի ամբողջականության և կայունության համար: Այս պրակտիկաները երաշխավորում են, որ ձեր ծածկագիրը ամուր է, հասանելի և ապագան պաշտպանված:</font></font></p>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հարց ու պատասխան նիստ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այժմ մենք բացում ենք խոսքը հարցերի համար: Սա ձեր հնարավորությունն է պարզաբանումներ փնտրելու, ավելի խորանալու մեր անդրադարձած ցանկացած թեմայի մեջ կամ ուսումնասիրելու նոր ոլորտներ՝ կապված իմաստային HTML-ի, մատչելիության, SEO-ի և արձագանքող դիզայնի հետ: Անկախ նրանից, թե դուք հետաքրքրված եք կոդավորման լավագույն փորձով, ցանկանում եք ավելին իմանալ բջջային սարքերի համար ձեր կայքի օպտիմալացման մասին, կամ ունեք հարցեր իմաստային տարրերի նրբությունների մասին, մենք այստեղ ենք օգնելու համար:</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հարցրեք որևէ բան.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ոչ մի հարց չափազանց տարրական կամ չափազանց բարդ չէ: Եթե &ZeroWidthSpace;&ZeroWidthSpace;ձեզ հետաքրքրում է, թե ինչպես իրականացնել HTML5-ի կոնկրետ հատկանիշ, հասանելիության վրա իմաստային նշագրման հետևանքները կամ ձեր կայքի SEO-ի բարելավման ռազմավարությունները, ազատ զգալ հարցրեք:</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կիսվեք ձեր մտքերով.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Եթե ունեք մտքեր կամ փորձ՝ կապված քննարկված թեմաների հետ, դրանց կիսվելը կարող է արժեքավոր սովորելու հնարավորություններ տալ բոլորի համար: Ողջունելի են այն ներդրումները, որոնք ընդգծում են առաջացած մարտահրավերները, հայտնաբերված լուծումները կամ վեբ զարգացման նորարարական մոտեցումները:</font></font></p>
+</li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս Q&amp;A նիստը նախատեսված է հարստացնելու HTML5-ի ձեր հասկացողությունն ու կիրառումը ձեր վեբ զարգացման նախագծերում: Զբաղվելով այս թեմաներով` դուք կարևոր քայլեր եք ձեռնարկում ավելի մատչելի, արդյունավետ և ապագայի համար պատրաստ վեբ բովանդակություն ստեղծելու ուղղությամբ:</font></font></p>
+		</div>
+
+
+
+
+
+
+		<div id="html_ru" class="html" style="display:none">
+<h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Урок 3. HTML5: семантические элементы и лучшие практики</font></font></h2>
+<hr>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Введение в HTML5 и семантические элементы</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обзор HTML5</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML5 представляет собой значительную эволюцию в развитии стандарта HTML, предлагая более надежную основу для создания веб-страниц и приложений. Представленный как пятая основная версия HTML, его разработка началась в середине 2000-х годов, а окончательная спецификация была официально завершена W3C (Консорциумом Всемирной паутины) в 2014 году. Появление HTML5 решило растущую потребность в стандартизированном, открытом веб-платформа, которая могла бы удовлетворить растущие потребности в мультимедийном контенте, веб-приложениях и интерактивных возможностях, не полагаясь на проприетарные плагины, такие как Flash.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цели HTML5 были многогранными:</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Поддержка мультимедиа:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> в HTML5 появились такие элементы, как </font></font><code>&lt;video&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>&lt;audio&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, упрощающие встраивание и управление мультимедийным контентом непосредственно в веб-страницы без внешних плагинов.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Расширенная интерактивность.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Благодаря новым элементам управления формами, API и </font></font><code>&lt;canvas&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">элементам HTML5 позволяет создавать сложные интерактивные элементы и графический контент прямо в браузере.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Улучшенная разметка:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> HTML5 призван упростить структуру веб-документов с более четкой семантикой, делая веб-страницы более понятными и удобными в обслуживании.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Семантические элементы в HTML5</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Одной из отличительных особенностей HTML5 является введение семантических элементов. Эти элементы позволяют описать структуру и назначение контента более осмысленно, чем ранее использовавшиеся универсальные контейнеры, такие как </font></font><code>&lt;div&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>&lt;span&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. Семантические элементы включают в себя:</font></font></p>
+<ul>
+<li><strong><code>&lt;header&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: определяет заголовок документа или раздела, часто содержащий вводный контент или навигационные ссылки.</font></font></li>
+<li><strong><code>&lt;nav&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: Обозначает навигационные ссылки, помогающие пользователям перемещаться по документу или связанным документам.</font></font></li>
+<li><strong><code>&lt;section&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: представляет собой отдельный раздел в документе, который логически должен быть сгруппирован.</font></font></li>
+<li><strong><code>&lt;article&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: обозначает контент, который образует независимую часть документа или сайта, например сообщение в блоге, новостную статью или сообщение на форуме.</font></font></li>
+<li><strong><code>&lt;aside&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: отмечает контент, который косвенно связан с окружающим его контентом, например боковые панели, выноски или рекламные объявления.</font></font></li>
+<li><strong><code>&lt;footer&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: Обозначает нижний колонтитул документа или раздела, обычно содержащий информацию об авторстве, уведомления об авторских правах или связанные документы.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Использование этих элементов вместо несемантических, например, </font></font><code>&lt;div&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">позволяет разработчикам создавать структуру страницы, которая легко интерпретируется как браузерами, так и людьми, улучшая общее удобство использования и доступность Интернета.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Преимущества семантических элементов</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Семантические элементы предлагают несколько ключевых преимуществ:</font></font></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Доступность.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Вспомогательные технологии, такие как программы чтения с экрана, полагаются на семантику веб-контента, чтобы обеспечить более богатый и удобный интерфейс для пользователей с ограниченными возможностями. Используя семантические элементы, разработчики могут гарантировать, что структура и значение веб-контента эффективно передаются этим пользователям.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Преимущества SEO:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> поисковые системы используют семантическое значение элементов HTML для лучшего понимания и индексации веб-контента. Страницы, использующие семантические элементы, скорее всего, будут более точно интерпретироваться поисковыми системами, что потенциально приведет к повышению рейтинга в поисковых системах.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Упрощенное обслуживание и стилизация.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Семантические элементы делают веб-документы более логичными и организованными, упрощая обслуживание и стилизацию с помощью CSS. Разработчики могут применять стили более интуитивно и эффективно, если структура документа четко отражает его содержание.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Внедрение HTML5 и его семантических элементов ознаменовало значительный шаг вперед в веб-разработке, продвигая более доступную, совместимую и эффективную сеть. Принимая семантические элементы, разработчики не только придерживаются лучших практик, но и способствуют созданию более структурированной и значимой сети.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Глубокое погружение в семантические элементы</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Понимание и правильная реализация семантических элементов в HTML5 имеет решающее значение для разработки доступного, логически структурированного и оптимизированного для SEO веб-контента. Давайте подробно рассмотрим каждый семантический элемент, обсудим его назначение и то, как его можно эффективно использовать в структуре веб-страницы.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Детальное исследование каждого элемента</font></font></h4>
+<ul>
+<li><p><strong><code>&lt;header&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: этот элемент обычно содержит вводный контент для страницы или раздела, например логотипы, навигационные ссылки или заголовки страниц. В отличие от несемантических контейнеров, </font></font><code>&lt;header&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">четко указывает начало значительной части контента.</font></font></p>
+<pre><code class="language-html">&lt;header&gt;<font></font>
+    &lt;h1&gt;My Website&lt;/h1&gt;<font></font>
+    &lt;nav&gt;<font></font>
+        &lt;!-- Navigation links go here --&gt;<font></font>
+    &lt;/nav&gt;<font></font>
+&lt;/header&gt;<font></font>
+</code></pre>
+</li>
+<li><p><strong><code>&lt;nav&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: посвящен навигационным ссылкам, </font></font><code>&lt;nav&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">помогает пользователям и поисковым системам понять основные области навигации веб-сайта. Это не ограничивается заголовком; вы можете использовать </font></font><code>&lt;nav&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">везде, где появляются навигационные ссылки, например нижние колонтитулы или боковые панели.</font></font></p>
+<pre><code class="language-html">&lt;nav&gt;<font></font>
+    &lt;ul&gt;<font></font>
+        &lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;<font></font>
+        &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;<font></font>
+        &lt;!-- More links --&gt;<font></font>
+    &lt;/ul&gt;<font></font>
+&lt;/nav&gt;<font></font>
+</code></pre>
+</li>
+<li><p><strong><code>&lt;section&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: представляет собой отдельный раздел контента, который логически группирует тематический контент. В идеале </font><font style="vertical-align: inherit;">каждый из них </font></font><code>&lt;section&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">должен иметь заголовок ( </font></font><code>&lt;h1&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font><code>&lt;h6&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) и содержимое, непосредственно связанное с заголовком.</font></font></p>
+<pre><code class="language-html">&lt;section&gt;<font></font>
+    &lt;h2&gt;About Us&lt;/h2&gt;<font></font>
+    &lt;p&gt;Our company was founded in...&lt;/p&gt;<font></font>
+&lt;/section&gt;<font></font>
+</code></pre>
+</li>
+<li><p><strong><code>&lt;article&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: Содержит контент, который представляет собой отдельный фрагмент, например сообщение в блоге, новостную статью или ветку форума. Статьи должны иметь смысл самостоятельно, если их удалить с сайта.</font></font></p>
+<pre><code class="language-html">&lt;article&gt;<font></font>
+    &lt;h2&gt;Blog Post Title&lt;/h2&gt;<font></font>
+    &lt;p&gt;Blog post content...&lt;/p&gt;<font></font>
+&lt;/article&gt;<font></font>
+</code></pre>
+</li>
+<li><p><strong><code>&lt;aside&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: отмечает контент, косвенно связанный с основным контентом, например боковые панели, связанные ссылки или биографию автора. Это не важно для основного контента, но обеспечивает дополнительный контекст или информацию.</font></font></p>
+<pre><code class="language-html">&lt;aside&gt;<font></font>
+    &lt;h3&gt;Related Posts&lt;/h3&gt;<font></font>
+    &lt;!-- Related links or content --&gt;<font></font>
+&lt;/aside&gt;<font></font>
+</code></pre>
+</li>
+<li><p><strong><code>&lt;footer&gt;</code></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: обычно содержит информацию об авторе, уведомления об авторских правах, контактную информацию и ссылки на юридические документы или политику конфиденциальности. Он отмечает конец содержимого страницы или раздела.</font></font></p>
+<pre><code class="language-html">&lt;footer&gt;<font></font>
+    &lt;p&gt;Copyright © 2024 My Website&lt;/p&gt;<font></font>
+&lt;/footer&gt;<font></font>
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практические примеры и упражнения</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Упражнение 1. Рефакторинг веб-страницы с использованием семантических элементов</font></font></strong></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Возьмите веб-страницу или раздел, написанный с использованием несемантической разметки (например, с использованием </font></font><code>&lt;div&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">элементов для верхних и нижних колонтитулов, навигации), и выполните ее рефакторинг для использования семантических элементов. Например, замените </font></font><code>&lt;div id="header"&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">на </font></font><code>&lt;header&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;div id="nav"&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">на </font></font><code>&lt;nav&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и т. д. Сосредоточьтесь на том, чтобы каждая часть контента была заключена в наиболее подходящий смысловой элемент.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Упражнение 2. Создание страницы блога</font></font></strong></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Создайте простую структуру страницы блога, используя семантические элементы. Включите заголовок с навигацией, основной раздел со статьей для сообщения в блоге, раздел для связанных ссылок или биографии автора и нижний колонтитул с информацией об авторских правах.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Интерактивная групповая деятельность</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В небольших группах посетите различные веб-сайты и проанализируйте использование ими семантических элементов. Искать:</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Правильное использование </font></font><code>&lt;header&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;nav&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;section&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;article&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;aside&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, и </font></font><code>&lt;footer&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Упущены возможности, когда несемантическая разметка могла быть заменена семантическими элементами.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Любое неправильное использование семантических элементов, которое может запутать структуру или значение контента.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Каждая группа должна представить свои выводы, подчеркнув как положительное использование семантических элементов, так и области для улучшения. Это занятие поощряет критическое мышление о веб-структуре и практическое применение семантической разметки для улучшения доступности, SEO и удобства обслуживания веб-контента.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Лучшие практики разработки HTML5</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обеспечение соблюдения лучших практик разработки HTML5 имеет решающее значение для создания надежного, доступного и оптимизированного для поисковых систем веб-контента. Эта часть урока посвящена нескольким ключевым областям передового опыта, включая метатеги, дизайн, удобный для мобильных устройств, и стандарты кодирования.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Мета-теги и кодировка символов</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Метатеги играют важную роль в HTML5, предоставляя важные метаданные о веб-странице. Они размещаются в </font></font><code>&lt;head&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">разделе HTML-документа и не видны пользователям, но имеют решающее значение для браузеров и поисковых систем.</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Кодировка символов ( </font></font><code>&lt;meta charset="utf-8"&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">):</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> этот тег определяет кодировку символов для HTML-документа. Использование UTF-8, универсального набора символов, гарантирует правильное отображение всех символов в вашем контенте, включая специальные символы из разных языков.</font></font></p>
+<pre><code class="language-html">&lt;meta charset="utf-8"&gt;
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Настройки области просмотра для мобильных устройств:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> метатег области просмотра помогает контролировать размеры и масштабирование страницы на мобильных устройствах. Настройка </font></font><code>width=device-width</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">заставляет страницу соответствовать ширине экрана в пикселях, независимых от устройства, и </font></font><code>initial-scale=1.0</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">устанавливает соотношение 1:1 между пикселями CSS и пикселями, независимыми от устройства. Эта настройка имеет решающее значение для адаптивного дизайна.</font></font></p>
+<pre><code class="language-html">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Описания и ключевые слова для SEO.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Мета-теги описания и ключевых слов информируют поисковые системы о содержании вашей страницы. Хотя значение метатега ключевых слов уменьшилось из-за исторических злоупотреблений, тег описания играет жизненно важную роль в результатах поисковых систем, предоставляя сводную информацию о содержании страницы.</font></font></p>
+<pre><code class="language-html">&lt;meta name="description" content="A brief description of the page's content."&gt;
+</code></pre>
+</li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эти методы повышают доступность веб-контента и его видимость в поисковых системах, способствуя улучшению пользовательского опыта и потенциально более высокому рейтингу страниц.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Мобильный дизайн</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">С ростом использования мобильных устройств для доступа в Интернет создание адаптивных и удобных для мобильных устройств веб-страниц не подлежит обсуждению. Адаптивный дизайн гарантирует, что ваш сайт будет хорошо выглядеть и работать на всех устройствах, от настольных компьютеров до смартфонов.</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Гибкие макеты:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> используйте гибкие макеты сетки, основанные на процентах, а не на фиксированных единицах измерения, таких как пиксели. Этот подход позволяет элементам изменять размер относительно размера экрана, гарантируя, что контент останется читаемым и доступным на любом устройстве.</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Медиа-запросы.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Медиа-запросы CSS позволяют применять различные правила стиля в зависимости от характеристик устройства, таких как его ширина, высота или ориентация. Они являются краеугольным камнем адаптивного дизайна и позволяют настраивать презентации для различных контекстов просмотра.</font></font></p>
+<pre><code class="language-css">@media (max-width: 600px) {<font></font>
+  .sidebar {<font></font>
+    display: none;<font></font>
+  }<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Масштабируемые изображения.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Обеспечьте правильное масштабирование изображений в макете с помощью свойств CSS, таких как </font></font><code>max-width: 100%;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>height: auto;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. Это предотвращает выход изображений за пределы ширины контейнера, что делает их отзывчивыми.</font></font></p>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Поощрение лучших практик</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Поддержание высоких стандартов в практике кодирования имеет важное значение для долговечности и удобства обслуживания веб-проектов. Вот несколько ключевых моментов для поощрения лучших практик:</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Правильное вложение элементов.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Убедитесь, что элементы HTML правильно вложены друг в друга в соответствии с правилами спецификации HTML. Это уменьшает количество ошибок и повышает читаемость страницы.</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Заключение атрибутов в кавычки.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Всегда заключайте значения атрибутов в кавычки, чтобы избежать потенциальных ошибок анализа. Это особенно важно, когда значения содержат пробелы.</font></font></p>
+<pre><code class="language-html">&lt;input type="text" name="user_name"&gt;
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Проверка HTML.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Используйте такие инструменты, как W3C HTML Validator, чтобы проверить ваши HTML-документы на наличие ошибок. Прохождение проверочных тестов означает, что ваш код соответствует стандартам, обеспечивая большую совместимость с различными браузерами и устройствами.</font></font></p>
+</li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Следование этим передовым практикам в разработке HTML5 не только улучшает непосредственный пользовательский опыт, но и закладывает основу для перспективного, доступного и удобного для поисковых систем веб-контента.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Подведение итогов и вопросы и ответы</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Завершая всестороннее исследование HTML5 и его важнейших аспектов, давайте подведем итог ключевым моментам, которые мы рассмотрели на протяжении всего урока. Этот обзор укрепит ваше понимание фундаментальных принципов современной веб-разработки, подчеркнув важность семантических элементов, метатегов и адаптивного дизайна.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обзор и резюме</font></font></h4>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Семантические элементы в HTML5.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Мы начали с введения в HTML5, уделяя особое внимание его эволюции и введению семантических элементов. Эти элементы, такие как </font></font><code>&lt;header&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;nav&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;section&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;article&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;aside&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>&lt;footer&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, обеспечивают значимую структуру веб-контента. Они повышают доступность, улучшают SEO, предоставляя поисковым системам четкие подсказки о структуре контента, а также делают веб-документы более интуитивно понятными в управлении и стилизации.</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Мета-теги и кодировка символов.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Мета-теги необходимы для определения набора символов вашего документа ( </font></font><code>&lt;meta charset="utf-8"&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">), настройки области просмотра для мобильных устройств ( </font></font><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) и указания описаний страниц для SEO. Эти методы способствуют тому, чтобы ваш веб-контент стал более доступным и удобным для поисковых систем, обеспечивая широкий и инклюзивный охват.</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Мобильный дизайн.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Важность адаптивного дизайна в современном мире, ориентированном на мобильные устройства, невозможно переоценить. Мы обсудили важность создания веб-страниц, которые хорошо функционируют на всех устройствах, уделяя особое внимание гибкому макету, медиа-запросам и масштабируемым изображениям. Эти методы гарантируют, что ваш контент будет доступен и удобен для пользователя, независимо от устройства, используемого для доступа к нему.</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Лучшие практики разработки HTML5.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Соблюдение веб-стандартов и лучших практик, таких как правильное вложение элементов, цитирование значений атрибутов и обеспечение прохождения документов проверочных тестов HTML, жизненно важно для целостности и устойчивости веб-проектов. Эти методы гарантируют, что ваш код будет надежным, доступным и перспективным.</font></font></p>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сессия вопросов и ответов</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Теперь мы открываем слово для вопросов. Это ваша возможность получить разъяснения, углубиться в любую из затронутых нами тем или изучить новые области, связанные с семантическим HTML, доступностью, SEO и адаптивным дизайном. Если вам интересны лучшие практики кодирования, вы хотите узнать больше об оптимизации вашего сайта для мобильных устройств или у вас есть вопросы о нюансах семантических элементов, мы здесь, чтобы помочь.</font></font></p>
+<ul>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Задавайте что угодно:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ни один вопрос не является слишком простым или слишком сложным. Если вам интересно, как реализовать определенную функцию HTML5, влияние семантической разметки на доступность или стратегии улучшения SEO вашего сайта, не стесняйтесь спрашивать.</font></font></p>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Поделитесь своими мыслями:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> если у вас есть идеи или опыт, связанные с обсуждаемыми темами, обмен ими может предоставить ценные возможности обучения для всех. Приветствуются материалы, освещающие возникшие проблемы, обнаруженные решения или инновационные подходы к веб-разработке.</font></font></p>
+</li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эта сессия вопросов и ответов призвана улучшить ваше понимание и применение HTML5 в ваших проектах веб-разработки. Занимаясь этими темами, вы делаете важные шаги на пути к созданию более доступного, эффективного и перспективного веб-контента.</font></font></p>
+		</div>
+
+		
+
+
+
+
+
+
+
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js" integrity="sha512-LhccdVNGe2QMEfI3x4DVV3ckMRe36TfydKss6mJpdHjNFiV07dFpS2xzeZedptKZrwxfICJpez09iNioiSZ3hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+		<script>
+			let currentLanguage = 'en';
+			const copiedTexts = {
+				en: 'Copied to clipboard!',
+				hy: 'Պատճենվել է սեղմատախտակում:',
+				ru: 'Скопировано в буфер обмена!'
+			}
+
+			function copyCode(index) {
+				const code = document.getElementById('code-block-' + index).innerText;
+				const copied = document.getElementById('copied-' + index);
+			
+				navigator.clipboard.writeText(code).then(() => {
+					copied.innerText = copiedTexts[currentLanguage];
+				});
+
+				setTimeout(() => {
+					copied.innerText = '';
+				}, 3000);
+			}
+
+			// Initialize Highlight.js after the document is fully loaded
+			document.addEventListener('DOMContentLoaded', (event) => {
+				hljs.highlightAll();
+			});
+
+			let en = document.getElementById('en');
+			let hy = document.getElementById('hy');
+			let ru = document.getElementById('ru');
+			let html_en = document.getElementById('html_en');
+			let html_hy = document.getElementById('html_hy');
+			let html_ru = document.getElementById('html_ru');
+			
+			en.addEventListener('click', function(){
+				html_en.style.display = 'block';
+				html_hy.style.display = 'none';
+				html_ru.style.display = 'none';
+				
+				en.style.display = 'none';
+				hy.style.display = 'inline';
+				ru.style.display = 'inline';
+				
+				document.getElementsByTagName('title')[0].innerText = html_en.getElementsByTagName('h2')[0].innerText
+				currentLanguage = 'en';
+			});
+			
+			hy.addEventListener('click', function(){
+				html_en.style.display = 'none';
+				html_hy.style.display = 'block';
+				html_ru.style.display = 'none';
+				
+				en.style.display = 'inline';
+				hy.style.display = 'none';
+				ru.style.display = 'inline';
+				
+				document.getElementsByTagName('title')[0].innerText = html_hy.getElementsByTagName('h2')[0].innerText
+				
+				currentLanguage = 'hy';
+			});
+			
+			ru.addEventListener('click', function(){
+				html_en.style.display = 'none';
+				html_hy.style.display = 'none';
+				html_ru.style.display = 'block';
+				
+				en.style.display = 'inline';
+				hy.style.display = 'inline';
+				ru.style.display = 'none';
+				
+				document.getElementsByTagName('title')[0].innerText = html_ru.getElementsByTagName('h2')[0].innerText
+				currentLanguage = 'ru';
+			});
+
+			let presLang = {
+				en: document.querySelectorAll('#html_en pre'), 
+				hy: document.querySelectorAll('#html_hy pre'), 
+				ru: document.querySelectorAll('#html_ru pre')
+			};
+			
+			let key = 1;
+			
+			for(let lang in presLang){
+				let pres = presLang[lang];
+
+				pres.forEach(function(pre){
+					let copyText = lang == 'hy' ? 'Պատճենել' : lang == 'ru' ? 'Копировать' : 'Copy';
+					let card = document.createElement('div');
+					card.className = 'card bg-dark text-white';
+					pre.firstChild.id = 'code-block-' + key
+					let cardHtml = `
+						<div class="card-header">
+							<button class="btn btn-primary" onclick="copyCode(${key})">${copyText}</button>
+							<span id="copied-${key}" class="float-end"></span>
+						</div>
+						<div class="p-0">
+							<pre>${pre.innerHTML}</pre>
+						</div>
+					`
+					card.innerHTML = cardHtml;
+					
+					pre.parentNode.replaceChild(card, pre);
+					key++;
+				});
+			}
+			
+		</script>
+	</body>
+</html>
