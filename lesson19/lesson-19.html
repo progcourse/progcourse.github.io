@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lesson 19: Handling Events and Forms in React</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+        <style>
+            code {
+                background-color: lightgray;
+                color: black;
+                padding: 2px 5px;
+                margin: 0 5px;
+				border: 1px solid gray;
+				border-radius: 5px;
+            }
+			#md{
+				display: none;
+			}
+        </style>
+    </head>
+    <body class="p-5">
+		<a href="#" id="hy" class="btn btn-info">Հայերեն</a>
+		<a href="#" id="en" class="btn btn-info" style="display:none">English</a>
+		<a href="#" id="ru" class="btn btn-info">Русский</a>
+		
+		<hr>
+
+
+
+
+
+
+		<div id="html_en" class="html">
+<h2>Lesson 19: Handling Events and Forms in React</h2>
+<hr>
+<h3>Introduction to React Events</h3>
+<h4>What are Synthetic Events?</h4>
+<p>React provides an abstraction layer over the browser&#39;s native events through something called <strong>Synthetic Events</strong>. This abstraction is part of React&#39;s effort to normalize events across different browsers, ensuring that your event handlers behave consistently regardless of the user&#39;s environment. This concept is crucial because different browsers can handle native events differently, and React&#39;s synthetic events system helps smooth out those inconsistencies.</p>
+<p><strong>Key Features of Synthetic Events:</strong></p>
+<ul>
+<li><strong>Cross-browser Consistency:</strong> Regardless of the browser, the event handling in React will work uniformly thanks to the synthetic event system.</li>
+<li><strong>Pooling:</strong> React uses a pooling mechanism for synthetic events to boost performance. This means that the synthetic event object will be reused after the event callback has been invoked. This is a performance benefit, as it reduces the need for frequent garbage collection.</li>
+<li><strong>Performance:</strong> By handling events in this unified way, React minimizes the overhead of direct DOM manipulations and contributes to faster application performance.</li>
+</ul>
+<h4>Handling Events in React</h4>
+<p>Handling events in React is similar to handling events on DOM elements, but there are some syntactic differences and practices to ensure the <code>this</code> context is correctly bound in callbacks, particularly in class components.</p>
+<p><strong>Basic Event Handling Syntax:</strong></p>
+<ul>
+<li>In React, you attach event handlers to components using camelCase event names, such as <code>onClick</code>, <code>onSubmit</code>, <code>onChange</code>, etc.</li>
+<li>You pass a function as the event handler, rather than a string (common in plain HTML).</li>
+</ul>
+<p><strong>Examples of Event Handling:</strong></p>
+<ul>
+<li><strong>Inline Function:</strong><pre><code class="language-jsx">function App() {
+    return &lt;button onClick={() =&gt; console.log(&#39;Button clicked!&#39;)}&gt;Click Me!&lt;/button&gt;;
+}
+</code></pre>
+</li>
+<li><strong>Method as an Event Handler in Class Component:</strong><pre><code class="language-jsx">class ToggleButton extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {isToggledOn: true};
+        // Binding this keyword to make `this` work in the callback
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        this.setState(state =&gt; ({
+            isToggledOn: !state.isToggledOn
+        }));
+    }
+
+    render() {
+        return (
+            &lt;button onClick={this.handleClick}&gt;
+                {this.state.isToggledOn ? &#39;ON&#39; : &#39;OFF&#39;}
+            &lt;/button&gt;
+        );
+    }
+}
+</code></pre>
+</li>
+</ul>
+<h4>Event Handling Examples</h4>
+<p><strong>1. Toggling Visibility of an Element:</strong></p>
+<pre><code class="language-jsx">function VisibilityToggle() {
+    const [isVisible, setIsVisible] = useState(true);
+
+    return (
+        &lt;div&gt;
+            &lt;button onClick={() =&gt; setIsVisible(!isVisible)}&gt;
+                {isVisible ? &#39;Hide&#39; : &#39;Show&#39;}
+            &lt;/button&gt;
+            {isVisible &amp;&amp; &lt;p&gt;This text can be shown or hidden.&lt;/p&gt;}
+        &lt;/div&gt;
+    );
+}
+</code></pre>
+<p>This example demonstrates toggling the visibility of a text paragraph using a button click event.</p>
+<p><strong>2. Updating State Based on User Input:</strong></p>
+<pre><code class="language-jsx">function NameForm() {
+    const [name, setName] = useState(&#39;&#39;);
+
+    return (
+        &lt;form onSubmit={e =&gt; {
+            e.preventDefault();
+            alert(&#39;A name was submitted: &#39; + name);
+        }}&gt;
+            &lt;label&gt;
+                Name:
+                &lt;input type=&quot;text&quot; value={name} onChange={e =&gt; setName(e.target.value)} /&gt;
+            &lt;/label&gt;
+            &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+        &lt;/form&gt;
+    );
+}
+</code></pre>
+<p>This form uses the <code>onChange</code> event to update the state as the user types and the <code>onSubmit</code> event to display a message with the user&#39;s input when the form is submitted.</p>
+<h4>Conclusion</h4>
+<p>Understanding how to handle events in React is fundamental for building interactive applications. React&#39;s synthetic events offer a robust and consistent way to handle user interactions across all browsers. By properly managing events and state, you can effectively control your application&#39;s features and provide a responsive user experience.</p>
+<h3>Introduction to Forms in React</h3>
+<h4>Creating Forms in React</h4>
+<p>Forms in React can be implemented using the <code>&lt;form&gt;</code> element, similar to HTML, but with some enhancements provided by React&#39;s handling of the form elements, making them integrate seamlessly with the component&#39;s state.</p>
+<p><strong>Basic Setup:</strong>
+To create a form in React, you typically use a combination of standard HTML form elements such as <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, and <code>&lt;select&gt;</code>. However, React adds an additional layer of functionality to these elements by potentially managing their state in the component, making the forms more interactive and integrated.</p>
+<p><strong>Example of a Simple Form:</strong></p>
+<pre><code class="language-jsx">function SimpleForm() {
+    const handleSubmit = (event) =&gt; {
+        event.preventDefault(); // Prevent default form submission behavior
+        alert(&#39;Form was submitted&#39;);
+    };
+
+    return (
+        &lt;form onSubmit={handleSubmit}&gt;
+            &lt;label&gt;
+                Name:
+                &lt;input type=&quot;text&quot; name=&quot;name&quot; /&gt;
+            &lt;/label&gt;
+            &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+        &lt;/form&gt;
+    );
+}
+</code></pre>
+<p>This form includes an input for a user&#39;s name and a submit button. The form submission is handled by React&#39;s event handling, preventing the default submit action and instead executing a function defined in the React component.</p>
+<h4>Controlled Components</h4>
+<p>In React, forms typically use the <strong>controlled component</strong> pattern. This approach involves setting the form element&#39;s <code>value</code> attribute to be controlled by the React state, and updating that state via an <code>onChange</code> handler.</p>
+<p><strong>How to Control an Input:</strong></p>
+<ol>
+<li><strong>State Initialization:</strong> First, you declare a state variable to keep track of the input&#39;s value.</li>
+<li><strong>Binding Value:</strong> You bind the input&#39;s value to a state variable.</li>
+<li><strong>Change Handling:</strong> You set up an <code>onChange</code> handler that updates the state when the user types into the form.</li>
+</ol>
+<p><strong>Example of Controlled Input:</strong></p>
+<pre><code class="language-jsx">import React, { useState } from &#39;react&#39;;
+
+function NameForm() {
+    const [name, setName] = useState(&#39;&#39;);
+
+    const handleChange = (event) =&gt; {
+        setName(event.target.value);
+    };
+
+    const handleSubmit = (event) =&gt; {
+        event.preventDefault();
+        alert(&#39;A name was submitted: &#39; + name);
+    };
+
+    return (
+        &lt;form onSubmit={handleSubmit}&gt;
+            &lt;label&gt;
+                Name:
+                &lt;input type=&quot;text&quot; value={name} onChange={handleChange} /&gt;
+            &lt;/label&gt;
+            &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+        &lt;/form&gt;
+    );
+}
+</code></pre>
+<p>In this controlled component, the state <code>name</code> is linked directly to the input&#39;s value. Any changes to the input update the state, and the state&#39;s value is always the current value of the input.</p>
+<h4>Form Validation</h4>
+<p>Validating form input in React can be implemented by setting conditions on the form data stored in the state and providing feedback based on those conditions.</p>
+<p><strong>Basic Form Validation Approach:</strong></p>
+<ul>
+<li><strong>Check Conditions:</strong> Before submitting the form, check if the input meets specific criteria (e.g., is not empty, is of a certain length, matches a pattern).</li>
+<li><strong>Provide Feedback:</strong> If the conditions are not met, display error messages and prevent the form submission.</li>
+</ul>
+<p><strong>Example with Validation:</strong></p>
+<pre><code class="language-jsx">function EmailForm() {
+    const [email, setEmail] = useState(&#39;&#39;);
+    const [errors, setErrors] = useState(&#39;&#39;);
+
+    const validateEmail = (email) =&gt; {
+        if (!email.includes(&#39;@&#39;)) {
+            setErrors(&#39;Email should contain an @ symbol.&#39;);
+            return false;
+        }
+        setErrors(&#39;&#39;);
+        return true;
+    };
+
+    const handleSubmit = (event) =&gt; {
+        event.preventDefault();
+        if (!validateEmail(email)) {
+            return;
+        }
+        alert(&#39;Email is valid and submitted: &#39; + email);
+    };
+
+    return (
+        &lt;form onSubmit={handleSubmit}&gt;
+            &lt;label&gt;
+                Email:
+                &lt;input type=&quot;email&quot; value={email} onChange={(e) =&gt; setEmail(e.target.value)} /&gt;
+            &lt;/label&gt;
+            &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+            {errors &amp;&amp; &lt;p style={{ color: &#39;red&#39; }}&gt;{errors}&lt;/p&gt;}
+        &lt;/form&gt;
+    );
+}
+</code></pre>
+<p>This form includes validation to ensure the email contains an &#39;@&#39; symbol, providing immediate feedback to the user if the validation fails.</p>
+<p>These concepts provide a foundation for effectively handling forms in React, from basic setups to complex scenarios involving validation and state management.</p>
+<h3>Building and Managing Complex Forms in React</h3>
+<h4>Handling Multiple Inputs</h4>
+<p>When dealing with forms that include multiple types of inputs, efficiently managing the state becomes crucial. A common pattern is to use a single <code>handleChange</code> event handler to update the state for various form elements.</p>
+<p><strong>Efficient State Management with <code>handleChange</code>:</strong></p>
+<ul>
+<li><strong>Single <code>handleChange</code> Function:</strong> Instead of creating a separate handler for each field, you can create a single generic handler that can update the state based on the input&#39;s name attribute. This approach reduces redundancy and keeps your component tidy.</li>
+</ul>
+<p><strong>Example of Handling Multiple Inputs:</strong></p>
+<pre><code class="language-jsx">import React, { useState } from &#39;react&#39;;
+
+function RegistrationForm() {
+    const [formData, setFormData] = useState({
+        username: &#39;&#39;,
+        email: &#39;&#39;,
+        age: &#39;&#39;
+    });
+
+    const handleChange = (event) =&gt; {
+        const { name, value } = event.target;
+        setFormData(prevFormData =&gt; ({
+            ...prevFormData,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = (event) =&gt; {
+        event.preventDefault();
+        console.log(&#39;Submitted Data:&#39;, formData);
+    };
+
+    return (
+        &lt;form onSubmit={handleSubmit}&gt;
+            &lt;label&gt;
+                Username:
+                &lt;input
+                    type=&quot;text&quot;
+                    name=&quot;username&quot;
+                    value={formData.username}
+                    onChange={handleChange}
+                /&gt;
+            &lt;/label&gt;
+            &lt;label&gt;
+                Email:
+                &lt;input
+                    type=&quot;email&quot;
+                    name=&quot;email&quot;
+                    value={formData.email}
+                    onChange={handleChange}
+                /&gt;
+            &lt;/label&gt;
+            &lt;label&gt;
+                Age:
+                &lt;input
+                    type=&quot;number&quot;
+                    name=&quot;age&quot;
+                    value={formData.age}
+                    onChange={handleChange}
+                /&gt;
+            &lt;/label&gt;
+            &lt;button type=&quot;submit&quot;&gt;Register&lt;/button&gt;
+        &lt;/form&gt;
+    );
+}
+</code></pre>
+<p>This approach ensures that all input changes are handled through a single function, streamlining state updates and reducing the complexity of the component.</p>
+<h4>Forms with Multiple Components</h4>
+<p>Complex forms often span across multiple components, requiring careful planning around state management and data flow.</p>
+<p><strong>Strategies for Managing State in Multi-Component Forms:</strong></p>
+<ol>
+<li><strong>Prop Drilling:</strong> Passing props down the component tree from a parent to deeply nested children. While straightforward, it can become cumbersome as the application grows.</li>
+<li><strong>Context API:</strong> Utilizes React&#39;s Context to provide a way to share values like form state between components without having to explicitly pass a prop through every level of the tree.</li>
+</ol>
+<p><strong>Example Using Context to Manage Form State:</strong></p>
+<pre><code class="language-jsx">import React, { createContext, useContext, useState } from &#39;react&#39;;
+
+const FormContext = createContext();
+
+function FormProvider({ children }) {
+    const [formData, setFormData] = useState({});
+    const handleChange = (event) =&gt; {
+        const { name, value } = event.target;
+        setFormData(prev =&gt; ({ ...prev, [name]: value }));
+    };
+    return (
+        &lt;FormContext.Provider value={{ formData, handleChange }}&gt;
+            {children}
+        &lt;/FormContext.Provider&gt;
+    );
+}
+
+function FormInput({ name }) {
+    const { formData, handleChange } = useContext(FormContext);
+    return (
+        &lt;input
+            name={name}
+            value={formData[name] || &#39;&#39;}
+            onChange={handleChange}
+        /&gt;
+    );
+}
+
+function RegistrationForm() {
+    const handleSubmit = (event) =&gt; {
+        event.preventDefault();
+        const { formData } = useContext(FormContext);
+        console.log(&#39;Form Data:&#39;, formData);
+    };
+
+    return (
+        &lt;FormProvider&gt;
+            &lt;form onSubmit={handleSubmit}&gt;
+                &lt;FormInput name=&quot;username&quot; /&gt;
+                &lt;FormInput name=&quot;email&quot; /&gt;
+                &lt;FormInput name=&quot;age&quot; /&gt;
+                &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+            &lt;/form&gt;
+        &lt;/FormProvider&gt;
+    );
+}
+</code></pre>
+<p>This example illustrates how to use the Context API to manage form data across multiple components, simplifying the form handling and avoiding prop drilling.</p>
+<h4>Practical Exercise: Building a Registration Form</h4>
+<p><strong>Task:</strong> Students will create a detailed registration form including various input types (text, email, number, checkbox, radio buttons) and implement validation for each input.</p>
+<p><strong>Objectives:</strong></p>
+<ul>
+<li>Manage the form’s state efficiently in React using a suitable method (single state object, Context API).</li>
+<li>Implement real-time validation and provide user feedback.</li>
+<li>Handle form submission, displaying a summary of the input data or errors.</li>
+</ul>
+<p><strong>Expected Outcomes:</strong></p>
+<ul>
+<li>Students should demonstrate an understanding of managing complex form states.</li>
+<li>They should handle user inputs gracefully and validate data effectively.</li>
+<li>Successfully process and validate form submissions, reflecting a deep understanding of React&#39;s capabilities in form handling.</li>
+</ul>
+<p>This exercise aims to reinforce the techniques discussed in handling complex forms, ensuring students are well-prepared to tackle real-world scenarios involving sophisticated forms and user interactions.</p>
+<h3>Advanced Event Handling Techniques</h3>
+<h4>Conditionally Handling Events</h4>
+<p>In complex applications, particularly when interacting with forms and dynamic interfaces, you may need to conditionally handle events based on various states or data properties. Advanced event handling involves more than just responding to user actions—it also requires making decisions based on the application&#39;s context.</p>
+<p><strong>Techniques:</strong></p>
+<ol>
+<li><p><strong>Preventing Default Behavior Conditionally:</strong> Sometimes, you might want to prevent the default form submission behavior based on specific conditions, such as form validation results.</p>
+<pre><code class="language-javascript">const handleSubmit = (event) =&gt; {
+    if (!formIsValid) {
+        event.preventDefault(); // Prevent form submission if the form is not valid
+        alert(&#39;Please correct errors before submitting.&#39;);
+    }
+};
+</code></pre>
+</li>
+<li><p><strong>Stopping Event Propagation:</strong> In certain scenarios, particularly in deeply nested component structures, you might want to stop an event from bubbling up to parent components.</p>
+<pre><code class="language-javascript">const handleClick = (event, shouldPropagate) =&gt; {
+    if (!shouldPropagate) {
+        event.stopPropagation(); // Stop the event from propagating to parent elements
+    }
+    // handle the click event
+};
+</code></pre>
+</li>
+</ol>
+<h4>Performance Considerations</h4>
+<p>Handling events efficiently is crucial in maintaining the performance of React applications, especially in complex forms and dynamic interfaces.</p>
+<p><strong>Key Performance Issues:</strong></p>
+<ol>
+<li><strong>Unnecessary Re-renders:</strong> Every state update in a React component causes the component to re-render. Inefficient handling of state in response to events can lead to unnecessary re-renders.<ul>
+<li><strong>Solution:</strong> Utilize memoization techniques, such as <code>React.memo</code> for components and <code>useMemo</code> for expensive calculations, to prevent unnecessary re-renders.</li>
+</ul>
+</li>
+<li><strong>Memory Leaks in Event Listeners:</strong> If not properly managed, event listeners attached in a React component can lead to memory leaks, especially if the listeners are not removed before the component unmounts.<ul>
+<li><strong>Solution:</strong> Always ensure to clean up event listeners in the <code>useEffect</code> cleanup function.</li>
+</ul>
+</li>
+</ol>
+<h4>Custom Hooks for Forms</h4>
+<p>Custom hooks offer a powerful way to extract component logic into reusable functions. For forms, custom hooks can manage inputs, handle validation, and deal with submissions.</p>
+<p><strong>Example of a Custom Hook for Form Inputs and Validation:</strong></p>
+<pre><code class="language-javascript">function useForm(initialValues) {
+    const [values, setValues] = useState(initialValues);
+    const [errors, setErrors] = useState({});
+
+    const handleChange = (event) =&gt; {
+        const { name, value } = event.target;
+        setValues({...values, [name]: value});
+        // Validation logic can also be integrated here
+    };
+
+    const handleSubmit = (callback) =&gt; (event) =&gt; {
+        event.preventDefault();
+        // Implement validation before executing the callback
+        if (validateForm(values)) {
+            callback();
+            setErrors({});
+        } else {
+            setErrors({ /* errors */ });
+            alert(&#39;Errors in form submission&#39;);
+        }
+    };
+
+    return { values, handleChange, handleSubmit, errors };
+}
+</code></pre>
+<p>This hook abstracts the common form handling logic, including state management and validation, making it easy to use across different form components.</p>
+<h4>Hands-on Exercise: Enhancing the Registration Form</h4>
+<p><strong>Task:</strong> Students will enhance the registration form by integrating custom hooks for form validation and managing state updates.</p>
+<p><strong>Objectives:</strong></p>
+<ol>
+<li><strong>Integrate a Custom Hook:</strong> Use the <code>useForm</code> custom hook to handle form state and validation logic.</li>
+<li><strong>Implement Advanced Event Handling:</strong> Apply techniques for conditionally handling events, such as preventing form submission under certain conditions.</li>
+</ol>
+<p><strong>Example Integration:</strong></p>
+<pre><code class="language-javascript">function RegistrationForm() {
+    const { values, handleChange, handleSubmit, errors } = useForm({
+        username: &#39;&#39;,
+        email: &#39;&#39;,
+        password: &#39;&#39;
+    });
+
+    return (
+        &lt;form onSubmit={handleSubmit(() =&gt; console.log(&#39;Form submitted&#39;, values))}&gt;
+            &lt;input type=&quot;text&quot; name=&quot;username&quot; value={values.username} onChange={handleChange} /&gt;
+            &lt;input type=&quot;email&quot; name=&quot;email&quot; value={values.email} onChange={handleChange} /&gt;
+            &lt;input type=&quot;password&quot; name=&quot;password&quot; value={values.password} onChange={handleChange} /&gt;
+            &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+        &lt;/form&gt;
+    );
+}
+</code></pre>
+<p>This exercise will help students understand how to effectively manage form state and validations using custom hooks, enhancing the modularity and reusability of their form logic.</p>
+<h3>Wrap-up and Q&amp;A</h3>
+<p>As we conclude our comprehensive session on handling forms and events in React, let&#39;s take a moment to summarize the critical concepts we&#39;ve covered and prepare for a Q&amp;A session to address any remaining questions.</p>
+<h4>Review and Summary</h4>
+<p>**1. <strong>Introduction to React Events:</strong></p>
+<ul>
+<li>We started by exploring <strong>Synthetic Events</strong>, which are React&#39;s way of ensuring consistency and performance across different browsers. Understanding these events is crucial for interacting effectively with user inputs and actions within the React framework.</li>
+</ul>
+<p>**2. <strong>Handling Multiple Inputs:</strong></p>
+<ul>
+<li>Efficient management of state in forms with multiple inputs is key. We discussed using a single <code>handleChange</code> method that utilizes the input&#39;s name to update state, simplifying the form handling logic significantly.</li>
+</ul>
+<p>**3. <strong>Controlled Components:</strong></p>
+<ul>
+<li>The concept of <strong>Controlled Components</strong> is fundamental in React forms. We examined how to control inputs like <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, and <code>&lt;select&gt;</code> by linking their values to the React state. This approach ensures that the form&#39;s internal state always represents the displayed output, enabling React to maintain control over the form&#39;s behavior.</li>
+</ul>
+<p>**4. <strong>Form Validation:</strong></p>
+<ul>
+<li>We touched on implementing form validation to check user inputs before processing a form submission. Effective validation improves usability and ensures that the data collected meets the required criteria.</li>
+</ul>
+<p>**5. <strong>Custom Hooks for Forms:</strong></p>
+<ul>
+<li>Custom hooks are a powerful feature in React for abstracting and reusing form logic across components. We looked at creating a custom hook to handle form inputs and validation, which helps reduce redundancy and maintain cleaner code.</li>
+</ul>
+<p>**6. <strong>Advanced Event Handling Techniques:</strong></p>
+<ul>
+<li>Advanced techniques in event handling, such as conditionally preventing default behavior and managing complex forms across multiple components, were discussed. These techniques are vital for creating sophisticated, user-friendly form interactions.</li>
+</ul>
+<p>**7. <strong>Practical Exercises:</strong></p>
+<ul>
+<li>Through hands-on exercises, you&#39;ve applied what you&#39;ve learned by enhancing a registration form using custom hooks and implementing advanced event handling strategies. These exercises are designed to solidify your understanding and provide practical skills that can be applied in real-world projects.</li>
+</ul>
+<h4>Q&amp;A Session</h4>
+<p>We will now open the floor for questions. This is your opportunity to seek clarification on any of the topics we&#39;ve covered, ask about specific challenges you might face in your projects, or explore deeper into any aspect of React forms and event handling.</p>
+<p><strong>Possible Areas for Discussion:</strong></p>
+<ul>
+<li><strong>Challenges with Controlled Components:</strong> How to handle complex state logic or integrate third-party UI libraries with controlled components.</li>
+<li><strong>Performance Optimization:</strong> Best practices for optimizing forms in large-scale applications to prevent performance bottlenecks.</li>
+<li><strong>State Management:</strong> Strategies for managing state more efficiently in large forms, possibly using libraries like Redux or the Context API.</li>
+<li><strong>Real-World Scenarios:</strong> Applying these concepts to create dynamic, responsive forms in e-commerce sites, dashboards, or other interactive web applications.</li>
+</ul>
+<p>Feel free to share your experiences or inquire about how to apply these techniques to enhance the functionality and user experience of your applications. This session is designed to ensure you leave with a thorough understanding of how to effectively manage forms and events in your React projects.</p>
+
+		</div>
+
+
+
+
+
+
+		<div id="html_hy" class="html" style="display:none">
+<h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դաս 19. Իրադարձությունների և ձևերի կառավարում React-ում</font></font></h2>
+<hr>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React իրադարձությունների ներածություն</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Որոնք են սինթետիկ իրադարձությունները:</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ն ապահովում է աբստրակցիոն շերտ բրաուզերի բնիկ իրադարձությունների վրա </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Synthetic Events</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> կոչվող մի բանի միջոցով : Այս վերացականությունը React-ի ջանքերի մի մասն է՝ իրադարձությունները նորմալացնելու տարբեր բրաուզերներում՝ ապահովելով, որ ձեր իրադարձությունների մշակողները հետևողականորեն վարվեն՝ անկախ օգտագործողի միջավայրից: Այս հայեցակարգը շատ կարևոր է, քանի որ տարբեր բրաուզերներ կարող են տարբեր կերպ վարվել բնօրինակ իրադարձությունների հետ, և React-ի սինթետիկ իրադարձությունների համակարգը օգնում է հարթել այդ անհամապատասխանությունները:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սինթետիկ իրադարձությունների հիմնական առանձնահատկությունները.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բրաուզերի միջև հետևողականություն.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> անկախ զննարկիչից, իրադարձությունների մշակումը React-ում կաշխատի միատեսակ՝ շնորհիվ սինթետիկ իրադարձությունների համակարգի:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Միավորում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> React-ն օգտագործում է սինթետիկ իրադարձությունների միավորման մեխանիզմ՝ արդյունավետությունը բարձրացնելու համար: Սա նշանակում է, որ սինթետիկ իրադարձության օբյեկտը նորից կօգտագործվի իրադարձության հետ կանչից հետո: Սա արդյունավետության առավելություն է, քանի որ նվազեցնում է հաճախակի աղբահանության անհրաժեշտությունը:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Արդյունավետություն․</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> այս միասնական ձևով կառավարելով իրադարձությունները՝ React-ը նվազագույնի է հասցնում DOM-ի ուղղակի մանիպուլյացիաների ծախսերը և նպաստում հավելվածի ավելի արագ աշխատանքին։</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրադարձությունների կառավարում React-ում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ում իրադարձությունների մշակումը նման է DOM-ի տարրերի վրա իրադարձությունների մշակմանը, սակայն կան որոշ շարահյուսական տարբերություններ և պրակտիկաներ՝ ապահովելու համար, որ համատեքստը </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ճիշտ կապակցված է հետ կանչերում, հատկապես դասի բաղադրիչներում:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիմնական իրադարձությունների մշակման շարահյուսություն.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ում դուք միջոցառումների մշակիչներ կցում եք բաղադրիչներին՝ օգտագործելով camelCase իրադարձությունների անունները, ինչպիսիք են </font></font><code>onClick</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>onSubmit</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>onChange</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և այլն:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դուք ֆունկցիա եք փոխանցում որպես իրադարձությունների մշակիչ, այլ ոչ թե տող (սովորական HTML-ում):</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրադարձությունների կառավարման օրինակներ.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներքին գործառույթ.</font></font></strong><pre><code class="language-jsx">function App() {<font></font>
+    return &lt;button onClick={() =&gt; console.log('Button clicked!')}&gt;Click Me!&lt;/button&gt;;<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մեթոդը որպես իրադարձությունների կառավարիչ դասի բաղադրիչում.</font></font></strong><pre><code class="language-jsx">class ToggleButton extends React.Component {<font></font>
+    constructor(props) {<font></font>
+        super(props);<font></font>
+        this.state = {isToggledOn: true};<font></font>
+        // Binding this keyword to make `this` work in the callback<font></font>
+        this.handleClick = this.handleClick.bind(this);<font></font>
+    }<font></font>
+<font></font>
+    handleClick() {<font></font>
+        this.setState(state =&gt; ({<font></font>
+            isToggledOn: !state.isToggledOn<font></font>
+        }));<font></font>
+    }<font></font>
+<font></font>
+    render() {<font></font>
+        return (<font></font>
+            &lt;button onClick={this.handleClick}&gt;<font></font>
+                {this.state.isToggledOn ? 'ON' : 'OFF'}<font></font>
+            &lt;/button&gt;<font></font>
+        );<font></font>
+    }<font></font>
+}<font></font>
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրադարձությունների մշակման օրինակներ</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1. Տարրի տեսանելիության անջատում.</font></font></strong></p>
+<pre><code class="language-jsx">function VisibilityToggle() {<font></font>
+    const [isVisible, setIsVisible] = useState(true);<font></font>
+<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            &lt;button onClick={() =&gt; setIsVisible(!isVisible)}&gt;<font></font>
+                {isVisible ? 'Hide' : 'Show'}<font></font>
+            &lt;/button&gt;<font></font>
+            {isVisible &amp;&amp; &lt;p&gt;This text can be shown or hidden.&lt;/p&gt;}<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս օրինակը ցույց է տալիս տեքստային պարբերության տեսանելիության փոփոխումը՝ օգտագործելով կոճակի սեղմման իրադարձությունը:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2. Օգտագործողի տվյալների հիման վրա վիճակի թարմացում.</font></font></strong></p>
+<pre><code class="language-jsx">function NameForm() {<font></font>
+    const [name, setName] = useState('');<font></font>
+<font></font>
+    return (<font></font>
+        &lt;form onSubmit={e =&gt; {<font></font>
+            e.preventDefault();<font></font>
+            alert('A name was submitted: ' + name);<font></font>
+        }}&gt;<font></font>
+            &lt;label&gt;<font></font>
+                Name:<font></font>
+                &lt;input type="text" value={name} onChange={e =&gt; setName(e.target.value)} /&gt;<font></font>
+            &lt;/label&gt;<font></font>
+            &lt;input type="submit" value="Submit" /&gt;<font></font>
+        &lt;/form&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս ձևը օգտագործում է </font></font><code>onChange</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">իրադարձությունը թարմացնելու վիճակը, քանի որ օգտատերը մուտքագրում է, և </font></font><code>onSubmit</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">իրադարձությունը ցուցադրում է հաղորդագրություն օգտվողի մուտքագրմամբ, երբ ձևը ներկայացվում է:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Եզրակացություն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հասկանալը, թե ինչպես վարել իրադարձությունները React-ում, հիմնարար է ինտերակտիվ հավելվածներ ստեղծելու համար: React-ի սինթետիկ իրադարձություններն առաջարկում են բոլոր բրաուզերների միջև օգտատերերի փոխազդեցությունները կարգավորելու ամուր և հետևողական եղանակ: Պատշաճ կերպով կառավարելով իրադարձությունները և վիճակը՝ դուք կարող եք արդյունավետորեն վերահսկել ձեր հավելվածի առանձնահատկությունները և ապահովել օգտատերերի արձագանքող փորձ:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ում ձևերի ներածություն</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ում ձևերի ստեղծում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ի ձևերը կարող են իրականացվել տարրով </font></font><code>&lt;form&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, որը նման է HTML-ին, սակայն որոշ բարելավումներով՝ տրամադրված React-ի կողմից ձևի տարրերի մշակմամբ, ինչը նրանց անխափան կերպով ինտեգրվում է բաղադրիչի վիճակին:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիմնական կարգավորում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+React-ում ձև ստեղծելու համար դուք սովորաբար օգտագործում եք ստանդարտ HTML ձևի տարրերի համակցություն, ինչպիսիք են </font></font><code>&lt;input&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;textarea&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>&lt;select&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. Այնուամենայնիվ, React-ն ավելացնում է այս տարրերին ֆունկցիոնալության լրացուցիչ շերտ՝ պոտենցիալ կառավարելով դրանց վիճակը բաղադրիչում, ձևերը դարձնելով ավելի ինտերակտիվ և ինտեգրված:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պարզ ձևի օրինակ.</font></font></strong></p>
+<pre><code class="language-jsx">function SimpleForm() {<font></font>
+    const handleSubmit = (event) =&gt; {<font></font>
+        event.preventDefault(); // Prevent default form submission behavior<font></font>
+        alert('Form was submitted');<font></font>
+    };<font></font>
+<font></font>
+    return (<font></font>
+        &lt;form onSubmit={handleSubmit}&gt;<font></font>
+            &lt;label&gt;<font></font>
+                Name:<font></font>
+                &lt;input type="text" name="name" /&gt;<font></font>
+            &lt;/label&gt;<font></font>
+            &lt;button type="submit"&gt;Submit&lt;/button&gt;<font></font>
+        &lt;/form&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս ձևը ներառում է մուտքագրում օգտվողի անվան համար և ուղարկելու կոճակ: Ձևաթղթի ներկայացումը կատարվում է React-ի իրադարձությունների մշակմամբ՝ կանխելով լռելյայն ուղարկելու գործողությունը և փոխարենը կատարելով React բաղադրիչում սահմանված գործառույթը:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերահսկվող բաղադրիչներ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ում ձևերը սովորաբար օգտագործում են </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">վերահսկվող բաղադրիչի</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> օրինակը: Այս մոտեցումը ներառում է ձևի տարրի </font></font><code>value</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հատկանիշի կարգավորումը, որպեսզի վերահսկվի React վիճակի կողմից և այդ վիճակի թարմացումը </font></font><code>onChange</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">մշակողի միջոցով:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ինչպես վերահսկել մուտքագրումը.</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պետության սկզբնավորում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Նախ, դուք հայտարարում եք վիճակի փոփոխական՝ մուտքագրման արժեքին հետևելու համար:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Binding Value.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Դուք մուտքագրման արժեքը կապում եք վիճակի փոփոխականի հետ:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Փոփոխությունների մշակում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> դուք կարգավորում եք </font></font><code>onChange</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">մշակիչ, որը թարմացնում է վիճակը, երբ օգտագործողը մուտքագրում է ձևը:</font></font></li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերահսկվող մուտքագրման օրինակ.</font></font></strong></p>
+<pre><code class="language-jsx">import React, { useState } from 'react';<font></font>
+<font></font>
+function NameForm() {<font></font>
+    const [name, setName] = useState('');<font></font>
+<font></font>
+    const handleChange = (event) =&gt; {<font></font>
+        setName(event.target.value);<font></font>
+    };<font></font>
+<font></font>
+    const handleSubmit = (event) =&gt; {<font></font>
+        event.preventDefault();<font></font>
+        alert('A name was submitted: ' + name);<font></font>
+    };<font></font>
+<font></font>
+    return (<font></font>
+        &lt;form onSubmit={handleSubmit}&gt;<font></font>
+            &lt;label&gt;<font></font>
+                Name:<font></font>
+                &lt;input type="text" value={name} onChange={handleChange} /&gt;<font></font>
+            &lt;/label&gt;<font></font>
+            &lt;button type="submit"&gt;Submit&lt;/button&gt;<font></font>
+        &lt;/form&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վերահսկվող բաղադրիչում վիճակը </font></font><code>name</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ուղղակիորեն կապված է մուտքագրման արժեքի հետ: Մուտքի ցանկացած փոփոխություն թարմացնում է վիճակը, և վիճակի արժեքը միշտ մուտքի ընթացիկ արժեքն է:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ձևի վավերացում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ում ձևի մուտքագրման վավերացումը կարող է իրականացվել՝ վիճակի մեջ պահվող ձևի տվյալների վրա պայմաններ սահմանելով և այդ պայմանների հիման վրա հետադարձ կապ տրամադրելով:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիմնական ձևի վավերացման մոտեցում.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ստուգեք պայմանները.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ձևը ներկայացնելուց առաջ ստուգեք՝ արդյոք մուտքագրումը համապատասխանում է որոշակի չափանիշներին (օրինակ՝ դատարկ չէ, որոշակի երկարություն ունի, համապատասխանում է օրինակին):</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հետադարձ կապ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Եթե պայմանները չեն պահպանվում, ցուցադրեք սխալի հաղորդագրություններ և կանխեք ձևի ներկայացումը:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վավերացման օրինակ.</font></font></strong></p>
+<pre><code class="language-jsx">function EmailForm() {<font></font>
+    const [email, setEmail] = useState('');<font></font>
+    const [errors, setErrors] = useState('');<font></font>
+<font></font>
+    const validateEmail = (email) =&gt; {<font></font>
+        if (!email.includes('@')) {<font></font>
+            setErrors('Email should contain an @ symbol.');<font></font>
+            return false;<font></font>
+        }<font></font>
+        setErrors('');<font></font>
+        return true;<font></font>
+    };<font></font>
+<font></font>
+    const handleSubmit = (event) =&gt; {<font></font>
+        event.preventDefault();<font></font>
+        if (!validateEmail(email)) {<font></font>
+            return;<font></font>
+        }<font></font>
+        alert('Email is valid and submitted: ' + email);<font></font>
+    };<font></font>
+<font></font>
+    return (<font></font>
+        &lt;form onSubmit={handleSubmit}&gt;<font></font>
+            &lt;label&gt;<font></font>
+                Email:<font></font>
+                &lt;input type="email" value={email} onChange={(e) =&gt; setEmail(e.target.value)} /&gt;<font></font>
+            &lt;/label&gt;<font></font>
+            &lt;button type="submit"&gt;Submit&lt;/button&gt;<font></font>
+            {errors &amp;&amp; &lt;p style={{ color: 'red' }}&gt;{errors}&lt;/p&gt;}<font></font>
+        &lt;/form&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս ձևը ներառում է վավերացում՝ համոզվելու համար, որ էլ. փոստը պարունակում է «@» նշանը, որն անհապաղ արձագանք է տալիս օգտատիրոջը, եթե վավերացումը ձախողվի:</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս հայեցակարգերը հիմք են ստեղծում React-ում ձևերի արդյունավետ մշակման համար՝ հիմնական կարգավորումներից մինչև վավերացում և պետական &ZeroWidthSpace;&ZeroWidthSpace;կառավարում ներառող բարդ սցենարներ:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React-ում համալիր ձևերի կառուցում և կառավարում</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բազմաթիվ մուտքերի կառավարում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Երբ գործ ունենք ձևերի հետ, որոնք ներառում են բազմաթիվ տեսակի ներդրում, պետության արդյունավետ կառավարումը դառնում է կարևոր: Ընդհանուր օրինաչափություն է օգտագործել մեկ </font></font><code>handleChange</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">իրադարձություն մշակող՝ ձևի տարբեր տարրերի վիճակը թարմացնելու համար:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Արդյունավետ պետական &ZeroWidthSpace;&ZeroWidthSpace;կառավարում </font></font><code>handleChange</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մեկ </font></font><code>handleChange</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">գործառույթ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> յուրաքանչյուր դաշտի համար առանձին մշակիչ ստեղծելու փոխարեն կարող եք ստեղծել մեկ ընդհանուր մշակող, որը կարող է թարմացնել վիճակը՝ հիմնվելով մուտքագրման անվան հատկանիշի վրա: Այս մոտեցումը նվազեցնում է ավելորդությունը և պահպանում է ձեր բաղադրիչը կոկիկ:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բազմաթիվ մուտքերի կառավարման օրինակ.</font></font></strong></p>
+<pre><code class="language-jsx">import React, { useState } from 'react';<font></font>
+<font></font>
+function RegistrationForm() {<font></font>
+    const [formData, setFormData] = useState({<font></font>
+        username: '',<font></font>
+        email: '',<font></font>
+        age: ''<font></font>
+    });<font></font>
+<font></font>
+    const handleChange = (event) =&gt; {<font></font>
+        const { name, value } = event.target;<font></font>
+        setFormData(prevFormData =&gt; ({<font></font>
+            ...prevFormData,<font></font>
+            [name]: value<font></font>
+        }));<font></font>
+    };<font></font>
+<font></font>
+    const handleSubmit = (event) =&gt; {<font></font>
+        event.preventDefault();<font></font>
+        console.log('Submitted Data:', formData);<font></font>
+    };<font></font>
+<font></font>
+    return (<font></font>
+        &lt;form onSubmit={handleSubmit}&gt;<font></font>
+            &lt;label&gt;<font></font>
+                Username:<font></font>
+                &lt;input<font></font>
+                    type="text"<font></font>
+                    name="username"<font></font>
+                    value={formData.username}<font></font>
+                    onChange={handleChange}<font></font>
+                /&gt;<font></font>
+            &lt;/label&gt;<font></font>
+            &lt;label&gt;<font></font>
+                Email:<font></font>
+                &lt;input<font></font>
+                    type="email"<font></font>
+                    name="email"<font></font>
+                    value={formData.email}<font></font>
+                    onChange={handleChange}<font></font>
+                /&gt;<font></font>
+            &lt;/label&gt;<font></font>
+            &lt;label&gt;<font></font>
+                Age:<font></font>
+                &lt;input<font></font>
+                    type="number"<font></font>
+                    name="age"<font></font>
+                    value={formData.age}<font></font>
+                    onChange={handleChange}<font></font>
+                /&gt;<font></font>
+            &lt;/label&gt;<font></font>
+            &lt;button type="submit"&gt;Register&lt;/button&gt;<font></font>
+        &lt;/form&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս մոտեցումը ապահովում է, որ բոլոր մուտքային փոփոխությունները կարգավորվեն մեկ գործառույթի միջոցով՝ պարզեցնելով վիճակի թարմացումները և նվազեցնելով բաղադրիչի բարդությունը:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բազմաթիվ բաղադրիչներով ձևեր</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բարդ ձևերը հաճախ տարածվում են մի քանի բաղադրիչների վրա, որոնք պահանջում են զգույշ պլանավորում պետական &ZeroWidthSpace;&ZeroWidthSpace;կառավարման և տվյալների հոսքի շուրջ:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պետության կառավարման ռազմավարություններ բազմաբաղադրիչ ձևերով.</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հենակետային հորատում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Հենակետերի փոխանցում բաղադրիչ ծառի վրա ծնողից խորը բնադրված երեխաներին: Թեև պարզ է, այն կարող է բարդանալ, քանի որ հավելվածը մեծանում է:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Համատեքստային API.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Օգտագործում է React-ի համատեքստը, որպեսզի հնարավորություն ընձեռի կիսել այնպիսի արժեքներ, ինչպիսին է ձևի վիճակը բաղադրիչների միջև՝ առանց ծառի յուրաքանչյուր մակարդակի վրա հստակորեն հենարան անցնելու:</font></font></li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օրինակ՝ օգտագործելով համատեքստ՝ ձևի վիճակը կառավարելու համար.</font></font></strong></p>
+<pre><code class="language-jsx">import React, { createContext, useContext, useState } from 'react';<font></font>
+<font></font>
+const FormContext = createContext();<font></font>
+<font></font>
+function FormProvider({ children }) {<font></font>
+    const [formData, setFormData] = useState({});<font></font>
+    const handleChange = (event) =&gt; {<font></font>
+        const { name, value } = event.target;<font></font>
+        setFormData(prev =&gt; ({ ...prev, [name]: value }));<font></font>
+    };<font></font>
+    return (<font></font>
+        &lt;FormContext.Provider value={{ formData, handleChange }}&gt;<font></font>
+            {children}<font></font>
+        &lt;/FormContext.Provider&gt;<font></font>
+    );<font></font>
+}<font></font>
+<font></font>
+function FormInput({ name }) {<font></font>
+    const { formData, handleChange } = useContext(FormContext);<font></font>
+    return (<font></font>
+        &lt;input<font></font>
+            name={name}<font></font>
+            value={formData[name] || ''}<font></font>
+            onChange={handleChange}<font></font>
+        /&gt;<font></font>
+    );<font></font>
+}<font></font>
+<font></font>
+function RegistrationForm() {<font></font>
+    const handleSubmit = (event) =&gt; {<font></font>
+        event.preventDefault();<font></font>
+        const { formData } = useContext(FormContext);<font></font>
+        console.log('Form Data:', formData);<font></font>
+    };<font></font>
+<font></font>
+    return (<font></font>
+        &lt;FormProvider&gt;<font></font>
+            &lt;form onSubmit={handleSubmit}&gt;<font></font>
+                &lt;FormInput name="username" /&gt;<font></font>
+                &lt;FormInput name="email" /&gt;<font></font>
+                &lt;FormInput name="age" /&gt;<font></font>
+                &lt;button type="submit"&gt;Submit&lt;/button&gt;<font></font>
+            &lt;/form&gt;<font></font>
+        &lt;/FormProvider&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս օրինակը ցույց է տալիս, թե ինչպես կարելի է օգտագործել Context API-ը բազմաթիվ բաղադրիչների վրա ձևի տվյալները կառավարելու համար՝ պարզեցնելով ձևի մշակումը և խուսափելով հենակետային հորատումից:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական վարժություն. Գրանցման ձևի ձևավորում</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Առաջադրանք.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ուսանողները կստեղծեն մանրամասն գրանցման ձև, ներառյալ մուտքագրման տարբեր տեսակներ (տեքստ, էլ. փոստ, համար, վանդակ, ռադիո կոճակներ) և կիրականացնեն վավերացում յուրաքանչյուր մուտքագրման համար:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նպատակները:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Արդյունավետ կառավարեք ձևի վիճակը React-ում՝ օգտագործելով համապատասխան մեթոդ (մեկ վիճակի օբյեկտ, համատեքստային API):</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրականացնել իրական ժամանակի վավերացում և տրամադրել օգտվողի կարծիքը:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կարգավորել ձևի ներկայացումը՝ ցուցադրելով մուտքային տվյալների կամ սխալների ամփոփագիրը:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ակնկալվող արդյունքները.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ուսանողները պետք է ցույց տան, որ հասկանում են բարդ ձևերի վիճակները:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նրանք պետք է նրբանկատորեն կարգավորեն օգտվողի մուտքերը և արդյունավետորեն վավերացնեն տվյալները:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հաջողությամբ մշակեք և հաստատեք ձևաթղթերի ներկայացումները՝ արտացոլելով React-ի կարողությունների խորը ըմբռնումը ձևերի մշակման հարցում:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժությունը նպատակ ունի ամրապնդել բարդ ձևերի մշակման ժամանակ քննարկված տեխնիկան՝ ապահովելով ուսանողների լավ պատրաստվածությունը լուծելու իրական աշխարհի սցենարները, որոնք ներառում են բարդ ձևեր և օգտատերերի փոխազդեցություններ:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրադարձությունների մշակման առաջադեմ տեխնիկա</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրադարձությունների պայմանական կառավարում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բարդ հավելվածներում, հատկապես ձևերի և դինամիկ ինտերֆեյսների հետ շփվելիս, ձեզ կարող է անհրաժեշտ լինել պայմանականորեն կարգավորել իրադարձությունները՝ հիմնված տարբեր վիճակների կամ տվյալների հատկությունների վրա: Իրադարձությունների առաջադեմ մշակումը ներառում է ավելին, քան պարզապես օգտվողի գործողություններին արձագանքելը, այն նաև պահանջում է որոշումներ կայացնել՝ հիմնվելով հավելվածի համատեքստի վրա:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տեխնիկա:</font></font></strong></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կանխադրված վարքագծի կանխարգելում պայմանականորեն.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Երբեմն դուք կարող եք կանխել ձևաթղթերի ներկայացման լռելյայն վարքագիծը՝ հիմնված հատուկ պայմանների վրա, ինչպիսիք են ձևի վավերացման արդյունքները:</font></font></p>
+<pre><code class="language-javascript">const handleSubmit = (event) =&gt; {<font></font>
+    if (!formIsValid) {<font></font>
+        event.preventDefault(); // Prevent form submission if the form is not valid<font></font>
+        alert('Please correct errors before submitting.');<font></font>
+    }<font></font>
+};<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրադարձությունների տարածման դադարեցում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> որոշ սցենարներում, հատկապես խորը ներկառուցված բաղադրիչների կառուցվածքներում, դուք կարող եք դադարեցնել իրադարձությունների փրփրացումը դեպի մայր բաղադրիչներ:</font></font></p>
+<pre><code class="language-javascript">const handleClick = (event, shouldPropagate) =&gt; {<font></font>
+    if (!shouldPropagate) {<font></font>
+        event.stopPropagation(); // Stop the event from propagating to parent elements<font></font>
+    }<font></font>
+    // handle the click event<font></font>
+};<font></font>
+</code></pre>
+</li>
+</ol>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կատարման նկատառումներ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրադարձությունների արդյունավետ կառավարումը կարևոր է React հավելվածների կատարողականությունը պահպանելու համար, հատկապես բարդ ձևերով և դինամիկ ինտերֆեյսներով:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիմնական կատարողական խնդիրները.</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ավելորդ վերարտադրումներ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> React բաղադրիչի յուրաքանչյուր վիճակի թարմացում հանգեցնում է բաղադրիչի վերարտադրման: Իրադարձություններին ի պատասխան պետության անարդյունավետ կառավարումը կարող է հանգեցնել անհարկի վերափոխումների:</font></font><ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Լուծում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Օգտագործեք հիշողության մշակման տեխնիկան, օրինակ՝ </font></font><code>React.memo</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բաղադրիչների և </font></font><code>useMemo</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">թանկարժեք հաշվարկների համար՝ կանխելու անհարկի վերարտադրումը:</font></font></li>
+</ul>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիշողության արտահոսք իրադարձությունների ունկնդիրներում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Եթե պատշաճ կերպով չի կառավարվում, React բաղադրիչում կցված իրադարձությունների ունկնդիրները կարող են հանգեցնել հիշողության արտահոսքի, հատկապես, եթե ունկնդիրները չհեռացվեն մինչև բաղադրիչի ապամոնտաժումը:</font></font><ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Լուծում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Միշտ համոզվեք, որ մաքրեք իրադարձությունների ունկնդիրները </font></font><code>useEffect</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">մաքրման գործառույթում:</font></font></li>
+</ul>
+</li>
+</ol>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հատուկ Կեռիկներ ձևաթղթերի համար</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պատվերով կեռիկներն առաջարկում են բաղադրիչ տրամաբանությունը բազմակի օգտագործման գործառույթներ հանելու հզոր միջոց: Ձևաթղթերի համար մաքսային կեռիկները կարող են կառավարել մուտքերը, կարգավորել վավերացումը և զբաղվել ներկայացումներով:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ձևաթղթերի մուտքագրման և վավերացման հատուկ կեռիկի օրինակ.</font></font></strong></p>
+<pre><code class="language-javascript">function useForm(initialValues) {<font></font>
+    const [values, setValues] = useState(initialValues);<font></font>
+    const [errors, setErrors] = useState({});<font></font>
+<font></font>
+    const handleChange = (event) =&gt; {<font></font>
+        const { name, value } = event.target;<font></font>
+        setValues({...values, [name]: value});<font></font>
+        // Validation logic can also be integrated here<font></font>
+    };<font></font>
+<font></font>
+    const handleSubmit = (callback) =&gt; (event) =&gt; {<font></font>
+        event.preventDefault();<font></font>
+        // Implement validation before executing the callback<font></font>
+        if (validateForm(values)) {<font></font>
+            callback();<font></font>
+            setErrors({});<font></font>
+        } else {<font></font>
+            setErrors({ /* errors */ });<font></font>
+            alert('Errors in form submission');<font></font>
+        }<font></font>
+    };<font></font>
+<font></font>
+    return { values, handleChange, handleSubmit, errors };<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս կեռիկը ամփոփում է ձևերի մշակման ընդհանուր տրամաբանությունը, ներառյալ պետական &ZeroWidthSpace;&ZeroWidthSpace;կառավարումը և վավերացումը, ինչը հեշտացնում է այն օգտագործելը ձևի տարբեր բաղադրիչներում:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական վարժություն. գրանցման ձևի ընդլայնում</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Առաջադրանք.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ուսանողները կբարելավեն գրանցման ձևը` ինտեգրելով հատուկ կեռիկներ` ձևերի վավերացման և պետական &ZeroWidthSpace;&ZeroWidthSpace;թարմացումները կառավարելու համար:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նպատակները:</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ինտեգրել հատուկ կեռիկ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Օգտագործեք </font></font><code>useForm</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հատուկ կեռիկը, որպեսզի կարգավորեք ձևի վիճակի և վավերացման տրամաբանությունը:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրականացնել առաջադեմ իրադարձությունների մշակում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> կիրառեք իրադարձությունների պայմանական մշակման մեթոդներ, օրինակ՝ կանխել ձևաթղթերի ներկայացումը որոշակի պայմաններում:</font></font></li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ինտեգրման օրինակ.</font></font></strong></p>
+<pre><code class="language-javascript">function RegistrationForm() {<font></font>
+    const { values, handleChange, handleSubmit, errors } = useForm({<font></font>
+        username: '',<font></font>
+        email: '',<font></font>
+        password: ''<font></font>
+    });<font></font>
+<font></font>
+    return (<font></font>
+        &lt;form onSubmit={handleSubmit(() =&gt; console.log('Form submitted', values))}&gt;<font></font>
+            &lt;input type="text" name="username" value={values.username} onChange={handleChange} /&gt;<font></font>
+            &lt;input type="email" name="email" value={values.email} onChange={handleChange} /&gt;<font></font>
+            &lt;input type="password" name="password" value={values.password} onChange={handleChange} /&gt;<font></font>
+            &lt;button type="submit"&gt;Submit&lt;/button&gt;<font></font>
+        &lt;/form&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժությունը կօգնի ուսանողներին հասկանալ, թե ինչպես արդյունավետ կառավարել ձևի վիճակն ու վավերացումները՝ օգտագործելով հատուկ կեռիկներ՝ բարձրացնելով իրենց ձևի տրամաբանության մոդուլյարությունն ու կրկնակի օգտագործման հնարավորությունը:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ամփոփում և հարց ու պատասխան</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Երբ մենք ավարտում ենք React-ում ձևերի և իրադարձությունների հետ կապված մեր համապարփակ նիստը, եկեք մի պահ ամփոփենք մեր անդրադարձած կարևորագույն հասկացությունները և պատրաստվենք հարցուպատասխանի նիստին, որպեսզի լուծենք մնացած հարցերը:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերանայում և ամփոփում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">**1. </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React իրադարձությունների ներածություն.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մենք սկսել ենք ուսումնասիրելով </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Synthetic Events-ը</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , որոնք React-ի միջոցն են՝ ապահովելու հետևողականություն և կատարողականություն տարբեր բրաուզերներում: Այս իրադարձությունների ըմբռնումը կարևոր է React շրջանակում օգտատերերի մուտքերի և գործողությունների հետ արդյունավետ փոխգործակցության համար:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">**2. </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բազմաթիվ մուտքերի կառավարում.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կարևոր է պետության արդյունավետ կառավարումը բազմաթիվ մուտքերով ձևերով: Մենք քննարկեցինք մեկ </font></font><code>handleChange</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">մեթոդի օգտագործումը, որն օգտագործում է մուտքագրման անունը՝ վիճակը թարմացնելու համար՝ զգալիորեն պարզեցնելով ձևի մշակման տրամաբանությունը:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">**3. </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերահսկվող բաղադրիչներ.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերահսկվող բաղադրիչների</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> հայեցակարգը </font><font style="vertical-align: inherit;">հիմնարար է React ձևերում: Մենք ուսումնասիրեցինք, թե ինչպես վերահսկել մուտքերը, ինչպիսիք են </font></font><code>&lt;input&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, -ը </font></font><code>&lt;textarea&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>&lt;select&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կապելով դրանց արժեքները React վիճակի հետ: Այս մոտեցումը երաշխավորում է, որ ձևի ներքին վիճակը միշտ ներկայացնում է ցուցադրվող ելքը՝ հնարավորություն տալով React-ին վերահսկել ձևի վարքագիծը:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">**4. </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ձևի վավերացում.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մենք անդրադարձանք ձևի վավերացման իրականացմանը, որպեսզի ստուգենք օգտվողի մուտքերը նախքան ձևի ներկայացումը մշակելը: Արդյունավետ վավերացումը բարելավում է օգտագործելիությունը և երաշխավորում է, որ հավաքված տվյալները համապատասխանում են պահանջվող չափանիշներին:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">**5. </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պատվերով Կեռիկներ ձևերի համար.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պատվերով կեռիկները React-ում հզոր հատկանիշ են՝ բաղադրիչների մեջ ձևի տրամաբանությունը վերացարկելու և վերօգտագործելու համար: Մենք նայեցինք ձևի մուտքագրման և վավերացման համար հարմարեցված կեռիկի ստեղծմանը, որն օգնում է նվազեցնել ավելորդությունը և պահպանել ավելի մաքուր կոդը:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">**6. </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրադարձությունների մշակման առաջադեմ տեխնիկա.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Քննարկվեցին իրադարձությունների մշակման առաջադեմ տեխնիկան, ինչպիսիք են լռելյայն վարքագծի պայմանականորեն կանխարգելումը և մի քանի բաղադրիչների մեջ բարդ ձևերի կառավարումը: Այս տեխնիկան կենսական նշանակություն ունի բարդ, օգտագործողի համար հարմար ձևերի փոխազդեցությունների ստեղծման համար:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">**7. </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական վարժություններ.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական վարժությունների միջոցով դուք կիրառեցիք այն, ինչ սովորել եք՝ ընդլայնելով գրանցման ձևը, օգտագործելով հատուկ կեռիկներ և իրականացնելով իրադարձությունների մշակման առաջադեմ ռազմավարություններ: Այս վարժությունները նախատեսված են ամրապնդելու ձեր հասկացողությունը և ապահովելու գործնական հմտություններ, որոնք կարող են կիրառվել իրական աշխարհի նախագծերում:</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հարց ու պատասխան նիստ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այժմ մենք կբացենք խոսքը հարցերի համար: Սա ձեր հնարավորությունն է պարզաբանումներ փնտրելու մեր անդրադարձած թեմաներից որևէ մեկի վերաբերյալ, հարցնելու կոնկրետ մարտահրավերների մասին, որոնց կարող եք հանդիպել ձեր նախագծերում կամ ավելի խորը ուսումնասիրելու React ձևերի և իրադարձությունների մշակման ցանկացած ասպեկտ:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Քննարկման հնարավոր ոլորտները.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերահսկվող բաղադրիչների հետ կապված մարտահրավերներ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ինչպե՞ս կառավարել բարդ վիճակի տրամաբանությունը կամ ինտեգրել երրորդ կողմի UI գրադարանները վերահսկվող բաղադրիչներով:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կատարման օպտիմիզացում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> լայնածավալ ծրագրերում ձևերի օպտիմալացման լավագույն պրակտիկան՝ արդյունավետության խցանումները կանխելու համար:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պետական &ZeroWidthSpace;&ZeroWidthSpace;կառավարում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ռազմավարություններ մեծ ձևերով պետությունն ավելի արդյունավետ կառավարելու համար, հնարավոր է, օգտագործելով գրադարաններ, ինչպիսիք են Redux-ը կամ Context API-ն:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրական աշխարհի սցենարներ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> այս հասկացությունների կիրառում էլեկտրոնային առևտրի կայքերում, վահանակներում կամ այլ ինտերակտիվ վեբ հավելվածներում դինամիկ, արձագանքող ձևեր ստեղծելու համար:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ազատորեն կիսվեք ձեր փորձով կամ հետաքրքրվեք, թե ինչպես կիրառել այս տեխնիկան՝ բարելավելու ձեր հավելվածների ֆունկցիոնալությունը և օգտագործողի փորձը: Այս նիստը նախատեսված է ապահովելու համար, որ դուք հեռանաք ձեր React նախագծերում արդյունավետ կերպով կառավարելու ձևերն ու իրադարձությունները մանրակրկիտ հասկանալով:</font></font></p>
+		</div>
+
+
+
+
+
+
+		<div id="html_ru" class="html" style="display:none">
+<h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Урок 19: Обработка событий и форм в React</font></font></h2>
+<hr>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Введение в события React</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Что такое синтетические события?</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React обеспечивает уровень абстракции над собственными событиями браузера посредством так называемых </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Synthetic Events</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Эта абстракция является частью усилий React по нормализации событий в разных браузерах, гарантируя, что ваши обработчики событий будут вести себя согласованно независимо от среды пользователя. Эта концепция имеет решающее значение, поскольку разные браузеры могут по-разному обрабатывать собственные события, а система синтетических событий React помогает сгладить эти несоответствия.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ключевые особенности синтетических событий:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Межбраузерная согласованность:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> независимо от браузера обработка событий в React будет работать единообразно благодаря синтетической системе событий.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Объединение в пулы:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> React использует механизм объединения синтетических событий для повышения производительности. Это означает, что объект синтетического события будет повторно использоваться после вызова обратного вызова события. Это преимущество в производительности, поскольку уменьшает необходимость частой сборки мусора.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Производительность.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Обрабатывая события таким унифицированным способом, React минимизирует накладные расходы на прямые манипуляции с DOM и способствует повышению производительности приложений.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обработка событий в React</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обработка событий в React аналогична обработке событий в элементах DOM, но существуют некоторые синтаксические различия и методы, позволяющие обеспечить </font></font><code>this</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">правильную привязку контекста в обратных вызовах, особенно в компонентах классов.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Основной синтаксис обработки событий:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В React вы прикрепляете обработчики событий к компонентам, используя имена событий в верблюжьем регистре, такие как </font></font><code>onClick</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>onSubmit</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>onChange</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и т. д.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В качестве обработчика событий вы передаете функцию, а не строку (обычно в простом HTML).</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Примеры обработки событий:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Встроенная функция:</font></font></strong><pre><code class="language-jsx">function App() {<font></font>
+    return &lt;button onClick={() =&gt; console.log('Button clicked!')}&gt;Click Me!&lt;/button&gt;;<font></font>
+}<font></font>
+</code></pre>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Метод как обработчик событий в компоненте класса:</font></font></strong><pre><code class="language-jsx">class ToggleButton extends React.Component {<font></font>
+    constructor(props) {<font></font>
+        super(props);<font></font>
+        this.state = {isToggledOn: true};<font></font>
+        // Binding this keyword to make `this` work in the callback<font></font>
+        this.handleClick = this.handleClick.bind(this);<font></font>
+    }<font></font>
+<font></font>
+    handleClick() {<font></font>
+        this.setState(state =&gt; ({<font></font>
+            isToggledOn: !state.isToggledOn<font></font>
+        }));<font></font>
+    }<font></font>
+<font></font>
+    render() {<font></font>
+        return (<font></font>
+            &lt;button onClick={this.handleClick}&gt;<font></font>
+                {this.state.isToggledOn ? 'ON' : 'OFF'}<font></font>
+            &lt;/button&gt;<font></font>
+        );<font></font>
+    }<font></font>
+}<font></font>
+</code></pre>
+</li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Примеры обработки событий</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1. Переключение видимости элемента:</font></font></strong></p>
+<pre><code class="language-jsx">function VisibilityToggle() {<font></font>
+    const [isVisible, setIsVisible] = useState(true);<font></font>
+<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            &lt;button onClick={() =&gt; setIsVisible(!isVisible)}&gt;<font></font>
+                {isVisible ? 'Hide' : 'Show'}<font></font>
+            &lt;/button&gt;<font></font>
+            {isVisible &amp;&amp; &lt;p&gt;This text can be shown or hidden.&lt;/p&gt;}<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этом примере показано переключение видимости абзаца текста с помощью события нажатия кнопки.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2. Обновление состояния на основе пользовательского ввода:</font></font></strong></p>
+<pre><code class="language-jsx">function NameForm() {<font></font>
+    const [name, setName] = useState('');<font></font>
+<font></font>
+    return (<font></font>
+        &lt;form onSubmit={e =&gt; {<font></font>
+            e.preventDefault();<font></font>
+            alert('A name was submitted: ' + name);<font></font>
+        }}&gt;<font></font>
+            &lt;label&gt;<font></font>
+                Name:<font></font>
+                &lt;input type="text" value={name} onChange={e =&gt; setName(e.target.value)} /&gt;<font></font>
+            &lt;/label&gt;<font></font>
+            &lt;input type="submit" value="Submit" /&gt;<font></font>
+        &lt;/form&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эта форма использует </font></font><code>onChange</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">событие для обновления состояния по мере ввода пользователем данных и </font></font><code>onSubmit</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">событие для отображения сообщения с введенными пользователем данными при отправке формы.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Заключение</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Понимание того, как обрабатывать события в React, имеет основополагающее значение для создания интерактивных приложений. Синтетические события React предлагают надежный и последовательный способ обработки взаимодействия с пользователем во всех браузерах. Правильно управляя событиями и состоянием, вы можете эффективно управлять функциями вашего приложения и обеспечивать быстрое реагирование пользователей.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Введение в формы в React</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Создание форм в React</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Формы в React могут быть реализованы с использованием </font></font><code>&lt;form&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">элемента, аналогично HTML, но с некоторыми улучшениями, предоставляемыми React обработкой элементов формы, что позволяет им легко интегрироваться с состоянием компонента.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Базовая настройка.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+Чтобы создать форму в React, вы обычно используете комбинацию стандартных элементов формы HTML, таких как </font></font><code>&lt;input&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code>&lt;textarea&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>&lt;select&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. Однако React добавляет к этим элементам дополнительный уровень функциональности, потенциально управляя их состоянием в компоненте, делая формы более интерактивными и интегрированными.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример простой формы:</font></font></strong></p>
+<pre><code class="language-jsx">function SimpleForm() {<font></font>
+    const handleSubmit = (event) =&gt; {<font></font>
+        event.preventDefault(); // Prevent default form submission behavior<font></font>
+        alert('Form was submitted');<font></font>
+    };<font></font>
+<font></font>
+    return (<font></font>
+        &lt;form onSubmit={handleSubmit}&gt;<font></font>
+            &lt;label&gt;<font></font>
+                Name:<font></font>
+                &lt;input type="text" name="name" /&gt;<font></font>
+            &lt;/label&gt;<font></font>
+            &lt;button type="submit"&gt;Submit&lt;/button&gt;<font></font>
+        &lt;/form&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эта форма включает в себя ввод имени пользователя и кнопку отправки. Отправка формы обрабатывается обработкой событий React, предотвращая действие отправки по умолчанию и вместо этого выполняя функцию, определенную в компоненте React.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Контролируемые компоненты</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В React формы обычно используют шаблон </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">управляемого компонента</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Этот подход предполагает установку атрибута элемента формы, </font></font><code>value</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">который будет контролироваться состоянием React, и обновление этого состояния через </font></font><code>onChange</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">обработчик.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Как управлять входом:</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Инициализация состояния.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Сначала вы объявляете переменную состояния, чтобы отслеживать входное значение.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Значение привязки:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> вы привязываете значение ввода к переменной состояния.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обработка изменений:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> вы настраиваете </font></font><code>onChange</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">обработчик, который обновляет состояние, когда пользователь вводит данные в форму.</font></font></li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример контролируемого входа:</font></font></strong></p>
+<pre><code class="language-jsx">import React, { useState } from 'react';<font></font>
+<font></font>
+function NameForm() {<font></font>
+    const [name, setName] = useState('');<font></font>
+<font></font>
+    const handleChange = (event) =&gt; {<font></font>
+        setName(event.target.value);<font></font>
+    };<font></font>
+<font></font>
+    const handleSubmit = (event) =&gt; {<font></font>
+        event.preventDefault();<font></font>
+        alert('A name was submitted: ' + name);<font></font>
+    };<font></font>
+<font></font>
+    return (<font></font>
+        &lt;form onSubmit={handleSubmit}&gt;<font></font>
+            &lt;label&gt;<font></font>
+                Name:<font></font>
+                &lt;input type="text" value={name} onChange={handleChange} /&gt;<font></font>
+            &lt;/label&gt;<font></font>
+            &lt;button type="submit"&gt;Submit&lt;/button&gt;<font></font>
+        &lt;/form&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этом контролируемом компоненте состояние </font></font><code>name</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">напрямую связано со значением входа. Любые изменения входных данных обновляют состояние, а значение состояния всегда является текущим значением входных данных.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Проверка формы</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Проверка ввода формы в React может быть реализована путем установки условий для данных формы, хранящихся в состоянии, и предоставления обратной связи на основе этих условий.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Базовый подход к проверке формы:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Условия проверки:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> перед отправкой формы проверьте, соответствует ли ввод определенным критериям (например, не пуст, имеет определенную длину, соответствует шаблону).</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Предоставить отзыв:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> если условия не выполнены, отобразить сообщения об ошибках и запретить отправку формы.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример с проверкой:</font></font></strong></p>
+<pre><code class="language-jsx">function EmailForm() {<font></font>
+    const [email, setEmail] = useState('');<font></font>
+    const [errors, setErrors] = useState('');<font></font>
+<font></font>
+    const validateEmail = (email) =&gt; {<font></font>
+        if (!email.includes('@')) {<font></font>
+            setErrors('Email should contain an @ symbol.');<font></font>
+            return false;<font></font>
+        }<font></font>
+        setErrors('');<font></font>
+        return true;<font></font>
+    };<font></font>
+<font></font>
+    const handleSubmit = (event) =&gt; {<font></font>
+        event.preventDefault();<font></font>
+        if (!validateEmail(email)) {<font></font>
+            return;<font></font>
+        }<font></font>
+        alert('Email is valid and submitted: ' + email);<font></font>
+    };<font></font>
+<font></font>
+    return (<font></font>
+        &lt;form onSubmit={handleSubmit}&gt;<font></font>
+            &lt;label&gt;<font></font>
+                Email:<font></font>
+                &lt;input type="email" value={email} onChange={(e) =&gt; setEmail(e.target.value)} /&gt;<font></font>
+            &lt;/label&gt;<font></font>
+            &lt;button type="submit"&gt;Submit&lt;/button&gt;<font></font>
+            {errors &amp;&amp; &lt;p style={{ color: 'red' }}&gt;{errors}&lt;/p&gt;}<font></font>
+        &lt;/form&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эта форма включает проверку, гарантирующую, что электронное письмо содержит символ «@», что обеспечивает немедленную обратную связь пользователю в случае неудачной проверки.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эти концепции обеспечивают основу для эффективной обработки форм в React, от базовых настроек до сложных сценариев, включающих проверку и управление состоянием.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Создание и управление сложными формами в React</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обработка нескольких входов</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">При работе с формами, включающими несколько типов входных данных, эффективное управление состоянием становится решающим. Распространенным шаблоном является использование одного </font></font><code>handleChange</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">обработчика событий для обновления состояния различных элементов формы.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эффективное управление состоянием с помощью </font></font><code>handleChange</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Единая </font></font><code>handleChange</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">функция:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> вместо создания отдельного обработчика для каждого поля вы можете создать один общий обработчик, который может обновлять состояние на основе атрибута имени входа. Такой подход уменьшает избыточность и сохраняет ваш компонент в порядке.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример обработки нескольких входов:</font></font></strong></p>
+<pre><code class="language-jsx">import React, { useState } from 'react';<font></font>
+<font></font>
+function RegistrationForm() {<font></font>
+    const [formData, setFormData] = useState({<font></font>
+        username: '',<font></font>
+        email: '',<font></font>
+        age: ''<font></font>
+    });<font></font>
+<font></font>
+    const handleChange = (event) =&gt; {<font></font>
+        const { name, value } = event.target;<font></font>
+        setFormData(prevFormData =&gt; ({<font></font>
+            ...prevFormData,<font></font>
+            [name]: value<font></font>
+        }));<font></font>
+    };<font></font>
+<font></font>
+    const handleSubmit = (event) =&gt; {<font></font>
+        event.preventDefault();<font></font>
+        console.log('Submitted Data:', formData);<font></font>
+    };<font></font>
+<font></font>
+    return (<font></font>
+        &lt;form onSubmit={handleSubmit}&gt;<font></font>
+            &lt;label&gt;<font></font>
+                Username:<font></font>
+                &lt;input<font></font>
+                    type="text"<font></font>
+                    name="username"<font></font>
+                    value={formData.username}<font></font>
+                    onChange={handleChange}<font></font>
+                /&gt;<font></font>
+            &lt;/label&gt;<font></font>
+            &lt;label&gt;<font></font>
+                Email:<font></font>
+                &lt;input<font></font>
+                    type="email"<font></font>
+                    name="email"<font></font>
+                    value={formData.email}<font></font>
+                    onChange={handleChange}<font></font>
+                /&gt;<font></font>
+            &lt;/label&gt;<font></font>
+            &lt;label&gt;<font></font>
+                Age:<font></font>
+                &lt;input<font></font>
+                    type="number"<font></font>
+                    name="age"<font></font>
+                    value={formData.age}<font></font>
+                    onChange={handleChange}<font></font>
+                /&gt;<font></font>
+            &lt;/label&gt;<font></font>
+            &lt;button type="submit"&gt;Register&lt;/button&gt;<font></font>
+        &lt;/form&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Такой подход гарантирует, что все входные изменения обрабатываются с помощью одной функции, что упрощает обновление состояния и снижает сложность компонента.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Формы с несколькими компонентами</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сложные формы часто охватывают несколько компонентов, что требует тщательного планирования управления состоянием и потоком данных.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Стратегии управления государством в многокомпонентных формах:</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Детализация реквизита:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> передача реквизита вниз по дереву компонентов от родительского элемента к глубоко вложенным дочерним элементам. Несмотря на простоту, это может стать громоздким по мере роста приложения.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Context API:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> использует контекст React, чтобы обеспечить возможность совместного использования значений, таких как состояние формы, между компонентами без необходимости явно передавать свойство через каждый уровень дерева.</font></font></li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример использования контекста для управления состоянием формы:</font></font></strong></p>
+<pre><code class="language-jsx">import React, { createContext, useContext, useState } from 'react';<font></font>
+<font></font>
+const FormContext = createContext();<font></font>
+<font></font>
+function FormProvider({ children }) {<font></font>
+    const [formData, setFormData] = useState({});<font></font>
+    const handleChange = (event) =&gt; {<font></font>
+        const { name, value } = event.target;<font></font>
+        setFormData(prev =&gt; ({ ...prev, [name]: value }));<font></font>
+    };<font></font>
+    return (<font></font>
+        &lt;FormContext.Provider value={{ formData, handleChange }}&gt;<font></font>
+            {children}<font></font>
+        &lt;/FormContext.Provider&gt;<font></font>
+    );<font></font>
+}<font></font>
+<font></font>
+function FormInput({ name }) {<font></font>
+    const { formData, handleChange } = useContext(FormContext);<font></font>
+    return (<font></font>
+        &lt;input<font></font>
+            name={name}<font></font>
+            value={formData[name] || ''}<font></font>
+            onChange={handleChange}<font></font>
+        /&gt;<font></font>
+    );<font></font>
+}<font></font>
+<font></font>
+function RegistrationForm() {<font></font>
+    const handleSubmit = (event) =&gt; {<font></font>
+        event.preventDefault();<font></font>
+        const { formData } = useContext(FormContext);<font></font>
+        console.log('Form Data:', formData);<font></font>
+    };<font></font>
+<font></font>
+    return (<font></font>
+        &lt;FormProvider&gt;<font></font>
+            &lt;form onSubmit={handleSubmit}&gt;<font></font>
+                &lt;FormInput name="username" /&gt;<font></font>
+                &lt;FormInput name="email" /&gt;<font></font>
+                &lt;FormInput name="age" /&gt;<font></font>
+                &lt;button type="submit"&gt;Submit&lt;/button&gt;<font></font>
+            &lt;/form&gt;<font></font>
+        &lt;/FormProvider&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этом примере показано, как использовать Context API для управления данными формы по нескольким компонентам, упрощая обработку формы и избегая детализации реквизита.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практическое упражнение: создание регистрационной формы</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Задача:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> учащиеся создадут подробную регистрационную форму, включающую различные типы ввода (текст, адрес электронной почты, номер, флажок, переключатели), и реализуют проверку для каждого ввода.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цели:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эффективно управляйте состоянием формы в React, используя подходящий метод (единый объект состояния, Context API).</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Внедряйте проверку в реальном времени и предоставляйте обратную связь пользователям.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обрабатывать отправку формы, отображая сводку входных данных или ошибок.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ожидаемые результаты:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Студенты должны продемонстрировать понимание управления состояниями сложной формы.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Они должны корректно обрабатывать вводимые пользователем данные и эффективно проверять данные.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Успешно обрабатывать и проверять отправленные формы, отражая глубокое понимание возможностей React в обработке форм.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это упражнение направлено на закрепление обсуждаемых методов работы со сложными формами и обеспечение хорошей подготовки учащихся к решению реальных сценариев, включающих сложные формы и взаимодействие с пользователем.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Расширенные методы обработки событий</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Условная обработка событий</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В сложных приложениях, особенно при взаимодействии с формами и динамическими интерфейсами, вам может потребоваться условно обрабатывать события на основе различных состояний или свойств данных. Расширенная обработка событий предполагает нечто большее, чем просто реагирование на действия пользователя: она также требует принятия решений на основе контекста приложения.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Техники:</font></font></strong></p>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Условное предотвращение поведения по умолчанию.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Иногда вам может потребоваться запретить поведение отправки формы по умолчанию на основе определенных условий, таких как результаты проверки формы.</font></font></p>
+<pre><code class="language-javascript">const handleSubmit = (event) =&gt; {<font></font>
+    if (!formIsValid) {<font></font>
+        event.preventDefault(); // Prevent form submission if the form is not valid<font></font>
+        alert('Please correct errors before submitting.');<font></font>
+    }<font></font>
+};<font></font>
+</code></pre>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Остановка распространения событий.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> В некоторых сценариях, особенно в глубоко вложенных структурах компонентов, может потребоваться остановить распространение события в родительские компоненты.</font></font></p>
+<pre><code class="language-javascript">const handleClick = (event, shouldPropagate) =&gt; {<font></font>
+    if (!shouldPropagate) {<font></font>
+        event.stopPropagation(); // Stop the event from propagating to parent elements<font></font>
+    }<font></font>
+    // handle the click event<font></font>
+};<font></font>
+</code></pre>
+</li>
+</ol>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Вопросы производительности</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эффективная обработка событий имеет решающее значение для поддержания производительности приложений React, особенно в сложных формах и динамических интерфейсах.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ключевые проблемы производительности:</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ненужные повторные рендеринги.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Каждое обновление состояния в компоненте React приводит к повторному рендерингу компонента. Неэффективная обработка состояния в ответ на события может привести к ненужным повторным рендерингам.</font></font><ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Решение:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> используйте методы мемоизации, например, </font></font><code>React.memo</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">для компонентов и </font></font><code>useMemo</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">для дорогостоящих вычислений, чтобы предотвратить ненужные повторные рендеринги.</font></font></li>
+</ul>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Утечки памяти в прослушивателях событий.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> При неправильном управлении прослушиватели событий, подключенные к компоненту React, могут привести к утечкам памяти, особенно если прослушиватели не удалены до отсоединения компонента.</font></font><ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Решение:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Всегда очищайте прослушиватели событий с помощью </font></font><code>useEffect</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">функции очистки.</font></font></li>
+</ul>
+</li>
+</ol>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пользовательские хуки для форм</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пользовательские перехватчики предлагают мощный способ извлечения логики компонента в повторно используемые функции. Для форм пользовательские перехватчики могут управлять входными данными, обрабатывать проверку и обрабатывать отправки.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример пользовательского хука для ввода формы и проверки:</font></font></strong></p>
+<pre><code class="language-javascript">function useForm(initialValues) {<font></font>
+    const [values, setValues] = useState(initialValues);<font></font>
+    const [errors, setErrors] = useState({});<font></font>
+<font></font>
+    const handleChange = (event) =&gt; {<font></font>
+        const { name, value } = event.target;<font></font>
+        setValues({...values, [name]: value});<font></font>
+        // Validation logic can also be integrated here<font></font>
+    };<font></font>
+<font></font>
+    const handleSubmit = (callback) =&gt; (event) =&gt; {<font></font>
+        event.preventDefault();<font></font>
+        // Implement validation before executing the callback<font></font>
+        if (validateForm(values)) {<font></font>
+            callback();<font></font>
+            setErrors({});<font></font>
+        } else {<font></font>
+            setErrors({ /* errors */ });<font></font>
+            alert('Errors in form submission');<font></font>
+        }<font></font>
+    };<font></font>
+<font></font>
+    return { values, handleChange, handleSubmit, errors };<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Этот хук абстрагирует общую логику обработки формы, включая управление состоянием и проверку, что упрощает его использование в различных компонентах формы.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практическое упражнение: улучшение регистрационной формы</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Задача:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> учащиеся улучшат форму регистрации, интегрировав специальные перехватчики для проверки формы и управления обновлениями состояния.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цели:</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Интегрируйте пользовательский крючок.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Используйте </font></font><code>useForm</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">пользовательский крючок для обработки состояния формы и логики проверки.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Внедрить расширенную обработку событий.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Примените методы условной обработки событий, например предотвращение отправки формы при определенных условиях.</font></font></li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример интеграции:</font></font></strong></p>
+<pre><code class="language-javascript">function RegistrationForm() {<font></font>
+    const { values, handleChange, handleSubmit, errors } = useForm({<font></font>
+        username: '',<font></font>
+        email: '',<font></font>
+        password: ''<font></font>
+    });<font></font>
+<font></font>
+    return (<font></font>
+        &lt;form onSubmit={handleSubmit(() =&gt; console.log('Form submitted', values))}&gt;<font></font>
+            &lt;input type="text" name="username" value={values.username} onChange={handleChange} /&gt;<font></font>
+            &lt;input type="email" name="email" value={values.email} onChange={handleChange} /&gt;<font></font>
+            &lt;input type="password" name="password" value={values.password} onChange={handleChange} /&gt;<font></font>
+            &lt;button type="submit"&gt;Submit&lt;/button&gt;<font></font>
+        &lt;/form&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это упражнение поможет учащимся понять, как эффективно управлять состоянием формы и проверками с помощью пользовательских перехватчиков, повышая модульность и возможность повторного использования логики формы.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Подведение итогов и вопросы и ответы</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Завершая наше подробное занятие по работе с формами и событиями в React, давайте подведем итог рассмотренным важным концепциям и подготовимся к сеансу вопросов и ответов, чтобы ответить на оставшиеся вопросы.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обзор и резюме</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">**1. </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Введение в события React:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Мы начали с изучения </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Synthetic Events</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> — способа React обеспечить согласованность и производительность в разных браузерах. Понимание этих событий имеет решающее значение для эффективного взаимодействия с пользовательскими вводами и действиями в рамках React.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">**2. </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обработка нескольких входов:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ключевое значение имеет эффективное управление состоянием в формах с несколькими входами. Мы обсудили использование одного </font></font><code>handleChange</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">метода, который использует имя ввода для обновления состояния, что значительно упрощает логику обработки формы.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">**3. </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Контролируемые компоненты:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Концепция </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">контролируемых компонентов</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> является фундаментальной в формах React. Мы рассмотрели, как управлять такими входными данными </font></font><code>&lt;input&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, как </font></font><code>&lt;textarea&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, и </font></font><code>&lt;select&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">связывая их значения с состоянием React. Такой подход гарантирует, что внутреннее состояние формы всегда представляет отображаемый вывод, что позволяет React сохранять контроль над поведением формы.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">**4. </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Проверка формы:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Мы коснулись реализации проверки формы для проверки вводимых пользователем данных перед обработкой отправки формы. Эффективная проверка повышает удобство использования и гарантирует, что собранные данные соответствуют требуемым критериям.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">**5. </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пользовательские хуки для форм:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пользовательские перехватчики — это мощная функция React для абстрагирования и повторного использования логики формы в компонентах. Мы рассмотрели возможность создания специального перехватчика для обработки ввода и проверки формы, который помогает уменьшить избыточность и поддерживать более чистый код.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">**6. </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Расширенные методы обработки событий:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Были обсуждены передовые методы обработки событий, такие как условное предотвращение поведения по умолчанию и управление сложными формами в нескольких компонентах. Эти методы жизненно важны для создания сложных и удобных для пользователя взаимодействий с формами.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">**7. </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практические упражнения:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">С помощью практических упражнений вы применили полученные знания, улучшив форму регистрации с помощью пользовательских перехватчиков и реализовав расширенные стратегии обработки событий. Эти упражнения призваны закрепить ваше понимание и дать практические навыки, которые можно применить в реальных проектах.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сессия вопросов и ответов</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Теперь мы предоставим слово для вопросов. Это ваша возможность получить разъяснения по любой из затронутых нами тем, спросить о конкретных проблемах, с которыми вы можете столкнуться в своих проектах, или глубже изучить любой аспект форм React и обработки событий.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Возможные темы для обсуждения:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Проблемы с контролируемыми компонентами:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> как обрабатывать сложную логику состояния или интегрировать сторонние библиотеки пользовательского интерфейса с контролируемыми компонентами.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Оптимизация производительности:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> лучшие практики оптимизации форм в крупномасштабных приложениях для предотвращения узких мест в производительности.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Управление состоянием:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> стратегии более эффективного управления состоянием в больших формах, возможно, с использованием таких библиотек, как Redux или Context API.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Реальные сценарии:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> применение этих концепций для создания динамических, адаптивных форм на сайтах электронной коммерции, информационных панелях или других интерактивных веб-приложениях.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Не стесняйтесь поделиться своим опытом или узнать, как применить эти методы для улучшения функциональности и удобства использования ваших приложений. Цель этого занятия — обеспечить вам полное понимание того, как эффективно управлять формами и событиями в ваших проектах React.</font></font></p>
+		</div>
+
+		
+
+
+
+
+
+
+
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js" integrity="sha512-LhccdVNGe2QMEfI3x4DVV3ckMRe36TfydKss6mJpdHjNFiV07dFpS2xzeZedptKZrwxfICJpez09iNioiSZ3hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+		<script>
+			let currentLanguage = 'en';
+			const copiedTexts = {
+				en: 'Copied to clipboard!',
+				hy: 'Պատճենվել է սեղմատախտակում:',
+				ru: 'Скопировано в буфер обмена!'
+			}
+
+			function copyCode(index) {
+				const code = document.getElementById('code-block-' + index).innerText;
+				const copied = document.getElementById('copied-' + index);
+			
+				navigator.clipboard.writeText(code).then(() => {
+					copied.innerText = copiedTexts[currentLanguage];
+				});
+
+				setTimeout(() => {
+					copied.innerText = '';
+				}, 3000);
+			}
+
+			// Initialize Highlight.js after the document is fully loaded
+			document.addEventListener('DOMContentLoaded', (event) => {
+				hljs.highlightAll();
+			});
+
+			let en = document.getElementById('en');
+			let hy = document.getElementById('hy');
+			let ru = document.getElementById('ru');
+			let html_en = document.getElementById('html_en');
+			let html_hy = document.getElementById('html_hy');
+			let html_ru = document.getElementById('html_ru');
+			
+			en.addEventListener('click', function(){
+				html_en.style.display = 'block';
+				html_hy.style.display = 'none';
+				html_ru.style.display = 'none';
+				
+				en.style.display = 'none';
+				hy.style.display = 'inline';
+				ru.style.display = 'inline';
+				
+				document.getElementsByTagName('title')[0].innerText = html_en.getElementsByTagName('h2')[0].innerText
+				currentLanguage = 'en';
+			});
+			
+			hy.addEventListener('click', function(){
+				html_en.style.display = 'none';
+				html_hy.style.display = 'block';
+				html_ru.style.display = 'none';
+				
+				en.style.display = 'inline';
+				hy.style.display = 'none';
+				ru.style.display = 'inline';
+				
+				document.getElementsByTagName('title')[0].innerText = html_hy.getElementsByTagName('h2')[0].innerText
+				
+				currentLanguage = 'hy';
+			});
+			
+			ru.addEventListener('click', function(){
+				html_en.style.display = 'none';
+				html_hy.style.display = 'none';
+				html_ru.style.display = 'block';
+				
+				en.style.display = 'inline';
+				hy.style.display = 'inline';
+				ru.style.display = 'none';
+				
+				document.getElementsByTagName('title')[0].innerText = html_ru.getElementsByTagName('h2')[0].innerText
+				currentLanguage = 'ru';
+			});
+
+			let presLang = {
+				en: document.querySelectorAll('#html_en pre'), 
+				hy: document.querySelectorAll('#html_hy pre'), 
+				ru: document.querySelectorAll('#html_ru pre')
+			};
+			
+			let key = 1;
+			
+			for(let lang in presLang){
+				let pres = presLang[lang];
+
+				pres.forEach(function(pre){
+					let copyText = lang == 'hy' ? 'Պատճենել' : lang == 'ru' ? 'Копировать' : 'Copy';
+					let card = document.createElement('div');
+					card.className = 'card bg-dark text-white';
+					pre.firstChild.id = 'code-block-' + key
+					let cardHtml = `
+						<div class="card-header">
+							<button class="btn btn-primary" onclick="copyCode(${key})">${copyText}</button>
+							<span id="copied-${key}" class="float-end"></span>
+						</div>
+						<div class="p-0">
+							<pre>${pre.innerHTML}</pre>
+						</div>
+					`
+					card.innerHTML = cardHtml;
+					
+					pre.parentNode.replaceChild(card, pre);
+					key++;
+				});
+			}
+			
+		</script>
+	</body>
+</html>

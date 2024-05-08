@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lesson 20: Routing in React with React Router</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+        <style>
+            code {
+                background-color: lightgray;
+                color: black;
+                padding: 2px 5px;
+                margin: 0 5px;
+				border: 1px solid gray;
+				border-radius: 5px;
+            }
+			#md{
+				display: none;
+			}
+        </style>
+    </head>
+    <body class="p-5">
+		<a href="#" id="hy" class="btn btn-info">Հայերեն</a>
+		<a href="#" id="en" class="btn btn-info" style="display:none">English</a>
+		<a href="#" id="ru" class="btn btn-info">Русский</a>
+		
+		<hr>
+
+
+
+
+
+
+		<div id="html_en" class="html">
+<h2>Lesson 20: Routing in React with React Router</h2>
+<hr>
+<h3>Introduction to Client-Side Routing</h3>
+<h4>What is Client-Side Routing?</h4>
+<p>Client-side routing is a fundamental concept in modern web development, particularly relevant in the context of Single Page Applications (SPAs). Unlike traditional server-side routing, where each new page request initiates a full page reload, client-side routing handles navigational actions within the browser without requiring a page refresh. This approach changes how content is loaded and displayed when users interact with an application, relying heavily on JavaScript to manage URL changes and view rendering.</p>
+<p><strong>Comparison to Server-Side Routing:</strong></p>
+<ul>
+<li><strong>Server-Side Routing:</strong><ul>
+<li>Each route change sends a new request to the server.</li>
+<li>The server processes the request, performs necessary operations (like querying a database), and returns a fully rendered page to the client.</li>
+<li>This process can be slower due to the round-trip time, especially if only part of the page needs to be updated.</li>
+</ul>
+</li>
+<li><strong>Client-Side Routing:</strong><ul>
+<li>Navigation between different parts of the application doesn&#39;t involve reaching out to the server to fetch new HTML.</li>
+<li>Instead, the routing is handled internally by the JavaScript loaded on the page.</li>
+<li>The browser does not reload the whole page but dynamically updates the content that needs to change.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Role in SPAs:</strong>
+In Single Page Applications (SPAs), client-side routing plays a pivotal role. SPAs load a single HTML page and dynamically update that page as the user interacts with the app. Client-side routers in JavaScript frameworks like React, Angular, or Vue.js manage these updates without additional page loads, making the experience smoother and more like a desktop application.</p>
+<h4>Advantages of Client-Side Routing</h4>
+<ol>
+<li><p><strong>Faster Transitions:</strong></p>
+<ul>
+<li>Since resources are only loaded once during the initial page load, and only data might be fetched asynchronously without page refresh, transitions between pages/views are generally much faster.</li>
+<li>Reduces the amount of data transferred over the network.</li>
+</ul>
+</li>
+<li><p><strong>Improved User Experience:</strong></p>
+<ul>
+<li>The interface feels more fluid and responsive. There’s no flicker of page reloads, making the application feel like a native app.</li>
+<li>Maintains user state and context without the need for complex server-side handling.</li>
+</ul>
+</li>
+<li><p><strong>Separation of Frontend and Backend Responsibilities:</strong></p>
+<ul>
+<li>Client-side routing allows developers to separate the concerns of presenting the user interface from data processing and handling on the server.</li>
+<li>The backend can be simplified to serve APIs (a set of subroutine definitions, protocols, and tools for building software and applications) which the frontend consumes. This architectural style is commonly known as the API-first approach where the server provides RESTful or GraphQL APIs.</li>
+</ul>
+</li>
+<li><p><strong>Efficient Data Management:</strong></p>
+<ul>
+<li>Since the client handles the UI routing, the server is tasked primarily with data management, which can lead to more efficient server performance.</li>
+<li>Allows for caching strategies on the client side to reduce even the data fetching requirements.</li>
+</ul>
+</li>
+<li><p><strong>Enhanced Capabilities with Modern Browsers:</strong></p>
+<ul>
+<li>Client-side routing leverages capabilities of modern browsers, such as the History API, which allows for manipulation of the browser session history that is part of the HTML5 specification.</li>
+</ul>
+</li>
+</ol>
+<p>In summary, client-side routing is a key component of building fast and interactive SPAs. It enhances the user experience by reducing load times and making applications feel more seamless. However, it requires careful consideration of routing strategies, potential SEO impacts, and initial loading performance.</p>
+<h3>Getting Started with React Router</h3>
+<p>React Router is a standard library for routing in React applications. It enables the implementation of dynamic routing in a web app, which means the routing takes place as the user interacts with the app, without a page reload. Let&#39;s dive into how to set up React Router in your project, understand its core components, and see it in action.</p>
+<h4>Installing React Router</h4>
+<p><strong>React Router</strong> comes in two flavors depending on the environment you are targeting:</p>
+<ol>
+<li><p><strong><code>react-router-dom</code> for Web Applications:</strong></p>
+<ul>
+<li>This package is designed for web applications and leverages the HTML5 history API to keep your UI in sync with the URL.</li>
+<li><strong>Installation via npm:</strong><pre><code class="language-bash">npm install react-router-dom
+</code></pre>
+</li>
+<li><strong>Installation via yarn:</strong><pre><code class="language-bash">yarn add react-router-dom
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong><code>react-router-native</code> for React Native Applications:</strong></p>
+<ul>
+<li>This package is similar to <code>react-router-dom</code> but is specifically tailored for React Native apps, handling navigation in a way that suits mobile apps.</li>
+<li><strong>Installation via npm:</strong><pre><code class="language-bash">npm install react-router-native
+</code></pre>
+</li>
+<li><strong>Installation via yarn:</strong><pre><code class="language-bash">yarn add react-router-native
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<p>Both packages share similar concepts and components but are optimized for their respective environments.</p>
+<h4>Basic Components of React Router</h4>
+<p><strong>1. <code>BrowserRouter</code>:</strong></p>
+<ul>
+<li>A <code>&lt;BrowserRouter&gt;</code> uses the HTML5 history API (pushState, replaceState, and the popstate event) to keep your UI in sync with the URL.</li>
+<li>It should be used as a wrapper around the entire part of your app that should be controlled by React Router.</li>
+</ul>
+<p><strong>2. <code>Route</code>:</strong></p>
+<ul>
+<li>The <code>&lt;Route&gt;</code> component is used to declare what should be rendered based on the URL path. It’s the core building block of React Router.</li>
+<li>Each Route maps a path to a component.</li>
+</ul>
+<p><strong>3. <code>Link</code> and <code>NavLink</code>:</strong></p>
+<ul>
+<li><code>&lt;Link&gt;</code> components are used to create links in your application. They work like <code>&lt;a&gt;</code> tags in HTML but are designed to work with React Router&#39;s in-app navigation.</li>
+<li><code>&lt;NavLink&gt;</code> is similar to <code>&lt;Link&gt;</code> but it includes styling attributes that help you automatically style the active link. You can specify styles or classes to be applied to the link when it matches the current URL.</li>
+</ul>
+<p><strong>4. <code>Switch</code>:</strong></p>
+<ul>
+<li>The <code>&lt;Switch&gt;</code> component is used to group <code>&lt;Route&gt;</code> components and render only the first one that matches the current location. It’s useful for defining exclusive routes where only one route should be rendered at a time.</li>
+</ul>
+<h4>Setting Up a Basic Route</h4>
+<p>Setting up routing in a React application using React Router involves wrapping your application in a <code>&lt;BrowserRouter&gt;</code> and then defining <code>&lt;Route&gt;</code> components for different paths. Here&#39;s a simple example:</p>
+<pre><code class="language-jsx">import React from &#39;react&#39;;
+import { BrowserRouter, Route, Link, Switch } from &#39;react-router-dom&#39;;
+
+function Home() {
+  return &lt;h2&gt;Home Page&lt;/h2&gt;;
+}
+
+function About() {
+  return &lt;h2&gt;About Page&lt;/h2&gt;;
+}
+
+function App() {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;div&gt;
+        &lt;nav&gt;
+          &lt;ul&gt;
+            &lt;li&gt;
+              &lt;Link to=&quot;/&quot;&gt;Home&lt;/Link&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+              &lt;Link to=&quot;/about&quot;&gt;About&lt;/Link&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/nav&gt;
+
+        {/* A &lt;Switch&gt; looks through its children &lt;Route&gt;s and
+            renders the first one that matches the current URL. */}
+        &lt;Switch&gt;
+          &lt;Route path=&quot;/about&quot;&gt;
+            &lt;About /&gt;
+          &lt;/Route&gt;
+          &lt;Route path=&quot;/&quot;&gt;
+            &lt;Home /&gt;
+          &lt;/Route&gt;
+        &lt;/Switch&gt;
+      &lt;/div&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}
+</code></pre>
+<p>In this setup:</p>
+<ul>
+<li>The <code>App</code> component contains a <code>&lt;BrowserRouter&gt;</code> wrapper.</li>
+<li>Inside, there&#39;s a simple navigation bar with links defined using <code>&lt;Link&gt;</code>.</li>
+<li><code>&lt;Switch&gt;</code> and <code>&lt;Route&gt;</code> components define the mapping of paths to components, ensuring only the corresponding component renders when the URL matches the route&#39;s path.</li>
+</ul>
+<p>This basic introduction sets the stage for creating more complex navigational structures in your React applications, leveraging the powerful routing capabilities provided by React Router.</p>
+<h3>Advanced Routing Concepts</h3>
+<h4>Dynamic Routing with Route Parameters</h4>
+<p>Dynamic routing allows you to accept different parts of the URL as parameters, making the route itself flexible and capable of handling a variety of input values. This technique is especially useful when you need to display or operate on different data based on URL parameters, such as displaying different user profiles or product details.</p>
+<p><strong>Defining Dynamic Routes:</strong></p>
+<ul>
+<li>You define dynamic routes in React Router by specifying parameters in the path prop of the <code>Route</code> component. A colon <code>:</code> precedes the name of the parameter.</li>
+</ul>
+<pre><code class="language-jsx">&lt;Route path=&quot;/profile/:userId&quot; component={UserProfile} /&gt;
+</code></pre>
+<p>In this example, <code>:userId</code> is a route parameter that can be accessed within the <code>UserProfile</code> component to load specific user data.</p>
+<h4>Example with Parameters: User Profile Page</h4>
+<p>Let&#39;s create a simple user profile page that fetches and displays user data based on a userId passed as a URL parameter.</p>
+<p><strong>UserProfile Component:</strong></p>
+<pre><code class="language-jsx">import React, { useState, useEffect } from &#39;react&#39;;
+import { useParams } from &#39;react-router-dom&#39;;
+
+function UserProfile() {
+    const [user, setUser] = useState(null);
+    const { userId } = useParams();
+
+    useEffect(() =&gt; {
+        fetch(`https://api.example.com/users/${userId}`)
+            .then(response =&gt; response.json())
+            .then(data =&gt; setUser(data));
+    }, [userId]);
+
+    return (
+        &lt;div&gt;
+            {user ? (
+                &lt;div&gt;
+                    &lt;h1&gt;{user.name}&lt;/h1&gt;
+                    &lt;p&gt;Email: {user.email}&lt;/p&gt;
+                &lt;/div&gt;
+            ) : (
+                &lt;p&gt;Loading...&lt;/p&gt;
+            )}
+        &lt;/div&gt;
+    );
+}
+</code></pre>
+<p>This component uses the <code>useParams</code> hook from React Router to access the <code>userId</code> parameter. It then fetches user data from an API based on this ID.</p>
+<h4>Programmatic Navigation</h4>
+<p>Sometimes, you need to perform navigation actions programmatically, such as after a form submission or a successful asynchronous operation.</p>
+<p><strong>Using <code>useHistory</code> Hook:</strong></p>
+<ul>
+<li>The <code>useHistory</code> hook gives you access to the history instance that you may use to navigate.</li>
+</ul>
+<pre><code class="language-jsx">import { useHistory } from &#39;react-router-dom&#39;;
+
+function FormSubmitButton() {
+    let history = useHistory();
+
+    function handleSubmit() {
+        performAsyncOperation().then(() =&gt; {
+            history.push(&#39;/success&#39;); // Navigate programmatically
+        });
+    }
+
+    return &lt;button onClick={handleSubmit}&gt;Submit&lt;/button&gt;;
+}
+</code></pre>
+<h4>Nested Routing</h4>
+<p>Nested routing allows you to create a hierarchy of routes, which is useful for having a consistent layout across different components or sub-components.</p>
+<p><strong>Example of Nested Routing:</strong></p>
+<pre><code class="language-jsx">&lt;Route path=&quot;/user&quot; component={UserLayout}&gt;
+    &lt;Route path=&quot;/user/profile&quot; component={UserProfile} /&gt;
+    &lt;Route path=&quot;/user/settings&quot; component={UserSettings} /&gt;
+&lt;/Route&gt;
+</code></pre>
+<p>In this setup, <code>UserLayout</code> could include a navbar or sidebar common to all user-related routes, while <code>UserProfile</code> and <code>UserSettings</code> handle specific views.</p>
+<h4>Protected Routes and Authentication</h4>
+<p>Protected routes are routes that require the user to be authenticated. React Router doesn&#39;t include built-in support for protected routes, but you can easily implement them by combining your authentication logic with route rendering.</p>
+<p><strong>Example of a Protected Route:</strong></p>
+<pre><code class="language-jsx">import { Route, Redirect } from &#39;react-router-dom&#39;;
+
+function ProtectedRoute({ component: Component, ...rest }) {
+    return (
+        &lt;Route {...rest} render={
+            props =&gt; isAuthenticated() ? (
+                &lt;Component {...props} /&gt;
+            ) : (
+                &lt;Redirect to=&#39;/login&#39; /&gt;
+            )
+        } /&gt;
+    );
+}
+</code></pre>
+<p>In this example, <code>ProtectedRoute</code> checks if the user is authenticated. If yes, it renders the requested component; if not, it redirects the user to the login page.</p>
+<p>These advanced routing techniques empower you to build complex, user-friendly, and secure applications using React Router, enhancing both the developer and user experience by providing dynamic, conditional, and nested routing solutions.</p>
+<h3>Practical Exercise - Building a Multi-Page SPA</h3>
+<h4>Exercise Overview</h4>
+<p>In this exercise, students will build a small Single Page Application (SPA) that includes multiple components such as a homepage, an about page, a contact form, and user profiles. Each part of the application will be accessible via distinct routes, demonstrating the power and flexibility of client-side routing with React Router.</p>
+<p><strong>Goals of the Exercise:</strong></p>
+<ol>
+<li><strong>Familiarize with React Router:</strong> Understand how to set up and manage routes using React Router.</li>
+<li><strong>Implement Dynamic and Nested Routing:</strong> Use dynamic routing for user profiles and nested routes for organizing related views.</li>
+<li><strong>Utilize Programmatic Navigation:</strong> Handle redirection after events like form submissions.</li>
+</ol>
+<h4>Implementing Features</h4>
+<p><strong>1. Setup Basic Routing:</strong></p>
+<ul>
+<li>First, ensure the application has the necessary pages: Home, About, Contact, and User Profile.</li>
+<li>Set up React Router in the application by wrapping the entire app in a <code>&lt;BrowserRouter&gt;</code>.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-jsx">import React from &#39;react&#39;;
+import { BrowserRouter as Router, Route, Switch, NavLink } from &#39;react-router-dom&#39;;
+import Home from &#39;./Home&#39;;
+import About from &#39;./About&#39;;
+import Contact from &#39;./Contact&#39;;
+import UserProfile from &#39;./UserProfile&#39;;
+
+function App() {
+  return (
+    &lt;Router&gt;
+      &lt;div&gt;
+        &lt;nav&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;NavLink exact to=&quot;/&quot; activeClassName=&quot;active&quot;&gt;Home&lt;/NavLink&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;NavLink to=&quot;/about&quot; activeClassName=&quot;active&quot;&gt;About&lt;/NavLink&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;NavLink to=&quot;/contact&quot; activeClassName=&quot;active&quot;&gt;Contact&lt;/NavLink&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/nav&gt;
+        &lt;Switch&gt;
+          &lt;Route path=&quot;/&quot; exact component={Home} /&gt;
+          &lt;Route path=&quot;/about&quot; component={About} /&gt;
+          &lt;Route path=&quot;/contact&quot; component={Contact} /&gt;
+          &lt;Route path=&quot;/user/:userId&quot; component={UserProfile} /&gt;
+        &lt;/Switch&gt;
+      &lt;/div&gt;
+    &lt;/Router&gt;
+  );
+}
+</code></pre>
+<p><strong>2. Dynamic Routing for User Profiles:</strong></p>
+<ul>
+<li>Implement dynamic routing to handle user profiles where the user ID is captured from the URL.</li>
+<li>This allows the <code>UserProfile</code> component to fetch and display data based on the provided ID.</li>
+</ul>
+<p><strong>3. Nested Routing:</strong></p>
+<ul>
+<li>Use nested routing within the About section if it has multiple sub-sections, such as company history, team, etc.</li>
+<li>This approach helps organize complex structures within a single route, maintaining a clean and manageable code structure.</li>
+</ul>
+<p><strong>Example of Nested Routing:</strong></p>
+<pre><code class="language-jsx">&lt;Route path=&quot;/about&quot; component={About}&gt;
+  &lt;Route path=&quot;/about/history&quot; component={History} /&gt;
+  &lt;Route path=&quot;/about/team&quot; component={Team} /&gt;
+&lt;/Route&gt;
+</code></pre>
+<p><strong>4. Programmatic Navigation after Form Submission:</strong></p>
+<ul>
+<li>In the contact form, use the <code>useHistory</code> hook from React Router to navigate programmatically to a thank-you page or back to the home page after the form is submitted.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-jsx">import { useHistory } from &#39;react-router-dom&#39;;
+
+function ContactForm() {
+  let history = useHistory();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    // Form processing logic here
+    history.push(&#39;/thank-you&#39;);  // Redirect to thank-you page
+  }
+
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      {/* form fields */}
+      &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}
+</code></pre>
+<h4>Adding Navigation Links</h4>
+<p><strong>Using <code>NavLink</code> for Main Navigation:</strong></p>
+<ul>
+<li>Implement <code>NavLink</code> for the navigation menu to allow users to identify which page they are currently viewing based on the active link styling.</li>
+<li><code>NavLink</code> makes it easy to add styling attributes to the rendered element when it matches the current URL.</li>
+</ul>
+<pre><code class="language-jsx">&lt;NavLink to=&quot;/about&quot; activeClassName=&quot;active&quot;&gt;About&lt;/NavLink&gt;
+</code></pre>
+<p>In this exercise, students will put into practice the foundational aspects of working with React Router in a SPA. They&#39;ll learn how to effectively manage routes, including dynamic and nested routes, and handle post-submission behaviors with programmatic navigation, all while ensuring that users can navigate easily through the use of <code>NavLink</code>. This comprehensive exercise aims to solidify their understanding and skills in managing complex application architectures with React Router.</p>
+<h3>Wrap-up and Q&amp;A</h3>
+<p>As we conclude our session on React Router and its role in building dynamic Single Page Applications (SPAs), let’s summarize the key points we&#39;ve covered today and open the floor for questions.</p>
+<h4>Review and Summary</h4>
+<p><strong>Key Features of React Router:</strong></p>
+<ol>
+<li><strong>Client-Side Routing:</strong> We discussed how React Router enables navigation within an application without requiring page reloads, which enhances the user experience and mimics the feel of a desktop application in a web browser.</li>
+<li><strong>Dynamic Routing:</strong> We explored how to use route parameters to create dynamic paths, allowing components to fetch and display content based on URL parameters. This capability is crucial for applications like e-commerce sites or user profiles where the content changes depending on user interaction or data requirements.</li>
+<li><strong>Nested Routing:</strong> The ability to nest routes within other routes was covered, which is useful for creating complex user interfaces with consistent layouts across multiple views, such as dashboards with multiple sections.</li>
+<li><strong>Programmatic Navigation:</strong> We demonstrated how to navigate programmatically using the <code>useHistory</code> hook, which is essential for scenarios where navigation needs to be triggered by application logic, such as submitting a form or completing an asynchronous operation.</li>
+<li><strong>Protected Routes:</strong> The concept of protected routes was introduced to ensure that certain parts of your application are accessible only to authenticated users, highlighting the integration of authentication flows within client-side routing.</li>
+</ol>
+<p><strong>Advantages of Client-Side Routing:</strong></p>
+<ul>
+<li><strong>Performance Improvements:</strong> Reduces the load on the server and the amount of data transferred over the network, leading to faster interactions and page transitions.</li>
+<li><strong>Enhanced User Experience:</strong> Provides a smooth, seamless interaction, similar to that of a native application, by avoiding page reloads.</li>
+<li><strong>Separation of Concerns:</strong> Facilitates a cleaner separation between the front-end and the back-end. The back-end can focus solely on data management via APIs, while the front-end handles user interface and experiences independently.</li>
+</ul>
+<h4>Q&amp;A Session</h4>
+<p>Now, let’s transition to our Q&amp;A session. This is your opportunity to ask questions about anything from today&#39;s material that might still be unclear or to explore further how React Router can be utilized in your specific projects. Whether you have technical queries about the implementation details, best practices in routing, or the strategic use of React Router in different types of applications, feel free to ask.</p>
+<p><strong>Possible Topics for Discussion Could Include:</strong></p>
+<ul>
+<li><strong>Best Practices:</strong> When to use hash routing versus browser routing.</li>
+<li><strong>Security Considerations:</strong> How to handle security in client-side routing, especially in terms of protecting sensitive data and preventing unauthorized access.</li>
+<li><strong>Performance Optimization:</strong> Techniques for optimizing performance in SPAs using React Router, such as lazy loading components.</li>
+<li><strong>Real-World Applications:</strong> Discussion of real-world scenarios where complex routing has been a challenge and how React Router helped solve those issues.</li>
+</ul>
+<p>This session aims to ensure you leave with a comprehensive understanding of React Router and are ready to implement sophisticated routing solutions in your projects effectively. Your questions can also help others by clarifying common doubts and encouraging deeper exploration of the topics discussed.</p>
+
+		</div>
+
+
+
+
+
+
+		<div id="html_hy" class="html" style="display:none">
+<h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դաս 20. Ուղղում React-ում React Router-ով</font></font></h2>
+<hr>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հաճախորդի կողմից երթուղիների ներածություն</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ի՞նչ է հաճախորդի կողմից երթուղիչը:</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հաճախորդի կողմից երթուղղումը հիմնարար հասկացություն է ժամանակակից վեբ մշակման մեջ, հատկապես կարևոր մեկ էջի հավելվածների (SPAs) համատեքստում: Ի տարբերություն սերվերի կողմից ավանդական երթուղավորման, որտեղ յուրաքանչյուր նոր էջի հարցում սկսում է էջի ամբողջական վերաբեռնում, հաճախորդի կողմից երթուղավորումն իրականացնում է նավիգացիոն գործողությունները բրաուզերի ներսում՝ առանց էջի թարմացում պահանջելու: Այս մոտեցումը փոխում է, թե ինչպես է բովանդակությունը բեռնվում և ցուցադրվում, երբ օգտվողները շփվում են հավելվածի հետ՝ մեծապես հենվելով JavaScript-ի վրա՝ URL-ի փոփոխությունները կառավարելու և ցուցադրումը դիտելու համար:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Համեմատություն սերվերի կողմի երթուղավորման հետ.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սերվերի կողմի երթուղում.</font></font></strong><ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Յուրաքանչյուր երթուղու փոփոխություն նոր հարցում է ուղարկում սերվերին:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սերվերը մշակում է հարցումը, կատարում է անհրաժեշտ գործողություններ (օրինակ՝ տվյալների բազայի հարցումը) և հաճախորդին վերադարձնում է ամբողջությամբ ներկայացված էջը:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս գործընթացը կարող է ավելի դանդաղ լինել՝ կապված շրջագայության ժամանակի հետ, հատկապես, եթե անհրաժեշտ է թարմացնել էջի միայն մի մասը։</font></font></li>
+</ul>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հաճախորդի կողմից երթուղի.</font></font></strong><ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հավելվածի տարբեր մասերի միջև նավարկությունը չի ներառում սերվերի հետ կապ հաստատել՝ նոր HTML բեռնելու համար:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Փոխարենը, երթուղավորումը ներքին կարգով մշակվում է էջում բեռնված JavaScript-ի միջոցով:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զննարկիչը չի վերաբեռնում ամբողջ էջը, այլ դինամիկ կերպով թարմացնում է բովանդակությունը, որը պետք է փոխվի:</font></font></li>
+</ul>
+</li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դերը SPA-ներում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+Մեկ էջի հավելվածներում (SPAs) հաճախորդի կողմից ուղղորդումը առանցքային դեր է խաղում: SPA-ները բեռնում են մեկ HTML էջ և դինամիկ կերպով թարմացնում են այդ էջը, երբ օգտատերը շփվում է հավելվածի հետ: Հաճախորդի կողմի երթուղիչները JavaScript-ի շրջանակներում, ինչպիսիք են React, Angular կամ Vue.js-ը, կառավարում են այս թարմացումներն առանց լրացուցիչ էջի բեռնումների՝ դարձնելով փորձը ավելի հարթ և ավելի նման՝ աշխատասեղանի հավելվածի:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հաճախորդի կողմից ուղղորդման առավելությունները</font></font></h4>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ավելի արագ անցումներ.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Քանի որ սկզբնական էջի բեռնման ընթացքում ռեսուրսները բեռնվում են միայն մեկ անգամ, և միայն տվյալները կարող են ասինխրոն կերպով բեռնվել առանց էջի թարմացման, էջերի/դիտումների միջև անցումները հիմնականում շատ ավելի արագ են:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նվազեցնում է ցանցի միջոցով փոխանցվող տվյալների քանակը:</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բարելավված օգտվողի փորձ.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ինտերֆեյսը զգում է ավելի հեղուկ և արձագանքող: Էջի վերբեռնման թարթիչներ չկան, ինչի շնորհիվ հավելվածն իրեն հարազատ հավելված է դարձնում:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պահպանում է օգտատիրոջ վիճակը և համատեքստը՝ առանց բարդ սերվերի կողմից մշակման անհրաժեշտության:</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Frontend-ի և Backend-ի պարտականությունների տարանջատում.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հաճախորդի կողմից ուղղորդումը թույլ է տալիս ծրագրավորողներին տարանջատել օգտատիրոջ միջերեսի ներկայացման խնդիրները սերվերում տվյալների մշակումից և մշակումից:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Backend-ը կարող է պարզեցվել՝ սպասարկելու API-ներ (ենթածրագրային սահմանումներ, արձանագրություններ և գործիքներ ծրագրային ապահովման և հավելվածների կառուցման համար), որոնք օգտագործում է ճակատը: Այս ճարտարապետական &ZeroWidthSpace;&ZeroWidthSpace;ոճը սովորաբար հայտնի է որպես API-առաջին մոտեցում, որտեղ սերվերը տրամադրում է RESTful կամ GraphQL API-ներ:</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Արդյունավետ տվյալների կառավարում.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Քանի որ հաճախորդը ղեկավարում է UI երթուղիչը, սերվերին հիմնականում հանձնարարված է տվյալների կառավարում, ինչը կարող է հանգեցնել սերվերի ավելի արդյունավետ աշխատանքի:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Թույլ է տալիս հաճախորդի կողմից քեշավորման ռազմավարություններ՝ նվազեցնելու նույնիսկ տվյալների առբերման պահանջները:</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ընդլայնված հնարավորություններ ժամանակակից բրաուզերների միջոցով.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հաճախորդի կողմից երթուղավորումն օգտագործում է ժամանակակից բրաուզերների հնարավորությունները, ինչպիսին է History API-ն, որը թույլ է տալիս մանիպուլյացիայի ենթարկել բրաուզերի աշխատաշրջանի պատմությունը, որը HTML5 հատկորոշման մաս է կազմում:</font></font></li>
+</ul>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ամփոփելով, հաճախորդի կողմից ուղղորդումը արագ և ինտերակտիվ SPA-ների կառուցման հիմնական բաղադրիչն է: Այն բարելավում է օգտատերերի փորձը՝ նվազեցնելով բեռնման ժամանակը և դարձնելով հավելվածներն ավելի անթերի: Այնուամենայնիվ, դա պահանջում է մանրակրկիտ դիտարկել երթուղային ռազմավարությունները, հնարավոր SEO ազդեցությունները և նախնական բեռնման կատարումը:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ինչպես սկսել React Router-ով</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React Router-ը ստանդարտ գրադարան է React հավելվածներում երթուղավորելու համար: Այն հնարավորություն է տալիս դինամիկ երթուղիներ իրականացնել վեբ հավելվածում, ինչը նշանակում է, որ երթուղավորումը տեղի է ունենում, երբ օգտատերը շփվում է հավելվածի հետ՝ առանց էջի վերաբեռնման: Եկեք ուսումնասիրենք, թե ինչպես կարգավորել React Router-ը ձեր նախագծում, հասկանալ դրա հիմնական բաղադրիչները և տեսնել այն գործողության մեջ:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React երթուղիչի տեղադրում</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React Router-ը</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> գալիս է երկու տեսակի՝ կախված ձեր թիրախավորված միջավայրից.</font></font></p>
+<ol>
+<li><p><strong><code>react-router-dom</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">վեբ հավելվածների համար.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս փաթեթը նախատեսված է վեբ հավելվածների համար և օգտագործում է HTML5 պատմության API՝ ձեր միջերեսը URL-ի հետ համաժամեցված պահելու համար:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տեղադրում npm-ի միջոցով.</font></font></strong><pre><code class="language-bash">npm install react-router-dom
+</code></pre>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տեղադրում մանվածքի միջոցով.</font></font></strong><pre><code class="language-bash">yarn add react-router-dom
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong><code>react-router-native</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React Native հավելվածների համար.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս փաթեթը նման է, </font></font><code>react-router-dom</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բայց հատուկ հարմարեցված է React Native հավելվածների համար՝ նավարկությունը վարում է այնպես, որ հարմար է բջջային հավելվածներին:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տեղադրում npm-ի միջոցով.</font></font></strong><pre><code class="language-bash">npm install react-router-native
+</code></pre>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տեղադրում մանվածքի միջոցով.</font></font></strong><pre><code class="language-bash">yarn add react-router-native
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Երկու փաթեթներն էլ ունեն նմանատիպ հասկացություններ և բաղադրիչներ, բայց օպտիմիզացված են իրենց համապատասխան միջավայրերի համար:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React երթուղիչի հիմնական բաղադրիչները</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1. </font></font><code>BrowserRouter</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A-ն </font></font><code>&lt;BrowserRouter&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">օգտագործում է HTML5 պատմության API-ն (pushState, replaceState և popstate իրադարձություն)՝ ձեր միջերեսը URL-ի հետ համաժամեցված պահելու համար:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այն պետք է օգտագործվի որպես փաթաթում ձեր հավելվածի ամբողջ մասի շուրջ, որը պետք է վերահսկվի React Router-ի կողմից:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2. </font></font><code>Route</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչն </font></font><code>&lt;Route&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">օգտագործվում է հայտարարելու, թե ինչ պետք է ներկայացվի URL-ի ուղու հիման վրա: Դա React Router-ի հիմնական շինարարական բլոկն է:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Յուրաքանչյուր երթուղի քարտեզագրում է ուղի դեպի բաղադրիչ:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3. </font></font><code>Link</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>NavLink</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></strong></p>
+<ul>
+<li><code>&lt;Link&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բաղադրիչներն օգտագործվում են ձեր հավելվածում հղումներ ստեղծելու համար: Նրանք աշխատում են ինչպես </font></font><code>&lt;a&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">պիտակները HTML-ում, բայց նախատեսված են React Router-ի ներծրագրային նավիգացիայի հետ աշխատելու համար:</font></font></li>
+<li><code>&lt;NavLink&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">նման է, </font></font><code>&lt;Link&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բայց այն ներառում է ոճավորման հատկանիշներ, որոնք օգնում են ձեզ ավտոմատ կերպով ձևավորել ակտիվ հղումը: Դուք կարող եք նշել ոճերը կամ դասերը, որոնք կկիրառվեն հղման վրա, երբ այն համապատասխանում է ընթացիկ URL-ին:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4. </font></font><code>Switch</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչն </font></font><code>&lt;Switch&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">օգտագործվում է բաղադրիչները խմբավորելու </font></font><code>&lt;Route&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և միայն առաջինը ներկայացնելու համար, որը համապատասխանում է ընթացիկ գտնվելու վայրին: Այն օգտակար է բացառիկ երթուղիներ սահմանելու համար, որտեղ միաժամանակ պետք է ներկայացվի միայն մեկ երթուղի:</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հիմնական երթուղու կարգավորում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React երթուղիչի կարգավորումը React ծրագրում React Router-ի միջոցով ներառում է ձեր հավելվածի փաթեթավորումը </font></font><code>&lt;BrowserRouter&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և այնուհետև </font></font><code>&lt;Route&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">տարբեր ուղիների բաղադրիչների սահմանում: Ահա մի պարզ օրինակ.</font></font></p>
+<pre><code class="language-jsx">import React from 'react';<font></font>
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';<font></font>
+<font></font>
+function Home() {<font></font>
+  return &lt;h2&gt;Home Page&lt;/h2&gt;;<font></font>
+}<font></font>
+<font></font>
+function About() {<font></font>
+  return &lt;h2&gt;About Page&lt;/h2&gt;;<font></font>
+}<font></font>
+<font></font>
+function App() {<font></font>
+  return (<font></font>
+    &lt;BrowserRouter&gt;<font></font>
+      &lt;div&gt;<font></font>
+        &lt;nav&gt;<font></font>
+          &lt;ul&gt;<font></font>
+            &lt;li&gt;<font></font>
+              &lt;Link to="/"&gt;Home&lt;/Link&gt;<font></font>
+            &lt;/li&gt;<font></font>
+            &lt;li&gt;<font></font>
+              &lt;Link to="/about"&gt;About&lt;/Link&gt;<font></font>
+            &lt;/li&gt;<font></font>
+          &lt;/ul&gt;<font></font>
+        &lt;/nav&gt;<font></font>
+<font></font>
+        {/* A &lt;Switch&gt; looks through its children &lt;Route&gt;s and<font></font>
+            renders the first one that matches the current URL. */}<font></font>
+        &lt;Switch&gt;<font></font>
+          &lt;Route path="/about"&gt;<font></font>
+            &lt;About /&gt;<font></font>
+          &lt;/Route&gt;<font></font>
+          &lt;Route path="/"&gt;<font></font>
+            &lt;Home /&gt;<font></font>
+          &lt;/Route&gt;<font></font>
+        &lt;/Switch&gt;<font></font>
+      &lt;/div&gt;<font></font>
+    &lt;/BrowserRouter&gt;<font></font>
+  );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս կարգավորումներում.</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Բաղադրիչը </font></font><code>App</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">պարունակում է </font></font><code>&lt;BrowserRouter&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">փաթաթան:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներսում կա պարզ նավիգացիոն տող, որտեղ նշված են հղումները՝ օգտագործելով </font></font><code>&lt;Link&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+<li><code>&lt;Switch&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>&lt;Route&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բաղադրիչները սահմանում են երթուղիների քարտեզագրումը դեպի բաղադրիչներ՝ ապահովելով միայն համապատասխան բաղադրիչի ցուցադրումը, երբ URL-ը համընկնում է երթուղու ուղու հետ:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս հիմնական ներածությունը հիմք է ստեղծում ձեր React հավելվածներում ավելի բարդ նավիգացիոն կառույցներ ստեղծելու համար՝ օգտագործելով React Router-ի տրամադրած հզոր երթուղային հնարավորությունները:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ընդլայնված երթուղային հասկացություններ</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դինամիկ երթուղում՝ երթուղու պարամետրերով</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դինամիկ երթուղավորումը թույլ է տալիս ընդունել URL-ի տարբեր մասեր՝ որպես պարամետրեր՝ դարձնելով երթուղին ինքնին ճկուն և ընդունակ կարգավորելու տարբեր մուտքային արժեքներ: Այս տեխնիկան հատկապես օգտակար է, երբ դուք պետք է ցուցադրեք կամ աշխատեք տարբեր տվյալների վրա՝ հիմնված URL-ի պարամետրերի վրա, ինչպես օրինակ՝ ցուցադրելով տարբեր օգտվողների պրոֆիլներ կամ արտադրանքի մանրամասներ:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դինամիկ երթուղիների սահմանում.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դուք դինամիկ երթուղիներ եք սահմանում React Router-ում՝ նշելով պարամետրեր բաղադրիչի ուղու հենակետում </font></font><code>Route</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: </font></font><code>:</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պարամետրի անվանմանը նախորդում է </font><font style="vertical-align: inherit;">երկու կետ :</font></font></li>
+</ul>
+<pre><code class="language-jsx">&lt;Route path="/profile/:userId" component={UserProfile} /&gt;
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս օրինակում </font></font><code>:userId</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">երթուղու պարամետր է, որը կարող է հասանելի լինել </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բաղադրիչի ներսում՝ բեռնելու կոնկրետ օգտատիրոջ տվյալները:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օրինակ Պարամետրերով. Օգտվողի պրոֆիլի էջ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Եկեք ստեղծենք օգտվողի պրոֆիլի պարզ էջ, որը վերցնում և ցուցադրում է օգտատիրոջ տվյալները՝ որպես URL պարամետր փոխանցված userId-ի հիման վրա:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտվողի պրոֆիլի բաղադրիչ.</font></font></strong></p>
+<pre><code class="language-jsx">import React, { useState, useEffect } from 'react';<font></font>
+import { useParams } from 'react-router-dom';<font></font>
+<font></font>
+function UserProfile() {<font></font>
+    const [user, setUser] = useState(null);<font></font>
+    const { userId } = useParams();<font></font>
+<font></font>
+    useEffect(() =&gt; {<font></font>
+        fetch(`https://api.example.com/users/${userId}`)<font></font>
+            .then(response =&gt; response.json())<font></font>
+            .then(data =&gt; setUser(data));<font></font>
+    }, [userId]);<font></font>
+<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            {user ? (<font></font>
+                &lt;div&gt;<font></font>
+                    &lt;h1&gt;{user.name}&lt;/h1&gt;<font></font>
+                    &lt;p&gt;Email: {user.email}&lt;/p&gt;<font></font>
+                &lt;/div&gt;<font></font>
+            ) : (<font></font>
+                &lt;p&gt;Loading...&lt;/p&gt;<font></font>
+            )}<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս բաղադրիչն օգտագործում է </font></font><code>useParams</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React Router-ի կեռը՝ </font></font><code>userId</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">պարամետրին մուտք գործելու համար: Այնուհետև այն բեռնում է օգտատիրոջ տվյալները API-ից՝ հիմնված այս ID-ի վրա:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ծրագրային նավարկություն</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Երբեմն, դուք պետք է կատարեք նավիգացիոն գործողություններ ծրագրային եղանակով, օրինակ՝ ձևի ներկայացումից կամ հաջող ասինխրոն գործողությունից հետո:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"></font><code>useHistory</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կեռիկի </font><font style="vertical-align: inherit;">օգտագործումը .</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կեռիկը </font></font><code>useHistory</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հնարավորություն է տալիս մուտք գործել պատմության օրինակ, որը կարող եք օգտագործել նավարկելու համար:</font></font></li>
+</ul>
+<pre><code class="language-jsx">import { useHistory } from 'react-router-dom';<font></font>
+<font></font>
+function FormSubmitButton() {<font></font>
+    let history = useHistory();<font></font>
+<font></font>
+    function handleSubmit() {<font></font>
+        performAsyncOperation().then(() =&gt; {<font></font>
+            history.push('/success'); // Navigate programmatically<font></font>
+        });<font></font>
+    }<font></font>
+<font></font>
+    return &lt;button onClick={handleSubmit}&gt;Submit&lt;/button&gt;;<font></font>
+}<font></font>
+</code></pre>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nested Routing</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nested routing-ը թույլ է տալիս ստեղծել երթուղիների հիերարխիա, որն օգտակար է տարբեր բաղադրիչների կամ ենթաբաղադրիչների միջև հետևողական դասավորություն ունենալու համար:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nested Routing-ի օրինակ.</font></font></strong></p>
+<pre><code class="language-jsx">&lt;Route path="/user" component={UserLayout}&gt;<font></font>
+    &lt;Route path="/user/profile" component={UserProfile} /&gt;<font></font>
+    &lt;Route path="/user/settings" component={UserSettings} /&gt;<font></font>
+&lt;/Route&gt;<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս կարգավորումը </font></font><code>UserLayout</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կարող է ներառել նավագոտի կամ կողագոտի, որը ընդհանուր է օգտատերերի հետ կապված բոլոր երթուղիների համար, մինչդեռ </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">և </font></font><code>UserSettings</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">մշակում է հատուկ դիտումներ:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պաշտպանված երթուղիներ և նույնականացում</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պաշտպանված երթուղիները երթուղիներ են, որոնք պահանջում են օգտատիրոջ իսկությունը: React Router-ը չի ներառում ներկառուցված աջակցություն պաշտպանված երթուղիների համար, բայց դուք կարող եք հեշտությամբ իրականացնել դրանք՝ համատեղելով ձեր իսկորոշման տրամաբանությունը երթուղու մատուցման հետ:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պաշտպանված երթուղու օրինակ.</font></font></strong></p>
+<pre><code class="language-jsx">import { Route, Redirect } from 'react-router-dom';<font></font>
+<font></font>
+function ProtectedRoute({ component: Component, ...rest }) {<font></font>
+    return (<font></font>
+        &lt;Route {...rest} render={<font></font>
+            props =&gt; isAuthenticated() ? (<font></font>
+                &lt;Component {...props} /&gt;<font></font>
+            ) : (<font></font>
+                &lt;Redirect to='/login' /&gt;<font></font>
+            )<font></font>
+        } /&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս օրինակում </font></font><code>ProtectedRoute</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ստուգում է, թե արդյոք օգտագործողը վավերացված է: Եթե &ZeroWidthSpace;&ZeroWidthSpace;այո, ապա այն ցուցադրում է պահանջվող բաղադրիչը. եթե ոչ, այն վերահղում է օգտվողին մուտքի էջ:</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս առաջադեմ երթուղային տեխնիկան հնարավորություն է տալիս ստեղծելու բարդ, օգտագործողի համար հարմար և անվտանգ հավելվածներ՝ օգտագործելով React Router-ը՝ բարելավելով ինչպես մշակողի, այնպես էլ օգտագործողի փորձը՝ տրամադրելով դինամիկ, պայմանական և ներկառուցված երթուղային լուծումներ:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Գործնական վարժություն - Բազմէջանոց SPA-ի կառուցում</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Զորավարժությունների ակնարկ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժության ընթացքում ուսանողները կստեղծեն փոքրիկ Single Page Application (SPA), որը ներառում է բազմաթիվ բաղադրիչներ, ինչպիսիք են գլխավոր էջը, մասին էջը, կոնտակտային ձևը և օգտվողի պրոֆիլները: Հավելվածի յուրաքանչյուր մաս հասանելի կլինի տարբեր երթուղիներով՝ ցույց տալով հաճախորդի կողմից երթուղիների ուժն ու ճկունությունը React Router-ով:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վարժության նպատակները.</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ծանոթացեք React Router-ին.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Հասկացեք, թե ինչպես կարգավորել և կառավարել երթուղիները՝ օգտագործելով React Router-ը:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրականացնել դինամիկ և ներկառուցված երթուղում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> օգտագործեք դինամիկ երթուղիներ օգտատերերի պրոֆիլների համար և ներկառուցված երթուղիներ՝ կապված դիտումները կազմակերպելու համար:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործեք ծրագրային նավարկություն.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> կարգավորեք վերահղումը իրադարձություններից հետո, ինչպիսիք են ձևաթղթերի ներկայացումները:</font></font></li>
+</ol>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրականացման առանձնահատկությունները</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1. Կարգավորեք հիմնական երթուղին.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նախ, համոզվեք, որ հավելվածն ունի անհրաժեշտ էջեր՝ Գլխավոր, Մասին, Կոնտակտ և Օգտատիրոջ պրոֆիլ:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Տեղադրեք React Router-ը հավելվածում՝ փաթեթավորելով ամբողջ հավելվածը մի </font></font><code>&lt;BrowserRouter&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օրինակ:</font></font></strong></p>
+<pre><code class="language-jsx">import React from 'react';<font></font>
+import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';<font></font>
+import Home from './Home';<font></font>
+import About from './About';<font></font>
+import Contact from './Contact';<font></font>
+import UserProfile from './UserProfile';<font></font>
+<font></font>
+function App() {<font></font>
+  return (<font></font>
+    &lt;Router&gt;<font></font>
+      &lt;div&gt;<font></font>
+        &lt;nav&gt;<font></font>
+          &lt;ul&gt;<font></font>
+            &lt;li&gt;&lt;NavLink exact to="/" activeClassName="active"&gt;Home&lt;/NavLink&gt;&lt;/li&gt;<font></font>
+            &lt;li&gt;&lt;NavLink to="/about" activeClassName="active"&gt;About&lt;/NavLink&gt;&lt;/li&gt;<font></font>
+            &lt;li&gt;&lt;NavLink to="/contact" activeClassName="active"&gt;Contact&lt;/NavLink&gt;&lt;/li&gt;<font></font>
+          &lt;/ul&gt;<font></font>
+        &lt;/nav&gt;<font></font>
+        &lt;Switch&gt;<font></font>
+          &lt;Route path="/" exact component={Home} /&gt;<font></font>
+          &lt;Route path="/about" component={About} /&gt;<font></font>
+          &lt;Route path="/contact" component={Contact} /&gt;<font></font>
+          &lt;Route path="/user/:userId" component={UserProfile} /&gt;<font></font>
+        &lt;/Switch&gt;<font></font>
+      &lt;/div&gt;<font></font>
+    &lt;/Router&gt;<font></font>
+  );<font></font>
+}<font></font>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2. Դինամիկ երթուղի օգտատերերի պրոֆիլների համար.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրականացրեք դինամիկ երթուղում՝ օգտատերերի պրոֆիլները մշակելու համար, որտեղ օգտատիրոջ ID-ն վերցված է URL-ից:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Սա թույլ է տալիս </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">բաղադրիչին առբերել և ցուցադրել տվյալներ՝ հիմնված տրամադրված ID-ի վրա:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3. Nested Routing:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործեք Nested Routing-ը About բաժնում, եթե այն ունի բազմաթիվ ենթաբաժիններ, ինչպիսիք են ընկերության պատմությունը, թիմը և այլն:</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս մոտեցումը օգնում է կազմակերպել բարդ կառույցներ մեկ երթուղու շրջանակներում՝ պահպանելով մաքուր և կառավարելի ծածկագրի կառուցվածքը:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nested Routing-ի օրինակ.</font></font></strong></p>
+<pre><code class="language-jsx">&lt;Route path="/about" component={About}&gt;<font></font>
+  &lt;Route path="/about/history" component={History} /&gt;<font></font>
+  &lt;Route path="/about/team" component={Team} /&gt;<font></font>
+&lt;/Route&gt;<font></font>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4. Ծրագրային նավարկություն ձևի ներկայացումից հետո.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կոնտակտային ձևում օգտագործեք </font></font><code>useHistory</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React Router-ի կեռը՝ ծրագրային կերպով նավարկելու շնորհակալական էջ կամ վերադառնալու գլխավոր էջ՝ ձևը ներկայացնելուց հետո:</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օրինակ:</font></font></strong></p>
+<pre><code class="language-jsx">import { useHistory } from 'react-router-dom';<font></font>
+<font></font>
+function ContactForm() {<font></font>
+  let history = useHistory();<font></font>
+<font></font>
+  function handleSubmit(event) {<font></font>
+    event.preventDefault();<font></font>
+    // Form processing logic here<font></font>
+    history.push('/thank-you');  // Redirect to thank-you page<font></font>
+  }<font></font>
+<font></font>
+  return (<font></font>
+    &lt;form onSubmit={handleSubmit}&gt;<font></font>
+      {/* form fields */}<font></font>
+      &lt;button type="submit"&gt;Submit&lt;/button&gt;<font></font>
+    &lt;/form&gt;<font></font>
+  );<font></font>
+}<font></font>
+</code></pre>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Նավիգացիոն հղումների ավելացում</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտագործելով </font></font><code>NavLink</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հիմնական նավիգացիայի համար.</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կիրառել </font></font><code>NavLink</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">նավիգացիոն մենյուի համար, որպեսզի օգտվողները կարողանան պարզել, թե որ էջն են նրանք ներկայումս դիտում` հիմնվելով ակտիվ հղման ձևավորման վրա:</font></font></li>
+<li><code>NavLink</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">հեշտացնում է ոճավորման ատրիբուտներ ավելացնել ցուցադրված տարրին, երբ այն համապատասխանում է ընթացիկ URL-ին:</font></font></li>
+</ul>
+<pre><code class="language-jsx">&lt;NavLink to="/about" activeClassName="active"&gt;About&lt;/NavLink&gt;
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս վարժությունում ուսանողները գործնականում կկիրառեն React Router-ի հետ աշխատելու հիմնարար ասպեկտները SPA-ում: Նրանք կսովորեն, թե ինչպես արդյունավետ կառավարել երթուղիները, ներառյալ դինամիկ և ներկառուցված երթուղիները, ինչպես նաև կարգավորել ծրագրային նավարկմամբ վարքագիծը ներկայացնելուց հետո՝ միաժամանակ ապահովելով, որ օգտվողները կարող են հեշտությամբ նավարկվել </font></font><code>NavLink</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. Այս համապարփակ վարժությունը նպատակ ունի ամրապնդել նրանց հասկացողությունն ու հմտությունները React Router-ով բարդ հավելվածների ճարտարապետության կառավարման գործում:</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ամփոփում և հարց ու պատասխան</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Երբ մենք ավարտում ենք մեր նիստը React Router-ի և դրա դերի վերաբերյալ դինամիկ Single Page Applications (SPAs) կառուցման գործում, եկեք ամփոփենք այն հիմնական կետերը, որոնք մենք անդրադարձել ենք այսօր և բացենք հարցերի համար:</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Վերանայում և ամփոփում</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React Router-ի հիմնական առանձնահատկությունները.</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հաճախորդի կողմից երթուղղում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> մենք քննարկեցինք, թե ինչպես է React Router-ը հնարավորություն տալիս նավիգացիան հավելվածի ներսում՝ առանց էջի վերաբեռնում պահանջելու, ինչը բարելավում է օգտատիրոջ փորձը և ընդօրինակում է աշխատասեղանի հավելվածի զգացողությունը վեբ բրաուզերում:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Դինամիկ երթուղիավորում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> մենք ուսումնասիրեցինք, թե ինչպես օգտագործել երթուղու պարամետրերը դինամիկ ուղիներ ստեղծելու համար՝ թույլ տալով բաղադրիչներին բեռնել և ցուցադրել բովանդակությունը՝ հիմնված URL-ի պարամետրերի վրա: Այս հնարավորությունը շատ կարևոր է այնպիսի ծրագրերի համար, ինչպիսիք են էլեկտրոնային առևտրի կայքերը կամ օգտվողների պրոֆիլները, որտեղ բովանդակությունը փոխվում է՝ կախված օգտագործողի փոխազդեցությունից կամ տվյալների պահանջներից:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ներդրված երթուղիավորում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> լուսաբանվել է այլ երթուղիներում երթուղիներ տեղադրելու հնարավորությունը, որն օգտակար է օգտատերերի բարդ միջերեսներ ստեղծելու համար՝ հետևողական դասավորություններով մի քանի դիտումներով, ինչպիսիք են բազմաթիվ բաժիններով վահանակները:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ծրագրային նավարկություն.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> մենք ցույց տվեցինք, թե ինչպես կարելի է նավարկել ծրագրային կերպով՝ օգտագործելով </font></font><code>useHistory</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">կեռիկը, ինչը կարևոր է այն սցենարների համար, որտեղ նավիգացիան պետք է գործարկվի կիրառական տրամաբանությամբ, օրինակ՝ ձևաթուղթ ներկայացնելը կամ ասինխրոն գործողություն լրացնելը:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Պաշտպանված երթուղիներ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Պաշտպանված երթուղիների հայեցակարգը ներդրվել է ապահովելու համար, որ ձեր հավելվածի որոշ մասեր հասանելի են միայն վավերացված օգտատերերի համար՝ ընդգծելով նույնականացման հոսքերի ինտեգրումը հաճախորդի կողմից երթուղղման շրջանակներում:</font></font></li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հաճախորդի կողմից ուղղորդման առավելությունները.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Կատարողականի բարելավում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> նվազեցնում է սերվերի բեռը և ցանցով փոխանցվող տվյալների քանակը՝ հանգեցնելով ավելի արագ փոխազդեցությունների և էջի անցումների:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Օգտատիրոջ ընդլայնված փորձառություն.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ապահովում է հարթ, անխափան փոխազդեցություն, որը նման է բնօրինակ հավելվածին, խուսափելով էջի վերաբեռնումից:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Մտահոգությունների տարանջատում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> հեշտացնում է ավելի մաքուր տարանջատումը առջևի և հետևի մասի միջև: Back-end-ը կարող է կենտրոնանալ բացառապես տվյալների կառավարման վրա API-ների միջոցով, մինչդեռ առջևի վերջը ինքնուրույն կարգավորում է օգտատիրոջ միջերեսը և փորձառությունները:</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Հարց ու պատասխան նիստ</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այժմ, եկեք անցնենք մեր հարցուպատասխանի նիստին: Սա ձեր հնարավորությունն է հարցեր տալու այսօրվա նյութից որևէ բանի մասին, որը կարող է դեռևս անհասկանալի լինել կամ հետագայում ուսումնասիրել, թե ինչպես կարող է React Router-ը օգտագործվել ձեր կոնկրետ նախագծերում: Անկախ նրանից, թե դուք տեխնիկական հարցումներ ունեք իրականացման մանրամասների, երթուղավորման լավագույն փորձի կամ React Router-ի ռազմավարական օգտագործման վերաբերյալ տարբեր տեսակի հավելվածներում, ազատ զգալ հարցրեք:</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Քննարկման հնարավոր թեմաները կարող են ներառել.</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Լավագույն փորձ</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Անվտանգության նկատառումներ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ինչպե՞ս կարգավորել անվտանգությունը հաճախորդի կողմից երթուղղման ժամանակ, հատկապես զգայուն տվյալների պաշտպանության և չարտոնված մուտքը կանխելու առումով:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Արդյունավետության օպտիմիզացում.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> SPA-ներում կատարողականի օպտիմալացման տեխնիկա՝ օգտագործելով React Router-ը, օրինակ՝ ծույլ բեռնման բաղադրիչները:</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Իրական աշխարհի հավելվածներ.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Իրական աշխարհի սցենարների քննարկում, որտեղ բարդ երթուղավորումը մարտահրավեր է եղել, և թե ինչպես է React Router-ը օգնել լուծել այդ խնդիրները:</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Այս նիստը նպատակ ունի ապահովելու, որ դուք հեռանաք React Router-ի համապարփակ ըմբռնմամբ և պատրաստ եք արդյունավետորեն կիրառել երթուղային լուծումներ ձեր նախագծերում: Ձեր հարցերը կարող են նաև օգնել ուրիշներին՝ պարզաբանելով ընդհանուր կասկածները և խրախուսելով ավելի խորը ուսումնասիրել քննարկված թեմաները:</font></font></p>
+		</div>
+
+
+
+
+
+
+		<div id="html_ru" class="html" style="display:none">
+<h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Урок 20: Маршрутизация в React с помощью React Router</font></font></h2>
+<hr>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Введение в маршрутизацию на стороне клиента</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Что такое маршрутизация на стороне клиента?</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Маршрутизация на стороне клиента — это фундаментальная концепция современной веб-разработки, особенно актуальная в контексте одностраничных приложений (SPA). В отличие от традиционной маршрутизации на стороне сервера, где каждый новый запрос страницы инициирует полную перезагрузку страницы, маршрутизация на стороне клиента обрабатывает навигационные действия в браузере, не требуя обновления страницы. Этот подход меняет способ загрузки и отображения контента, когда пользователи взаимодействуют с приложением, в значительной степени полагаясь на JavaScript для управления изменениями URL-адресов и просмотра рендеринга.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сравнение с маршрутизацией на стороне сервера:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Маршрутизация на стороне сервера:</font></font></strong><ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">При каждом изменении маршрута на сервер отправляется новый запрос.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сервер обрабатывает запрос, выполняет необходимые операции (например, запрос к базе данных) и возвращает клиенту полностью обработанную страницу.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Этот процесс может быть медленнее из-за времени прохождения туда и обратно, особенно если необходимо обновить только часть страницы.</font></font></li>
+</ul>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Маршрутизация на стороне клиента:</font></font></strong><ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Навигация между различными частями приложения не требует обращения к серверу для получения нового HTML.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Вместо этого маршрутизация обрабатывается внутри JavaScript, загруженного на страницу.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Браузер не перезагружает всю страницу, а динамически обновляет контент, который необходимо изменить.</font></font></li>
+</ul>
+</li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Роль в SPA.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+В одностраничных приложениях (SPA) маршрутизация на стороне клиента играет ключевую роль. SPA загружают одну HTML-страницу и динамически обновляют эту страницу по мере взаимодействия пользователя с приложением. Маршрутизаторы на стороне клиента в средах JavaScript, таких как React, Angular или Vue.js, управляют этими обновлениями без дополнительной загрузки страниц, что делает работу более плавной и более похожей на настольное приложение.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Преимущества маршрутизации на стороне клиента</font></font></h4>
+<ol>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Более быстрые переходы:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Поскольку ресурсы загружаются только один раз во время начальной загрузки страницы, а асинхронно могут быть получены только данные без обновления страницы, переходы между страницами/представлениями обычно происходят намного быстрее.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Уменьшает объем данных, передаваемых по сети.</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Улучшенный пользовательский опыт:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Интерфейс кажется более плавным и отзывчивым. При перезагрузке страницы не мигает, что делает приложение похожим на родное.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Поддерживает состояние и контекст пользователя без необходимости сложной обработки на стороне сервера.</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Разделение обязанностей фронтенда и бэкенда:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Маршрутизация на стороне клиента позволяет разработчикам отделить проблемы представления пользовательского интерфейса от обработки и обработки данных на сервере.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Серверную часть можно упростить для обслуживания API (набора определений подпрограмм, протоколов и инструментов для создания программного обеспечения и приложений), которые использует внешний интерфейс. Этот архитектурный стиль широко известен как подход «сначала API», при котором сервер предоставляет API-интерфейсы RESTful или GraphQL.</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эффективное управление данными:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Поскольку клиент обрабатывает маршрутизацию пользовательского интерфейса, перед сервером в первую очередь стоит задача управления данными, что может привести к более эффективной производительности сервера.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Позволяет использовать стратегии кэширования на стороне клиента, чтобы даже снизить требования к выборке данных.</font></font></li>
+</ul>
+</li>
+<li><p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Расширенные возможности современных браузеров:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Маршрутизация на стороне клиента использует возможности современных браузеров, такие как History API, который позволяет манипулировать историей сеансов браузера, которая является частью спецификации HTML5.</font></font></li>
+</ul>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Таким образом, маршрутизация на стороне клиента является ключевым компонентом создания быстрых и интерактивных SPA. Это улучшает взаимодействие с пользователем, сокращая время загрузки и делая приложения более плавными. Однако это требует тщательного рассмотрения стратегий маршрутизации, потенциального воздействия на SEO и начальной производительности загрузки.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Начало работы с React Router</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React Router — это стандартная библиотека для маршрутизации в приложениях React. Он позволяет реализовать динамическую маршрутизацию в веб-приложении, что означает, что маршрутизация происходит по мере взаимодействия пользователя с приложением без перезагрузки страницы. Давайте углубимся в то, как настроить React Router в вашем проекте, разберемся с его основными компонентами и увидим его в действии.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Установка React Router</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">React Router</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> поставляется в двух вариантах в зависимости от целевой среды:</font></font></p>
+<ol>
+<li><p><strong><code>react-router-dom</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">для веб-приложений:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Этот пакет предназначен для веб-приложений и использует API истории HTML5 для синхронизации вашего пользовательского интерфейса с URL-адресом.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Установка через npm:</font></font></strong><pre><code class="language-bash">npm install react-router-dom
+</code></pre>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Монтаж с помощью пряжи:</font></font></strong><pre><code class="language-bash">yarn add react-router-dom
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong><code>react-router-native</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">для приложений React Native:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Этот пакет похож на </font></font><code>react-router-dom</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">приложения React Native, но специально разработан для них и обрабатывает навигацию так, как это подходит для мобильных приложений.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Установка через npm:</font></font></strong><pre><code class="language-bash">npm install react-router-native
+</code></pre>
+</li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Монтаж с помощью пряжи:</font></font></strong><pre><code class="language-bash">yarn add react-router-native
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Оба пакета имеют схожие концепции и компоненты, но оптимизированы для соответствующих сред.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Основные компоненты React Router</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1. </font></font><code>BrowserRouter</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A </font></font><code>&lt;BrowserRouter&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">использует API истории HTML5 (pushState, replaceState и событие popstate), чтобы синхронизировать ваш пользовательский интерфейс с URL-адресом.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Его следует использовать в качестве оболочки для всей части вашего приложения, которой должен управлять React Router.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2. </font></font><code>Route</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Компонент </font></font><code>&lt;Route&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">используется для объявления того, что должно отображаться на основе URL-пути. Это основной строительный блок React Router.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Каждый маршрут отображает путь к компоненту.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3. </font></font><code>Link</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>NavLink</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></strong></p>
+<ul>
+<li><code>&lt;Link&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">компоненты используются для создания ссылок в вашем приложении. Они работают как </font></font><code>&lt;a&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">теги в HTML, но предназначены для работы с навигацией внутри приложения React Router.</font></font></li>
+<li><code>&lt;NavLink&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">похож на </font></font><code>&lt;Link&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, но включает атрибуты стиля, которые помогают автоматически стилизовать активную ссылку. Вы можете указать стили или классы, которые будут применяться к ссылке, если она соответствует текущему URL-адресу.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4. </font></font><code>Switch</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Компонент </font></font><code>&lt;Switch&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">используется для группировки </font></font><code>&lt;Route&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">компонентов и рендеринга только первого из них, который соответствует текущему местоположению. Это полезно для определения эксклюзивных маршрутов, где одновременно должен отображаться только один маршрут.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Настройка базового маршрута</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Настройка маршрутизации в приложении React с помощью React Router включает в себя упаковку вашего приложения в </font></font><code>&lt;BrowserRouter&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и последующее определение </font></font><code>&lt;Route&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">компонентов для разных путей. Вот простой пример:</font></font></p>
+<pre><code class="language-jsx">import React from 'react';<font></font>
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';<font></font>
+<font></font>
+function Home() {<font></font>
+  return &lt;h2&gt;Home Page&lt;/h2&gt;;<font></font>
+}<font></font>
+<font></font>
+function About() {<font></font>
+  return &lt;h2&gt;About Page&lt;/h2&gt;;<font></font>
+}<font></font>
+<font></font>
+function App() {<font></font>
+  return (<font></font>
+    &lt;BrowserRouter&gt;<font></font>
+      &lt;div&gt;<font></font>
+        &lt;nav&gt;<font></font>
+          &lt;ul&gt;<font></font>
+            &lt;li&gt;<font></font>
+              &lt;Link to="/"&gt;Home&lt;/Link&gt;<font></font>
+            &lt;/li&gt;<font></font>
+            &lt;li&gt;<font></font>
+              &lt;Link to="/about"&gt;About&lt;/Link&gt;<font></font>
+            &lt;/li&gt;<font></font>
+          &lt;/ul&gt;<font></font>
+        &lt;/nav&gt;<font></font>
+<font></font>
+        {/* A &lt;Switch&gt; looks through its children &lt;Route&gt;s and<font></font>
+            renders the first one that matches the current URL. */}<font></font>
+        &lt;Switch&gt;<font></font>
+          &lt;Route path="/about"&gt;<font></font>
+            &lt;About /&gt;<font></font>
+          &lt;/Route&gt;<font></font>
+          &lt;Route path="/"&gt;<font></font>
+            &lt;Home /&gt;<font></font>
+          &lt;/Route&gt;<font></font>
+        &lt;/Switch&gt;<font></font>
+      &lt;/div&gt;<font></font>
+    &lt;/BrowserRouter&gt;<font></font>
+  );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этой настройке:</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Компонент </font></font><code>App</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">содержит </font></font><code>&lt;BrowserRouter&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">обертку.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Внутри есть простая панель навигации со ссылками, определенными с помощью </font></font><code>&lt;Link&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+<li><code>&lt;Switch&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">и </font></font><code>&lt;Route&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">компоненты определяют сопоставление путей к компонентам, обеспечивая отображение только соответствующего компонента, когда URL-адрес соответствует пути маршрута.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это базовое введение закладывает основу для создания более сложных навигационных структур в ваших приложениях React, используя мощные возможности маршрутизации, предоставляемые React Router.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Расширенные концепции маршрутизации</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Динамическая маршрутизация с параметрами маршрута</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Динамическая маршрутизация позволяет принимать различные части URL-адреса в качестве параметров, что делает сам маршрут гибким и способным обрабатывать различные входные значения. Этот метод особенно полезен, когда вам нужно отображать или обрабатывать различные данные на основе параметров URL-адреса, например отображать разные профили пользователей или сведения о продукте.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Определение динамических маршрутов:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Вы определяете динамические маршруты в React Router, указывая параметры в свойстве пути компонента </font></font><code>Route</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. Двоеточие </font></font><code>:</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">предшествует имени параметра.</font></font></li>
+</ul>
+<pre><code class="language-jsx">&lt;Route path="/profile/:userId" component={UserProfile} /&gt;
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этом примере </font></font><code>:userId</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">— это параметр маршрута, к которому можно получить доступ внутри </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">компонента для загрузки определенных пользовательских данных.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример с параметрами: страница профиля пользователя</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Давайте создадим простую страницу профиля пользователя, которая извлекает и отображает данные пользователя на основе идентификатора пользователя, переданного в качестве параметра URL-адреса.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Компонент UserProfile:</font></font></strong></p>
+<pre><code class="language-jsx">import React, { useState, useEffect } from 'react';<font></font>
+import { useParams } from 'react-router-dom';<font></font>
+<font></font>
+function UserProfile() {<font></font>
+    const [user, setUser] = useState(null);<font></font>
+    const { userId } = useParams();<font></font>
+<font></font>
+    useEffect(() =&gt; {<font></font>
+        fetch(`https://api.example.com/users/${userId}`)<font></font>
+            .then(response =&gt; response.json())<font></font>
+            .then(data =&gt; setUser(data));<font></font>
+    }, [userId]);<font></font>
+<font></font>
+    return (<font></font>
+        &lt;div&gt;<font></font>
+            {user ? (<font></font>
+                &lt;div&gt;<font></font>
+                    &lt;h1&gt;{user.name}&lt;/h1&gt;<font></font>
+                    &lt;p&gt;Email: {user.email}&lt;/p&gt;<font></font>
+                &lt;/div&gt;<font></font>
+            ) : (<font></font>
+                &lt;p&gt;Loading...&lt;/p&gt;<font></font>
+            )}<font></font>
+        &lt;/div&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Этот компонент использует </font></font><code>useParams</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">перехватчик из React Router для доступа к </font></font><code>userId</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">параметру. Затем он извлекает пользовательские данные из API на основе этого идентификатора.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Программная навигация</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Иногда вам необходимо выполнить действия навигации программно, например после отправки формы или успешной асинхронной операции.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Использование </font></font><code>useHistory</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">крючка:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Хук </font></font><code>useHistory</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">дает вам доступ к экземпляру истории, который вы можете использовать для навигации.</font></font></li>
+</ul>
+<pre><code class="language-jsx">import { useHistory } from 'react-router-dom';<font></font>
+<font></font>
+function FormSubmitButton() {<font></font>
+    let history = useHistory();<font></font>
+<font></font>
+    function handleSubmit() {<font></font>
+        performAsyncOperation().then(() =&gt; {<font></font>
+            history.push('/success'); // Navigate programmatically<font></font>
+        });<font></font>
+    }<font></font>
+<font></font>
+    return &lt;button onClick={handleSubmit}&gt;Submit&lt;/button&gt;;<font></font>
+}<font></font>
+</code></pre>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Вложенная маршрутизация</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Вложенная маршрутизация позволяет создавать иерархию маршрутов, что полезно для обеспечения единообразной компоновки различных компонентов или подкомпонентов.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример вложенной маршрутизации:</font></font></strong></p>
+<pre><code class="language-jsx">&lt;Route path="/user" component={UserLayout}&gt;<font></font>
+    &lt;Route path="/user/profile" component={UserProfile} /&gt;<font></font>
+    &lt;Route path="/user/settings" component={UserSettings} /&gt;<font></font>
+&lt;/Route&gt;<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этой настройке </font></font><code>UserLayout</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">можно включить панель навигации или боковую панель, общую для всех маршрутов, связанных с пользователем, а </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">также </font></font><code>UserSettings</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">обрабатывать определенные представления.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Защищенные маршруты и аутентификация</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Защищенные маршруты — это маршруты, требующие аутентификации пользователя. React Router не включает встроенную поддержку защищенных маршрутов, но вы можете легко реализовать их, объединив логику аутентификации с рендерингом маршрутов.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример защищенного маршрута:</font></font></strong></p>
+<pre><code class="language-jsx">import { Route, Redirect } from 'react-router-dom';<font></font>
+<font></font>
+function ProtectedRoute({ component: Component, ...rest }) {<font></font>
+    return (<font></font>
+        &lt;Route {...rest} render={<font></font>
+            props =&gt; isAuthenticated() ? (<font></font>
+                &lt;Component {...props} /&gt;<font></font>
+            ) : (<font></font>
+                &lt;Redirect to='/login' /&gt;<font></font>
+            )<font></font>
+        } /&gt;<font></font>
+    );<font></font>
+}<font></font>
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этом примере </font></font><code>ProtectedRoute</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">проверяется, прошел ли пользователь аутентификацию. Если да, он отображает запрошенный компонент; в противном случае он перенаправляет пользователя на страницу входа.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Эти передовые методы маршрутизации позволяют создавать сложные, удобные и безопасные приложения с помощью React Router, улучшая работу как разработчиков, так и пользователей за счет предоставления решений динамической, условной и вложенной маршрутизации.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Практическое упражнение — создание многостраничного SPA</font></font></h3>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обзор упражнений</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этом упражнении учащиеся создадут небольшое одностраничное приложение (SPA), которое включает в себя несколько компонентов, таких как домашняя страница, страница «О нас», контактная форма и профили пользователей. Доступ к каждой части приложения будет осуществляться по отдельным маршрутам, что демонстрирует мощь и гибкость маршрутизации на стороне клиента с помощью React Router.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цели упражнения:</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ознакомьтесь с React Router:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> поймите, как настраивать маршруты и управлять ими с помощью React Router.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Реализация динамической и вложенной маршрутизации.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Используйте динамическую маршрутизацию для профилей пользователей и вложенные маршруты для организации связанных представлений.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Используйте программную навигацию:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> обрабатывайте перенаправление после таких событий, как отправка формы.</font></font></li>
+</ol>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Реализация функций</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1. Настройка базовой маршрутизации:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сначала убедитесь, что в приложении есть необходимые страницы: «Главная», «О программе», «Контакты» и «Профиль пользователя».</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Настройте React Router в приложении, обернув все приложение в файл </font></font><code>&lt;BrowserRouter&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример:</font></font></strong></p>
+<pre><code class="language-jsx">import React from 'react';<font></font>
+import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';<font></font>
+import Home from './Home';<font></font>
+import About from './About';<font></font>
+import Contact from './Contact';<font></font>
+import UserProfile from './UserProfile';<font></font>
+<font></font>
+function App() {<font></font>
+  return (<font></font>
+    &lt;Router&gt;<font></font>
+      &lt;div&gt;<font></font>
+        &lt;nav&gt;<font></font>
+          &lt;ul&gt;<font></font>
+            &lt;li&gt;&lt;NavLink exact to="/" activeClassName="active"&gt;Home&lt;/NavLink&gt;&lt;/li&gt;<font></font>
+            &lt;li&gt;&lt;NavLink to="/about" activeClassName="active"&gt;About&lt;/NavLink&gt;&lt;/li&gt;<font></font>
+            &lt;li&gt;&lt;NavLink to="/contact" activeClassName="active"&gt;Contact&lt;/NavLink&gt;&lt;/li&gt;<font></font>
+          &lt;/ul&gt;<font></font>
+        &lt;/nav&gt;<font></font>
+        &lt;Switch&gt;<font></font>
+          &lt;Route path="/" exact component={Home} /&gt;<font></font>
+          &lt;Route path="/about" component={About} /&gt;<font></font>
+          &lt;Route path="/contact" component={Contact} /&gt;<font></font>
+          &lt;Route path="/user/:userId" component={UserProfile} /&gt;<font></font>
+        &lt;/Switch&gt;<font></font>
+      &lt;/div&gt;<font></font>
+    &lt;/Router&gt;<font></font>
+  );<font></font>
+}<font></font>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2. Динамическая маршрутизация для профилей пользователей:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Внедрите динамическую маршрутизацию для обработки профилей пользователей, где идентификатор пользователя считывается из URL-адреса.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Это позволяет </font></font><code>UserProfile</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">компоненту получать и отображать данные на основе предоставленного идентификатора.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3. Вложенная маршрутизация:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Используйте вложенную маршрутизацию в разделе «О программе», если он имеет несколько подразделов, например историю компании, команду и т.&nbsp;д.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Этот подход помогает организовывать сложные структуры в рамках одного маршрута, сохраняя чистую и управляемую структуру кода.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример вложенной маршрутизации:</font></font></strong></p>
+<pre><code class="language-jsx">&lt;Route path="/about" component={About}&gt;<font></font>
+  &lt;Route path="/about/history" component={History} /&gt;<font></font>
+  &lt;Route path="/about/team" component={Team} /&gt;<font></font>
+&lt;/Route&gt;<font></font>
+</code></pre>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4. Программная навигация после отправки формы:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В контактной форме используйте </font></font><code>useHistory</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">перехватчик из React Router для программного перехода на страницу благодарности или обратно на домашнюю страницу после отправки формы.</font></font></li>
+</ul>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Пример:</font></font></strong></p>
+<pre><code class="language-jsx">import { useHistory } from 'react-router-dom';<font></font>
+<font></font>
+function ContactForm() {<font></font>
+  let history = useHistory();<font></font>
+<font></font>
+  function handleSubmit(event) {<font></font>
+    event.preventDefault();<font></font>
+    // Form processing logic here<font></font>
+    history.push('/thank-you');  // Redirect to thank-you page<font></font>
+  }<font></font>
+<font></font>
+  return (<font></font>
+    &lt;form onSubmit={handleSubmit}&gt;<font></font>
+      {/* form fields */}<font></font>
+      &lt;button type="submit"&gt;Submit&lt;/button&gt;<font></font>
+    &lt;/form&gt;<font></font>
+  );<font></font>
+}<font></font>
+</code></pre>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Добавление навигационных ссылок</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Использование </font></font><code>NavLink</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">для основной навигации:</font></font></strong></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Реализуйте </font></font><code>NavLink</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">меню навигации, чтобы пользователи могли определять, какую страницу они просматривают в данный момент, на основе стиля активной ссылки.</font></font></li>
+<li><code>NavLink</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">позволяет легко добавлять атрибуты стиля к отображаемому элементу, если он соответствует текущему URL-адресу.</font></font></li>
+</ul>
+<pre><code class="language-jsx">&lt;NavLink to="/about" activeClassName="active"&gt;About&lt;/NavLink&gt;
+</code></pre>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В этом упражнении студенты примут на практике основные аспекты работы с React Router в SPA. Они научатся эффективно управлять маршрутами, включая динамические и вложенные маршруты, а также управлять поведением после отправки с помощью программной навигации, при этом гарантируя, что пользователи смогут легко перемещаться с помощью </font></font><code>NavLink</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. Это комплексное упражнение направлено на закрепление их понимания и навыков управления сложными архитектурами приложений с помощью React Router.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Подведение итогов и вопросы и ответы</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Завершая нашу сессию о React Router и его роли в создании динамических одностраничных приложений (SPA), давайте подведем итог ключевым моментам, которые мы рассмотрели сегодня, и предоставим слово для вопросов.</font></font></p>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Обзор и резюме</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ключевые особенности React Router:</font></font></strong></p>
+<ol>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Маршрутизация на стороне клиента.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Мы обсудили, как React Router обеспечивает навигацию внутри приложения без необходимости перезагрузки страниц, что улучшает взаимодействие с пользователем и имитирует ощущения от настольного приложения в веб-браузере.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Динамическая маршрутизация.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Мы рассмотрели, как использовать параметры маршрута для создания динамических путей, позволяющих компонентам получать и отображать контент на основе параметров URL-адреса. Эта возможность имеет решающее значение для таких приложений, как сайты электронной коммерции или профили пользователей, где контент меняется в зависимости от взаимодействия с пользователем или требований к данным.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Вложенная маршрутизация.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Была рассмотрена возможность вложения маршрутов в другие маршруты, что полезно для создания сложных пользовательских интерфейсов с согласованным макетом в нескольких представлениях, например информационных панелей с несколькими разделами.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Программная навигация.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Мы продемонстрировали, как программно перемещаться с помощью перехватчика </font></font><code>useHistory</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, что важно для сценариев, в которых навигация должна запускаться логикой приложения, например при отправке формы или выполнении асинхронной операции.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Защищенные маршруты.</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Концепция защищенных маршрутов была введена для обеспечения того, чтобы определенные части вашего приложения были доступны только аутентифицированным пользователям, что подчеркивает интеграцию потоков аутентификации в маршрутизацию на стороне клиента.</font></font></li>
+</ol>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Преимущества маршрутизации на стороне клиента:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Улучшения производительности:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> снижается нагрузка на сервер и объем данных, передаваемых по сети, что приводит к более быстрому взаимодействию и переходу между страницами.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Улучшенный пользовательский интерфейс:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> обеспечивает плавное и плавное взаимодействие, аналогичное встроенному приложению, без перезагрузки страниц.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Разделение задач:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> способствует более четкому разделению между интерфейсом и сервером. Серверная часть может сосредоточиться исключительно на управлении данными через API, в то время как интерфейсная часть обрабатывает пользовательский интерфейс и взаимодействие независимо.</font></font></li>
+</ul>
+<h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сессия вопросов и ответов</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Теперь давайте перейдем к сеансу вопросов и ответов. Это ваша возможность задать вопросы о чем-либо из сегодняшнего материала, который может быть еще неясен, или дополнительно изучить, как React Router можно использовать в ваших конкретных проектах. Если у вас есть технические вопросы о деталях реализации, лучших методах маршрутизации или стратегическом использовании React Router в различных типах приложений, не стесняйтесь спрашивать.</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Возможные темы для обсуждения могут включать:</font></font></strong></p>
+<ul>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Рекомендации:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> когда использовать хеш-маршрутизацию, а не маршрутизацию через браузер.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Вопросы безопасности:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> как обеспечить безопасность маршрутизации на стороне клиента, особенно с точки зрения защиты конфиденциальных данных и предотвращения несанкционированного доступа.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Оптимизация производительности:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> методы оптимизации производительности в SPA с использованием React Router, такие как отложенная загрузка компонентов.</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Реальные приложения:</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> обсуждение реальных сценариев, в которых сложная маршрутизация была проблемой, и того, как React Router помог решить эти проблемы.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Целью этого занятия является обеспечение того, чтобы вы получили полное представление о React Router и были готовы эффективно внедрять сложные решения маршрутизации в своих проектах. Ваши вопросы также могут помочь другим, проясняя общие сомнения и побуждая к более глубокому изучению обсуждаемых тем.</font></font></p>
+		</div>
+
+		
+
+
+
+
+
+
+
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js" integrity="sha512-LhccdVNGe2QMEfI3x4DVV3ckMRe36TfydKss6mJpdHjNFiV07dFpS2xzeZedptKZrwxfICJpez09iNioiSZ3hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+		<script>
+			let currentLanguage = 'en';
+			const copiedTexts = {
+				en: 'Copied to clipboard!',
+				hy: 'Պատճենվել է սեղմատախտակում:',
+				ru: 'Скопировано в буфер обмена!'
+			}
+
+			function copyCode(index) {
+				const code = document.getElementById('code-block-' + index).innerText;
+				const copied = document.getElementById('copied-' + index);
+			
+				navigator.clipboard.writeText(code).then(() => {
+					copied.innerText = copiedTexts[currentLanguage];
+				});
+
+				setTimeout(() => {
+					copied.innerText = '';
+				}, 3000);
+			}
+
+			// Initialize Highlight.js after the document is fully loaded
+			document.addEventListener('DOMContentLoaded', (event) => {
+				hljs.highlightAll();
+			});
+
+			let en = document.getElementById('en');
+			let hy = document.getElementById('hy');
+			let ru = document.getElementById('ru');
+			let html_en = document.getElementById('html_en');
+			let html_hy = document.getElementById('html_hy');
+			let html_ru = document.getElementById('html_ru');
+			
+			en.addEventListener('click', function(){
+				html_en.style.display = 'block';
+				html_hy.style.display = 'none';
+				html_ru.style.display = 'none';
+				
+				en.style.display = 'none';
+				hy.style.display = 'inline';
+				ru.style.display = 'inline';
+				
+				document.getElementsByTagName('title')[0].innerText = html_en.getElementsByTagName('h2')[0].innerText
+				currentLanguage = 'en';
+			});
+			
+			hy.addEventListener('click', function(){
+				html_en.style.display = 'none';
+				html_hy.style.display = 'block';
+				html_ru.style.display = 'none';
+				
+				en.style.display = 'inline';
+				hy.style.display = 'none';
+				ru.style.display = 'inline';
+				
+				document.getElementsByTagName('title')[0].innerText = html_hy.getElementsByTagName('h2')[0].innerText
+				
+				currentLanguage = 'hy';
+			});
+			
+			ru.addEventListener('click', function(){
+				html_en.style.display = 'none';
+				html_hy.style.display = 'none';
+				html_ru.style.display = 'block';
+				
+				en.style.display = 'inline';
+				hy.style.display = 'inline';
+				ru.style.display = 'none';
+				
+				document.getElementsByTagName('title')[0].innerText = html_ru.getElementsByTagName('h2')[0].innerText
+				currentLanguage = 'ru';
+			});
+
+			let presLang = {
+				en: document.querySelectorAll('#html_en pre'), 
+				hy: document.querySelectorAll('#html_hy pre'), 
+				ru: document.querySelectorAll('#html_ru pre')
+			};
+			
+			let key = 1;
+			
+			for(let lang in presLang){
+				let pres = presLang[lang];
+
+				pres.forEach(function(pre){
+					let copyText = lang == 'hy' ? 'Պատճենել' : lang == 'ru' ? 'Копировать' : 'Copy';
+					let card = document.createElement('div');
+					card.className = 'card bg-dark text-white';
+					pre.firstChild.id = 'code-block-' + key
+					let cardHtml = `
+						<div class="card-header">
+							<button class="btn btn-primary" onclick="copyCode(${key})">${copyText}</button>
+							<span id="copied-${key}" class="float-end"></span>
+						</div>
+						<div class="p-0">
+							<pre>${pre.innerHTML}</pre>
+						</div>
+					`
+					card.innerHTML = cardHtml;
+					
+					pre.parentNode.replaceChild(card, pre);
+					key++;
+				});
+			}
+			
+		</script>
+	</body>
+</html>
