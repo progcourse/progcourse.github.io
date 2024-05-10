@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lesson</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-dark.min.css">
+        <style>
+            code {
+                background-color: lightgray;
+                color: black;
+                padding: 2px 5px;
+                margin: 0 5px;
+				border: 1px solid gray;
+				border-radius: 5px;
+            }
+			#md{
+				display: none;
+			}
+        </style>
+    </head>
+    <body class="p-5">
+		<!-- <a href="#" id="hy" class="btn btn-info">Հայերեն</a>
+		<a href="#" id="en" class="btn btn-info" style="display:none">English</a>
+		<a href="#" id="ru" class="btn btn-info">Русский</a> -->
+		
+		<hr>
+
+
+
+
+
+
+		<div id="html_en" class="html">
+			<p>App.js</p>
+			<pre><code class="language-jsx">
+// App.js
+import React from 'react';
+import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
+import './App.css';
+import HomePage from './pages/HomPage';
+import ProductsPage from './pages/ProductsPage';
+import AboutPage from './pages/AboutPage';
+
+function App() {
+
+    return (
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Lesson 21<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">BrowserRouter</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">"/"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"nav-link"</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
+                            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">"/products"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"nav-link"</span>&gt;</span>Products<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
+                            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">"/about"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"nav-link"</span>&gt;</span>About<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
+                            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+                        <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
+
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Routes</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"/"</span> <span class="hljs-attr">exact</span> <span class="hljs-attr">Component</span>=<span class="hljs-string">{HomePage}</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"/products"</span> <span class="hljs-attr">Component</span>=<span class="hljs-string">{ProductsPage}</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"/about"</span> <span class="hljs-attr">Component</span>=<span class="hljs-string">{AboutPage}</span> /&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">Routes</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">BrowserRouter</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    );
+}
+
+export default App;
+			</code></pre>
+
+			<p>App.css</p>
+			<pre><code>
+<span class="hljs-comment">/* Add this CSS to your stylesheet */</span>
+<span class="hljs-selector-tag">nav</span> <span class="hljs-selector-tag">ul</span>{
+    <span class="hljs-attribute">display</span>: flex;
+}
+
+<span class="hljs-selector-tag">nav</span> <span class="hljs-selector-tag">li</span>{
+    <span class="hljs-attribute">list-style-type</span>: none;
+}
+
+<span class="hljs-selector-class">.nav-link</span> {
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">8px</span> <span class="hljs-number">12px</span>;
+    <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">10px</span>;
+    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#007bff</span>;
+    <span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;
+    <span class="hljs-attribute">text-decoration</span>: none;
+    <span class="hljs-attribute">border</span>: none;
+    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
+  }
+
+  <span class="hljs-selector-class">.nav-link</span><span class="hljs-selector-pseudo">:hover</span> {
+    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#0056b3</span>;
+  }
+
+  <span class="hljs-selector-id">#main</span> {
+    <span class="hljs-attribute">display</span>: flex;
+} 
+<span class="hljs-selector-id">#productList</span> {
+    <span class="hljs-attribute">display</span>: block;
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">600px</span>;
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">15%</span>;
+    <span class="hljs-attribute">overflow</span>: scroll;
+}
+  <span class="hljs-selector-class">.icon</span> {
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">30px</span>;
+}
+
+<span class="hljs-selector-class">.image</span> {
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">300px</span>;
+}
+			</code></pre>
+
+			<p>pages/HomePage.js</p>
+		<pre><code>
+<span class="hljs-comment">// HomePage.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">const</span> HomePage = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Welcome to our Website!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Check out our awesome products and learn more about us.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> HomePage;
+		</code></pre>
+
+		<p>pages/ProductsPage.js</p>
+
+		<pre><code><span class="hljs-comment">// ProductsPage.js</span>
+<span class="hljs-keyword">import</span> React, { useEffect, useState } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> Product <span class="hljs-keyword">from</span> <span class="hljs-string">'../components/Product'</span>;
+<span class="hljs-keyword">import</span> ProductInfo <span class="hljs-keyword">from</span> <span class="hljs-string">'../components/ProductInfo'</span>;
+
+<span class="hljs-keyword">const</span> ProductsPage = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> [productID, setProductID] = useState(<span class="hljs-number">1</span>);
+  <span class="hljs-keyword">const</span> [products, setProducts] = useState([]);
+  <span class="hljs-keyword">const</span> [searchQuery, setSearchQuery] = useState(<span class="hljs-string">''</span>);
+  <span class="hljs-keyword">const</span> [filteredProducts, setFilteredProducts] = useState([]);
+
+  useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    fetch(<span class="hljs-string">'https://fakestoreapi.com/products'</span>)
+      .then(<span class="hljs-function"><span class="hljs-params">res</span>=&gt;</span>res.json())
+      .then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> setProducts(data));
+  }, []);
+
+  <span class="hljs-comment">// Filter products based on search query</span>
+  useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-keyword">const</span> filtered = products.filter(<span class="hljs-function"><span class="hljs-params">product</span> =&gt;</span>
+      product.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredProducts(filtered);
+  }, [searchQuery, products]);
+
+  <span class="hljs-comment">// Handle search input change</span>
+  <span class="hljs-keyword">const</span> handleSearchInputChange = <span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> {
+    setSearchQuery(event.target.value);
+  };
+
+  <span class="hljs-keyword">const</span> openProduct = <span class="hljs-function">(<span class="hljs-params">id</span>) =&gt;</span> {
+    setProductID(id);
+  }
+
+    <span class="hljs-keyword">return</span> (
+      &lt;div&gt;
+        &lt;input
+          type="text"
+          placeholder="Search by product name"
+          value={searchQuery}
+          onChange={handleSearchInputChange}
+        /&gt;
+        &lt;div id="main"&gt;
+
+            &lt;div id="productList"&gt;
+                {
+                    filteredProducts.map((product, index) =&gt; {
+                        return (
+                            &lt;Product key={index} productID={product} onClick={openProduct}/&gt;
+                        )
+                    })
+                }
+            &lt;/div&gt;
+            &lt;ProductInfo productID={productID}/&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
+}
+
+export default ProductsPage;
+</code></pre>
+
+<p>components/Product.js</p>
+<pre><code><span class="hljs-comment">// Product.js</span>
+<span class="hljs-keyword">import</span> React, { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Product</span>(<span class="hljs-params">{ productID, onClick }</span>) </span>{
+    <span class="hljs-keyword">const</span> [product, setProduct] = useState({});
+
+    useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        setProduct(productID)
+    }, [productID]);
+
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+            {product ? (
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"product"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">{</span>'#'+ <span class="hljs-attr">product.id</span>} <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> onClick(product.id)}&gt;
+                        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">{product.image}</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">'Alternative text'</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'icon'</span>/&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{product.title}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            ) : (
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Loading...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            )}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    );
+}
+
+export default Product;</span>
+</code></pre>
+
+<p>components/ProductInfo.js</p>
+<pre><code><span class="hljs-comment">// ProductInfo.js</span>
+<span class="hljs-keyword">import</span> React, { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ProductInfo</span>(<span class="hljs-params">{ productID }</span>) </span>{
+    <span class="hljs-keyword">const</span> [product, setProduct] = useState({});
+
+    useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        fetch(<span class="hljs-string">`https://fakestoreapi.com/products/<span class="hljs-subst">${productID}</span>`</span>)
+            .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.json())
+            .then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+                <span class="hljs-built_in">console</span>.log(data);
+                setProduct(data);
+            });
+    }, [productID]); <span class="hljs-comment">// Dependency array includes productID to refetch when it changes</span>
+
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+            {product ? (
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{product.title}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Category: {product.category}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Description: {product.description}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">{product.image}</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">'Alternative text'</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'image'</span>/&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            ) : (
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Loading...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            )}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    );
+}
+
+export default ProductInfo;</span>
+</code></pre>
+
+<p>pages/AboutPage.js</p>
+<pre><code><span class="hljs-comment">// AboutPage.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">const</span> AboutPage = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>About Us<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>We are a company dedicated to providing high-quality products to our customers.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> AboutPage;
+</code></pre>
+		</div>
+
+
+
+
+
+		<div id="html_hy" class="html" style="display:none">
+		
+		</div>
+
+
+
+
+
+
+		<div id="html_ru" class="html" style="display:none">
+		
+		</div>
+
+		
+
+
+
+
+
+
+
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js" integrity="sha512-LhccdVNGe2QMEfI3x4DVV3ckMRe36TfydKss6mJpdHjNFiV07dFpS2xzeZedptKZrwxfICJpez09iNioiSZ3hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+
+		<script>
+			let currentLanguage = 'en';
+			const copiedTexts = {
+				en: 'Copied to clipboard!',
+				hy: 'Պատճենվել է սեղմատախտակում:',
+				ru: 'Скопировано в буфер обмена!'
+			}
+
+			function copyCode(index) {
+				const code = document.getElementById('code-block-' + index).innerText;
+				const copied = document.getElementById('copied-' + index);
+			
+				navigator.clipboard.writeText(code).then(() => {
+					copied.innerText = copiedTexts[currentLanguage];
+				});
+
+				setTimeout(() => {
+					copied.innerText = '';
+				}, 3000);
+			}
+
+			// Initialize Highlight.js after the document is fully loaded
+			document.addEventListener('DOMContentLoaded', (event) => {
+				hljs.highlightAll();
+			});
+
+			let en = document.getElementById('en');
+			let hy = document.getElementById('hy');
+			let ru = document.getElementById('ru');
+			let html_en = document.getElementById('html_en');
+			let html_hy = document.getElementById('html_hy');
+			let html_ru = document.getElementById('html_ru');
+			
+			en.addEventListener('click', function(){
+				html_en.style.display = 'block';
+				html_hy.style.display = 'none';
+				html_ru.style.display = 'none';
+				
+				en.style.display = 'none';
+				hy.style.display = 'inline';
+				ru.style.display = 'inline';
+				
+				document.getElementsByTagName('title')[0].innerText = html_en.getElementsByTagName('h2')[0].innerText
+				currentLanguage = 'en';
+			});
+			
+			hy.addEventListener('click', function(){
+				html_en.style.display = 'none';
+				html_hy.style.display = 'block';
+				html_ru.style.display = 'none';
+				
+				en.style.display = 'inline';
+				hy.style.display = 'none';
+				ru.style.display = 'inline';
+				
+				document.getElementsByTagName('title')[0].innerText = html_hy.getElementsByTagName('h2')[0].innerText
+				
+				currentLanguage = 'hy';
+			});
+			
+			ru.addEventListener('click', function(){
+				html_en.style.display = 'none';
+				html_hy.style.display = 'none';
+				html_ru.style.display = 'block';
+				
+				en.style.display = 'inline';
+				hy.style.display = 'inline';
+				ru.style.display = 'none';
+				
+				document.getElementsByTagName('title')[0].innerText = html_ru.getElementsByTagName('h2')[0].innerText
+				currentLanguage = 'ru';
+			});
+
+			let presLang = {
+				en: document.querySelectorAll('#html_en pre'), 
+				hy: document.querySelectorAll('#html_hy pre'), 
+				ru: document.querySelectorAll('#html_ru pre')
+			};
+			
+			let key = 1;
+			
+			for(let lang in presLang){
+				let pres = presLang[lang];
+
+				pres.forEach(function(pre){
+					let copyText = lang == 'hy' ? 'Պատճենել' : lang == 'ru' ? 'Копировать' : 'Copy';
+					let card = document.createElement('div');
+					card.className = 'card bg-dark text-white';
+					pre.firstChild.id = 'code-block-' + key
+					let cardHtml = `
+						<div class="card-header">
+							<button class="btn btn-primary" onclick="copyCode(${key})">${copyText}</button>
+							<span id="copied-${key}" class="float-end"></span>
+						</div>
+						<div class="p-0">
+							<pre>${pre.innerHTML}</pre>
+						</div>
+					`
+					card.innerHTML = cardHtml;
+					
+					pre.parentNode.replaceChild(card, pre);
+					key++;
+				});
+			}
+			
+		</script>
+	</body>
+</html>
