@@ -4,12 +4,15 @@ const UserList = ({ token }) => {
   const apiUrl = 'https://progcourse.000webhostapp.com';
   const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
   const fullUrl = proxyUrl + apiUrl;
+  
+  const backendUrl = 'https://opulent-trout-69v5w5wp4qw5c5r6v-3000.app.github.dev';
+  
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch(fullUrl + '/api/users', {
+        const response = await fetch(backendUrl + '/api/users', {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await response.json();

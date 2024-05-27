@@ -5,6 +5,8 @@ const Login = ({ setToken }) => {
   const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
   const fullUrl = proxyUrl + apiUrl;
 
+  const backendUrl = 'https://opulent-trout-69v5w5wp4qw5c5r6v-3000.app.github.dev';
+
   const [form, setForm] = useState({ email: '', password: '' });
 
   const handleChange = (e) => {
@@ -14,7 +16,7 @@ const Login = ({ setToken }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      fetch(fullUrl + '/api/login', {
+      fetch(backendUrl + '/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
