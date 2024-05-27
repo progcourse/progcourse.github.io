@@ -1,0 +1,42 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+#game-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: relative;
+    width: fit-content;
+}
+
+#game-canvas {
+    background-color: #000;
+    image-rendering: pixelated;
+    margin-left: 500px; /* Adjust as needed to create space for hold canvas */
+    border: 5px solid gray;
+    border-radius: 20px;
+}
+
+#score-display {
+    color: #3b198b;
+    font-size: 2em;
+    text-shadow: 1px 1px #000;
+    margin-left: 400px;
+}
+
+
+#hold-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 50px 300px;
+    width: 180px; /* Adjust as needed */
+    height: 180px; /* Adjust as needed */
+    background-color: #000; /* Just to see the position, remove if not needed */
+}
