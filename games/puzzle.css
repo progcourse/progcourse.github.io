@@ -20,7 +20,7 @@ body, html {
     height: 600px;
     background-color: #000;
     image-rendering: pixelated;
-    margin-left: 500px; /* Adjust as needed to create space for hold canvas */
+    margin-left: 300px; /* Adjust as needed to create space for hold canvas */
     border: 5px solid gray;
     border-radius: 20px;
 }
