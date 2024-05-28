@@ -13,7 +13,7 @@ const colors = [
     ['#0aa', '#0ff'],
     ['#00f', '#88f'],
     ['#a0a', '#f0f'],
-    ['#ccc', '#fff'],
+    ['#ccc', '#fff']
 ];
 
 let board = [];
