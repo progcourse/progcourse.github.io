@@ -165,6 +165,18 @@ document.addEventListener('keydown', (event) => {
         case 'ArrowDown':
             newDirection = 'down';
             break;
+        case 'j':
+            newDirection = 'left';
+            break;
+        case 'l':
+            newDirection = 'right';
+            break;
+        case 'i':
+            newDirection = 'up';
+            break;
+        case 'k':
+            newDirection = 'down';
+            break;
     }
 });
 
